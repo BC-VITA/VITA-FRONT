@@ -1,11 +1,12 @@
-import NavBar from '../components/NavBar';
+import Header from '../components/Header';
+import Nav from '../components/Nav';
 // import SubBar from './components/SubBar';
 // import tyled from 'styled-components';
 
 const BloodDonation = () => {
   return (
     <div>
-      <NavBar />
+      <Nav />
     </div>
   );
 };
