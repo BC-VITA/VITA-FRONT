@@ -1,12 +1,10 @@
-import Header from '../components/Header';
-import Nav from '../components/Nav';
 // import SubBar from './components/SubBar';
 // import tyled from 'styled-components';
 
 const BloodDonation = () => {
   return (
     <div>
-      <Nav />
+      <h3>안녕하세요</h3>
     </div>
   );
 };
