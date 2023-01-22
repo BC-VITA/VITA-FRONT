@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 function LogIn() {
   const [id, setId] = useState('');
@@ -40,65 +39,80 @@ function LogIn() {
         //에러메세지만 보이도록 설정
       });
     setDisabled(false);
-  };  
-  return (    
+  };
+  return (
     <div>
-    <section>
-    <Styleddiv>로그인</Styleddiv>
-    <Styleddiv1>회원일 경우 로그인 해주세요</Styleddiv1>
-    <hr style={{width:'60%',size:'10',borderWidth:'2px',border:'solid'}}></hr>
-    </section>
-    <section style={{position:'static',display:'flex', justifyContent:'center', alignItems:'center',height:'50vh'}}>
-      <div>
-      <form onSubmit={handleSubmit} >        
-        <Styledinput
-          type="id"
-          placeholder="id"
-          name="id"
-          value={id}
-          onChange={handleChangeId}
-        />
-        <br />
-        <Styledinput
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={handleChangePassword}
-        />
-        <br />
-        <StyledButton1 type="submit" disabled={disabled}>
-          로그인
-        </StyledButton1>
-        <br />
-        <StyledButton2 type="submit" disabled={disabled}>
-          회원가입
-        </StyledButton2>
-        <StyledButton3 type="submit" disabled={disabled}>
-          아이디/비밀번호찾기
-        </StyledButton3>
-        <div className="home">{error && <div>{error}</div>}</div>
-      </form>
-      </div>
-    </section>
-    </div>    
+      <section>
+        <Styleddiv>로그인</Styleddiv>
+        <Styleddiv1>회원일 경우 로그인 해주세요</Styleddiv1>
+        <hr
+          style={{
+            width: '60%',
+            size: '10',
+            borderWidth: '2px',
+            border: 'solid',
+          }}
+        ></hr>
+      </section>
+      <section
+        style={{
+          position: 'static',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '50vh',
+        }}
+      >
+        <div>
+          <form onSubmit={handleSubmit}>
+            <Styledinput
+              type="id"
+              placeholder="id"
+              name="id"
+              value={id}
+              onChange={handleChangeId}
+            />
+            <br />
+            <Styledinput
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handleChangePassword}
+            />
+            <br />
+            <StyledButton1 type="submit" disabled={disabled}>
+              로그인
+            </StyledButton1>
+            <br />
+            <StyledButton2 type="submit" disabled={disabled}>
+              회원가입
+            </StyledButton2>
+            {/* <StyledButton3 type="submit" disabled={disabled}>
+              아이디/비밀번호찾기
+            </StyledButton3> */}
+            <div className="home">{error && <div>{error}</div>}</div>
+          </form>
+        </div>
+      </section>
+    </div>
   );
-};
+}
 const Styleddiv = styled.div`
-  position:static;
-  display:flex;
-  justify-Content:center;
+  position: static;
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   font-size: 48px;
   font-weight: 700;
-  margin-top:3%;
+  margin-top: 3%;
   margin-left: 20%;
 `;
 const Styleddiv1 = styled.div`
-  position:static;
-  display:flex;
-  justify-Content:center;
+  position: static;
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   font-size: 24px;
@@ -112,12 +126,12 @@ const Styledinput = styled.input`
   top: 351.7px;
 `;
 const StyledButton1 = styled.button`
-  background-color: #FF9F9F;
-  color: white;  
+  background-color: #ff9f9f;
+  color: white;
   border-radius: 8px;
   font-size: 30px;
   border: none;
-  cursor: pointer;  
+  cursor: pointer;
   margin-bottom: 10px;
   width: 593px;
   height: 87px;
@@ -125,21 +139,21 @@ const StyledButton1 = styled.button`
   top: 541px;
 `;
 const StyledButton2 = styled.button`
-  background-color: #FFD7D7;
+  background-color: #ffd7d7;
   color: black;
   font-size: 15px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   margin-bottom: 10px;
-  margin-right:25px;
+  margin-right: 25px;
   width: 242px;
   height: 61px;
   left: 567px;
   top: 640px;
 `;
 const StyledButton3 = styled.button`
-  background-color: #FFD7D7;
+  background-color: #ffd7d7;
   color: black;
   font-size: 15px;
   border: none;
