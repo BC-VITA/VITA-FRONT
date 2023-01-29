@@ -47,10 +47,11 @@ function LogIn() {
         <Styleddiv1>회원일 경우 로그인 해주세요</Styleddiv1>
         <hr
           style={{
-            width: '60%',
+            width: '70%',
             size: '10',
             borderWidth: '2px',
             border: 'solid',
+            marginLeft:'15%'
           }}
         ></hr>
       </section>
@@ -88,9 +89,9 @@ function LogIn() {
             <StyledButton2 type="submit" disabled={disabled}>
               회원가입
             </StyledButton2>
-            {/* <StyledButton3 type="submit" disabled={disabled}>
+            {/* <StyledButton2 type="submit" disabled={disabled}>
               아이디/비밀번호찾기
-            </StyledButton3> */}
+            </StyledButton2> */}
             <div className="home">{error && <div>{error}</div>}</div>
           </form>
         </div>
@@ -107,7 +108,7 @@ const Styleddiv = styled.div`
   font-size: 48px;
   font-weight: 700;
   margin-top: 3%;
-  margin-left: 20%;
+  margin-left: 15%;
 `;
 const Styleddiv1 = styled.div`
   position: static;
@@ -117,7 +118,7 @@ const Styleddiv1 = styled.div`
   flex-direction: column;
   font-size: 24px;
   font-weight: 500;
-  margin-left: 20%;
+  margin-left: 15%;
 `;
 const Styledinput = styled.input`
   width: 593px;
@@ -150,19 +151,6 @@ const StyledButton2 = styled.button`
   width: 242px;
   height: 61px;
   left: 567px;
-  top: 640px;
-`;
-const StyledButton3 = styled.button`
-  background-color: #ffd7d7;
-  color: black;
-  font-size: 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  width: 325px;
-  height: 61px;
-  left: 835px;
   top: 640px;
 `;
 export default LogIn;
