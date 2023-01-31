@@ -12,6 +12,9 @@ function SignUpGroup() {
   const [Date, setDate] = useState('');
   const [Email, setEmail] = useState('');
   const [Phon, setPhon] = useState('');
+  const [RH, setRH] = useState('');
+  const [sex, setsex] = useState('');
+  const [Blood, setBlood] = useState('');
   const [History, setHistory] = useState('');
 
   const [error, setError] = useState(null);
@@ -35,16 +38,20 @@ function SignUpGroup() {
     await new Promise((r) => setTimeout(r, 1000));
 
     //back으로 정보 post함
-    fetch('http://localhost:8003/join', {
+    fetch('http://localhost:8004/join', {
       method: 'post',
       body: JSON.stringify({
         id: 'userID',
         password: 'userPW',
         passwordCheck: 'userPW',
-        Name: 'userPW',
-        Date: 'userPW',
-        Email: 'userPW',
-        Phon: 'userPW',
+        Name: 'userName',
+        Date: 'userBirth',
+        Email: 'userEmail',
+        Phon: 'userPhoneNumber',
+        RH: 'isRH',
+        sex: 'sex',
+        Blood: 'userBlood',
+        History: 'bloodHistory',
       }),
     })
       //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
@@ -175,6 +182,9 @@ function SignUpGroup() {
                 }}
               >
                 <RadioGroup
+                  type="sex"
+                  name="sex"
+                  value={sex}
                   label="성별"
                   style={{
                     fontsize: '32px',
@@ -195,7 +205,7 @@ function SignUpGroup() {
                   width: '230px',
                 }}
               >
-                <RadioGroup label="RH여부">
+                <RadioGroup type="RH" name="RH" value={RH} label="RH여부">
                   <Radio name="contact" value="EMAIL" defaultChecked>
                     RH-
                   </Radio>
@@ -211,7 +221,12 @@ function SignUpGroup() {
                   width: '424px',
                 }}
               >
-                <RadioGroup label="혈액형">
+                <RadioGroup
+                  type="Blood"
+                  name="Blood"
+                  value={Blood}
+                  label="혈액형"
+                >
                   <Radio name="contact" value="EMAIL" defaultChecked>
                     A형
                   </Radio>
