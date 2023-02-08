@@ -89,7 +89,7 @@ function DBD_PostGeneral() {
         setbloodproduct(e.target.value);
         setbloodmatch(e.target.value);
     };
-    
+
     const handleSubmit = async (event) => {
         setDisabled(true);
         event.preventDefault();
@@ -333,7 +333,7 @@ function DBD_PostGeneral() {
                         <FloatingLabel
                             label="제목"
                             value={title}
-                            onChange={handlesettitleChange}                                >
+                            onChange={handlesettitleChange}>
                             <Form.Control type="textarea" />
                         </FloatingLabel>
                     </Styleddiv4>
@@ -341,7 +341,7 @@ function DBD_PostGeneral() {
                         <FloatingLabel
                             label="내용"
                             value={detail}
-                            onChange={handlesetdetailChange}                                >
+                            onChange={handlesetdetailChange}>
                             <Form.Control type="textarea" />
                         </FloatingLabel>
                     </Styleddiv4>
