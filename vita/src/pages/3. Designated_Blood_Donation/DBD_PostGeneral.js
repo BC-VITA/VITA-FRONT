@@ -6,13 +6,39 @@ import Form from 'react-bootstrap/Form';
 
 function DBD_PostGeneral() {
     const [id, setId] = useState('');
+    const [number, setnumber] = useState('');
+    const [people, setpeople] = useState('');
+    const [age, setage] = useState('');
+    const [roomnumber, setroomnumber] = useState('');
+    const [hostipalname, sethostipalname] = useState('');
+    const [hostipalcall, sethostipalcall] = useState('');
     const [bloodtype, setbloodtype] = useState('');
     const [rhtype, setbrhtype] = useState('');
     const [donationtype, setdonationtype] = useState("");
+    const [bloodproduct, setbloodproduct] = useState("");
+    const [bloodmatch, setbloodmatch] = useState("");
+    const [review, setreview] = useState("");
+    const [startDate, setstartDate] = useState("");
+    const [endDate, setendDate] = useState("");
+    const [title, settitle] = useState("");
+    const [detail, setdetail] = useState("");
+
+
     const [error, setError] = useState(null);
     const [disabled, setDisabled] = useState(false);
 
     const handleChangeId = ({ target: { value } }) => setId(value);
+    const handleChangenumber = ({ target: { value } }) => setnumber(value);
+    const handleChangepeople = ({ target: { value } }) => setpeople(value);
+    const handleChangeage = ({ target: { value } }) => setage(value);
+    const handleChangeroomnumber = ({ target: { value } }) => setroomnumber(value);
+    const handleChangehostipalname = ({ target: { value } }) => sethostipalname(value);
+    const handleChangehostipalcall = ({ target: { value } }) => sethostipalcall(value);
+    const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
+    const handleEndDateChange = ({ target: { value } }) => setendDate(value);
+    const handlesettitleChange = ({ target: { value } }) => settitle(value);
+    const handlesetdetailChange = ({ target: { value } }) => setdetail(value);
+
 
     const navigate = useNavigate();
 
@@ -42,11 +68,26 @@ function DBD_PostGeneral() {
     const handleRHPChange = () => {
         setbrhtype('RH+');
     };
+    const handlereviewTChange = () => {
+        setreview('T');
+    };
+    const handlereviewFChange = () => {
+        setreview('F');
+    };
     const selectList = [
         "전혈", "혈소판", "그외"
     ];
+    const selectList1 = [
+        "RBC", "그외"
+    ];
+    const selectList2 = [
+        "일치", "불일치"
+    ];
+
     const handleSelect = (e) => {
         setdonationtype(e.target.value);
+        setbloodproduct(e.target.value);
+        setbloodmatch(e.target.value);
     };
     const handleSubmit = async (event) => {
         setDisabled(true);
@@ -111,9 +152,7 @@ function DBD_PostGeneral() {
                             <div>
                                 <Styleddiv2>* 환자명</Styleddiv2>
                                 <FloatingLabel
-                                    type="id"
                                     label="홍길동"
-                                    name="id"
                                     value={id}
                                     onChange={handleChangeId}
                                 >
@@ -123,11 +162,9 @@ function DBD_PostGeneral() {
                             <div>
                                 <Styleddiv2>* 수혈자 등록번호</Styleddiv2>
                                 <FloatingLabel
-                                    type="id"
                                     label="id"
-                                    name="id"
-                                    value={id}
-                                    onChange={handleChangeId}
+                                    value={number}
+                                    onChange={handleChangenumber}
                                 >
                                     <Form.Control type="email" placeholder="name@example.com" />
                                 </FloatingLabel>
@@ -137,11 +174,9 @@ function DBD_PostGeneral() {
                             <div>
                                 <Styleddiv2>* 필요한 헌혈자 명수</Styleddiv2>
                                 <FloatingLabel
-                                    type="id"
                                     label="3명"
-                                    name="id"
-                                    value={id}
-                                    onChange={handleChangeId}
+                                    value={people}
+                                    onChange={handleChangepeople}
                                 >
                                     <Form.Control type="email" placeholder="name@example.com" />
                                 </FloatingLabel>
@@ -149,11 +184,9 @@ function DBD_PostGeneral() {
                             <div>
                                 <Styleddiv2>환자 나이</Styleddiv2>
                                 <FloatingLabel
-                                    type="id"
                                     label="60"
-                                    name="id"
-                                    value={id}
-                                    onChange={handleChangeId}
+                                    value={age}
+                                    onChange={handleChangeage}
                                 >
                                     <Form.Control type="email" placeholder="name@example.com" />
                                 </FloatingLabel>
@@ -161,11 +194,9 @@ function DBD_PostGeneral() {
                             <div>
                                 <Styleddiv2>병실 호수</Styleddiv2>
                                 <FloatingLabel
-                                    type="id"
                                     label="000호"
-                                    name="id"
-                                    value={id}
-                                    onChange={handleChangeId}
+                                    value={roomnumber}
+                                    onChange={handleChangeroomnumber}
                                 >
                                     <Form.Control type="email" placeholder="name@example.com" />
                                 </FloatingLabel>
@@ -175,11 +206,9 @@ function DBD_PostGeneral() {
                             <div>
                                 <Styleddiv2>* 의료기관 명</Styleddiv2>
                                 <FloatingLabel
-                                    type="id"
                                     label="id"
-                                    name="id"
-                                    value={id}
-                                    onChange={handleChangeId}
+                                    value={hostipalname}
+                                    onChange={handleChangehostipalname}
                                 >
                                     <Form.Control type="email" placeholder="name@example.com" />
                                 </FloatingLabel>
@@ -187,11 +216,9 @@ function DBD_PostGeneral() {
                             <div>
                                 <Styleddiv2>* 의료기관 전화번호</Styleddiv2>
                                 <FloatingLabel
-                                    type="id"
                                     label="01033333333"
-                                    name="id"
-                                    value={id}
-                                    onChange={handleChangeId}
+                                    value={hostipalcall}
+                                    onChange={handleChangehostipalcall}
                                 >
                                     <Form.Control type="email" placeholder="name@example.com" />
                                 </FloatingLabel>
@@ -245,9 +272,99 @@ function DBD_PostGeneral() {
                                 </select>
                             </div>
                         </Styleddiv3>
+                        <Styleddiv3>
+                            <div>
+                                <Styleddiv2>* 필요 혈액제제</Styleddiv2>
+                                <select onChange={handleSelect} value={bloodproduct}>
+                                    {selectList1.map((item) => (
+                                        <option value={item} key={item}>
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <Styleddiv2>* 혈액 일치여부</Styleddiv2>
+                                <select onChange={handleSelect} value={bloodmatch}>
+                                    {selectList2.map((item) => (
+                                        <option value={item} key={item}>
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <Styleddiv2>* 신청자 후기 작성 여부</Styleddiv2>
+                                <RadioButton
+                                    label="&nbsp;예&nbsp;"
+                                    value={review === 'T'}
+                                    onChange={handlereviewTChange}
+                                />
+                                <RadioButton
+                                    label="&nbsp;아니오&nbsp;"
+                                    value={review === 'F'}
+                                    onChange={handlereviewFChange}
+                                />
+                            </div>
+                        </Styleddiv3>
+                        <Styleddiv3>
+                            <div>
+                                <Styleddiv2>* 진행기간</Styleddiv2>
+                                <input
+                                    type="Date"
+                                    value={startDate}
+                                    onChange={handleStartDateChange}
+                                />
+                            </div>
+                            <Styleddiv2>-</Styleddiv2>
+                            <div>
+                                <Styleddiv2>* 마감기간</Styleddiv2>
+                                <input
+                                    type="Date"
+                                    value={endDate}
+                                    onChange={handleEndDateChange}
+                                />
+                            </div>
+                        </Styleddiv3>
                     </Styleddiv4>
+                    <Styleddiv4>
+                        <FloatingLabel
+                            label="제목"
+                            value={title}
+                            onChange={handlesettitleChange}                                >
+                            <Form.Control type="email" placeholder="name@example.com" />
+                        </FloatingLabel>
+                    </Styleddiv4>
+                    <Styleddiv4>
+                        <FloatingLabel
+                            label="내용"
+                            value={detail}
+                            onChange={handlesetdetailChange}                                >
+                            <Form.Control type="email" placeholder="name@example.com" />
+                        </FloatingLabel>
+                    </Styleddiv4>
+                    <Styledsec>
+                        <div
+                            style={{
+                                fontSize: '13px',
+                                fontWeight: '500',
+                                padding: '0.5%'
+                            }}># 혈액관리법 제3조(혈액 매매행위 등의 금지)은 "누구든지 금전, 재산상의 이익 또는 그 밖의 대가</div>
+                        <div
+                            style={{
+                                fontSize: '13px',
+                                fontWeight: '500',
+                                padding: '0.5%',
+                            }}>적 급부를 받거나 받기로 하고 자신의 혈액(헌혈증서 포함)을 제공하거나 제공할 것을 약속하여서는</div>
+                        <div
+                            style={{
+                                fontSize: '13px',
+                                fontWeight: '500',
+                                padding: '0.5%',
+                            }}>아니된다</div>
+                    </Styledsec>
                     <StyledButton1 type="submit" disabled={disabled}>
-                        로그인
+                        게시하기
                     </StyledButton1>
                     <div className="home">{error && <div>{error}</div>}</div>
                 </form>
