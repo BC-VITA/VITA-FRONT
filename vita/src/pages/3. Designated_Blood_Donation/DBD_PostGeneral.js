@@ -89,15 +89,14 @@ function DBD_PostGeneral() {
         setbloodproduct(e.target.value);
         setbloodmatch(e.target.value);
     };
-    const proxyurl = 'http://localhost:3306';
-    const url = '/join';
+    
     const handleSubmit = async (event) => {
         setDisabled(true);
         event.preventDefault();
         await new Promise((r) => setTimeout(r, 1000));
 
         //back으로 정보 post함
-        fetch(proxyurl+url, {
+        fetch('http://localhost:8004', {
             method: 'post',
             body: JSON.stringify({
                 id: 'userID',
