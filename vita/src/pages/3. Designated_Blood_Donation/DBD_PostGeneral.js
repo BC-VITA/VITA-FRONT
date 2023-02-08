@@ -89,13 +89,14 @@ function DBD_PostGeneral() {
         setbloodproduct(e.target.value);
         setbloodmatch(e.target.value);
     };
+    
     const handleSubmit = async (event) => {
         setDisabled(true);
         event.preventDefault();
         await new Promise((r) => setTimeout(r, 1000));
 
         //back으로 정보 post함
-        fetch('http://localhost:8003/join', {
+        fetch('http://localhost:8004', {
             method: 'post',
             body: JSON.stringify({
                 id: 'userID',
@@ -156,7 +157,7 @@ function DBD_PostGeneral() {
                                     value={id}
                                     onChange={handleChangeId}
                                 >
-                                    <Form.Control type="email" placeholder="name@example.com" />
+                                    <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
                             <div>
@@ -166,7 +167,7 @@ function DBD_PostGeneral() {
                                     value={number}
                                     onChange={handleChangenumber}
                                 >
-                                    <Form.Control type="email" placeholder="name@example.com" />
+                                    <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
                         </Styleddiv3>
@@ -178,7 +179,7 @@ function DBD_PostGeneral() {
                                     value={people}
                                     onChange={handleChangepeople}
                                 >
-                                    <Form.Control type="email" placeholder="name@example.com" />
+                                    <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
                             <div>
@@ -188,7 +189,7 @@ function DBD_PostGeneral() {
                                     value={age}
                                     onChange={handleChangeage}
                                 >
-                                    <Form.Control type="email" placeholder="name@example.com" />
+                                    <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
                             <div>
@@ -198,7 +199,7 @@ function DBD_PostGeneral() {
                                     value={roomnumber}
                                     onChange={handleChangeroomnumber}
                                 >
-                                    <Form.Control type="email" placeholder="name@example.com" />
+                                    <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
                         </Styleddiv3>
@@ -210,7 +211,7 @@ function DBD_PostGeneral() {
                                     value={hostipalname}
                                     onChange={handleChangehostipalname}
                                 >
-                                    <Form.Control type="email" placeholder="name@example.com" />
+                                    <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
                             <div>
@@ -220,7 +221,7 @@ function DBD_PostGeneral() {
                                     value={hostipalcall}
                                     onChange={handleChangehostipalcall}
                                 >
-                                    <Form.Control type="email" placeholder="name@example.com" />
+                                    <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
                         </Styleddiv3>
@@ -260,6 +261,7 @@ function DBD_PostGeneral() {
                                     value={rhtype === 'RH+'}
                                     onChange={handleRHPChange}
                                 />
+
                             </div>
                             <div>
                                 <Styleddiv2>* 혈액종류</Styleddiv2>
@@ -332,7 +334,7 @@ function DBD_PostGeneral() {
                             label="제목"
                             value={title}
                             onChange={handlesettitleChange}                                >
-                            <Form.Control type="email" placeholder="name@example.com" />
+                            <Form.Control type="textarea" />
                         </FloatingLabel>
                     </Styleddiv4>
                     <Styleddiv4>
@@ -340,7 +342,7 @@ function DBD_PostGeneral() {
                             label="내용"
                             value={detail}
                             onChange={handlesetdetailChange}                                >
-                            <Form.Control type="email" placeholder="name@example.com" />
+                            <Form.Control type="textarea" />
                         </FloatingLabel>
                     </Styleddiv4>
                     <Styledsec>
@@ -385,7 +387,7 @@ const Styleddiv = styled.div`
 const Styleddiv1 = styled.div`
     position: static;
     display: flex;
-    justify-content: flex-start
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: row;
     font-size: 16px;
