@@ -89,22 +89,26 @@ function DBD_PostGeneral() {
         setbloodproduct(e.target.value);
         setbloodmatch(e.target.value);
     };
-    
+
     const handleSubmit = async (event) => {
         setDisabled(true);
         event.preventDefault();
         await new Promise((r) => setTimeout(r, 1000));
-
         //back으로 정보 post함
-        fetch('http://localhost:8004', {
+        fetch('http://localhost:8004/user/board/1', {
             method: 'post',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
             body: JSON.stringify({
-                id: 'userID',
+                id: 'patient_name',
                 password: 'userPW',
+
             }),
         })
             //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
             .then((res) => res.json())
+
             //회원가입 성공시 실행
             .then((res) => {
                 navigate('/');
@@ -333,7 +337,7 @@ function DBD_PostGeneral() {
                         <FloatingLabel
                             label="제목"
                             value={title}
-                            onChange={handlesettitleChange}                                >
+                            onChange={handlesettitleChange}>
                             <Form.Control type="textarea" />
                         </FloatingLabel>
                     </Styleddiv4>
@@ -341,7 +345,7 @@ function DBD_PostGeneral() {
                         <FloatingLabel
                             label="내용"
                             value={detail}
-                            onChange={handlesetdetailChange}                                >
+                            onChange={handlesetdetailChange}>
                             <Form.Control type="textarea" />
                         </FloatingLabel>
                     </Styleddiv4>
