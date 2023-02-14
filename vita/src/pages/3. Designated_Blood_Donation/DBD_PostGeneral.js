@@ -101,9 +101,7 @@ function DBD_PostGeneral() {
                 "Content-Type": "application/json; charset=utf-8"
             },
             body: JSON.stringify({
-                id: 'patient_name',
-                password: 'userPW',
-
+                "testName": id,
             }),
         })
             //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
@@ -120,6 +118,9 @@ function DBD_PostGeneral() {
                 //에러메세지만 보이도록 설정
             });
         setDisabled(false);
+        console.log("data: " + JSON.stringify({
+            "testName": id,
+        }))
     };
     return (
         <div
