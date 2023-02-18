@@ -38,7 +38,7 @@ function SignUpGroup() {
     await new Promise((r) => setTimeout(r, 1000));
 
     //back으로 정보 post함
-    fetch('http://localhost:8004/join', {
+    fetch('http://localhost:8004/user/join', {
       method: 'post',
       body: JSON.stringify({
         id: 'userID',
