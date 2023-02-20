@@ -37,10 +37,11 @@ function SignUpHospital() {
         id: 'userID',
         password: 'userPW',
         passwordCheck: 'userPW',
-        Name: 'userPW',
-        Date: 'userPW',
-        Email: 'userPW',
-        Phon: 'userPW',
+        Name: 'userName',
+        Date: 'userBirth',
+        Email: 'userEmail',
+        Phon: 'userPhoneNumber',
+        History: 'bloodHistory',
       }),
     })
       //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
