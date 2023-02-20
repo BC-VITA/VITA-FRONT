@@ -30,16 +30,12 @@ function Main() {
     return (
         <div>
             <section>
-                <div>
-                    <b>{inputData[0].testNumber}</b> <span>{inputData[0].testName}</span>
-                </div>
-                <Styleddiv>사용자 :</Styleddiv>
+                <Styleddiv>사용자 : {inputData[0].testNumber}번&nbsp;{inputData[0].testName}님</Styleddiv>
                 <Styleddiv1>'확인하기'버튼을 눌러주세요</Styleddiv1>
                 <form onSubmit={handleSubmit}>
                     <StyledButton1 type="submit" disabled={disabled}>
                         확인하기
                     </StyledButton1>
-
                     <div className="home">{error && <div>{error}</div>}</div>
                 </form>
             </section>

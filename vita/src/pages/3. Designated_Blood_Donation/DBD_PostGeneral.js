@@ -50,18 +50,6 @@ function DBD_PostGeneral() {
             </label>
         );
     };
-    const handleAChange = () => {
-        setbloodtype('A');
-    };
-    const handleBChange = () => {
-        setbloodtype('B');
-    };
-    const handleOChange = () => {
-        setbloodtype('O');
-    };
-    const handleABChange = () => {
-        setbloodtype('AB');
-    };
     const handleRHMChange = () => {
         setbrhtype('RH-');
     };
@@ -69,25 +57,35 @@ function DBD_PostGeneral() {
         setbrhtype('RH+');
     };
     const handlereviewTChange = () => {
-        setreview('T');
+        setreview('true');
     };
     const handlereviewFChange = () => {
-        setreview('F');
+        setreview('false');
     };
     const selectList = [
-        "전혈", "혈소판", "그외"
+        "", "전혈", "혈소판", "그외"
     ];
     const selectList1 = [
-        "RBC", "그외"
+        "", "RBC", "그외"
     ];
     const selectList2 = [
-        "일치", "불일치"
+        "", "true", "false"
+    ];
+    const selectList3 = [
+        "", "A형", "B형", "O형", "AB형"
     ];
 
     const handleSelect = (e) => {
         setdonationtype(e.target.value);
+    };
+    const handleSelect1 = (e) => {
         setbloodproduct(e.target.value);
+    };
+    const handleSelect2 = (e) => {
         setbloodmatch(e.target.value);
+    };
+    const handleSelect3 = (e) => {
+        setbloodtype(e.target.value);
     };
 
     const handleSubmit = async (event) => {
@@ -101,12 +99,27 @@ function DBD_PostGeneral() {
                 "Content-Type": "application/json; charset=utf-8"
             },
             body: JSON.stringify({
-                "testName": id,
+                "patientName": id,
+                "bloodPersonNumber": number,
+                "bloodNumber": people,
+                "patientAge": age,
+                "hospitalRoomNumber": roomnumber,
+                "hospitalName": hostipalname,
+                "hospitalPhoneNumber": hostipalcall,
+                "patientBlood": bloodtype,
+                "patientIsRH": rhtype,
+                "bloodType": donationtype,
+                "needBloodSystem": bloodproduct,
+                "bloodMatchType": bloodmatch,
+                "isReview": review,
+                "startDate": startDate,
+                "endDate": endDate,
+                "title": title,
+                "content": detail,
             }),
         })
             //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
             .then((res) => res.json())
-
             //회원가입 성공시 실행
             .then((res) => {
                 navigate('/');
@@ -119,14 +132,28 @@ function DBD_PostGeneral() {
             });
         setDisabled(false);
         console.log("data: " + JSON.stringify({
-            "testName": id,
+            "patientName": id,
+            "bloodPersonNumber": number,
+            "bloodNumber": people,
+            "patientAge": age,
+            "hospitalRoomNumber": roomnumber,
+            "hospitalName": hostipalname,
+            "hospitalPhoneNumber": hostipalcall,
+            "patientBlood": bloodtype,
+            "patientIsRH": rhtype,
+            "bloodType": donationtype,
+            "needBloodSystem": bloodproduct,
+            "bloodMatchType": bloodmatch,
+            "isReview": review,
+            "startDate": startDate,
+            "endDate": endDate,
+            "title": title,
+            "content": detail,
         }))
     };
     return (
         <div
-            style={{
-                marginLeft: '15%',
-            }}>
+            style={{ marginLeft: '15%' }}>
             <section>
                 <Styleddiv>지정헌혈하기</Styleddiv>
                 <Styleddiv1>일반사용자 | <span>&nbsp;병원</span></Styleddiv1>
@@ -233,26 +260,13 @@ function DBD_PostGeneral() {
                         <Styleddiv3>
                             <div>
                                 <Styleddiv2>* 혈액형</Styleddiv2>
-                                <RadioButton
-                                    label="&nbsp;A형&nbsp;"
-                                    value={bloodtype === 'A형'}
-                                    onChange={handleAChange}
-                                />
-                                <RadioButton
-                                    label="&nbsp;B형&nbsp;"
-                                    value={bloodtype === 'B형'}
-                                    onChange={handleBChange}
-                                />
-                                <RadioButton
-                                    label="&nbsp;O형&nbsp;"
-                                    value={bloodtype === 'O형'}
-                                    onChange={handleOChange}
-                                />
-                                <RadioButton
-                                    label="&nbsp;AB형&nbsp;"
-                                    value={bloodtype === 'AB형'}
-                                    onChange={handleABChange}
-                                />
+                                <select onChange={handleSelect3} value={bloodtype}>
+                                    {selectList3.map((item) => (
+                                        <option value={item} key={item}>
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div>
                                 <Styleddiv2>* RH여부</Styleddiv2>
@@ -266,7 +280,6 @@ function DBD_PostGeneral() {
                                     value={rhtype === 'RH+'}
                                     onChange={handleRHPChange}
                                 />
-
                             </div>
                             <div>
                                 <Styleddiv2>* 혈액종류</Styleddiv2>
@@ -282,7 +295,7 @@ function DBD_PostGeneral() {
                         <Styleddiv3>
                             <div>
                                 <Styleddiv2>* 필요 혈액제제</Styleddiv2>
-                                <select onChange={handleSelect} value={bloodproduct}>
+                                <select onChange={handleSelect1} value={bloodproduct}>
                                     {selectList1.map((item) => (
                                         <option value={item} key={item}>
                                             {item}
@@ -292,7 +305,7 @@ function DBD_PostGeneral() {
                             </div>
                             <div>
                                 <Styleddiv2>* 혈액 일치여부</Styleddiv2>
-                                <select onChange={handleSelect} value={bloodmatch}>
+                                <select onChange={handleSelect2} value={bloodmatch}>
                                     {selectList2.map((item) => (
                                         <option value={item} key={item}>
                                             {item}
@@ -304,12 +317,12 @@ function DBD_PostGeneral() {
                                 <Styleddiv2>* 신청자 후기 작성 여부</Styleddiv2>
                                 <RadioButton
                                     label="&nbsp;예&nbsp;"
-                                    value={review === 'T'}
+                                    value={review === 'true'}
                                     onChange={handlereviewTChange}
                                 />
                                 <RadioButton
                                     label="&nbsp;아니오&nbsp;"
-                                    value={review === 'F'}
+                                    value={review === 'false'}
                                     onChange={handlereviewFChange}
                                 />
                             </div>
@@ -347,7 +360,9 @@ function DBD_PostGeneral() {
                             label="내용"
                             value={detail}
                             onChange={handlesetdetailChange}>
-                            <Form.Control type="textarea" />
+                            <Form.Control
+                                as="textarea"
+                                style={{ height: '270px' }} />
                         </FloatingLabel>
                     </Styleddiv4>
                     <Styledsec>
@@ -370,7 +385,7 @@ function DBD_PostGeneral() {
                                 padding: '0.5%',
                             }}>아니된다</div>
                     </Styledsec>
-                    <StyledButton1 type="submit" disabled={disabled}>
+                    <StyledButton1 type="button" onClick={handleSubmit} disabled={disabled}>
                         게시하기
                     </StyledButton1>
                     <div className="home">{error && <div>{error}</div>}</div>
@@ -380,7 +395,6 @@ function DBD_PostGeneral() {
     );
 }
 const Styleddiv = styled.div`
-    position: static;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -390,7 +404,6 @@ const Styleddiv = styled.div`
     margin-top: 2%;
 `;
 const Styleddiv1 = styled.div`
-    position: static;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -414,14 +427,14 @@ const Styleddiv4 = styled.div`
     margin-bottom: 1%;
     border : solid 1px;
     border-radius: 10px;
+    padding:1%;    
     margin-right: 15%;
-    padding:1%;
 `;
 const Styledsec = styled.section`
     background-color: #ebebeb;
     border-radius: 10px;
-    margin-right: 15%;
     margin-top: 1%;
+    margin-right: 15%;
 `;
 const StyledButton1 = styled.button`
     background-color: #ff9f9f;
@@ -430,6 +443,6 @@ const StyledButton1 = styled.button`
     font-size: 30px;
     border: none;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom:10px;
 `;
 export default DBD_PostGeneral;

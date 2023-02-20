@@ -7,7 +7,8 @@ import SignUp from './pages/SignUp/SignUp';
 import Group from './pages/SignUp/SignUpGroup';
 import Hospital from './pages/SignUp/SignUpHospital';
 import Individual from './pages/SignUp/SignUpIndividual';
-import DBD_PostGeneral from './pages/3. Designated_Blood_Donation/DBD_PostGeneral';
+import DBDPostGeneral from './pages/3. Designated_Blood_Donation/DBD_PostGeneral';
+import DBDGeneral from './pages/3. Designated_Blood_Donation/DBD_General';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/Group" element={<Group />}></Route>
         <Route path="/Hospital" element={<Hospital />}></Route>
         <Route path="/Individual" element={<Individual />}></Route>
-        <Route path="/DBD_PostGeneral" element={<DBD_PostGeneral />}></Route>
+        <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>
+        <Route path="/DBD_General" element={<DBDGeneral />}></Route>
       </Routes>
     </BrowserRouter>
   );
