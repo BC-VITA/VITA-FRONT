@@ -119,10 +119,11 @@ function DBD_PostGeneral() {
             }),
         })
             //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
-            .then((res) => res.json())
-            //회원가입 성공시 실행
             .then((res) => {
-                navigate('/');
+                res.json();
+                if (res.ok) {
+                    navigate('/DBD_General');
+                }
             })
             //회원가입 실패시 실행
             .catch((err) => {
@@ -150,6 +151,7 @@ function DBD_PostGeneral() {
             "title": title,
             "content": detail,
         }))
+
     };
     return (
         <div
@@ -181,8 +183,15 @@ function DBD_PostGeneral() {
             <section>
                 <form onSubmit={handleSubmit}>
                     <Styleddiv4>
-                        <Styleddiv3>
-                            <div>
+                        <div style={{
+                            display: "flex",
+                            backgroundColor: "gray",
+                        }}>
+                            <div style={{
+                                backgroundColor: "red",
+                                width: "30%",
+                                marginLeft: "6%",
+                            }}>
                                 <Styleddiv2>* 환자명</Styleddiv2>
                                 <FloatingLabel
                                     label="홍길동"
@@ -192,7 +201,12 @@ function DBD_PostGeneral() {
                                     <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
-                            <div>
+                            <div style={{
+                                backgroundColor: "red",
+                                width: "50%",
+                                marginLeft: "6%",
+                                marginRight: "8%"
+                            }}>
                                 <Styleddiv2>* 수혈자 등록번호</Styleddiv2>
                                 <FloatingLabel
                                     label="id"
@@ -202,7 +216,7 @@ function DBD_PostGeneral() {
                                     <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
-                        </Styleddiv3>
+                        </div>
                         <Styleddiv3>
                             <div>
                                 <Styleddiv2>* 필요한 헌혈자 명수</Styleddiv2>
@@ -420,7 +434,7 @@ const Styleddiv2 = styled.div`
 `;
 const Styleddiv3 = styled.div`    
     display:flex;
-    justify-content: space-evenly
+    justify-content: space-around;
 `;
 const Styleddiv4 = styled.div`
     margin-top: 1%;
