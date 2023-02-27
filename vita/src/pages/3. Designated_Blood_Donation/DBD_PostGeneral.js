@@ -185,10 +185,8 @@ function DBD_PostGeneral() {
                     <Styleddiv4>
                         <div style={{
                             display: "flex",
-                            backgroundColor: "gray",
                         }}>
                             <div style={{
-                                backgroundColor: "red",
                                 width: "30%",
                                 marginLeft: "6%",
                             }}>
@@ -202,7 +200,6 @@ function DBD_PostGeneral() {
                                 </FloatingLabel>
                             </div>
                             <div style={{
-                                backgroundColor: "red",
                                 width: "50%",
                                 marginLeft: "6%",
                                 marginRight: "8%"
@@ -217,8 +214,13 @@ function DBD_PostGeneral() {
                                 </FloatingLabel>
                             </div>
                         </div>
-                        <Styleddiv3>
-                            <div>
+                        <div style={{
+                            display: "flex",
+                        }}>
+                            <div style={{
+                                width: "26%",
+                                marginLeft: "10%",
+                            }}>
                                 <Styleddiv2>* 필요한 헌혈자 명수</Styleddiv2>
                                 <FloatingLabel
                                     label="3명"
@@ -228,7 +230,10 @@ function DBD_PostGeneral() {
                                     <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
-                            <div>
+                            <div style={{
+                                width: "13%",
+                                marginLeft: "10%",
+                            }}>
                                 <Styleddiv2>환자 나이</Styleddiv2>
                                 <FloatingLabel
                                     label="60"
@@ -238,7 +243,11 @@ function DBD_PostGeneral() {
                                     <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
-                            <div>
+                            <div style={{
+                                width: "22%",
+                                marginLeft: "10%",
+                                marginRight: "10%",
+                            }}>
                                 <Styleddiv2>병실 호수</Styleddiv2>
                                 <FloatingLabel
                                     label="000호"
@@ -248,9 +257,14 @@ function DBD_PostGeneral() {
                                     <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
-                        </Styleddiv3>
-                        <Styleddiv3>
-                            <div>
+                        </div>
+                        <div style={{
+                            display: "flex",
+                        }}>
+                            <div style={{
+                                width: "35%",
+                                marginLeft: "7.5%",
+                            }}>
                                 <Styleddiv2>* 의료기관 명</Styleddiv2>
                                 <FloatingLabel
                                     label="id"
@@ -260,7 +274,11 @@ function DBD_PostGeneral() {
                                     <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
-                            <div>
+                            <div style={{
+                                width: "43%",
+                                marginLeft: "7%",
+                                marginRight: "7.5%",
+                            }}>
                                 <Styleddiv2>* 의료기관 전화번호</Styleddiv2>
                                 <FloatingLabel
                                     label="01033333333"
@@ -270,9 +288,12 @@ function DBD_PostGeneral() {
                                     <Form.Control type="textarea" />
                                 </FloatingLabel>
                             </div>
-                        </Styleddiv3>
-                        <Styleddiv3>
-                            <div>
+                        </div>
+                        <div style={{
+                            display: "flex",
+                            backgroundColor: "gray",
+                        }}>
+                            <div >
                                 <Styleddiv2>* 혈액형</Styleddiv2>
                                 <select onChange={handleSelect3} value={bloodtype}>
                                     {selectList3.map((item) => (
@@ -305,8 +326,11 @@ function DBD_PostGeneral() {
                                     ))}
                                 </select>
                             </div>
-                        </Styleddiv3>
-                        <Styleddiv3>
+                        </div>
+                        <div style={{
+                            display: "flex",
+                            backgroundColor: "gray",
+                        }}>
                             <div>
                                 <Styleddiv2>* 필요 혈액제제</Styleddiv2>
                                 <select onChange={handleSelect1} value={bloodproduct}>
@@ -340,8 +364,11 @@ function DBD_PostGeneral() {
                                     onChange={handlereviewFChange}
                                 />
                             </div>
-                        </Styleddiv3>
-                        <Styleddiv3>
+                        </div>
+                        <div style={{
+                            display: "flex",
+                            backgroundColor: "gray",
+                        }}>
                             <div>
                                 <Styleddiv2>* 진행기간</Styleddiv2>
                                 <input
@@ -359,7 +386,7 @@ function DBD_PostGeneral() {
                                     onChange={handleEndDateChange}
                                 />
                             </div>
-                        </Styleddiv3>
+                        </div>
                     </Styleddiv4>
                     <Styleddiv4>
                         <FloatingLabel
@@ -431,10 +458,6 @@ const Styleddiv2 = styled.div`
     font-size: 16px;
     line-height: 32px;
     margin-top:1%;
-`;
-const Styleddiv3 = styled.div`    
-    display:flex;
-    justify-content: space-around;
 `;
 const Styleddiv4 = styled.div`
     margin-top: 1%;
