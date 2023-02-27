@@ -9,55 +9,43 @@ const Nav = () => {
     <Stylednav>
       <Styleddiv1>
         <Styledimg src={icon} class name="main-icon" alt="logo" />
-        <Link to="first" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem style={{ fontSize: '28px', marginLeft: '0.5%' }}>
             vita
           </MenuItem>
         </Link>
       </Styleddiv1>
       <Styleddiv>
-        <Link to="first" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to="Learn" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem>알아보자</MenuItem>
         </Link>
       </Styleddiv>
       <Styleddiv>
-        <Link to="first" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to="DBD_PostGeneral" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem>헌혈하자</MenuItem>
         </Link>
       </Styleddiv>
       <Styleddiv>
-        <Link to="first" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to="BD_Story" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem>이야기하자</MenuItem>
         </Link>
       </Styleddiv>
       <Styleddiv>
-        <Link to="first" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to="S_Main" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem>봉사하자</MenuItem>
         </Link>
       </Styleddiv>
       <Styleddiv>
-        <Link
-          Link
-          to="first"
-          style={{ textDecoration: 'none', color: 'white' }}
-        >
+        <Link to="D_Main" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem>기부하자</MenuItem>
         </Link>
       </Styleddiv>
       <Styledstate>
-        <Link
-          Link
-          to="Login"
-          style={{ textDecoration: 'none', color: 'white' }}
-        >
+        <Link to="Login" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem>로그인</MenuItem>
         </Link>
         <div>|</div>
-        <Link
-          Link
-          to="first"
-          style={{ textDecoration: 'none', color: 'white' }}
-        >
+        <Link to="SignUp" style={{ textDecoration: 'none', color: 'white' }}>
           <MenuItem>회원가입</MenuItem>
         </Link>
       </Styledstate>
