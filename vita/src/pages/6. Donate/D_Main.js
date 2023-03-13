@@ -9,7 +9,7 @@ const D_Main = () => {
   const [socketClient, setSocketClient] = useState(null);
 
   useEffect(() => {
-    const client = Stomp.client('ws://localhost:8004/api/websocket');
+    const client = Stomp.client('ws://localhost:8004/ws/chat');
     client.connect({}, () => {
       setStompClient(client);
     });
