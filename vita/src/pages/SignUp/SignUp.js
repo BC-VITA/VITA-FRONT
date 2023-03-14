@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '@mui/material';
-import Group from './SignUpGroup';
-import Hospital from './SignUpHospital';
-import Individual from './SignUpIndividual';
 import GroupPhoTO from '../img/개인.png';
 import icHospitalonPhoTO from '../img/병원.png';
 import IndividualPhoTO from '../img/봉사 기업・단체.png';
@@ -23,33 +20,43 @@ function SignUp() {
   };
 
   return (
-    <div>
+    <div >
       <section>
-        <Styleddiv1>로그인</Styleddiv1>
-        <Styleddiv1>회원일 경우 로그인 해주세요</Styleddiv1>
+        <Styleddiv>회원가입</Styleddiv>
+        <Styleddiv1>자신에게 맞는 항목을 선택하여 회원가입 해주세요.</Styleddiv1>
         <hr
           style={{
-            width: '60%',
+            width: '70%',
             size: '10',
             borderWidth: '2px',
             border: 'solid',
+            marginLeft: '15%'
           }}
         ></hr>
       </section>
-      <Stylednav>
-        <Styleddiv1>
-          <Button size="large" onClick={Group}>
+      <section style={{
+        display: 'flex'
+      }}>
+        <div style={{ flexdirection: 'column' }}>
+          <Button size="large" onClick={Group} style={{
+            width: '100%',
+            height: '50vh',
+            display: 'flex',
+          }}>
             <Styledimg
               src={GroupPhoTO}
               class
               name="GroupPhoTO"
               alt="GroupPhoTO"
             />
-            <div>개 인</div>
+            <div >개 인</div>
           </Button>
-        </Styleddiv1>
-        <Styleddiv1>
-          <Button size="large" onClick={Hospital}>
+        </div>
+        <div>
+          <Button size="large" onClick={Hospital} style={{
+            display: 'flex',
+            flexdirection: 'column',
+          }}>
             <Styledimg
               src={icHospitalonPhoTO}
               class
@@ -58,9 +65,9 @@ function SignUp() {
             />
             <div>병 원</div>
           </Button>
-        </Styleddiv1>
-        <Styleddiv1>
-          <Button size="large" onClick={Individual}>
+        </div>
+        <div>
+          <Button size="large" onClick={Individual} >
             <Styledimg
               src={IndividualPhoTO}
               class
@@ -69,33 +76,35 @@ function SignUp() {
             />
             <div>봉사 기업・단체</div>
           </Button>
-        </Styleddiv1>
-      </Stylednav>
+        </div>
+      </section >
     </div>
   );
 }
-
-const Stylednav = styled.nav`
+const Styleddiv = styled.div`
   position: static;
-  bottom: 100;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  border: solid 2px;
-  background-color: black;
-  padding: auto;
-  margin: auto;
-`;
-
-const Styleddiv1 = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration-line: none;
+  align-items: flex-start;
+  flex-direction: column;
+  font-size: 48px;
+  font-weight: 700;
+  margin-top: 3%;
   margin-left: 15%;
-  font-size: 3rem;
+`;
+
+/*const Styleddiv2 = styled(Styleddiv)`
+  margin-top: 0%;
+`;*/
+const Styleddiv1 = styled.div`
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  font-size: 24px;
+  font-weight: 500;
+  margin-left: 15%;
 `;
 const Styledimg = styled.img`
   width: 20px;
