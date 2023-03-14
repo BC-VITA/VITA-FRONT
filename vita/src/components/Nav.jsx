@@ -70,8 +70,6 @@ const Stylednav = styled.nav`
   display: flex;
   border: solid 2px;
   background-color: black;
-  padding: auto;
-  margin: auto;
 `;
 const Styleddiv = styled.div`
   width: 100%;
@@ -96,5 +94,6 @@ const Styledimg = styled.img`
   height: 25px;
   object-fit: cover;
 `;
+
 
 export default Nav;

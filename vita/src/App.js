@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Nav from './components/Nav';
+import Foot from './components/Foot';
 
 import Home from './pages/Main';
 
@@ -25,6 +27,7 @@ import DMain from './pages/6. Donate/D_Main';
 
 function App() {
   return (
+    <FooterContainer >
     <BrowserRouter>
       <Nav />
       <Routes>
@@ -41,8 +44,14 @@ function App() {
         <Route path="/S_Main" element={<SMain />}></Route> {/*봉사하자*/}
         <Route path="/D_Main" element={<DMain />}></Route> {/*기부하자*/}
       </Routes>
+        <Foot />
     </BrowserRouter>
+    </FooterContainer>
   );
 }
-
+const FooterContainer = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+`;
 export default App;
