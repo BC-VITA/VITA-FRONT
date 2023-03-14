@@ -5,7 +5,7 @@ import icon from './icon.png';
 const Footer = () => {
   return (
     <Styledfoot>
-      <div style={{ fontSize: '28px' }}>
+      <div style={{ fontSize: '28px', marginbottom: '200px' }}>
         <Styledimg src={icon} class name="main-icon" alt="logo" />
         <Sp0>
           헌혈하러 갈래?
@@ -28,7 +28,7 @@ const Styledfoot = styled.footer`
   position: static;
   bottom: 0;
   width: 100%;
-  height: 150px;
+  height: 200px;
   background-color: #F5F5F5;
   margin-top: auto;
   display:flex;
