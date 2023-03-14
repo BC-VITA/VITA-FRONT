@@ -21,7 +21,10 @@ const Nav = () => {
         </Link>
       </Styleddiv>
       <Styleddiv>
-        <Link to="DBD_PostGeneral" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link
+          to="DBD_PostGeneral"
+          style={{ textDecoration: 'none', color: 'white' }}
+        >
           <MenuItem>헌혈하자</MenuItem>
         </Link>
       </Styleddiv>
@@ -94,6 +97,5 @@ const Styledimg = styled.img`
   height: 25px;
   object-fit: cover;
 `;
-
 
 export default Nav;
