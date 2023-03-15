@@ -75,7 +75,7 @@ function DBD_General() {
       <StyledSubcomment>
         <section>
           <StyledTitle>지정헌혈하기</StyledTitle>
-          <Tabs
+          {/* <Tabs
             defaultActiveKey="profile"
             id="uncontrolled-tab-example"
             className="mb-3"
@@ -86,7 +86,7 @@ function DBD_General() {
             <Tab eventKey="profile" title="병원">
               <Sonnet />
             </Tab>
-          </Tabs>
+          </Tabs> */}
 
           <Styleddiv1>일반사용자 | &nbsp;병원</Styleddiv1>
         </section>
@@ -155,14 +155,14 @@ const StyledAll = styled.div`
   display: flex;
 `;
 const StyledSub = styled.div`
-  width: 208px;
-  height: 350px;
-  margin-top: 28.2px;
-  margin-left: 370px;
+  width: 14px;
+  height: 175px;
+  margin-top: 14.1px;
+  margin-left: 185px;
 `;
 const StyledSubDiv1 = styled.div`
   /* width: 208px; */
-  height: 66px;
+  height: 33px;
   /* left: 370px;
   top: 123px; */
 
@@ -170,8 +170,8 @@ const StyledSubDiv1 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 32px;
-  line-height: 75px;
+  font-size: 16px;
+  line-height: 37.5px;
   /* identical to box height, or 100% */
 
   text-align: center;
@@ -180,23 +180,23 @@ const StyledSubDiv1 = styled.div`
 `;
 
 const StyledSubDiv2 = styled.div`
-  width: 208px;
-  height: 284px;
+  width: 104px;
+  height: 142px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 70px;
-  margin-left: 5px;
-  margin-right: 5px;
+  height: 35px;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
 `;
 const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 70px;
-  margin-left: 5px;
-  margin-right: 5px;
+  height: 35px;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
 `;
 const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
@@ -206,8 +206,8 @@ const StyledSubDiv2_2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 53px;
+  font-size: 12px;
+  line-height: 26.5px;
   /* identical to box height, or 100% */
 
   text-align: center;

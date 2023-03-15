@@ -10,11 +10,9 @@ const Nav = () => {
       <StyledDiv>
         <StyledDiv1>
           <Styledimg src={icon} class name="main-icon" alt="logo" />
-          <Link to="/">
-            <StyledStrBig>
-              <div>VITA</div>
-            </StyledStrBig>
-          </Link>
+          <StyledStr>
+            <Link to="/">VITA</Link>
+          </StyledStr>
         </StyledDiv1>
 
         <StyledDiv2>
@@ -72,101 +70,64 @@ const Nav = () => {
 };
 
 const StyledNav = styled.div`
-  /* position: absolute; */
   width: 100%;
-  height: 94.8px;
+  height: 48px;
 
   background: #333333;
 `;
 
 const StyledDiv = styled.div`
-  /* position: absolute; */
-  /* width: 1180.12px;
-  height: 306px; */
-  margin-left: 370px;
-  margin-top: 24px;
+  margin-left: 190px;
+  margin-top: 12px;
   display: flex;
 `;
 
 const StyledDiv1 = styled.div`
-  /* width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration-line: none;
-  margin-left: 15%;
-  font-size: 3rem; */
-  /* position: absolute;
-  width: 120px;
-  height: 46px; */
   display: flex;
 `;
 const Styledimg = styled.img`
-  /* width: 20px;
-  height: 25px;
-  object-fit: cover; */
+  width: 17.5px;
+  height: 23px;
 
-  width: 35px;
-  height: 46px;
+  margin-right: 4px;
 
-  flex: none;
+  /* flex: none;
   order: 0;
-  flex-grow: 0;
-
-  margin-right: 8px;
+  flex-grow: 0; */
 `;
-const StyledStrBig = styled.div`
-  /* textdecoration: none;
-  color: white;
-  fontsize: 28px;
-  marginleft: 0.5%; */
-
+const StyledStr = styled.Link`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
-  /* line-height: 41px; */
+  font-size: 18px;
   text-align: center;
 
   color: #ffffff;
 
-  flex: none;
+  /* flex: none;
   order: 1;
-  flex-grow: 0;
+  flex-grow: 0; */
+  text-decoration: inherit;
 `;
 
+const StyledStrLogo = styled.div`
+  text-decoration: none;
+  color: #ffffff;
+`;
 const StyledDiv2 = styled.div`
-  /* width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration-line: none; */
-
-  /* width: 699px;
-  height: 300px; */
-  margin-left: 119px;
-  margin-right: 119px;
-  margin-top: 6px;
+  margin-left: 59.5px;
+  margin-right: 59.5px;
+  margin-top: 3px;
 
   display: flex;
 `;
 const StyledDiv2_1 = styled.div`
-  /* width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration-line: none; */
   width: 140px;
 
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
-  /* line-height: 29px; */
-  /* identical to box height */
+  font-size: 10px;
 
   text-align: center;
 
@@ -189,7 +150,7 @@ const StyledStrSmall = styled.div`
   font-family: 'Noto Sans';
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 8px;
   /* line-height: 22px; */
   /* identical to box height */
 
@@ -206,7 +167,7 @@ const StyledStrSmall = styled.div`
 
   text-align: center; */
 
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 
 export default Nav;
