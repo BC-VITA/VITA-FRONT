@@ -65,6 +65,7 @@ function App() {
           <Route path="/Hospital" element={<Hospital />}></Route>
           <Route path="/Individual" element={<Individual />}></Route>
           {/* 알아보자 */}
+          <Route path="/Learn" element={<Learn />}></Route>
           {/* 헌혈하자 */}
           <Route path="/BDMain " element={<BDMain />}></Route>
           <Route path="/BDHouse " element={<BDHouse />}></Route>
