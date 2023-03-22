@@ -5,99 +5,55 @@ import styled from 'styled-components';
 import Nav from './components/Nav';
 import Foot from './components/Foot';
 
+import Home from './pages/Main';
+
 import Login from './pages/Login';
+
 import SignUp from './pages/SignUp/SignUp';
 import Group from './pages/SignUp/SignUpGroup';
 import Hospital from './pages/SignUp/SignUpHospital';
 import Individual from './pages/SignUp/SignUpIndividual';
 
-import Home from './pages/Main';
-import MyPage from './pages/MyPage';
+import DBDPostGeneral from './pages/3. Designated_Blood_Donation/DBD_PostGeneral';
+import DBDGeneral from './pages/3. Designated_Blood_Donation/DBD_General';
 
 import Learn from './pages/1. Learn/Learn';
 
-import BDMain from './pages/2. Blood_Donation/BD_Main';
-import BDHouse from './pages/2. Blood_Donation/BD_House';
-import BDBus from './pages/2. Blood_Donation/BD_Bus';
-import BDReservationFirst from './pages/2. Blood_Donation/BD_ReservationFirst';
-import BDReservationSecond from './pages/2. Blood_Donation/BD_ReservationSecond';
-import BDReservationThird from './pages/2. Blood_Donation/BD_ReservationThird';
-import BDHistory from './pages/2. Blood_Donation/BD_History';
-
-import DBDMain from './pages/3. Designated_Blood_Donation/DBD_Main';
-import DBDGeneral from './pages/3. Designated_Blood_Donation/DBD_General';
-import DBDPostGeneral from './pages/3. Designated_Blood_Donation/DBD_PostGeneral';
-import DBDPostHospital from './pages/3. Designated_Blood_Donation/DBD_PostHospital';
-import DBDNews from './pages/3. Designated_Blood_Donation/DBD_News';
-import DBDWatchList from './pages/3. Designated_Blood_Donation/DBD_WatchList';
-
 import BDStory from './pages/4. Community/BD_Story';
-// import BDDetails from './pages/4. Community/BD_Details';
-// import BDWrite from './pages/4. Community/BD_Write';
-// import DBDStory from './pages/4. Community/DBD_Story';
-// import DBDDetails from './pages/4. Community/DBD_Details';
-// import DBDWrite from './pages/4. Community/DBD_Write';
-// import BDStory from './pages/4. Community/BD_Story';
-// import BDStory from './pages/4. Community/BD_Story';
-// import BDStory from './pages/4. Community/BD_Story';
 
 import SMain from './pages/5. Service/S_Main';
-// import SMain from './pages/5. Service';
+import SOther from './pages/5. Service/S_Other';
 
 import DMain from './pages/6. Donate/D_Main';
-// import DMain from './pages/6. Donate';
+
+const startDate = '2022-01-01';
+const endDate = '2022-01-10';
+const onReservation = () => {
+  console.log();
+};
 
 function App() {
   return (
-    <FooterContainer>
-      <BrowserRouter>
-        <Nav />
-        <Routes>
-          {/* 메인 */}
-          <Route path="/" element={<Home />}></Route>
-          {/* 마이페이지 */}
-          <Route path="/MyPage" element={<MyPage />}></Route>
-          {/*로그인*/}
-          <Route path="/Login" element={<Login />}></Route>
-          {/*회원가입*/}
-          <Route path="/SignUp" element={<SignUp />}></Route>
-          <Route path="/Group" element={<Group />}></Route>
-          <Route path="/Hospital" element={<Hospital />}></Route>
-          <Route path="/Individual" element={<Individual />}></Route>
-          {/* 알아보자 */}
-          {/* 헌혈하자 */}
-          <Route path="/BDMain " element={<BDMain />}></Route>
-          <Route path="/BDHouse " element={<BDHouse />}></Route>
-          <Route path="/BDBus " element={<BDBus />}></Route>
-          <Route
-            path="/BDReservationFirst "
-            element={<BDReservationFirst />}
-          ></Route>
-          <Route
-            path="/BDReservationSecond "
-            element={<BDReservationSecond />}
-          ></Route>
-          <Route
-            path="/BDReservationThird "
-            element={<BDReservationThird />}
-          ></Route>
-          <Route path="/BDHistory" element={<BDHistory />}></Route>
-          {/*지정헌혈하자*/}
-          <Route path="/DBDMain" element={<DBDMain />}></Route>
-          <Route path="/DBDGeneral" element={<DBDGeneral />}></Route>
-          <Route path="/DBDPostGeneral" element={<DBDPostGeneral />}></Route>
-          <Route path="/DBDPostHospital" element={<DBDPostHospital />}></Route>
-          <Route path="/DBDNews" element={<DBDNews />}></Route>
-          <Route path="/DBDWatchList" element={<DBDWatchList />}></Route>
-          {/*이야기하자*/}
-          <Route path="/BDStory" element={<BDStory />}></Route>
-          {/*봉사하자*/}
-          <Route path="/SMain" element={<SMain />}></Route>
-          {/*기부하자*/}
-          <Route path="/DMain" element={<DMain />}></Route>
-        </Routes>
+    <FooterContainer >
+    <BrowserRouter>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/Login" element={<Login />}></Route>{/*로그인*/}
+        <Route path="/SignUp" element={<SignUp />}></Route>{/*회원가입*/}
+        <Route path="/Group" element={<Group />}></Route>
+        <Route path="/Hospital" element={<Hospital />}></Route>
+        <Route path="/Individual" element={<Individual />}></Route>
+        <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>{/*헌혈하자*/}
+        <Route path="/DBD_General" element={<DBDGeneral />}></Route>
+        <Route path="/Learn" element={<Learn />}></Route> {/*알아보자*/}
+        <Route path="/BD_Story" element={<BDStory />}></Route>{/*이야기하자*/}
+          <Route path="/S_Main" element={<SMain startDate={startDate} endDate={endDate} onReservation={onReservation} />}></Route> {/*봉사하자*/}
+          <Route path="/S_Other" element={<SOther />}></Route>
+        <Route path="/D_Main" element={<DMain />}></Route> {/*기부하자*/}
+      </Routes>
         <Foot />
-      </BrowserRouter>
+    </BrowserRouter>
     </FooterContainer>
   );
 }
