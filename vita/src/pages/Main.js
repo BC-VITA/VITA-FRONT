@@ -6,12 +6,12 @@ import qwe from './img/asd.png';
 
 function Main() {
     return (
-        <div style={{ margin: '15%', marginTop: '0%', backgroundColor: 'red', }}>
-            <Carousel indicators indicatorStyle={{ backgroundColor: 'gray', width: '10px', height: '10px', borderRadius: '50%', margin: '0 5px', display: 'inline-block' }}>
+        <div style={{ margin: '15%', marginTop: '3%' }}>
+            <Carousel variant="dark">
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={GroupPhoTO}
+                        src={qwe}
                         alt="First slide"
                     />
                 </Carousel.Item>
@@ -20,6 +20,13 @@ function Main() {
                         className="d-block w-100"
                         src={qwe}
                         alt="Second slide"
+                    />
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={qwe}
+                        alt="Third slide"
                     />
                 </Carousel.Item>
             </Carousel>
