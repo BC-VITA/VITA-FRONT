@@ -7,95 +7,185 @@ import icon from './icon.png';
 const Nav = () => {
   return (
     <Stylednav>
-      <Styleddiv1>
+      <StyledDiv1>
         <Styledimg src={icon} class name="main-icon" alt="logo" />
-        <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-          <MenuItem style={{ fontSize: '28px', marginLeft: '0.5%' }}>
-            vita
-          </MenuItem>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <StyledDiv1_1>
+            <div>vita</div>
+          </StyledDiv1_1>
         </Link>
-      </Styleddiv1>
-      <Styleddiv>
-        <Link to="Learn" style={{ textDecoration: 'none', color: 'white' }}>
-          <MenuItem>알아보자</MenuItem>
+      </StyledDiv1>
+
+      <StyledDiv2>
+        <Link to="Learn" style={{ textDecoration: 'none' }}>
+          <StyledDiv2_1>
+            <div>알아보자</div>
+          </StyledDiv2_1>
         </Link>
-      </Styleddiv>
-      <Styleddiv>
-        <Link
-          to="DBD_PostGeneral"
-          style={{ textDecoration: 'none', color: 'white' }}
-        >
-          <MenuItem>헌혈하자</MenuItem>
+
+        <Link to="DBD_PostGeneral" style={{ textDecoration: 'none' }}>
+          <StyledDiv2_1>
+            <div>헌혈하자</div>
+          </StyledDiv2_1>
         </Link>
-      </Styleddiv>
-      <Styleddiv>
-        <Link to="BD_Story" style={{ textDecoration: 'none', color: 'white' }}>
-          <MenuItem>이야기하자</MenuItem>
+
+        <Link to="DBD_PostGeneral" style={{ textDecoration: 'none' }}>
+          <StyledDiv2_1L>
+            <div>지정헌혈하자</div>
+          </StyledDiv2_1L>
         </Link>
-      </Styleddiv>
-      <Styleddiv>
-        <Link to="S_Main" style={{ textDecoration: 'none', color: 'white' }}>
-          <MenuItem>봉사하자</MenuItem>
+
+        <Link to="BD_Story" style={{ textDecoration: 'none' }}>
+          <StyledDiv2_1M>
+            <div>이야기하자</div>
+          </StyledDiv2_1M>
         </Link>
-      </Styleddiv>
-      <Styleddiv>
-        <Link to="D_Main" style={{ textDecoration: 'none', color: 'white' }}>
-          <MenuItem>기부하자</MenuItem>
+
+        <Link to="S_Main" style={{ textDecoration: 'none' }}>
+          <StyledDiv2_1>
+            <div>봉사하자</div>
+          </StyledDiv2_1>
         </Link>
-      </Styleddiv>
-      <Styledstate>
+
+        <Link to="D_Main" style={{ textDecoration: 'none' }}>
+          <StyledDiv2_1>
+            <div>기부하자</div>
+          </StyledDiv2_1>
+        </Link>
+      </StyledDiv2>
+
+      <StyledDiv3>
         <Link to="Login" style={{ textDecoration: 'none', color: 'white' }}>
-          <MenuItem>로그인</MenuItem>
+          <StyledDiv3_1>
+            <div>로그인</div>
+          </StyledDiv3_1>
         </Link>
-        <div>|</div>
+        <StyledDiv3_1m>
+          <div>|</div>
+        </StyledDiv3_1m>
         <Link to="SignUp" style={{ textDecoration: 'none', color: 'white' }}>
-          <MenuItem>회원가입</MenuItem>
+          <StyledDiv3_1>
+            <div>회원가입</div>
+          </StyledDiv3_1>
         </Link>
-      </Styledstate>
+      </StyledDiv3>
     </Stylednav>
   );
 };
-const Styledstate = styled.div`
-  flex-direction: row;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration-line: none;
-  margin-right: 15%;
-`;
+
 const Stylednav = styled.nav`
   position: static;
-  bottom: 100;
+  /* position: fixed; */
+  /* bottom: 100; */
   width: 100%;
   height: 60px;
   display: flex;
   border: solid 2px;
-  background-color: black;
+  background-color: #333333;
 `;
-const Styleddiv = styled.div`
-  width: 100%;
+
+const StyledDiv1 = styled.div`
+  width: 90px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   color: white;
   text-decoration-line: none;
-`;
-const Styleddiv1 = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration-line: none;
-  margin-left: 15%;
-  font-size: 3rem;
+  margin-left: 200px;
+  margin-top: 10px;
 `;
 const Styledimg = styled.img`
-  width: 20px;
-  height: 25px;
-  object-fit: cover;
+  width: 25px;
+  height: 30px;
+  /* object-fit: cover; */
+`;
+const StyledDiv1_1 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 27px;
+  text-align: center;
+  margin-left: 8px;
+
+  color: #ffffff;
+`;
+
+const StyledDiv2 = styled.div`
+  width: 655px;
+  display: flex;
+  /* text-decoration-line: none; */
+  color: white;
+
+  text-decoration: none;
+  text-decoration-line: none;
+  margin-top: 15px;
+  margin-left: 120px;
+  margin-right: 120px;
+`;
+const StyledDiv2_1 = styled.div`
+  width: 110px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+
+  color: #ffffff;
+`;
+const StyledDiv2_1L = styled.div`
+  width: 150px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+
+  color: #ffffff;
+`;
+const StyledDiv2_1M = styled.div`
+  width: 130px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+
+  color: #ffffff;
+`;
+
+const StyledDiv3 = styled.div`
+  /* flex-direction: row; */
+  width: 125px;
+  display: flex;
+  align-items: center;
+  text-decoration-line: none;
+`;
+const StyledDiv3_1 = styled.div`
+  /* flex-direction: row; */
+  text-decoration-line: none;
+
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: -2px;
+
+  color: #ffffff;
+`;
+const StyledDiv3_1m = styled.div`
+  /* flex-direction: row; */
+  text-decoration-line: none;
+
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: -2px;
+
+  margin-left: 15px;
+  margin-right: 15px;
+
+  color: #ffffff;
 `;
 
 export default Nav;
