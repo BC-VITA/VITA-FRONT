@@ -22,8 +22,15 @@ import Learn from './pages/1. Learn/Learn';
 import BDStory from './pages/4. Community/BD_Story';
 
 import SMain from './pages/5. Service/S_Main';
+import SOther from './pages/5. Service/S_Other';
 
 import DMain from './pages/6. Donate/D_Main';
+
+const startDate = '2022-01-01';
+const endDate = '2022-01-10';
+const onReservation = () => {
+  console.log();
+};
 
 function App() {
   return (
@@ -41,7 +48,8 @@ function App() {
         <Route path="/DBD_General" element={<DBDGeneral />}></Route>
         <Route path="/Learn" element={<Learn />}></Route> {/*알아보자*/}
         <Route path="/BD_Story" element={<BDStory />}></Route>{/*이야기하자*/}
-        <Route path="/S_Main" element={<SMain />}></Route> {/*봉사하자*/}
+          <Route path="/S_Main" element={<SMain startDate={startDate} endDate={endDate} onReservation={onReservation} />}></Route> {/*봉사하자*/}
+          <Route path="/S_Other" element={<SOther />}></Route>
         <Route path="/D_Main" element={<DMain />}></Route> {/*기부하자*/}
       </Routes>
         <Foot />
