@@ -23,13 +23,13 @@ const Nav = () => {
           </StyledDiv2_1>
         </Link>
 
-        <Link to="DBD_PostGeneral" style={{ textDecoration: 'none' }}>
+        <Link to="BD_Main" style={{ textDecoration: 'none' }}>
           <StyledDiv2_1>
             <div>헌혈하자</div>
           </StyledDiv2_1>
         </Link>
 
-        <Link to="DBD_PostGeneral" style={{ textDecoration: 'none' }}>
+        <Link to="DBD_Main" style={{ textDecoration: 'none' }}>
           <StyledDiv2_1L>
             <div>지정헌혈하자</div>
           </StyledDiv2_1L>

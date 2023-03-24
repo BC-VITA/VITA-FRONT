@@ -201,11 +201,13 @@ function DBD_PostGeneral() {
               >
                 <Styleddiv2>* 환자명</Styleddiv2>
                 <FloatingLabel
+                  controlId="floatingInput"
                   label="홍길동"
+                  className="mb-3"
                   value={id}
                   onChange={handleChangeId}
                 >
-                  <Form.Control type="textarea" />
+                  <Form.Control type="textarea" placeholder="name" />
                 </FloatingLabel>
               </div>
               <div
