@@ -1,5 +1,5 @@
-// import React, { useEffect, useState } from 'react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+// import React, { useState } from 'react';
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
 import Accordion from 'react-bootstrap/Accordion';
@@ -14,6 +14,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 function DBD_General() {
   const [hostipalcall, sethostipalcall] = useState('');
@@ -49,47 +52,6 @@ function DBD_General() {
   const selectList2 = ['최신순', '마감순'];
   const handleChangehostipalcall = ({ target: { value } }) =>
     sethostipalcall(value);
-  const handleSubmit = async (event) => {
-    setDisabled(true);
-    event.preventDefault();
-    await new Promise((r) => setTimeout(r, 1000));
-    //back으로 정보 post함
-    fetch('http://localhost:8004/user/board/1', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        hospitalPhoneNumber: hostipalcall,
-        patientBlood: bloodtype,
-        patientIsRH: rhtype,
-        bloodType: donationtype,
-      }),
-    })
-      //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
-      .then((res) => {
-        res.json();
-        if (res.ok) {
-          navigate('/DBD_General');
-        }
-      })
-      //회원가입 실패시 실행
-      .catch((err) => {
-        setError(err.message);
-        //에러시 Loading메세지 사라지고
-        //에러메세지만 보이도록 설정
-      });
-    setDisabled(false);
-    console.log(
-      'data: ' +
-        JSON.stringify({
-          hospitalPhoneNumber: hostipalcall,
-          patientBlood: bloodtype,
-          patientIsRH: rhtype,
-          bloodType: donationtype,
-        })
-    );
-  };
   const RadioButton = ({ label, value, onChange }) => {
     return (
       <label>
@@ -115,21 +77,21 @@ function DBD_General() {
     {},
   ]);
 
-  // useEffect(() => {
-  //   fetch('http://localhost:8004/user/board/list', {
-  //     method: 'get',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log(res);
-  //       setInputData(res);
-  //       console.log(inputData);
-  //     })
-  //     .catch((err) => {
-  //       setError(err.message);
-  //     });
-  //   console.log(inputData);
-  // }, []);
+  useEffect(() => {
+    fetch('http://localhost:8004/user/board/filter', {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setInputData(res);
+        console.log(inputData);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+    console.log(inputData);
+  }, []);
 
   return (
     <StyledAll>
@@ -180,9 +142,9 @@ function DBD_General() {
             <Tab eventKey="profile" title="일반 사용자">
               <Tab.Content>
                 <StyledFilter>
-                  <StyledFilterDiv>
-                    <StyledFilterDiv1>
-                      <StyledFilterDiv1_1>지역선택</StyledFilterDiv1_1>
+                  <StyledFilterDiv1>
+                    <StyledFilterDiv1_1>
+                      <StyledFilterDiv1_2>지역선택</StyledFilterDiv1_2>
                       {/* <StyledFilterDiv1_2> */}
                       <select
                         onChange={handleSelect1}
@@ -196,9 +158,10 @@ function DBD_General() {
                         ))}
                       </select>
                       {/* </StyledFilterDiv1_2> */}
-                    </StyledFilterDiv1>
-                    <StyledFilterDiv1>
-                      <StyledFilterDiv1_1>RH여부</StyledFilterDiv1_1>
+                    </StyledFilterDiv1_1>
+
+                    <StyledFilterDiv1_1>
+                      <StyledFilterDiv1_2>RH여부</StyledFilterDiv1_2>
                       <RadioButton
                         label="&nbsp;RH-&nbsp;"
                         value={rhtype === 'RH-'}
@@ -209,13 +172,17 @@ function DBD_General() {
                         value={rhtype === 'RH+'}
                         onChange={handleRHPChange}
                       />
-                    </StyledFilterDiv1>
+                    </StyledFilterDiv1_1>
+                    <StyledFilterDiv1_1>
+                      <StyledFilterDiv1_2l>마감순</StyledFilterDiv1_2l>
+                      <StyledFilterDiv1_2l>최신순</StyledFilterDiv1_2l>
+                    </StyledFilterDiv1_1>
                     <StyledFilterButton>
                       <Nav.Link href="/DBDPostGeneral">
                         <StyledButtonDiv>검색하기</StyledButtonDiv>
                       </Nav.Link>
                     </StyledFilterButton>
-                  </StyledFilterDiv>
+                  </StyledFilterDiv1>
                   <StyledFilterDiv2>
                     <FloatingLabel
                       label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
@@ -226,8 +193,7 @@ function DBD_General() {
                     </FloatingLabel>
                   </StyledFilterDiv2>
                 </StyledFilter>
-                <div>마감순</div>
-                <div>최신순</div>
+
                 <section>
                   <Styleddiv2>
                     <Accordion defaultActiveKey="0">
@@ -264,6 +230,8 @@ function DBD_General() {
                                   {element.bloodNumber}
                                   {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
                                   <br />
+                                  <FontAwesomeIcon icon={faHeart} />
+                                  {/* <FontAwesomeIcon icon={fa-solid fa-heart} /> */}
                                   <Styledimg
                                     src={icon}
                                     class
@@ -271,8 +239,8 @@ function DBD_General() {
                                     alt="logo"
                                   />
                                   {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
-                                  <br />
-                                  <button type="button">상세보기</button>
+                                  {/* <br />
+                                  <button type="button">상세보기</button> */}
                                   <br />
                                   <button type="button">참여하기</button>
                                 </Styledtd>
@@ -289,55 +257,7 @@ function DBD_General() {
             {/* <StyledTabTitle> */}
 
             <Tab eventKey="home" title="병원">
-              <Tab.Content>
-                <StyledFilter>
-                  <StyledFilterDiv>
-                    <StyledFilterDiv1>
-                      <StyledFilterDiv1_1>지역선택</StyledFilterDiv1_1>
-                      {/* <StyledFilterDiv1_2> */}
-                      <select
-                        onChange={handleSelect1}
-                        value={donationtype}
-                        style={{ border: 'none' }}
-                      >
-                        {selectList1.map((item) => (
-                          <option value={item} key={item}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
-                      {/* </StyledFilterDiv1_2> */}
-                    </StyledFilterDiv1>
-                    <StyledFilterDiv1>
-                      <StyledFilterDiv1_1>RH여부</StyledFilterDiv1_1>
-                      <RadioButton
-                        label="&nbsp;RH-&nbsp;"
-                        value={rhtype === 'RH-'}
-                        onChange={handleRHMChange}
-                      />
-                      <RadioButton
-                        label="&nbsp;RH+&nbsp;"
-                        value={rhtype === 'RH+'}
-                        onChange={handleRHPChange}
-                      />
-                    </StyledFilterDiv1>
-                    <StyledFilterButton>
-                      <Nav.Link href="/DBDPostGeneral">
-                        <StyledButtonDiv>검색하기</StyledButtonDiv>
-                      </Nav.Link>
-                    </StyledFilterButton>
-                  </StyledFilterDiv>
-                  <StyledFilterDiv2>
-                    <FloatingLabel
-                      label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
-                      value={hostipalcall}
-                      onChange={handleChangehostipalcall}
-                    >
-                      <Form.Control type="textarea" />
-                    </FloatingLabel>
-                  </StyledFilterDiv2>
-                </StyledFilter>
-              </Tab.Content>
+              <Tab.Content>skjfjsf</Tab.Content>
             </Tab>
             {/* </StyledTabTitle> */}
             {/* <StyledTabTitle> */}
@@ -436,10 +356,11 @@ const StyledFilter = styled.div`
   background: #ffe9e9;
   margin-bottom: 20px;
 `;
-const StyledFilterDiv = styled.div`
+
+const StyledFilterDiv1 = styled.div`
   display: flex;
 `;
-const StyledFilterDiv1 = styled.div`
+const StyledFilterDiv1_1 = styled.div`
   display: flex;
   margin-top: 20px;
 `;
@@ -447,12 +368,11 @@ const StyledFilterButton = styled.div`
   margin-top: 15px;
   width: 125px;
   height: 35px;
-  margin-left: 350px;
-
+  margin-left: 80px;
   background: #ff9f9f;
   border-radius: 9px;
 `;
-const StyledFilterDiv1_1 = styled.div`
+const StyledFilterDiv1_2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 600;
@@ -460,12 +380,13 @@ const StyledFilterDiv1_1 = styled.div`
   margin-right: 20px;
   margin-left: 30px;
 `;
-// const StyledFilterDiv1_2 = styled`
-//   margin-right: 20px;
-//   margin-left: 0px;
-//   width: 80px;
-//   border: none;
-// `;
+const StyledFilterDiv1_2l = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-size: 18px;
+  margin-right: -20px;
+  margin-left: 80px;
+`;
 const StyledFilterDiv2 = styled.label`
   margin-top: 20px;
   width: 860px;
