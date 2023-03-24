@@ -5,47 +5,32 @@ import styled from 'styled-components';
 import Nav from './components/Nav';
 import Foot from './components/Foot';
 
+import Home from './pages/Main';
+
 import Login from './pages/Login';
+
 import SignUp from './pages/SignUp/SignUp';
 import Group from './pages/SignUp/SignUpGroup';
 import Hospital from './pages/SignUp/SignUpHospital';
 import Individual from './pages/SignUp/SignUpIndividual';
 
-import Home from './pages/Main';
-import MyPage from './pages/MyPage';
+import DBDPostGeneral from './pages/3. Designated_Blood_Donation/DBD_PostGeneral';
+import DBDGeneral from './pages/3. Designated_Blood_Donation/DBD_General';
 
 import Learn from './pages/1. Learn/Learn';
 
-import BDMain from './pages/2. Blood_Donation/BD_Main';
-import BDHouse from './pages/2. Blood_Donation/BD_House';
-import BDBus from './pages/2. Blood_Donation/BD_Bus';
-import BDReservationFirst from './pages/2. Blood_Donation/BD_ReservationFirst';
-import BDReservationSecond from './pages/2. Blood_Donation/BD_ReservationSecond';
-import BDReservationThird from './pages/2. Blood_Donation/BD_ReservationThird';
-import BDHistory from './pages/2. Blood_Donation/BD_History';
-
-import DBDMain from './pages/3. Designated_Blood_Donation/DBD_Main';
-import DBDGeneral from './pages/3. Designated_Blood_Donation/DBD_General';
-import DBDPostGeneral from './pages/3. Designated_Blood_Donation/DBD_PostGeneral';
-import DBDPostHospital from './pages/3. Designated_Blood_Donation/DBD_PostHospital';
-import DBDNews from './pages/3. Designated_Blood_Donation/DBD_News';
-import DBDWatchList from './pages/3. Designated_Blood_Donation/DBD_WatchList';
-
 import BDStory from './pages/4. Community/BD_Story';
-// import BDDetails from './pages/4. Community/BD_Details';
-// import BDWrite from './pages/4. Community/BD_Write';
-// import DBDStory from './pages/4. Community/DBD_Story';
-// import DBDDetails from './pages/4. Community/DBD_Details';
-// import DBDWrite from './pages/4. Community/DBD_Write';
-// import BDStory from './pages/4. Community/BD_Story';
-// import BDStory from './pages/4. Community/BD_Story';
-// import BDStory from './pages/4. Community/BD_Story';
 
 import SMain from './pages/5. Service/S_Main';
-// import SMain from './pages/5. Service';
+import SOther from './pages/5. Service/S_Other';
 
 import DMain from './pages/6. Donate/D_Main';
-// import DMain from './pages/6. Donate';
+
+const startDate = '2022-01-01';
+const endDate = '2022-01-10';
+const onReservation = () => {
+  console.log();
+};
 
 function App() {
   return (
@@ -98,7 +83,7 @@ function App() {
           <Route path="/DMain" element={<DMain />}></Route>
         </Routes>
         <Foot />
-      </BrowserRouter>
+    </BrowserRouter>
     </FooterContainer>
   );
 }
