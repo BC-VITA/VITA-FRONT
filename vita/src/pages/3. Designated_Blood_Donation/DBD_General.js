@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 // import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import Table from 'react-bootstrap/Table';
 import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
 import { useNavigate } from 'react-router-dom';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-
 import Nav from 'react-bootstrap/Nav';
 
 import Col from 'react-bootstrap/Col';
@@ -100,22 +100,22 @@ function DBD_General() {
           <StyledSubDiv1>지정헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBDMain">
+              <Nav.Link href="/DBD_Main">
                 <StyledSubDiv2_2g>지정헌혈이란</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/DBDGeneral">
+              <Nav.Link href="/DBD_General">
                 <StyledSubDiv2_2>지정헌혈하기</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBDWatchList">
+              <Nav.Link href="/DBD_WatchList">
                 <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBDNews">
+              <Nav.Link href="/DBD_News">
                 <StyledSubDiv2_2g>따뜻한 사례</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
@@ -405,6 +405,7 @@ const StyledTab = styled.div`
 `;
 
 const StyledTitle = styled.div`
+  width: 203px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;

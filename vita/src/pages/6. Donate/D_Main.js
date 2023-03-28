@@ -24,12 +24,15 @@ const D_Main = () => {
 
   useEffect(() => {
     if (stompClient && socketClient) {
-      const stompSubscription = stompClient.subscribe('/topic/chat', message => {
-        const newMessages = [...messages, JSON.parse(message.body)];
-        setMessages(newMessages);
-      });
+      const stompSubscription = stompClient.subscribe(
+        '/topic/chat',
+        (message) => {
+          const newMessages = [...messages, JSON.parse(message.body)];
+          setMessages(newMessages);
+        }
+      );
 
-      const socketSubscription = socketClient.on('message', message => {
+      const socketSubscription = socketClient.on('message', (message) => {
         const newMessages = [...messages, message];
         setMessages(newMessages);
       });
@@ -59,7 +62,11 @@ const D_Main = () => {
         ))}
       </ul>
       <div>
-        <input type="text" value={messageInput} onChange={e => setMessageInput(e.target.value)} />
+        <input
+          type="text"
+          value={messageInput}
+          onChange={(e) => setMessageInput(e.target.value)}
+        />
         <button onClick={handleMessageSend}>Send</button>
       </div>
     </div>
