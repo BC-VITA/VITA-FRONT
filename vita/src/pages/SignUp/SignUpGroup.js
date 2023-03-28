@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import RadioGroup from '../../components/RadioGroup';
 import Radio from '../../components/Radio';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
 function SignUpGroup() {
   const [id, setId] = useState('');
@@ -31,6 +34,12 @@ function SignUpGroup() {
   const handleChangeHistory = ({ target: { value } }) => setHistory(value);
 
   const navigate = useNavigate();
+
+  const [bloodtype, setbloodtype] = useState('');
+  const handleSelect3 = (e) => {
+    setbloodtype(e.target.value);
+  };
+  const selectList3 = ['RH-', 'RH+'];
 
   const handleSubmit = async (event) => {
     setDisabled(true);
@@ -67,6 +76,22 @@ function SignUpGroup() {
         //에러메세지만 보이도록 설정
       });
     setDisabled(false);
+    console.log(
+      'data: ' +
+        JSON.stringify({
+          id: 'userID',
+          password: 'userPW',
+          passwordCheck: 'userPW',
+          Name: 'userName',
+          Date: 'userBirth',
+          Email: 'userEmail',
+          Phon: 'userPhoneNumber',
+          RH: 'isRH',
+          sex: 'sex',
+          Blood: 'userBlood',
+          History: 'bloodHistory',
+        })
+    );
   };
   return (
     <div
@@ -100,7 +125,20 @@ function SignUpGroup() {
       </section>
       <form onSubmit={handleSubmit}>
         <Styleddiv2>
+          {/* <FloatingLabel controlId="floatingInput" label="ID" className="mb-3">
+            <Form.Control type="id" placeholder="아이디" />
+          </FloatingLabel>
+
           <Styleddiv>아이디</Styleddiv>
+          <FloatingLabel
+            controlId="floatingInput"
+            label="ID"
+            placeholder="아이디"
+            className="mb-3"
+          >
+            <Form.Control type="id" />
+          </FloatingLabel> */}
+
           <Styledinput
             type="id"
             placeholder="아이디"
@@ -174,47 +212,8 @@ function SignUpGroup() {
               />
             </StyledBlock1>
           </StyledFlax>
+
           <StyledFlax>
-            <form>
-              <article
-                style={{
-                  width: '199px',
-                }}
-              >
-                <RadioGroup
-                  type="sex"
-                  name="sex"
-                  value={sex}
-                  label="성별"
-                  style={{
-                    fontsize: '32px',
-                  }}
-                >
-                  <Radio name="contact" value="EMAIL" defaultChecked>
-                    남자
-                  </Radio>
-                  <Radio name="contact" value="PHONE">
-                    여자
-                  </Radio>
-                </RadioGroup>
-              </article>
-            </form>
-            <form>
-              <article
-                style={{
-                  width: '230px',
-                }}
-              >
-                <RadioGroup type="RH" name="RH" value={RH} label="RH여부">
-                  <Radio name="contact" value="EMAIL" defaultChecked>
-                    RH-
-                  </Radio>
-                  <Radio name="contact" value="PHONE">
-                    RH+
-                  </Radio>
-                </RadioGroup>
-              </article>
-            </form>
             <form>
               <article
                 style={{
@@ -242,6 +241,59 @@ function SignUpGroup() {
                 </RadioGroup>
               </article>
             </form>
+
+            <form>
+              <article
+                style={{
+                  width: '199px',
+                }}
+              >
+                <RadioGroup
+                  type="sex"
+                  name="sex"
+                  value={sex}
+                  label="성별"
+                  style={{
+                    fontsize: '32px',
+                  }}
+                >
+                  <Radio name="contact" value="EMAIL" defaultChecked>
+                    남자
+                  </Radio>
+                  <Radio name="contact" value="PHONE">
+                    여자
+                  </Radio>
+                </RadioGroup>
+              </article>
+            </form>
+
+            <div>
+              <Styleddiv2>* 혈액형</Styleddiv2>
+              <select onChange={handleSelect3} value={bloodtype}>
+                {selectList3.map((item) => (
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <form>
+              <article
+                style={{
+                  width: '230px',
+                }}
+              >
+                <RadioGroup type="RH" name="RH" value={RH} label="RH여부">
+                  <Radio name="contact" value="EMAIL" defaultChecked>
+                    RH-
+                  </Radio>
+                  <Radio name="contact" value="PHONE">
+                    RH+
+                  </Radio>
+                </RadioGroup>
+              </article>
+            </form>
+
             <StyledBlock>
               <Styleddiv>헌혈이력</Styleddiv>
               <Styledinput2
