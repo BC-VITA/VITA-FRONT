@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
@@ -22,13 +21,6 @@ function BD_Main() {
   const handleSelect2 = (e) => {
     setbloodproduct(e.target.value);
   };
-  // const handleSelect1 = (e) => {
-  //   setdonationtype(e.target.value);
-  // };
-  // const handleSelect2 = (e) => {
-  //   setbloodtype(e.target.value);
-  // };
-
   const handleRHMChange = () => {
     setbrhtype('RH-');
   };
@@ -37,8 +29,10 @@ function BD_Main() {
   };
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const selectList2 = ['최신순', '마감순'];
+
   const handleChangehostipalcall = ({ target: { value } }) =>
     sethostipalcall(value);
+
   const RadioButton = ({ label, value, onChange }) => {
     return (
       <label>
@@ -65,7 +59,7 @@ function BD_Main() {
   ]);
 
   useEffect(() => {
-    fetch('http://localhost:8004/user/board/filter', {
+    fetch('http://localhost:8004/blood/house/filter', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -80,19 +74,19 @@ function BD_Main() {
     console.log(inputData);
   }, []);
   return (
-    <StyledAll>
+    <div style={{ display: 'flex' }}>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>지정헌혈하자</StyledSubDiv1>
+          <StyledSubDiv1>헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1p>
               <Nav.Link href="/DBD_Main">
-                <StyledSubDiv2_2>지정헌혈이란</StyledSubDiv2_2>
+                <StyledSubDiv2_2>헌혈이란</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBD_General">
-                <StyledSubDiv2_2g>지정헌혈하기</StyledSubDiv2_2g>
+              <Nav.Link href="/BD_House">
+                <StyledSubDiv2_2g>헌혈하기</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
@@ -110,7 +104,7 @@ function BD_Main() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>지정헌혈이란</StyledTitle>
+          <StyledTitle>헌혈이란</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
@@ -118,14 +112,10 @@ function BD_Main() {
           </StyledButton>
         </StyledTop>
       </StyledSubcomment>
-      z<div className="home">{error && <div>{error}</div>}</div>
-    </StyledAll>
+      <div className="home">{error && <div>{error}</div>}</div>
+    </div>
   );
 }
-
-const StyledAll = styled.div`
-  display: flex;
-`;
 const StyledSub = styled.div`
   width: 120px;
   /* height: 175px; */
