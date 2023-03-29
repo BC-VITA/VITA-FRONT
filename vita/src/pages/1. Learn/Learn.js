@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-// import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+
 function Learn() {
   return <div>알아보자</div>;
 }

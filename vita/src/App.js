@@ -17,13 +17,13 @@ import MyPage from './pages/MyPage';
 import Learn from './pages/1. Learn/Learn';
 
 import BDMain from './pages/2. Blood_Donation/BD_Main';
-import BDMain1 from './pages/2. Blood_Donation/BD_Main1';
 import BDHouse from './pages/2. Blood_Donation/BD_House';
 import BDBus from './pages/2. Blood_Donation/BD_Bus';
 import BDReservationFirst from './pages/2. Blood_Donation/BD_ReservationFirst';
 import BDReservationSecond from './pages/2. Blood_Donation/BD_ReservationSecond';
 import BDReservationThird from './pages/2. Blood_Donation/BD_ReservationThird';
 import BDHistory from './pages/2. Blood_Donation/BD_History';
+import BDtest from './pages/2. Blood_Donation/BD_test';
 
 import DBDMain from './pages/3. Designated_Blood_Donation/DBD_Main';
 import DBDGeneral from './pages/3. Designated_Blood_Donation/DBD_General';
@@ -42,8 +42,8 @@ import BDStory from './pages/4. Community/BD_Story';
 // import BDStory from './pages/4. Community/BD_Story';
 // import BDStory from './pages/4. Community/BD_Story';
 
-// import SMain from './pages/5. Service/S_Main';
-// import SMain from './pages/5. Service';
+import SMain from './pages/5. Service/S_Main';
+import SOther from './pages/5. Service/S_Other';
 
 import DMain from './pages/6. Donate/D_Main';
 // import DMain from './pages/6. Donate';
@@ -62,7 +62,6 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path="/KakaoMap" element={<KakaoMap />}></Route>
           <Route path="/BD_Main1" element={<BDMain1 />}></Route>
           {/* 메인 */}
           <Route path="/" element={<Home />}></Route>
@@ -72,41 +71,36 @@ function App() {
           <Route path="/Login" element={<Login />}></Route>
           {/*회원가입*/}
           <Route path="/SignUp" element={<SignUp />}></Route>
+
           <Route path="/SignUpGroup" element={<Group />}></Route>
           <Route path="/SignUpHospital" element={<Hospital />}></Route>
           <Route path="/SignUpIndividual" element={<Individual />}></Route>
-          {/* 알아보자 */}
-          <Route path="/Learn" element={<Learn />}></Route>
-          {/* 헌혈하자 */}
-          <Route path="/BD_Main " element={<BDMain />}></Route>
-          <Route path="/BD_House " element={<BDHouse />}></Route>
-          <Route path="/BD_Bus " element={<BDBus />}></Route>
-          <Route
-            path="/BD_ReservationFirst "
-            element={<BDReservationFirst />}
-          ></Route>
-          <Route
-            path="/BD_ReservationSecond "
-            element={<BDReservationSecond />}
-          ></Route>
-          <Route
-            path="/BD_ReservationThird "
-            element={<BDReservationThird />}
-          ></Route>
+
+          <Route path="/Learn" element={<Learn />}></Route>{/* 알아보자 */}
+
+          <Route path="/BD_Main" element={<BDMain />}></Route>{/*헌혈하자*/}
+          <Route path="/BD_House" element={<BDHouse />}></Route>
+          <Route path="/BD_Bus" element={<BDBus />}></Route>
+          <Route path="/BD_ReservationFirst" element={<BDReservationFirst />}></Route>
+          <Route path="/BD_ReservationSecond" element={<BDReservationSecond />}></Route>
+          <Route path="/BD_ReservationThird" element={<BDReservationThird />}></Route>
           <Route path="/BD_History" element={<BDHistory />}></Route>
-          {/*지정헌혈하자*/}
-          <Route path="/DBD_Main" element={<DBDMain />}></Route>
+
+          <Route path="/BD_test" element={<BDtest />}></Route>{/*헌혈의집 등록하는 관리자 화면*/}
+
+          <Route path="/DBD_Main" element={<DBDMain />}></Route>{/*지정헌혈하자*/}
           <Route path="/DBD_General" element={<DBDGeneral />}></Route>
           <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>
           <Route path="/DBD_PostHospital" element={<DBDPostHospital />}></Route>
           <Route path="/DBD_News" element={<DBDNews />}></Route>
           <Route path="/DBD_WatchList" element={<DBDWatchList />}></Route>
-          {/*이야기하자*/}
-          <Route path="/BD_Story" element={<BDStory />}></Route>
-          {/*봉사하자*/}
-          {/* <Route path="/S_Main" element={<SMain />}></Route> */}
-          {/*기부하자*/}
-          <Route path="/D_Main" element={<DMain />}></Route>
+
+          <Route path="/BD_Story" element={<BDStory />}></Route>{/*이야기하자*/}
+
+          <Route path="/S_Main" element={<SMain startDate={startDate} endDate={endDate} onReservation={onReservation} />}></Route>{/*봉사하자, 헌혈하자 캘린더실험용 사용중*/}
+          <Route path="/S_Other" element={<SOther />}></Route>
+
+          <Route path="/D_Main" element={<DMain />}></Route>{/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
         </Routes>
         <Foot />
       </BrowserRouter>
