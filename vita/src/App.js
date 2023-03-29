@@ -48,7 +48,7 @@ import BDStory from './pages/4. Community/BD_Story';
 import DMain from './pages/6. Donate/D_Main';
 // import DMain from './pages/6. Donate';
 
-//import KakaoMap from './components/';
+import KakaoMap from './components/KakaoMap';
 
 const startDate = '2022-01-01';
 const endDate = '2022-01-10';
@@ -62,6 +62,7 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
+          <Route path="/KakaoMap" element={<KakaoMap />}></Route>
           <Route path="/BD_Main1" element={<BDMain1 />}></Route>
           {/* 메인 */}
           <Route path="/" element={<Home />}></Route>
