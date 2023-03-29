@@ -6,7 +6,7 @@ import Select from 'react-select';
 function DBD_Insert() {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
-  const [options, setOptions] = useState(null);
+  const [options, setOptions] = useState([]);
   const [reservations, setReservations] = useState([]);
 
   const handleDateChange = (date) => {
@@ -76,7 +76,7 @@ function DBD_Insert() {
           <div key={index}>
             <div>날짜: {element.date.toString()}</div>
             <div>시간: {element.time.value}</div>
-            <div>헌혈종류: {element.options.value}</div>
+            <div>헌혈종류: {element.options.map((option) => option.value).join(", ")}</div>
             <button onClick={() => handleDelete(index)}>삭제</button>
             <div><br /></div>
           </div>

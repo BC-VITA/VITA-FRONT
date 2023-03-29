@@ -61,6 +61,8 @@ function BD_House() {
     console.log(inputData);
   }, []);
 
+  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
+
   return (
     <StyledAll>
       <StyledSub>
@@ -162,7 +164,7 @@ function BD_House() {
                           </tr>
                         </thead>
                         <Styledtbody1>
-                          {inputData.map((element, index) => {
+                          {filteredData.map((element, index) => {
                             return (
                               <Styledtr>
                                 <Styledtd>

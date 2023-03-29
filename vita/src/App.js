@@ -31,6 +31,7 @@ import DBDPostGeneral from './pages/3. Designated_Blood_Donation/DBD_PostGeneral
 import DBDPostHospital from './pages/3. Designated_Blood_Donation/DBD_PostHospital';
 import DBDNews from './pages/3. Designated_Blood_Donation/DBD_News';
 import DBDWatchList from './pages/3. Designated_Blood_Donation/DBD_WatchList';
+import DBDInsert from './pages/3. Designated_Blood_Donation/DBD_Insert';
 
 import BDStory from './pages/4. Community/BD_Story';
 // import BDDetails from './pages/4. Community/BD_Details';
@@ -86,6 +87,7 @@ function App() {
           <Route path="/BD_test" element={<BDtest />}></Route>{/*헌혈의집 등록하는 관리자 화면*/}
 
           <Route path="/DBD_Main" element={<DBDMain />}></Route>{/*지정헌혈하자*/}
+          <Route path="/DBD_insert" element={<DBDInsert />}></Route>{/*지정헌혈하자*/}
           <Route path="/DBD_General" element={<DBDGeneral />}></Route>
           <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>
           <Route path="/DBD_PostHospital" element={<DBDPostHospital />}></Route>
