@@ -48,7 +48,7 @@ import SOther from './pages/5. Service/S_Other';
 import DMain from './pages/6. Donate/D_Main';
 // import DMain from './pages/6. Donate';
 
-//import KakaoMap from './components/';
+import KakaoMap from './components/KakaoMap';
 
 const startDate = '2022-01-01';
 const endDate = '2022-01-10';
@@ -62,13 +62,16 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path="/" element={<Home />}></Route>{/* 메인 */}
+          <Route path="/BD_Main1" element={<BDMain1 />}></Route>
+          {/* 메인 */}
+          <Route path="/" element={<Home />}></Route>
+          {/* 마이페이지 */}
+          <Route path="/MyPage" element={<MyPage />}></Route>
+          {/*로그인*/}
+          <Route path="/Login" element={<Login />}></Route>
+          {/*회원가입*/}
+          <Route path="/SignUp" element={<SignUp />}></Route>
 
-          <Route path="/MyPage" element={<MyPage />}></Route>{/* 마이페이지 */}
-
-          <Route path="/Login" element={<Login />}></Route>{/*로그인*/}
-
-          <Route path="/SignUp" element={<SignUp />}></Route>{/*회원가입*/}
           <Route path="/SignUpGroup" element={<Group />}></Route>
           <Route path="/SignUpHospital" element={<Hospital />}></Route>
           <Route path="/SignUpIndividual" element={<Individual />}></Route>
