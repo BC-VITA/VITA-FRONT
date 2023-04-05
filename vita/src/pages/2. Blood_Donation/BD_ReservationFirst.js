@@ -82,12 +82,12 @@ function BD_ReservationFirst() {
 
           <StyledBarMg />
           <StyledCircleg>
-            <StyledCircleTxtg>날짜선택</StyledCircleTxtg>
+            <StyledCircleTxtg>예약하기</StyledCircleTxtg>
           </StyledCircleg>
 
           <StyledBarMg />
           <StyledCircleg>
-            <StyledCircleTxtg>종류선택</StyledCircleTxtg>
+            <StyledCircleTxtg>예약완료</StyledCircleTxtg>
           </StyledCircleg>
 
           <StyledBarg />
