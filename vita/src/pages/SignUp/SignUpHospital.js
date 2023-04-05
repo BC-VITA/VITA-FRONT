@@ -31,7 +31,7 @@ function SignUpHospital() {
     await new Promise((r) => setTimeout(r, 1000));
 
     //back으로 정보 post함
-    fetch('http://localhost:8003/join', {
+    fetch('http://localhost:8003/hospitalJoin', {
       method: 'post',
       body: JSON.stringify({
         id: 'userID',
