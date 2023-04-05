@@ -361,10 +361,4 @@ const Styleddiv2 = styled.div`
   margin-left: 100px; */
   text-align: center;
 `;
-
-const Styledimg = styled.img`
-  width: 30px;
-  height: 25px;
-  object-fit: cover;
-`;
 export default BD_House;
