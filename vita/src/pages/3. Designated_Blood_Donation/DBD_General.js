@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 // import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import Table from 'react-bootstrap/Table';
 import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
 import { useNavigate } from 'react-router-dom';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-
 import Nav from 'react-bootstrap/Nav';
 
 import Col from 'react-bootstrap/Col';
@@ -100,22 +100,22 @@ function DBD_General() {
           <StyledSubDiv1>지정헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBDMain">
+              <Nav.Link href="/DBD_Main">
                 <StyledSubDiv2_2g>지정헌혈이란</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/DBDGeneral">
+              <Nav.Link href="/DBD_General">
                 <StyledSubDiv2_2>지정헌혈하기</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBDWatchList">
+              <Nav.Link href="/DBD_WatchList">
                 <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBDNews">
+              <Nav.Link href="/DBD_News">
                 <StyledSubDiv2_2g>따뜻한 사례</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
@@ -193,63 +193,52 @@ function DBD_General() {
                     </FloatingLabel>
                   </StyledFilterDiv2>
                 </StyledFilter>
-
                 <section>
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>제목 / 내용</th>
+                        <th>모집인원 및 현황</th>
+                      </tr>
+                    </thead>
+                  </Table>
                   <Styleddiv2>
-                    <Accordion defaultActiveKey="0">
-                      <Table striped bordered hover size="sm">
-                        <thead>
-                          <tr>
-                            <th>제목 / 내용</th>
-                            <th>모집인원 및 현황</th>
-                          </tr>
-                        </thead>
-                        <Styledtbody1>
-                          {inputData.map((element, index) => {
-                            return (
-                              <Styledtr>
-                                <Styledtd>
-                                  <Accordion.Item eventKey={index}>
-                                    <Accordion.Header>
-                                      {element.title}
-                                      <br />
-                                      {element.startDate}
-                                      <br />
-                                      필요한 혈액형 : {element.patientBlood}
-                                      <br />
-                                      혈액 종류 : {element.bloodType}
-                                      <br />
-                                      장소 : {element.hospitalName}
-                                    </Accordion.Header>
-                                    <Accordion.Body colSpan={2}>
-                                      {element.content}
-                                    </Accordion.Body>
-                                  </Accordion.Item>
-                                </Styledtd>
-                                <Styledtd>
-                                  {element.bloodNumber}
-                                  {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
-                                  <br />
-                                  <FontAwesomeIcon icon={faHeart} />
-                                  {/* <FontAwesomeIcon icon={fa-solid fa-heart} /> */}
-                                  <Styledimg
-                                    src={icon}
-                                    class
-                                    name="main-icon"
-                                    alt="logo"
-                                  />
-                                  {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
-                                  {/* <br />
+                    {/* {inputData.map((element, index) => {
+                      <Accordion defaultActiveKey="0">
+                        return (
+                        <Accordion.Item eventKey={index}>
+                          <Accordion.Header>
+                            {element.title}
+                            <br />
+                            {element.startDate}
+                            <br />
+                            필요한 혈액형 : {element.patientBlood}
+                            <br />
+                            혈액 종류 : {element.bloodType}
+                            <br />
+                            장소 : {element.hospitalName}
+                          </Accordion.Header>
+                          <Accordion.Body colSpan={2}>
+                            {element.content}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>; */}
+
+                    {/* <Styledtd eventKey={index}>
+                      {element.bloodNumber} */}
+                    {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
+                    {/* <br />
+                      <FontAwesomeIcon icon={faHeart} /> */}
+                    {/* <FontAwesomeIcon icon={fa-solid fa-heart} /> */}
+                    {/* <Styledimg src={icon} class name="main-icon" alt="logo" /> */}
+                    {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
+                    {/* <br />
                                   <button type="button">상세보기</button> */}
-                                  <br />
-                                  <button type="button">참여하기</button>
-                                </Styledtd>
-                              </Styledtr>
-                            );
-                          })}
-                        </Styledtbody1>
-                      </Table>
-                    </Accordion>
+                    {/* <br />
+                      <button type="button">참여하기</button>
+                    </Styledtd>
+                    );
+                  })} */}
                   </Styleddiv2>
                 </section>
               </Tab.Content>
@@ -259,6 +248,59 @@ function DBD_General() {
             <Tab eventKey="home" title="병원">
               <Tab.Content>skjfjsf</Tab.Content>
             </Tab>
+            <Accordion defaultActiveKey="1">
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th>제목 / 내용</th>
+                    <th>모집인원 및 현황</th>
+                  </tr>
+                </thead>
+                <Styledtbody1>
+                  {inputData.map((element, index) => {
+                    return (
+                      <Styledtr>
+                        <Styledtd>
+                          <Accordion.Item eventKey={index}>
+                            <Accordion.Header>
+                              {element.title}
+                              <br />
+                              {element.startDate}
+                              <br />
+                              필요한 혈액형 : {element.patientBlood}
+                              <br />
+                              혈액 종류 : {element.bloodType}
+                              <br />
+                              장소 : {element.hospitalName}
+                            </Accordion.Header>
+                            <Accordion.Body colSpan={2}></Accordion.Body>
+                          </Accordion.Item>
+                        </Styledtd>
+                        <Styledtd>
+                          {element.content}
+                          {element.bloodNumber}
+                          {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
+                          <br />
+                          <FontAwesomeIcon icon={faHeart} />
+                          {/* <FontAwesomeIcon icon={fa-solid fa-heart} /> */}
+                          <Styledimg
+                            src={icon}
+                            class
+                            name="main-icon"
+                            alt="logo"
+                          />
+                          {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
+                          {/* <br />
+                                  <button type="button">상세보기</button> */}
+                          <br />
+                          <button type="button">참여하기</button>
+                        </Styledtd>
+                      </Styledtr>
+                    );
+                  })}
+                </Styledtbody1>
+              </Table>
+            </Accordion>
             {/* </StyledTabTitle> */}
             {/* <StyledTabTitle> */}
 
@@ -405,6 +447,7 @@ const StyledTab = styled.div`
 `;
 
 const StyledTitle = styled.div`
+  width: 203px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
