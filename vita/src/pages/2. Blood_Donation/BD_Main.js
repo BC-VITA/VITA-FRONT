@@ -5,43 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
 function BD_Main() {
-  const [hostipalcall, sethostipalcall] = useState('');
-  const [bloodtype, setbloodtype] = useState('');
-  const [rhtype, setbrhtype] = useState('');
-  const [donationtype, setdonationtype] = useState('');
-  const [bloodproduct, setbloodproduct] = useState('');
-
-  const [disabled, setDisabled] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleSelect1 = (e) => {
-    setdonationtype(e.target.value);
-  };
-  const handleSelect2 = (e) => {
-    setbloodproduct(e.target.value);
-  };
-  const handleRHMChange = () => {
-    setbrhtype('RH-');
-  };
-  const handleRHPChange = () => {
-    setbrhtype('RH+');
-  };
-  const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
-  const selectList2 = ['최신순', '마감순'];
-
-  const handleChangehostipalcall = ({ target: { value } }) =>
-    sethostipalcall(value);
-
-  const RadioButton = ({ label, value, onChange }) => {
-    return (
-      <label>
-        <input type="radio" checked={value} onChange={onChange} />
-        {label}
-      </label>
-    );
-  };
-
   const [error, setError] = useState(null);
 
   const [inputData, setInputData] = useState([
@@ -74,29 +37,34 @@ function BD_Main() {
     console.log(inputData);
   }, []);
   return (
-    <div style={{ display: 'flex' }}>
+    <StyledAll>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/DBD_Main">
+              <Nav.Link href="/BD_Main">
                 <StyledSubDiv2_2>헌혈이란</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
             <StyledSubDiv2_1>
               <Nav.Link href="/BD_House">
-                <StyledSubDiv2_2g>헌혈하기</StyledSubDiv2_2g>
+                <StyledSubDiv2_2g>헌혈의 집 찾기</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBD_WatchList">
-                <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
+              <Nav.Link href="/BD_Bus">
+                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/DBD_News">
-                <StyledSubDiv2_2g>따뜻한 사례</StyledSubDiv2_2g>
+              <Nav.Link href="/BD_ReservationFirst">
+                <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_History">
+                <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
           </StyledSubDiv2>
@@ -113,17 +81,21 @@ function BD_Main() {
         </StyledTop>
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
-    </div>
+    </StyledAll>
   );
 }
+const StyledAll = styled.div`
+  display: flex;
+  padding-bottom: 300px;
+`;
 const StyledSub = styled.div`
-  width: 120px;
+  width: 170px;
   /* height: 175px; */
   margin-top: 25px;
   margin-left: 205px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 150px;
+  width: 190px;
   height: 50px;
   /* left: 370px;
   top: 123px; */
@@ -142,23 +114,23 @@ const StyledSubDiv1 = styled.div`
 `;
 
 const StyledSubDiv2 = styled.div`
-  width: 150px;
-  height: 202.5px;
+  width: 190px;
+  height: 278px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
 const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
 const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
@@ -168,8 +140,8 @@ const StyledSubDiv2_2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
@@ -184,8 +156,8 @@ const StyledSubDiv2_2g = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;

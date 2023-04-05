@@ -2,33 +2,48 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '@mui/material';
-import GroupPhoTO from '../img/개인.png';
-import icHospitalonPhoTO from '../img/병원.png';
-import IndividualPhoTO from '../img/봉사 기업・단체.png';
+import groupPhoto from '../../img/개인.png';
+import icHospitalonPhoto from '../../img/병원.png';
+import individualPhoto from '../../img/봉사 기업・단체.png';
 
 function SignUp() {
   const navigate = useNavigate();
 
   const Group = () => {
-    navigate('/Group');
+    navigate('/groupPhoto');
   };
   const Hospital = () => {
-    navigate('/Hospital');
+    navigate('/icHospitalonPhoto');
   };
   const Individual = () => {
-    navigate('/Individual');
+    navigate('/individualPhoto');
   };
 
   return (
-    <div style={{ marginLeft: '15%' }}>
+    <div style={{ marginLeft: '15%', paddingBottom: '300px' }}>
       <section>
-        <div style={{ ...divStyle, fontSize: '48px', fontWeight: 'bold', marginTop: '3%', color: 'black', }}>
+        <div
+          style={{
+            ...divStyle,
+            fontSize: '48px',
+            fontWeight: 'bold',
+            marginTop: '3%',
+            color: 'black',
+          }}
+        >
           회원가입
         </div>
         <div style={{ ...divStyle }}>
           자신에게 맞는 항목을 선택하여 회원가입 해주세요.
         </div>
-        <hr style={{ width: '85%', borderWidth: '3px', border: 'solid', borderColor: 'black' }} />
+        <hr
+          style={{
+            width: '85%',
+            borderWidth: '3px',
+            border: 'solid',
+            borderColor: 'black',
+          }}
+        />
       </section>
       <section style={{ display: 'flex', marginTop: '3%' }}>
         <Button
@@ -36,7 +51,12 @@ function SignUp() {
           onClick={Group}
           style={{ ...buttonStyle, marginLeft: '4%', marginRight: '4%' }}
         >
-          <Styledimg src={GroupPhoTO} class name="GroupPhoTO" alt="GroupPhoTO" />
+          <Styledimg
+            src={groupPhoto}
+            class
+            name="groupPhoto"
+            alt="groupPhoto"
+          />
           <div style={{ ...divStyle1 }}>개 인</div>
         </Button>
         <Button
@@ -44,7 +64,12 @@ function SignUp() {
           onClick={Hospital}
           style={{ ...buttonStyle, width: '23.3%', marginRight: '4%' }}
         >
-          <Styledimg src={icHospitalonPhoTO} class name="icHospitalonPhoTO" alt="icHospitalonPhoTO" />
+          <Styledimg
+            src={icHospitalonPhoto}
+            class
+            name="icHospitalonPhoto"
+            alt="icHospitalonPhoto"
+          />
           <div style={{ ...divStyle1 }}>병 원</div>
         </Button>
         <Button
@@ -53,10 +78,14 @@ function SignUp() {
           style={{ ...buttonStyle, width: '23.3%' }}
         >
           <Styledimg
-            src={IndividualPhoTO} class name="IndividualPhoTO" alt="IndividualPhoTO" />
+            src={individualPhoto}
+            class
+            name="individualPhoto"
+            alt="individualPhoto"
+          />
           <div style={{ ...divStyle1 }}>봉사 기업・단체</div>
         </Button>
-      </section >
+      </section>
     </div>
   );
 }

@@ -6,9 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-
 function BD_House() {
-
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
   const [secondListOptions, setSecondListOptions] = useState([]);
@@ -27,7 +25,7 @@ function BD_House() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
-  };
+  }
 
   const [error, setError] = useState(null);
 
@@ -67,32 +65,37 @@ function BD_House() {
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
-            <StyledSubDiv2One>
+            <StyledSubDiv2_1>
               <Nav.Link href="/BD_Main">
-                <StyledSubDiv2Two>헌혈이란</StyledSubDiv2Two>
+                <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
-            <StyledSubDiv2Onep>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1p>
               <Nav.Link href="/BD_House">
-                <StyledSubDiv2Two2>헌혈하기</StyledSubDiv2Two2>
+                <StyledSubDiv2_2>헌혈의 집 찾기</StyledSubDiv2_2>
               </Nav.Link>
-            </StyledSubDiv2Onep>
-            <StyledSubDiv2One>
-              <Nav.Link href="/DBD_WatchList">
-                <StyledSubDiv2Two>관심목록</StyledSubDiv2Two>
+            </StyledSubDiv2_1p>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_Bus">
+                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
-            <StyledSubDiv2One>
-              <Nav.Link href="/DBD_News">
-                <StyledSubDiv2Two>따뜻한 사례</StyledSubDiv2Two>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_ReservationFirst">
+                <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_History">
+                <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>지정헌혈하기</StyledTitle>
+          <StyledTitle>헌혈의 집 찾기</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
@@ -119,7 +122,10 @@ function BD_House() {
                       ))}
                     </select>
                     <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
@@ -128,7 +134,9 @@ function BD_House() {
                     </select>
                   </StyledFilterDiv1One>
                   <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
+                    <StyledFilterDiv1Two>
+                      &nbsp;기&nbsp;간&nbsp;
+                    </StyledFilterDiv1Two>
                     <select
                       onChange={handleFirstListChange}
                       value={firstListValue}
@@ -141,7 +149,10 @@ function BD_House() {
                       ))}
                     </select>
                     <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
@@ -174,21 +185,27 @@ function BD_House() {
                                       <br />
                                       헌혈의집 이름 : {element.centerName}
                                       <br />
-                                      헌혈의집 주소 : {element.bloodHouseAddress}
+                                      헌혈의집 주소 :{' '}
+                                      {element.bloodHouseAddress}
                                       <br />
-                                      헌혈의집 전화번호 : {element.bloodHousePhoneNumber}
+                                      헌혈의집 전화번호 :{' '}
+                                      {element.bloodHousePhoneNumber}
                                       <br />
                                       헌혈의집 위도 : {element.latitude}
                                       <br />
                                       헌혈의집 경도 : {element.longitude}
                                       <br />
-                                      헌혈의집 평일 마감시간 : {element.weekdayTime}
+                                      헌혈의집 평일 마감시간 :{' '}
+                                      {element.weekdayTime}
                                       <br />
-                                      헌혈의집 토요일 마감시간 : {element.saturdayTime}
+                                      헌혈의집 토요일 마감시간 :{' '}
+                                      {element.saturdayTime}
                                       <br />
-                                      헌혈의집 일요일 마감시간: {element.sundayRestTime}
+                                      헌혈의집 일요일 마감시간:{' '}
+                                      {element.sundayRestTime}
                                       <br />
-                                      헌혈의집 공휴일 마감시간 : {element.restTime}
+                                      헌혈의집 공휴일 마감시간 :{' '}
+                                      {element.restTime}
                                       <br />
                                       전혈 가능 여부 : {element.wholeBlood}
                                       <br />
@@ -221,20 +238,21 @@ function BD_House() {
         </StyledTab>
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
-    </StyledAll >
+    </StyledAll>
   );
 }
 const StyledAll = styled.div`
   display: flex;
+  padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 120px;
+  width: 170px;
   /* height: 175px; */
   margin-top: 25px;
   margin-left: 205px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 150px;
+  width: 190px;
   height: 50px;
   /* left: 370px;
   top: 123px; */
@@ -253,25 +271,25 @@ const StyledSubDiv1 = styled.div`
 `;
 
 const StyledSubDiv2 = styled.div`
-  width: 150px;
-  height: 202.5px;
+  width: 190px;
+  height: 278px;
   border: 3px solid #d7d7d7;
 `;
-const StyledSubDiv2One = styled.div`
+const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
-const StyledSubDiv2Onep = styled.div`
+const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
-const StyledSubDiv2Two2 = styled.div`
+const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -279,15 +297,15 @@ const StyledSubDiv2Two2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
 
   color: #333333;
 `;
-const StyledSubDiv2Two = styled.div`
+const StyledSubDiv2_2g = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -295,13 +313,18 @@ const StyledSubDiv2Two = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
 
   color: #969696;
+`;
+
+const StyledTab = styled.div`
+  margin-top: 5px;
+  width: 120vh;
 `;
 
 const StyledFilter = styled.div`
@@ -329,13 +352,8 @@ const StyledSubcomment = styled.div`
   margin-top: 25px;
 `;
 
-const StyledTab = styled.div`
-  margin-top: 5px;
-  padding-bottom: 500px;
-`;
-
 const StyledTitle = styled.div`
-  width: 203px;
+  width: 270px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -350,9 +368,9 @@ const StyledTop = styled.div`
 
 const StyledButton = styled.div`
   margin-top: 10px;
-  width: 125px;
+  width: 120px;
   height: 35px;
-  margin-left: 580px;
+  margin-left: 475px;
 
   background: #ff9f9f;
   border-radius: 9px;
@@ -365,7 +383,7 @@ const StyledButtonDiv = styled.div`
   font-size: 18px;
   line-height: 38px;
   margin: auto;
-  margin-left: 28px;
+  margin-left: 25px;
   /* identical to box height, or 100% */
 
   color: #ffffff;
