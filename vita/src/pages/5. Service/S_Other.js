@@ -39,7 +39,7 @@ function S_Other() {
     <div>
       <h1>날짜데이터가 잘 넘어왔는지 확인</h1>
       <p>{formattedDate}</p>
-      <div>
+      <div style={{ marginLeft: '15%', marginRight: '15%' }}>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>

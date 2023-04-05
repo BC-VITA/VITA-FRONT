@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
-import Accordion from 'react-bootstrap/Accordion';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -10,6 +9,10 @@ function BD_House() {
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
   const [secondListOptions, setSecondListOptions] = useState([]);
+  const [openIndex, setOpenIndex] = useState(-1);
+  const handleRowClick = (index) => {
+    setOpenIndex(index === openIndex ? -1 : index);
+  };
   function handleFirstListChange(event) {
     const selectedValue = event.target.value;
     setFirstListValue(selectedValue);
@@ -44,7 +47,7 @@ function BD_House() {
   ]);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter ', {
+    fetch('http://localhost:8004/blood/board/list ', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -58,6 +61,8 @@ function BD_House() {
       });
     console.log(inputData);
   }, []);
+
+  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
 
   return (
     <StyledAll>
@@ -95,7 +100,11 @@ function BD_House() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
+<<<<<<< HEAD
           <StyledTitle>헌혈의 집 찾기</StyledTitle>
+=======
+          <StyledTitle>헌혈하기</StyledTitle>
+>>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
@@ -103,6 +112,7 @@ function BD_House() {
           </StyledButton>
         </StyledTop>
 
+<<<<<<< HEAD
         {/* <StyledFilter>
           <StyledFilterDiv1One>
             <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
@@ -265,11 +275,113 @@ function BD_House() {
             </Accordion>
           </Styleddiv2>
         </section>
+=======
+        <StyledTab>
+          <Tabs>
+            <Tab eventKey="profile" title="일반 사용자">
+              <Tab.Content>
+                <StyledFilter>
+                  <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+                    <select
+                      onChange={handleFirstListChange}
+                      value={firstListValue}
+                      style={{ border: 'none' }}
+                    >
+                      {selectList1.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                      {secondListOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </StyledFilterDiv1One>
+                  <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
+                    <select
+                      onChange={handleFirstListChange}
+                      value={firstListValue}
+                      style={{ border: 'none' }}
+                    >
+                      {selectList1.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                      {secondListOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </StyledFilterDiv1One>
+                </StyledFilter>
+                <section>
+                  <Styleddiv2>
+                    <StyledTable striped>
+                      <thead>
+                        <tr>
+                          <th id="area-header">지역</th>
+                          <th id="centerName-header">헌혈의 집</th>
+                          <th id="bloodHouseAddress-header">주소</th>
+                          <th id="bloodHousePhoneNumber-header">전화번호</th>
+                          <th>&nbsp;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredData.map((element, index) => {
+                          return (
+                            <React.Fragment key={index}>
+                              <tr onClick={() => handleRowClick(index)}>
+                                <td headers="area-header">{element.area}</td>
+                                <td headers="centerName-header">{element.centerName}</td>
+                                <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
+                                <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
+                                <td><div style={{ display: 'flex', flexDirection: 'column' }}>
+                                  <button type='button'>상세보기</button>
+                                  <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
+                                </div></td>
+                              </tr>
+                              {openIndex === index && (
+                                <tr>
+                                  <td colSpan="5">지도 나오게 하기</td>
+                                </tr>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                      </tbody>
+                    </StyledTable>
+                  </Styleddiv2>
+                </section>
+              </Tab.Content>
+            </Tab>
+            <Tab eventKey="home" title="병원">
+              <Tab.Content>skjfjsf</Tab.Content>
+            </Tab>
+          </Tabs>
+        </StyledTab>
+>>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
+const StyledTable = styled(Table)`
+  border-collapse: collapse;
+  th,tbody,td
+  td {
+    padding: 0;
+  }
+`;
 const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
@@ -419,6 +531,7 @@ const Styleddiv2 = styled.div`
   margin-left: 100px; */
   text-align: center;
 `;
+<<<<<<< HEAD
 const Styledtr = styled.tr`
   border: none;
 `;
@@ -476,4 +589,6 @@ const StyledFilterDiv2 = styled.label`
   width: 860px;
   margin-left: 30px;
 `;
+=======
+>>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
 export default BD_House;

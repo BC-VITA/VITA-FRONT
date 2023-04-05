@@ -39,23 +39,19 @@ function S_Main({ startDate, endDate, onReservation }) {
     //여기에다가 백에서 정보를 가져다 배열을 작성하는 코드 작성, 지금 작성한 코드는 테스트용임
     {
       title: '전혈',
-      start: new Date(2023, 2, 29),
-      end: new Date(2023, 2, 29),
+      start: new Date(2023, 3, 3),
+      end: new Date(2023, 3, 3),
     },
     {
       title: '혈소판',
-      start: new Date(2023, 2, 29),
-      end: new Date(2023, 2, 29),
+      start: new Date(2023, 3, 3),
+      end: new Date(2023, 3, 7),
     },
-    {
-      title: '혈소판',
-      start: new Date(2023, 2, 30),
-      end: new Date(2023, 2, 29),
-    },
+
     {
       title: '전혈',
-      start: new Date(2023, 2, 28),
-      end: new Date(2023, 2, 29),
+      start: new Date(2023, 3, 5),
+      end: new Date(2023, 3, 5),
     },
   ];
 
