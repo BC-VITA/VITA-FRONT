@@ -126,7 +126,7 @@ function DBD_General() {
         <StyledTop>
           <StyledTitle>지정헌혈하기</StyledTitle>
           <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
+            <Nav.Link href="/DBD_PostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>

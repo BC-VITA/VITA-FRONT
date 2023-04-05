@@ -103,139 +103,168 @@ function BD_House() {
           </StyledButton>
         </StyledTop>
 
-        <StyledTab>
-          <Tabs>
-            <Tab eventKey="profile" title="일반 사용자">
-              <Tab.Content>
-                <StyledFilter>
-                  <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
-                    <select
-                      onChange={handleFirstListChange}
-                      value={firstListValue}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList1.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </StyledFilterDiv1One>
-                  <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>
-                      &nbsp;기&nbsp;간&nbsp;
-                    </StyledFilterDiv1Two>
-                    <select
-                      onChange={handleFirstListChange}
-                      value={firstListValue}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList1.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </StyledFilterDiv1One>
-                </StyledFilter>
+        {/* <StyledFilter>
+          <StyledFilterDiv1One>
+            <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+            <select
+              onChange={handleFirstListChange}
+              value={firstListValue}
+              style={{ border: 'none' }}
+            >
+              {selectList1.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <select value={secondListOptions} onChange={setSecondListOptions}>
+              {secondListOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </StyledFilterDiv1One>
+          <StyledFilterDiv1One>
+            <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
+            <select
+              onChange={handleFirstListChange}
+              value={firstListValue}
+              style={{ border: 'none' }}
+            >
+              {selectList1.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <select value={secondListOptions} onChange={setSecondListOptions}>
+              {secondListOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </StyledFilterDiv1One>
+        </StyledFilter> */}
 
-                <section>
-                  <Styleddiv2>
-                    <Accordion defaultActiveKey="0">
-                      <Table striped bordered hover size="sm">
-                        <thead>
-                          <tr>
-                            <th>제목 / 내용</th>
-                            <th>모집인원 및 현황</th>
-                          </tr>
-                        </thead>
-                        <Styledtbody1>
-                          {inputData.map((element, index) => {
-                            return (
-                              <Styledtr>
-                                <Styledtd>
-                                  <Accordion.Item eventKey={index}>
-                                    <Accordion.Header>
-                                      헌혈의집 아이디 : {element.id}
-                                      <br />
-                                      헌혈의집 지역 : {element.area}
-                                      <br />
-                                      헌혈의집 이름 : {element.centerName}
-                                      <br />
-                                      헌혈의집 주소 :{' '}
-                                      {element.bloodHouseAddress}
-                                      <br />
-                                      헌혈의집 전화번호 :{' '}
-                                      {element.bloodHousePhoneNumber}
-                                      <br />
-                                      헌혈의집 위도 : {element.latitude}
-                                      <br />
-                                      헌혈의집 경도 : {element.longitude}
-                                      <br />
-                                      헌혈의집 평일 마감시간 :{' '}
-                                      {element.weekdayTime}
-                                      <br />
-                                      헌혈의집 토요일 마감시간 :{' '}
-                                      {element.saturdayTime}
-                                      <br />
-                                      헌혈의집 일요일 마감시간:{' '}
-                                      {element.sundayRestTime}
-                                      <br />
-                                      헌혈의집 공휴일 마감시간 :{' '}
-                                      {element.restTime}
-                                      <br />
-                                      전혈 가능 여부 : {element.wholeBlood}
-                                      <br />
-                                      혈소판 가능 여부 : {element.plasma}
-                                      <br />
-                                      혈장 가능 여부 : {element.platelet}
-                                    </Accordion.Header>
-                                    <Accordion.Body colSpan={2}>
-                                      지도가 나오게 하기
-                                    </Accordion.Body>
-                                  </Accordion.Item>
-                                </Styledtd>
-                                <Styledtd>
-                                  <button type="button">지도보기</button>
-                                </Styledtd>
-                              </Styledtr>
-                            );
-                          })}
-                        </Styledtbody1>
-                      </Table>
-                    </Accordion>
-                  </Styleddiv2>
-                </section>
-              </Tab.Content>
-            </Tab>
-            <Tab eventKey="home" title="병원">
-              <Tab.Content>skjfjsf</Tab.Content>
-            </Tab>
-          </Tabs>
-        </StyledTab>
+        <StyledFilter>
+          <StyledFilterDiv1>
+            <StyledFilterDiv1_1>
+              <StyledFilterDiv1_2>지역선택</StyledFilterDiv1_2>
+              {/* <StyledFilterDiv1_2> */}
+              <select
+                onChange={handleFirstListChange}
+                value={firstListValue}
+                style={{ border: 'none' }}
+              >
+                {selectList1.map((item) => (
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+              {/* </StyledFilterDiv1_2> */}
+            </StyledFilterDiv1_1>
+
+            {/* <StyledFilterDiv1_1>
+              <StyledFilterDiv1_2>RH여부</StyledFilterDiv1_2>
+              <RadioButton
+                label="&nbsp;RH-&nbsp;"
+                value={rhtype === 'RH-'}
+                onChange={handleRHMChange}
+              />
+              <RadioButton
+                label="&nbsp;RH+&nbsp;"
+                value={rhtype === 'RH+'}
+                onChange={handleRHPChange}
+              />
+            </StyledFilterDiv1_1> */}
+            {/* <StyledFilterDiv1_1>
+              <StyledFilterDiv1_2l>마감순</StyledFilterDiv1_2l>
+              <StyledFilterDiv1_2l>최신순</StyledFilterDiv1_2l>
+            </StyledFilterDiv1_1> */}
+            <StyledFilterButton>
+              <Nav.Link href="/DBDPostGeneral">
+                <StyledButtonDiv>검색하기</StyledButtonDiv>
+              </Nav.Link>
+            </StyledFilterButton>
+          </StyledFilterDiv1>
+          <StyledFilterDiv2>
+            {/* <FloatingLabel
+              label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
+              value={hostipalcall}
+              onChange={handleChangehostipalcall}
+            >
+              <Form.Control type="textarea" />
+            </FloatingLabel> */}
+          </StyledFilterDiv2>
+        </StyledFilter>
+
+        <section>
+          <Styleddiv2>
+            <Accordion defaultActiveKey="0">
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th>제목 / 내용</th>
+                    <th>모집인원 및 현황</th>
+                  </tr>
+                </thead>
+                <Styledtbody1>
+                  {inputData.map((element, index) => {
+                    return (
+                      <Styledtr>
+                        <Styledtd>
+                          <Accordion.Item eventKey={index}>
+                            <Accordion.Header>
+                              헌혈의집 아이디 : {element.id}
+                              <br />
+                              헌혈의집 지역 : {element.area}
+                              <br />
+                              헌혈의집 이름 : {element.centerName}
+                              <br />
+                              헌혈의집 주소 : {element.bloodHouseAddress}
+                              <br />
+                              헌혈의집 전화번호 :{' '}
+                              {element.bloodHousePhoneNumber}
+                              <br />
+                              헌혈의집 위도 : {element.latitude}
+                              <br />
+                              헌혈의집 경도 : {element.longitude}
+                              <br />
+                              헌혈의집 평일 마감시간 : {element.weekdayTime}
+                              <br />
+                              헌혈의집 토요일 마감시간 : {element.saturdayTime}
+                              <br />
+                              헌혈의집 일요일 마감시간: {element.sundayRestTime}
+                              <br />
+                              헌혈의집 공휴일 마감시간 : {element.restTime}
+                              <br />
+                              전혈 가능 여부 : {element.wholeBlood}
+                              <br />
+                              혈소판 가능 여부 : {element.plasma}
+                              <br />
+                              혈장 가능 여부 : {element.platelet}
+                            </Accordion.Header>
+                            <Accordion.Body colSpan={2}>
+                              지도가 나오게 하기
+                            </Accordion.Body>
+                          </Accordion.Item>
+                        </Styledtd>
+                        <Styledtd>
+                          <button type="button">지도보기</button>
+                        </Styledtd>
+                      </Styledtr>
+                    );
+                  })}
+                </Styledtbody1>
+              </Table>
+            </Accordion>
+          </Styleddiv2>
+        </section>
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
@@ -322,29 +351,25 @@ const StyledSubDiv2_2g = styled.div`
   color: #969696;
 `;
 
-const StyledTab = styled.div`
-  margin-top: 5px;
-  width: 120vh;
-`;
-
-const StyledFilter = styled.div`
-  width: 100%;
-  height: 145px;
-  background: #ffe9e9;
-  margin-bottom: 20px;
-`;
-const StyledFilterDiv1One = styled.div`
-  display: flex;
-  margin-top: 20px;
-`;
-const StyledFilterDiv1Two = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  margin-right: 20px;
-  margin-left: 30px;
-`;
+// const StyledFilter = styled.div`
+//   width: 100%;
+//   height: 145px;
+//   background: #ffe9e9;
+//   margin-bottom: 20px;
+// `;
+// const StyledFilterDiv1One = styled.div`
+//   margin-top: 10px;
+//   display: flex;
+//   margin-top: 20px;
+// `;
+// const StyledFilterDiv1Two = styled.div`
+//   font-family: 'Gmarket Sans TTF';
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 18px;
+//   margin-right: 20px;
+//   margin-left: 30px;
+// `;
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
@@ -407,5 +432,48 @@ const Styledimg = styled.img`
   width: 30px;
   height: 25px;
   object-fit: cover;
+`;
+//asdadasdadasd
+const StyledFilter = styled.div`
+  width: 100%;
+  height: 145px;
+  background: #ffe9e9;
+  margin-bottom: 20px;
+`;
+
+const StyledFilterDiv1 = styled.div`
+  display: flex;
+`;
+const StyledFilterDiv1_1 = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
+const StyledFilterButton = styled.div`
+  margin-top: 15px;
+  width: 125px;
+  height: 35px;
+  margin-left: 80px;
+  background: #ff9f9f;
+  border-radius: 9px;
+`;
+const StyledFilterDiv1_2 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 30px;
+`;
+const StyledFilterDiv1_2l = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-size: 18px;
+  margin-right: -20px;
+  margin-left: 80px;
+`;
+const StyledFilterDiv2 = styled.label`
+  margin-top: 20px;
+  width: 860px;
+  margin-left: 30px;
 `;
 export default BD_House;
