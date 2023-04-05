@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
-import Accordion from 'react-bootstrap/Accordion';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-
 
 function BD_House() {
 
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
   const [secondListOptions, setSecondListOptions] = useState([]);
+  const [openIndex, setOpenIndex] = useState(-1);
+  const handleRowClick = (index) => {
+    setOpenIndex(index === openIndex ? -1 : index);
+  };
   function handleFirstListChange(event) {
     const selectedValue = event.target.value;
     setFirstListValue(selectedValue);
@@ -46,7 +48,7 @@ function BD_House() {
   ]);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter ', {
+    fetch('http://localhost:8004/blood/board/list ', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -94,7 +96,7 @@ function BD_House() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>지정헌혈하기</StyledTitle>
+          <StyledTitle>헌혈하기</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
@@ -120,7 +122,6 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                     <select value={secondListOptions} onChange={setSecondListOptions}>
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
@@ -142,7 +143,6 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                     <select value={secondListOptions} onChange={setSecondListOptions}>
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
@@ -152,66 +152,42 @@ function BD_House() {
                     </select>
                   </StyledFilterDiv1One>
                 </StyledFilter>
-
                 <section>
                   <Styleddiv2>
-                    <Accordion defaultActiveKey="0">
-                      <Table striped bordered hover size="sm">
-                        <thead>
-                          <tr>
-                            <th>제목 / 내용</th>
-                            <th>모집인원 및 현황</th>
-                          </tr>
-                        </thead>
-                        <Styledtbody1>
-                          {filteredData.map((element, index) => {
-                            return (
-                              <Styledtr>
-                                <Styledtd>
-                                  <Accordion.Item eventKey={index}>
-                                    <Accordion.Header>
-                                      헌혈의집 아이디 : {element.id}
-                                      <br />
-                                      헌혈의집 지역 : {element.area}
-                                      <br />
-                                      헌혈의집 이름 : {element.centerName}
-                                      <br />
-                                      헌혈의집 주소 : {element.bloodHouseAddress}
-                                      <br />
-                                      헌혈의집 전화번호 : {element.bloodHousePhoneNumber}
-                                      <br />
-                                      헌혈의집 위도 : {element.latitude}
-                                      <br />
-                                      헌혈의집 경도 : {element.longitude}
-                                      <br />
-                                      헌혈의집 평일 마감시간 : {element.weekdayTime}
-                                      <br />
-                                      헌혈의집 토요일 마감시간 : {element.saturdayTime}
-                                      <br />
-                                      헌혈의집 일요일 마감시간: {element.sundayRestTime}
-                                      <br />
-                                      헌혈의집 공휴일 마감시간 : {element.restTime}
-                                      <br />
-                                      전혈 가능 여부 : {element.wholeBlood}
-                                      <br />
-                                      혈소판 가능 여부 : {element.plasma}
-                                      <br />
-                                      혈장 가능 여부 : {element.platelet}
-                                    </Accordion.Header>
-                                    <Accordion.Body colSpan={2}>
-                                      지도가 나오게 하기
-                                    </Accordion.Body>
-                                  </Accordion.Item>
-                                </Styledtd>
-                                <Styledtd>
-                                  <button type="button">지도보기</button>
-                                </Styledtd>
-                              </Styledtr>
-                            );
-                          })}
-                        </Styledtbody1>
-                      </Table>
-                    </Accordion>
+                    <StyledTable striped>
+                      <thead>
+                        <tr>
+                          <th id="area-header">지역</th>
+                          <th id="centerName-header">헌혈의 집</th>
+                          <th id="bloodHouseAddress-header">주소</th>
+                          <th id="bloodHousePhoneNumber-header">전화번호</th>
+                          <th>&nbsp;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredData.map((element, index) => {
+                          return (
+                            <React.Fragment key={index}>
+                              <tr onClick={() => handleRowClick(index)}>
+                                <td headers="area-header">{element.area}</td>
+                                <td headers="centerName-header">{element.centerName}</td>
+                                <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
+                                <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
+                                <td><div style={{ display: 'flex', flexDirection: 'column' }}>
+                                  <button type='button'>상세보기</button>
+                                  <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
+                                </div></td>
+                              </tr>
+                              {openIndex === index && (
+                                <tr>
+                                  <td colSpan="5">지도 나오게 하기</td>
+                                </tr>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                      </tbody>
+                    </StyledTable>
                   </Styleddiv2>
                 </section>
               </Tab.Content>
@@ -226,6 +202,13 @@ function BD_House() {
     </StyledAll >
   );
 }
+const StyledTable = styled(Table)`
+  border-collapse: collapse;
+  th,tbody,td
+  td {
+    padding: 0;
+  }
+`;
 const StyledAll = styled.div`
   display: flex;
 `;
@@ -378,15 +361,7 @@ const Styleddiv2 = styled.div`
   margin-left: 100px; */
   text-align: center;
 `;
-const Styledtr = styled.tr`
-  border: none;
-`;
-const Styledtd = styled.td`
-  border: none;
-`;
-const Styledtbody1 = styled.tbody`
-  border: none;
-`;
+
 const Styledimg = styled.img`
   width: 30px;
   height: 25px;

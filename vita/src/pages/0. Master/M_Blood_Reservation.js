@@ -3,7 +3,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 
-function DBD_Insert() {
+// 날짜별 가능한 예약 목록을 저장하는 페이지
+
+function M_Blood_Reservation() {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
   const [options, setOptions] = useState([]);
@@ -86,4 +88,4 @@ function DBD_Insert() {
   );
 }
 
-export default DBD_Insert;
+export default M_Blood_Reservation;
