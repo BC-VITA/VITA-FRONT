@@ -193,7 +193,6 @@ function DBD_General() {
                     </FloatingLabel>
                   </StyledFilterDiv2>
                 </StyledFilter>
-
                 <section>
                   <Table>
                     <thead>

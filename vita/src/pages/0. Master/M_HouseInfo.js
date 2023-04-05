@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
+//헌혈의집 정보 넣는 페이지
+
 function BD_test() {
     //const [id, setId] = useState(''); // 헌혈의 집 ID
     const [area, setArea] = useState(''); //지역
