@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 헌혈의집데이터를 가지고 다음페이지로 넘어감
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
@@ -9,6 +10,7 @@ function BD_House() {
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
   const [secondListOptions, setSecondListOptions] = useState([]);
+  const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
@@ -62,7 +64,10 @@ function BD_House() {
     console.log(inputData);
   }, []);
 
-  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
+  const filteredData =
+    firstListValue === '전체'
+      ? inputData
+      : inputData.filter((item) => item.area === firstListValue);
 
   return (
     <StyledAll>
@@ -100,11 +105,7 @@ function BD_House() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-<<<<<<< HEAD
           <StyledTitle>헌혈의 집 찾기</StyledTitle>
-=======
-          <StyledTitle>헌혈하기</StyledTitle>
->>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
@@ -112,170 +113,6 @@ function BD_House() {
           </StyledButton>
         </StyledTop>
 
-<<<<<<< HEAD
-        {/* <StyledFilter>
-          <StyledFilterDiv1One>
-            <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
-            <select
-              onChange={handleFirstListChange}
-              value={firstListValue}
-              style={{ border: 'none' }}
-            >
-              {selectList1.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            <select value={secondListOptions} onChange={setSecondListOptions}>
-              {secondListOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </StyledFilterDiv1One>
-          <StyledFilterDiv1One>
-            <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
-            <select
-              onChange={handleFirstListChange}
-              value={firstListValue}
-              style={{ border: 'none' }}
-            >
-              {selectList1.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            <select value={secondListOptions} onChange={setSecondListOptions}>
-              {secondListOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </StyledFilterDiv1One>
-        </StyledFilter> */}
-
-        <StyledFilter>
-          <StyledFilterDiv1>
-            <StyledFilterDiv1_1>
-              <StyledFilterDiv1_2>지역선택</StyledFilterDiv1_2>
-              {/* <StyledFilterDiv1_2> */}
-              <select
-                onChange={handleFirstListChange}
-                value={firstListValue}
-                style={{ border: 'none' }}
-              >
-                {selectList1.map((item) => (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-              {/* </StyledFilterDiv1_2> */}
-            </StyledFilterDiv1_1>
-
-            {/* <StyledFilterDiv1_1>
-              <StyledFilterDiv1_2>RH여부</StyledFilterDiv1_2>
-              <RadioButton
-                label="&nbsp;RH-&nbsp;"
-                value={rhtype === 'RH-'}
-                onChange={handleRHMChange}
-              />
-              <RadioButton
-                label="&nbsp;RH+&nbsp;"
-                value={rhtype === 'RH+'}
-                onChange={handleRHPChange}
-              />
-            </StyledFilterDiv1_1> */}
-            {/* <StyledFilterDiv1_1>
-              <StyledFilterDiv1_2l>마감순</StyledFilterDiv1_2l>
-              <StyledFilterDiv1_2l>최신순</StyledFilterDiv1_2l>
-            </StyledFilterDiv1_1> */}
-            <StyledFilterButton>
-              <Nav.Link href="/DBDPostGeneral">
-                <StyledButtonDiv>검색하기</StyledButtonDiv>
-              </Nav.Link>
-            </StyledFilterButton>
-          </StyledFilterDiv1>
-          <StyledFilterDiv2>
-            {/* <FloatingLabel
-              label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
-              value={hostipalcall}
-              onChange={handleChangehostipalcall}
-            >
-              <Form.Control type="textarea" />
-            </FloatingLabel> */}
-          </StyledFilterDiv2>
-        </StyledFilter>
-
-        <section>
-          <Styleddiv2>
-            <Accordion defaultActiveKey="0">
-              <Table striped bordered hover size="sm">
-                <thead>
-                  <tr>
-                    <th>제목 / 내용</th>
-                    <th>모집인원 및 현황</th>
-                  </tr>
-                </thead>
-                <Styledtbody1>
-                  {inputData.map((element, index) => {
-                    return (
-                      <Styledtr>
-                        <Styledtd>
-                          <Accordion.Item eventKey={index}>
-                            <Accordion.Header>
-                              헌혈의집 아이디 : {element.id}
-                              <br />
-                              헌혈의집 지역 : {element.area}
-                              <br />
-                              헌혈의집 이름 : {element.centerName}
-                              <br />
-                              헌혈의집 주소 : {element.bloodHouseAddress}
-                              <br />
-                              헌혈의집 전화번호 :{' '}
-                              {element.bloodHousePhoneNumber}
-                              <br />
-                              헌혈의집 위도 : {element.latitude}
-                              <br />
-                              헌혈의집 경도 : {element.longitude}
-                              <br />
-                              헌혈의집 평일 마감시간 : {element.weekdayTime}
-                              <br />
-                              헌혈의집 토요일 마감시간 : {element.saturdayTime}
-                              <br />
-                              헌혈의집 일요일 마감시간: {element.sundayRestTime}
-                              <br />
-                              헌혈의집 공휴일 마감시간 : {element.restTime}
-                              <br />
-                              전혈 가능 여부 : {element.wholeBlood}
-                              <br />
-                              혈소판 가능 여부 : {element.plasma}
-                              <br />
-                              혈장 가능 여부 : {element.platelet}
-                            </Accordion.Header>
-                            <Accordion.Body colSpan={2}>
-                              지도가 나오게 하기
-                            </Accordion.Body>
-                          </Accordion.Item>
-                        </Styledtd>
-                        <Styledtd>
-                          <button type="button">지도보기</button>
-                        </Styledtd>
-                      </Styledtr>
-                    );
-                  })}
-                </Styledtbody1>
-              </Table>
-            </Accordion>
-          </Styleddiv2>
-        </section>
-=======
         <StyledTab>
           <Tabs>
             <Tab eventKey="profile" title="일반 사용자">
@@ -294,7 +131,10 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
@@ -303,7 +143,9 @@ function BD_House() {
                     </select>
                   </StyledFilterDiv1One>
                   <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
+                    <StyledFilterDiv1Two>
+                      &nbsp;기&nbsp;간&nbsp;
+                    </StyledFilterDiv1Two>
                     <select
                       onChange={handleFirstListChange}
                       value={firstListValue}
@@ -315,7 +157,10 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
@@ -342,13 +187,39 @@ function BD_House() {
                             <React.Fragment key={index}>
                               <tr onClick={() => handleRowClick(index)}>
                                 <td headers="area-header">{element.area}</td>
-                                <td headers="centerName-header">{element.centerName}</td>
-                                <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
-                                <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
-                                <td><div style={{ display: 'flex', flexDirection: 'column' }}>
-                                  <button type='button'>상세보기</button>
-                                  <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
-                                </div></td>
+                                <td headers="centerName-header">
+                                  {element.centerName}
+                                </td>
+                                <td headers="bloodHouseAddress-header">
+                                  {element.bloodHouseAddress}
+                                </td>
+                                <td headers="bloodHousePhoneNumber-header">
+                                  {element.bloodHousePhoneNumber}
+                                </td>
+                                <td>
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      flexDirection: 'column',
+                                    }}
+                                  >
+                                    <button
+                                      onClick={() =>
+                                        navigate('/BD_Story', {
+                                          state: element.centerName,
+                                        })
+                                      }
+                                    >
+                                      예약하기
+                                    </button>
+                                    <button
+                                      type="button"
+                                      style={{ marginTop: '10px' }}
+                                    >
+                                      자세히보기
+                                    </button>
+                                  </div>
+                                </td>
                               </tr>
                               {openIndex === index && (
                                 <tr>
@@ -369,7 +240,6 @@ function BD_House() {
             </Tab>
           </Tabs>
         </StyledTab>
->>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
@@ -377,14 +247,14 @@ function BD_House() {
 }
 const StyledTable = styled(Table)`
   border-collapse: collapse;
-  th,tbody,td
-  td {
+  th,
+  tbody,
+  td td {
     padding: 0;
   }
 `;
 const StyledAll = styled.div`
   display: flex;
-  padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
   width: 170px;
@@ -463,34 +333,38 @@ const StyledSubDiv2_2g = styled.div`
   color: #969696;
 `;
 
-// const StyledFilter = styled.div`
-//   width: 100%;
-//   height: 145px;
-//   background: #ffe9e9;
-//   margin-bottom: 20px;
-// `;
-// const StyledFilterDiv1One = styled.div`
-//   margin-top: 10px;
-//   display: flex;
-//   margin-top: 20px;
-// `;
-// const StyledFilterDiv1Two = styled.div`
-//   font-family: 'Gmarket Sans TTF';
-//   font-style: normal;
-//   font-weight: 600;
-//   font-size: 18px;
-//   margin-right: 20px;
-//   margin-left: 30px;
-// `;
+const StyledFilter = styled.div`
+  width: 100%;
+  height: 145px;
+  background: #ffe9e9;
+  margin-bottom: 20px;
+`;
+const StyledFilterDiv1One = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
+const StyledFilterDiv1Two = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 30px;
+`;
 const StyledSubcomment = styled.div`
   display: block;
-  width: 924px;
+  width: 870px;
   margin-left: 65px;
   margin-top: 25px;
 `;
 
+const StyledTab = styled.div`
+  margin-top: 5px;
+  padding-bottom: 500px;
+`;
+
 const StyledTitle = styled.div`
-  width: 270px;
+  width: 230px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -505,9 +379,9 @@ const StyledTop = styled.div`
 
 const StyledButton = styled.div`
   margin-top: 10px;
-  width: 120px;
+  width: 125px;
   height: 35px;
-  margin-left: 475px;
+  margin-left: 510px;
 
   background: #ff9f9f;
   border-radius: 9px;
@@ -520,7 +394,7 @@ const StyledButtonDiv = styled.div`
   font-size: 18px;
   line-height: 38px;
   margin: auto;
-  margin-left: 25px;
+  margin-left: 28px;
   /* identical to box height, or 100% */
 
   color: #ffffff;
@@ -531,64 +405,4 @@ const Styleddiv2 = styled.div`
   margin-left: 100px; */
   text-align: center;
 `;
-<<<<<<< HEAD
-const Styledtr = styled.tr`
-  border: none;
-`;
-const Styledtd = styled.td`
-  border: none;
-`;
-const Styledtbody1 = styled.tbody`
-  border: none;
-`;
-const Styledimg = styled.img`
-  width: 30px;
-  height: 25px;
-  object-fit: cover;
-`;
-//asdadasdadasd
-const StyledFilter = styled.div`
-  width: 100%;
-  height: 145px;
-  background: #ffe9e9;
-  margin-bottom: 20px;
-`;
-
-const StyledFilterDiv1 = styled.div`
-  display: flex;
-`;
-const StyledFilterDiv1_1 = styled.div`
-  display: flex;
-  margin-top: 20px;
-`;
-const StyledFilterButton = styled.div`
-  margin-top: 15px;
-  width: 125px;
-  height: 35px;
-  margin-left: 80px;
-  background: #ff9f9f;
-  border-radius: 9px;
-`;
-const StyledFilterDiv1_2 = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  margin-right: 20px;
-  margin-left: 30px;
-`;
-const StyledFilterDiv1_2l = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-size: 18px;
-  margin-right: -20px;
-  margin-left: 80px;
-`;
-const StyledFilterDiv2 = styled.label`
-  margin-top: 20px;
-  width: 860px;
-  margin-left: 30px;
-`;
-=======
->>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
 export default BD_House;

@@ -18,18 +18,38 @@ import Nav from 'react-bootstrap/Nav';
 function Main() {
   return (
     <div>
-      <Carousel variant="dark">
-        <Carousel.Item>
-          <img className="d-block w-100" src={Post3} alt="Third slide" />
+      <Carousel variant="dark" style={{ height: '400px' }}>
+        <Carousel.Item style={{ height: '400px' }}>
+          <img
+            style={{ height: '400px' }}
+            className="d-block w-100"
+            src={Post3}
+            alt="Third slide"
+          />
         </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={Post} alt="First slide" />
+        <Carousel.Item style={{ height: '400px' }}>
+          <img
+            style={{ height: '400px' }}
+            className="d-block w-100"
+            src={Post}
+            alt="First slide"
+          />
         </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={Post1} alt="Second slide" />
+        <Carousel.Item style={{ height: '400px' }}>
+          <img
+            style={{ height: '400px' }}
+            className="d-block w-100"
+            src={Post1}
+            alt="Second slide"
+          />
         </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={Post2} alt="Third slide" />
+        <Carousel.Item style={{ height: '400px' }}>
+          <img
+            style={{ height: '400px' }}
+            className="d-block w-100"
+            src={Post2}
+            alt="Third slide"
+          />
         </Carousel.Item>
       </Carousel>
 
@@ -130,10 +150,11 @@ function Main() {
     </div>
   );
 }
+
 const StyledDiv1 = styled.div`
-  width: 1180px;
-  height: 202px;
-  margin-left: 180px;
+  width: 1130px;
+  height: 170px;
+  margin-left: 200px;
   margin-top: 50px;
   margin-bottom: 50px;
 
@@ -143,25 +164,25 @@ const StyledDiv1 = styled.div`
   display: flex;
 `;
 const StyledDiv1_1 = styled.div`
-  margin-left: 40px;
-  margin-top: 48px;
+  margin-left: 55px;
+  margin-top: 35px;
 `;
 const StyledTxt1 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 33px;
   line-height: 36px;
   /* or 100% */
 
   color: #ff0000;
 `;
 const StyledTxt2 = styled.div`
-  margin-top: 10px;
+  margin-top: 5px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 33px;
   line-height: 36px;
   /* or 100% */
 
@@ -178,23 +199,25 @@ const StyledTxt3 = styled.div`
   color: #7a7a7a;
 `;
 const StyledDiv1_2 = styled.div`
-  margin-left: 140px;
-  margin-top: 35px;
+  margin-left: 165px;
+  margin-top: 25px;
   display: flex;
 `;
 const Styledimg = styled.img`
-  width: 131.68px;
-  height: 131px;
+  /* margin-left: 10px; */
+  width: 125px;
+  height: 125px;
 `;
 const StyledDiv1_3 = styled.div`
-  margin-left: 50px;
+  margin-left: 20px;
 `;
 const StyledPrice = styled.div`
-  margin-top: 30px;
+  margin-left: 12px;
+  margin-top: 25px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 32px;
   /* identical to box height, or 100% */
 
@@ -202,7 +225,7 @@ const StyledPrice = styled.div`
 `;
 const StyledDiv1_4 = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 const StyledBtn = styled.div`
   width: 125px;

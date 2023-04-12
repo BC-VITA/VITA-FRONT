@@ -66,10 +66,7 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-<<<<<<< HEAD
           {/* <Route path="/BD_Main1" element={<BDMain1 />}></Route> */}
-=======
->>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
           {/* 메인 */}
           <Route path="/" element={<Home />}></Route>
 
@@ -87,16 +84,9 @@ function App() {
 
           <Route path="/Learn" element={<Learn />}></Route>
           {/* 알아보자 */}
-
-<<<<<<< HEAD
           <Route path="/BD_Main" element={<BDMain />}></Route>
           {/*헌혈하자*/}
           <Route path="/BD_House" element={<BDHouse />}></Route>
-=======
-          {/*헌혈하자*/}
-          <Route path="/BD_Main" element={<BDMain />}></Route>
-          <Route path="/BD_House" element={<BDHouse />}></Route>{/*헌혈의 집 목록*/}
->>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
           <Route path="/BD_Bus" element={<BDBus />}></Route>
           <Route
             path="/BD_ReservationFirst"
@@ -112,16 +102,11 @@ function App() {
           ></Route>
           <Route path="/BD_History" element={<BDHistory />}></Route>
 
-<<<<<<< HEAD
-          <Route path="/BD_test" element={<BDtest />}></Route>
+          {/* <Route path="/BD_test" element={<BDtest />}></Route> */}
           {/*헌혈의집 등록하는 관리자 화면*/}
 
           <Route path="/DBD_Main" element={<DBDMain />}></Route>
           {/*지정헌혈하자*/}
-=======
-          {/*지정헌혈하자*/}
-          <Route path="/DBD_Main" element={<DBDMain />}></Route>
->>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
           <Route path="/DBD_General" element={<DBDGeneral />}></Route>
           <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>
           <Route path="/DBD_PostHospital" element={<DBDPostHospital />}></Route>
@@ -143,18 +128,21 @@ function App() {
             }
           ></Route> */}
           {/*봉사하자, 헌혈하자 캘린더실험용 사용중*/}
-          <Route path="/S_Other" element={<SOther />}></Route>
+          {/* <Route path="/S_Other" element={<SOther />}></Route> */}
 
-<<<<<<< HEAD
-          <Route path="/D_Main" element={<DMain />}></Route>
+          {/* <Route path="/D_Main" element={<DMain />}></Route> */}
           {/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
-=======
-          <Route path="/D_Main" element={<DMain />}></Route>{/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
+          {/* <Route path="/D_Main" element={<DMain />}></Route> */}
+          {/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
 
           {/*관리자 페이지 모음*/}
-          <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>{/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>{/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
->>>>>>> 556fd11f0424f2addc495d15362c67d14a3aee0c
+          {/* <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route> */}
+          {/*헌혈의 집 정보 Insert하는 페이지*/}
+          {/* <Route
+            path="/M_Blood_Reservation"
+            element={<MBloodReservation />}
+          ></Route> */}
+          {/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
         </Routes>
         <Foot />
       </BrowserRouter>
