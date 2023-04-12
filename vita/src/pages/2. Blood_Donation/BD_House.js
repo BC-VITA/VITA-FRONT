@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 헌혈의집데이터를 가지고 다음페이지로 넘어감
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
@@ -6,10 +7,10 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 function BD_House() {
-
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
   const [secondListOptions, setSecondListOptions] = useState([]);
+  const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
@@ -29,7 +30,7 @@ function BD_House() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
-  };
+  }
 
   const [error, setError] = useState(null);
 
@@ -63,7 +64,10 @@ function BD_House() {
     console.log(inputData);
   }, []);
 
-  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
+  const filteredData =
+    firstListValue === '전체'
+      ? inputData
+      : inputData.filter((item) => item.area === firstListValue);
 
   return (
     <StyledAll>
@@ -71,32 +75,37 @@ function BD_House() {
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
-            <StyledSubDiv2One>
+            <StyledSubDiv2_1>
               <Nav.Link href="/BD_Main">
-                <StyledSubDiv2Two>헌혈이란</StyledSubDiv2Two>
+                <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
-            <StyledSubDiv2Onep>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1p>
               <Nav.Link href="/BD_House">
-                <StyledSubDiv2Two2>헌혈하기</StyledSubDiv2Two2>
+                <StyledSubDiv2_2>헌혈의 집 찾기</StyledSubDiv2_2>
               </Nav.Link>
-            </StyledSubDiv2Onep>
-            <StyledSubDiv2One>
-              <Nav.Link href="/DBD_WatchList">
-                <StyledSubDiv2Two>관심목록</StyledSubDiv2Two>
+            </StyledSubDiv2_1p>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_Bus">
+                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
-            <StyledSubDiv2One>
-              <Nav.Link href="/DBD_News">
-                <StyledSubDiv2Two>따뜻한 사례</StyledSubDiv2Two>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_ReservationFirst">
+                <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_History">
+                <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>헌혈하기</StyledTitle>
+          <StyledTitle>헌혈의 집 찾기</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
@@ -122,7 +131,10 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
@@ -131,7 +143,9 @@ function BD_House() {
                     </select>
                   </StyledFilterDiv1One>
                   <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
+                    <StyledFilterDiv1Two>
+                      &nbsp;기&nbsp;간&nbsp;
+                    </StyledFilterDiv1Two>
                     <select
                       onChange={handleFirstListChange}
                       value={firstListValue}
@@ -143,7 +157,10 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
@@ -170,13 +187,39 @@ function BD_House() {
                             <React.Fragment key={index}>
                               <tr onClick={() => handleRowClick(index)}>
                                 <td headers="area-header">{element.area}</td>
-                                <td headers="centerName-header">{element.centerName}</td>
-                                <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
-                                <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
-                                <td><div style={{ display: 'flex', flexDirection: 'column' }}>
-                                  <button type='button'>상세보기</button>
-                                  <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
-                                </div></td>
+                                <td headers="centerName-header">
+                                  {element.centerName}
+                                </td>
+                                <td headers="bloodHouseAddress-header">
+                                  {element.bloodHouseAddress}
+                                </td>
+                                <td headers="bloodHousePhoneNumber-header">
+                                  {element.bloodHousePhoneNumber}
+                                </td>
+                                <td>
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      flexDirection: 'column',
+                                    }}
+                                  >
+                                    <button
+                                      onClick={() =>
+                                        navigate('/BD_Story', {
+                                          state: element.centerName,
+                                        })
+                                      }
+                                    >
+                                      예약하기
+                                    </button>
+                                    <button
+                                      type="button"
+                                      style={{ marginTop: '10px' }}
+                                    >
+                                      자세히보기
+                                    </button>
+                                  </div>
+                                </td>
                               </tr>
                               {openIndex === index && (
                                 <tr>
@@ -199,13 +242,14 @@ function BD_House() {
         </StyledTab>
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
-    </StyledAll >
+    </StyledAll>
   );
 }
 const StyledTable = styled(Table)`
   border-collapse: collapse;
-  th,tbody,td
-  td {
+  th,
+  tbody,
+  td td {
     padding: 0;
   }
 `;
@@ -213,13 +257,13 @@ const StyledAll = styled.div`
   display: flex;
 `;
 const StyledSub = styled.div`
-  width: 120px;
+  width: 170px;
   /* height: 175px; */
   margin-top: 25px;
   margin-left: 205px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 150px;
+  width: 190px;
   height: 50px;
   /* left: 370px;
   top: 123px; */
@@ -238,25 +282,25 @@ const StyledSubDiv1 = styled.div`
 `;
 
 const StyledSubDiv2 = styled.div`
-  width: 150px;
-  height: 202.5px;
+  width: 190px;
+  height: 278px;
   border: 3px solid #d7d7d7;
 `;
-const StyledSubDiv2One = styled.div`
+const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
-const StyledSubDiv2Onep = styled.div`
+const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
-const StyledSubDiv2Two2 = styled.div`
+const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -264,15 +308,15 @@ const StyledSubDiv2Two2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
 
   color: #333333;
 `;
-const StyledSubDiv2Two = styled.div`
+const StyledSubDiv2_2g = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -280,8 +324,8 @@ const StyledSubDiv2Two = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
@@ -309,7 +353,7 @@ const StyledFilterDiv1Two = styled.div`
 `;
 const StyledSubcomment = styled.div`
   display: block;
-  width: 924px;
+  width: 870px;
   margin-left: 65px;
   margin-top: 25px;
 `;
@@ -320,7 +364,7 @@ const StyledTab = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 203px;
+  width: 230px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -337,7 +381,7 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 580px;
+  margin-left: 510px;
 
   background: #ff9f9f;
   border-radius: 9px;

@@ -41,7 +41,7 @@ function LogIn() {
     setDisabled(false);
   };
   return (
-    <div>
+    <div style={{ paddingBottom: '300px' }}>
       <section>
         <Styleddiv>로그인</Styleddiv>
         <Styleddiv1>회원일 경우 로그인 해주세요</Styleddiv1>
@@ -51,7 +51,7 @@ function LogIn() {
             size: '10',
             borderWidth: '2px',
             border: 'solid',
-            marginLeft: '15%'
+            marginLeft: '15%',
           }}
         ></hr>
       </section>
@@ -82,11 +82,17 @@ function LogIn() {
               onChange={handleChangePassword}
             />
             <br />
-            <StyledButton1 type="button" onClick={handleSubmit} disabled={disabled}>
+            <StyledButton1
+              type="button"
+              onClick={handleSubmit}
+              disabled={disabled}
+            >
               로그인
             </StyledButton1>
             <br />
-            <StyledButton2 type="button" disabled={disabled}> {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
+            <StyledButton2 type="button" disabled={disabled}>
+              {' '}
+              {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
               회원가입
             </StyledButton2>
             {/* <StyledButton2 type="submit" disabled={disabled}>
