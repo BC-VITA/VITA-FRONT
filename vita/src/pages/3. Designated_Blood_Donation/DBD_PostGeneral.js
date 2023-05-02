@@ -150,7 +150,7 @@ function DBD_PostGeneral() {
   };
 
   return (
-    <div style={{ marginLeft: '13%' }}>
+    <StyledAll>
       <section>
         <StyledTitle>지정헌혈하기</StyledTitle>
         <StyledTitle2>일반 사용자</StyledTitle2>
@@ -316,7 +316,9 @@ function DBD_PostGeneral() {
                   ))}
                 </select>
               </StyledGroup5_2>
-              <StyledGroup5_3>
+            </StyledGroup5>
+            <StyledGroup6>
+              <StyledGroup6_1>
                 <StyledGroupTitle>* 신청자 후기 작성 여부</StyledGroupTitle>
                 <RadioButton
                   label="&nbsp;예&nbsp;"
@@ -328,26 +330,24 @@ function DBD_PostGeneral() {
                   value={review === 'false'}
                   onChange={handlereviewFChange}
                 />
-              </StyledGroup5_3>
-            </StyledGroup5>
-            <StyledGroup6>
-              <StyledGroup6_1>
+              </StyledGroup6_1>
+              <StyledGroup6_2>
                 <StyledGroupTitle>* 진행기간</StyledGroupTitle>
                 <input
                   type="Date"
                   value={startDate}
                   onChange={handleStartDateChange}
                 />
-              </StyledGroup6_1>
+              </StyledGroup6_2>
               <StyledGroupTitle>-</StyledGroupTitle>
-              <StyledGroup6_2>
+              <StyledGroup6_3>
                 <StyledGroupTitle>* 마감기간</StyledGroupTitle>
                 <input
                   type="Date"
                   value={endDate}
                   onChange={handleEndDateChange}
                 />
-              </StyledGroup6_2>
+              </StyledGroup6_3>
             </StyledGroup6>
           </StyledDiv1>
           <StyledDiv2>
@@ -368,19 +368,14 @@ function DBD_PostGeneral() {
               <Form.Control as="textarea" style={{ height: '270px' }} />
             </FloatingLabel>
           </StyledDiv3>
-          <Styledsec>
-            <StyledTxt>
-              <StyledTxtL>
-                # 혈액관리법 제3조(혈액 매매행위 등의 금지)은 "누구든지 금전,
-                재산상의 이익 또는 그 밖의 대가
-                <br />
-                적 급부를 받거나 받기로 하고 자신의 혈액(헌혈증서 포함)을
-                제공하거나 제공할 것을 약속하여서는
-                <br />
-                아니된다
-              </StyledTxtL>
-            </StyledTxt>
-          </Styledsec>
+          <Styledsec3>
+            <StyledTxt2>
+              # 혈액관리법 제3조(혈액 매매행위 등의 금지)은 "누구든지 금전,
+              재산상의 이익 또는 그 밖의 대가 적 급부를 받거나 받기로 하고
+              자신의 혈액(헌혈증서 포함)을 제공하거나 제공할 것을 약속하여서는
+              아니된다
+            </StyledTxt2>
+          </Styledsec3>
           <StyledButton1
             type="button"
             onClick={handleSubmit}
@@ -391,9 +386,13 @@ function DBD_PostGeneral() {
           <div className="home">{error && <div>{error}</div>}</div>
         </form>
       </Styledsec2>
-    </div>
+    </StyledAll>
   );
 }
+const StyledAll = styled.div`
+  margin: auto;
+  padding-bottom: 300px;
+`;
 const StyledTitle = styled.div`
   width: 270px;
   font-family: 'Gmarket Sans TTF';
@@ -464,7 +463,7 @@ const Styledsec2 = styled.div`
   margin-left: 10px;
 
   width: 1100px;
-  height: 1364px;
+  height: 190ch;
   left: 378px;
   top: 446px;
 
@@ -479,12 +478,14 @@ const StyledDiv1 = styled.div`
 const StyledGroup1 = styled.div`
   display: flex;
   margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
 `;
 const StyledGroup1_1 = styled.div`
   width: 200px;
 `;
 const StyledGroup1_2 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
   width: 500px;
 `;
 const StyledGroupTitle = styled.div`
@@ -503,96 +504,149 @@ const StyledGroupTitle = styled.div`
 const StyledGroup2 = styled.div`
   display: flex;
   margin-bottom: 20px;
+  margin-top: 30px;
+  margin-left: 20px;
 `;
 const StyledGroup2_1 = styled.div`
   width: 500px;
 `;
 const StyledGroup2_2 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
   width: 200px;
 `;
 const StyledGroup2_3 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
   width: 200px;
 `;
 
 const StyledGroup3 = styled.div`
   display: flex;
   margin-bottom: 20px;
+  margin-top: 30px;
+  margin-left: 20px;
 `;
 const StyledGroup3_1 = styled.div`
   width: 300px;
 `;
 const StyledGroup3_2 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
   width: 500px;
 `;
 
 const StyledGroup4 = styled.div`
   display: flex;
   margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
 `;
 const StyledGroup4_1 = styled.div`
   width: 200px;
 `;
 const StyledSelectBox = styled.div`
-  width: 200px;
+  /* width: 200px;
   height: 65px;
   background: #ffffff;
   border: 2px solid #e6e9ec;
-  border-radius: 8px;
+  border-radius: 8px; */
 `;
 const StyledGroup4_2 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
   width: 200px;
 `;
 const StyledGroup4_3 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
   width: 200px;
 `;
 const StyledGroup4_4 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
   width: 400px;
 `;
 
 const StyledGroup5 = styled.div`
   display: flex;
   margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
 `;
 const StyledGroup5_1 = styled.div`
-  width: 500px;
+  width: 250px;
 `;
 const StyledGroup5_2 = styled.div`
-  margin-left: 70px;
-  width: 200px;
-`;
-const StyledGroup5_3 = styled.div`
-  margin-left: 70px;
-  width: 200px;
+  margin-left: 50px;
+  width: 250px;
 `;
 
 const StyledGroup6 = styled.div`
   display: flex;
   margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
 `;
 const StyledGroup6_1 = styled.div`
-  width: 500px;
+  width: 320px;
 `;
 const StyledGroup6_2 = styled.div`
-  margin-left: 70px;
+  margin-left: 50px;
+  width: 200px;
+`;
+const StyledGroup6_3 = styled.div`
+  margin-left: 50px;
   width: 200px;
 `;
 
-const StyledDiv2 = styled.div``;
-const StyledDiv3 = styled.div``;
+const StyledDiv2 = styled.div`
+  margin-top: 40px;
+  margin-left: 30px;
+  width: 115ch;
+`;
+const StyledDiv3 = styled.div`
+  margin-top: 10px;
+  margin-left: 30px;
+  width: 115ch;
+`;
+
+const Styledsec3 = styled.div`
+  margin-top: 40px;
+  margin-left: 20px;
+
+  width: 120ch;
+  height: 110px;
+  /* left: 378px;
+  top: 259px; */
+
+  background: #ebebeb;
+  border-radius: 10px;
+`;
+const StyledTxt2 = styled.div`
+  /* padding-top: 25px;
+  padding-left: 25px; */
+  width: 67ch;
+  margin-left: 20px;
+  padding-top: 25px;
+  margin-bottom: 10px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
+  /* or 96% */
+
+  color: #333333;
+  text-align: center;
+`;
 
 const StyledButton1 = styled.button`
   background-color: #ff9f9f;
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 30px;
   border: none;
   cursor: pointer;
+  width: 180px;
+  height: 55px;
+  margin-left: 28ch;
   margin-bottom: 10px;
+  margin-top: 15ch;
 `;
 export default DBD_PostGeneral;
