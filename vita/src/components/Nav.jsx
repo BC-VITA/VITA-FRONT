@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MenuItem from '@mui/material/MenuItem';
 import styled from 'styled-components';
 import icon from '../img/icon.png';
 

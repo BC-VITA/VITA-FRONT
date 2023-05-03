@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
-
-function RadioGroup({ label, children }) {
-  return (
-    <fieldset>
-      <legend>{label}</legend>
-      {children}
-    </fieldset>
-  );
-};
 
 const RadioButton = ({ label, value, onChange }) => {
   return (
@@ -26,12 +18,24 @@ function S_Other() {
   const { selectedDate } = location.state;
   console.log(selectedDate);
   const formattedDate = selectedDate.toLocaleDateString();
+  const navigate = useNavigate();
+
+  const handleReservation = () => {
+    navigate('/S_WatchList', {
+      state: { rhtype, formattedDate }
+    });
+  };
+  
 
   const handleRHMChange = () => {
-    setbrhtype('RH-');
+    setbrhtype('전혈');
   };
   const handleRHPChange = () => {
-    setbrhtype('RH+');
+    setbrhtype('혈소판');
+  };
+
+  const handleRHAChange = () => {
+    setbrhtype('혈장');
   };
   const [rhtype, setbrhtype] = useState('');
 
@@ -56,18 +60,8 @@ function S_Other() {
           <tbody>
             <tr>
               <td><br></br>예약 가능<br></br>헌혈종류</td>
-              <td>-</td>
-              <td><br></br><RadioButton
-                label="&nbsp;전혈&nbsp;"
-                value={rhtype === 'RH-'}
-                onChange={handleRHMChange}
-              />
-                <br></br>
-                <RadioButton
-                  label="&nbsp;혈소판&nbsp;"
-                  value={rhtype === 'RH-'}
-                  onChange={handleRHMChange}
-                /></td>
+              <td></td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -92,24 +86,24 @@ function S_Other() {
           <tbody>
             <tr>
               <td><br></br>예약 가능<br></br>헌혈종류</td>
-              <td>-</td>
+              <td></td>
               <td><br></br><RadioButton
                 label="&nbsp;전혈&nbsp;"
-                value={rhtype === 'RH-'}
+                value={rhtype === '전혈'}
                 onChange={handleRHMChange}
               />
                 <br></br>
                 <RadioButton
                   label="&nbsp;혈소판&nbsp;"
-                  value={rhtype === 'RH-'}
-                  onChange={handleRHMChange}
+                  value={rhtype === '혈소판'}
+                  onChange={handleRHPChange}
                 /></td>
               <td></td>
               <td></td>
               <td><RadioButton
-                label="&nbsp;혈소판&nbsp;"
-                value={rhtype === 'RH-'}
-                onChange={handleRHMChange}
+                label="&nbsp;혈장&nbsp;"
+                value={rhtype === '혈장'}
+                onChange={handleRHAChange}
               /></td>
               <td></td>
               <td></td>
@@ -132,30 +126,17 @@ function S_Other() {
           <tbody>
             <tr>
               <td><br></br>예약 가능<br></br>헌혈종류</td>
-              <td>-</td>
-              <td><br></br><RadioButton
-                label="&nbsp;전혈&nbsp;"
-                value={rhtype === 'RH-'}
-                onChange={handleRHMChange}
-              />
-                <br></br>
-                <RadioButton
-                  label="&nbsp;혈소판&nbsp;"
-                  value={rhtype === 'RH-'}
-                  onChange={handleRHMChange}
-                /></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
-              <td><RadioButton
-                label="&nbsp;혈소판&nbsp;"
-                value={rhtype === 'RH-'}
-                onChange={handleRHMChange}
-              /></td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
           </tbody>
         </Table>
+        <button onClick={handleReservation}>예약하기</button>
       </div>
     </div>
   );

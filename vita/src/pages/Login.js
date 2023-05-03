@@ -13,46 +13,37 @@ function LogIn() {
 
   const navigate = useNavigate();
 
+  const handleSubmit1 = ()=>{
+    navigate('/SignUp');
+  };
   const handleSubmit = async (event) => {
     setDisabled(true);
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
 
     //back으로 정보 post함
-    fetch('http://localhost:8003/join', {
+    fetch('http://localhost:8004/user/login', {
       method: 'post',
       body: JSON.stringify({
         id: 'userID',
         password: 'userPW',
       }),
     })
-      //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
       .then((res) => res.json())
-      //회원가입 성공시 실행
       .then((res) => {
         navigate('/');
       })
-      //회원가입 실패시 실행
       .catch((err) => {
         setError(err.message);
-        //에러시 Loading메세지 사라지고
-        //에러메세지만 보이도록 설정
       });
     setDisabled(false);
   };
   return (
-    <div style={{ paddingBottom: '300px' }}>
+    <div>
       <section>
         <Styleddiv>로그인</Styleddiv>
         <Styleddiv1>회원일 경우 로그인 해주세요</Styleddiv1>
-        <hr
-          style={{
-            width: '70%',
-            size: '10',
-            borderWidth: '2px',
-            border: 'solid',
-            marginLeft: '15%',
-          }}
+        <hr style={{ width: '70%', size: '10', borderWidth: '2px', border: 'solid', marginLeft: '15%' }}
         ></hr>
       </section>
       <section
@@ -82,17 +73,11 @@ function LogIn() {
               onChange={handleChangePassword}
             />
             <br />
-            <StyledButton1
-              type="button"
-              onClick={handleSubmit}
-              disabled={disabled}
-            >
+            <StyledButton1 type="button" onClick={handleSubmit} disabled={disabled}>
               로그인
             </StyledButton1>
             <br />
-            <StyledButton2 type="button" disabled={disabled}>
-              {' '}
-              {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
+            <StyledButton2 type="button" onClick={handleSubmit1} disabled={disabled}> {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
               회원가입
             </StyledButton2>
             {/* <StyledButton2 type="submit" disabled={disabled}>

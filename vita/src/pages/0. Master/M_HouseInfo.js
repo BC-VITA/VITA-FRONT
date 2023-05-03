@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
 
 //헌혈의집 정보 넣는 페이지
 
@@ -17,11 +14,7 @@ function BD_test() {
     const [saturdayTime, setSaturdayTime] = useState(''); //토요일시간
     const [sundayRestTime, setSundayRestTime] = useState(''); //일요일 시간 
     const [restTime, setRestTime] = useState(''); // 공휴일 시간
-
     const [date, setDate] = useState(''); // 날짜
-    const [wholeBlood, setWholeBlood] = useState(''); //전혈
-    const [plasma, setPlasma] = useState(''); // 혈장
-    const [platelet, setPlatelet] = useState(''); // 혈소판
 
     const [error, setError] = useState(null);
     const [disabled, setDisabled] = useState(false);
@@ -37,9 +30,6 @@ function BD_test() {
     const handleChangeSundayRestTime = ({ target: { value } }) => setSundayRestTime(value);
     const handleChangeRestTime = ({ target: { value } }) => setRestTime(value);
     const handleChangeDate = ({ target: { value } }) => setDate(value);
-    const handleChangeWholeBlood = ({ target: { value } }) => setWholeBlood(value);
-    const handleChangePlasma = ({ target: { value } }) => setPlasma(value);
-    const handleChangePlatelet = ({ target: { value } }) => setPlatelet(value);
 
     const handleSubmit = async (event) => {
         setDisabled(true);
@@ -63,9 +53,6 @@ function BD_test() {
                 sundayRestTime: sundayRestTime,
                 restTime: restTime,
                 date: date,
-                wholeBlood: wholeBlood,
-                plasma: plasma,
-                platelet: platelet,
             }),
         })
             .then((res) => {
@@ -76,7 +63,7 @@ function BD_test() {
             });
         setDisabled(false);
         console.log(
-            'data: ' +
+            'Data: ' +
             JSON.stringify({
                 area: area,
                 centerName: centerName,
@@ -89,9 +76,6 @@ function BD_test() {
                 sundayRestTime: sundayRestTime,
                 restTime: restTime,
                 date: date,
-                wholeBlood: wholeBlood,
-                plasma: plasma,
-                platelet: platelet,
             })
         );
     };
@@ -121,12 +105,6 @@ function BD_test() {
                     <input type="text" value={restTime} onChange={handleChangeRestTime}></input>
                     <div>날짜</div>
                     <input type="text" value={date} onChange={handleChangeDate}></input>
-                    <div>전혈</div>
-                    <input type="text" value={wholeBlood} onChange={handleChangeWholeBlood}></input>
-                    <div>혈장</div>
-                    <input type="text" value={plasma} onChange={handleChangePlasma}></input>
-                    <div>혈소판</div>
-                    <input type="text" value={platelet} onChange={handleChangePlatelet}></input>
                 </div>
                 <button type="submit">저장</button>
             </form>
