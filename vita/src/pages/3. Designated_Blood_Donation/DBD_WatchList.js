@@ -125,15 +125,16 @@ function DBD_WatchList() {
 
 const StyledAll = styled.div`
   display: flex;
+  padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 120px;
+  width: 170px;
   /* height: 175px; */
   margin-top: 25px;
   margin-left: 205px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 150px;
+  width: 190px;
   height: 50px;
   /* left: 370px;
   top: 123px; */
@@ -152,23 +153,23 @@ const StyledSubDiv1 = styled.div`
 `;
 
 const StyledSubDiv2 = styled.div`
-  width: 150px;
-  height: 202.5px;
+  width: 190px;
+  height: 222.5px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
 const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
 const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
@@ -178,8 +179,8 @@ const StyledSubDiv2_2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
@@ -194,8 +195,8 @@ const StyledSubDiv2_2g = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
