@@ -10,13 +10,13 @@ function SignUp() {
   const navigate = useNavigate();
 
   const Group = () => {
-    navigate('/Group');
+    navigate('/SignUpGroup');
   };
   const Hospital = () => {
-    navigate('/Hospital');
+    navigate('/SignUpHospital');
   };
   const Individual = () => {
-    navigate('/Individual');
+    navigate('/SignUpIndividual');
   };
 
   return (

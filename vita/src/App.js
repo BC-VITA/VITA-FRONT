@@ -14,6 +14,8 @@ import Individual from './pages/SignUp/SignUpIndividual';
 import Home from './pages/Main';
 import MyPage from './pages/MyPage';
 
+import MyPagetest from './pages/MyPage_test';
+
 import Learn from './pages/1. Learn/Learn';
 
 import BDMain from './pages/2. Blood_Donation/BD_Main';
@@ -43,11 +45,12 @@ import BDStory from './pages/4. Community/BD_Story';
 
 import SMain from './pages/5. Service/S_Main';
 import SOther from './pages/5. Service/S_Other';
+import SWatchList from './pages/5. Service/S_WatchList';
 
 import DMain from './pages/6. Donate/D_Main';
 // import DMain from './pages/6. Donate';
 
-//import KakaoMap from './components/';
+import KakaoMap from './pages/KakaoMap';
 
 //관리자페이지 모음
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
@@ -103,12 +106,14 @@ function App() {
 
           <Route path="/S_Main" element={<SMain startDate={startDate} endDate={endDate} onReservation={onReservation} />}></Route>{/*봉사하자, 헌혈하자 캘린더실험용 사용중*/}
           <Route path="/S_Other" element={<SOther />}></Route>
+          <Route path="/S_WatchList" element={<SWatchList />}></Route>
 
           <Route path="/D_Main" element={<DMain />}></Route>{/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
 
           {/*관리자 페이지 모음*/}
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>{/*헌혈의 집 정보 Insert하는 페이지*/}
           <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>{/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
+          <Route path="/MyPagetest" element={<MyPagetest />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>

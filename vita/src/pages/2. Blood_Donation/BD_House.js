@@ -4,8 +4,10 @@ import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { useNavigate } from 'react-router-dom';
 
 function BD_House() {
+  const navigate = useNavigate();
 
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
@@ -47,6 +49,9 @@ function BD_House() {
     {},
   ]);
 
+  function handleReservation() {
+    navigate('/s_main');
+  }
   useEffect(() => {
     fetch('http://localhost:8004/blood/board/list ', {
       method: 'get',
@@ -174,7 +179,7 @@ function BD_House() {
                                 <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
                                 <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
                                 <td><div style={{ display: 'flex', flexDirection: 'column' }}>
-                                  <button type='button'>상세보기</button>
+                                  <button onClick={handleReservation}>예약하기</button>
                                   <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
                                 </div></td>
                               </tr>
