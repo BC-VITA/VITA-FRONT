@@ -5,39 +5,35 @@ import styled from 'styled-components';
 function LogIn() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(false);
 
   const handleChangeId = ({ target: { value } }) => setId(value);
   const handleChangePassword = ({ target: { value } }) => setPassword(value);
 
   const navigate = useNavigate();
 
-  const handleSubmit1 = ()=>{
+  const handleSubmit1 = () => {
     navigate('/SignUp');
   };
-  const handleSubmit = async (event) => {
-    setDisabled(true);
-    event.preventDefault();
-    await new Promise((r) => setTimeout(r, 1000));
-
-    //back으로 정보 post함
-    fetch('http://localhost:8004/user/login', {
-      method: 'post',
+  const handleSubmit = async () => {
+    const response = await fetch('http://localhost:8004/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        id: 'userID',
-        password: 'userPW',
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        navigate('/');
+        userId: id,
+        userPw: password
       })
-      .catch((err) => {
-        setError(err.message);
-      });
-    setDisabled(false);
-  };
+    });
+    const result = await response.text();
+    console.log(result);
+    if (result === '로그인 성공') {
+      // 세션에 저장
+      sessionStorage.setItem('userId', id);
+      navigate('/');
+    }
+  }
+
   return (
     <div>
       <section>
@@ -73,17 +69,16 @@ function LogIn() {
               onChange={handleChangePassword}
             />
             <br />
-            <StyledButton1 type="button" onClick={handleSubmit} disabled={disabled}>
+            <StyledButton1 type="button" onClick={handleSubmit}>
               로그인
             </StyledButton1>
             <br />
-            <StyledButton2 type="button" onClick={handleSubmit1} disabled={disabled}> {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
+            <StyledButton2 type="button" onClick={handleSubmit1}> {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
               회원가입
             </StyledButton2>
             {/* <StyledButton2 type="submit" disabled={disabled}>
               아이디/비밀번호찾기
             </StyledButton2> */}
-            <div className="home">{error && <div>{error}</div>}</div>
           </form>
         </div>
       </section>
