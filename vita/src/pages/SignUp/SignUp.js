@@ -2,9 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '@mui/material';
-import GroupPhoTO from '../img/개인.png';
-import icHospitalonPhoTO from '../img/병원.png';
-import IndividualPhoTO from '../img/봉사 기업・단체.png';
+import GroupPhoTO from '../../img/개인.png';
+import icHospitalonPhoTO from '../../img/병원.png';
+import IndividualPhoTO from '../../img/봉사 기업・단체.png';
 
 function SignUp() {
   const navigate = useNavigate();

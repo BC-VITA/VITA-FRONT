@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import icon from '../img/icon.png';
 
 const Nav = () => {
+  const userId = sessionStorage.getItem('userId');
+
   return (
     <Stylednav>
       <StyledDiv1>
@@ -54,17 +56,17 @@ const Nav = () => {
       </StyledDiv2>
 
       <StyledDiv3>
-        <Link to="Login" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to={userId ? `/users/${userId}` : "/login"} style={{ textDecoration: 'none', color: 'white' }}>
           <StyledDiv3_1>
-            <div>로그인</div>
+            <div>{userId ? `${userId}님 반갑습니다` : '로그인'}</div>
           </StyledDiv3_1>
         </Link>
         <StyledDiv3_1m>
           <div>|</div>
         </StyledDiv3_1m>
-        <Link to="SignUp" style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to={userId ? "/logout" : "/signup"} style={{ textDecoration: 'none', color: 'white' }}>
           <StyledDiv3_1>
-            <div>회원가입</div>
+            <div>{userId ? '로그아웃' : '회원가입'}</div>
           </StyledDiv3_1>
         </Link>
       </StyledDiv3>
