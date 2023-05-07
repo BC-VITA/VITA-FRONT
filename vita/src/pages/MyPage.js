@@ -54,6 +54,7 @@ export default function App() {
           </>
         )}
       </div>
+      <div>{mapSize},{markerPositions}</div>
     </div>
   );
 }

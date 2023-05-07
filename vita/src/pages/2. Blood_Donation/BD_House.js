@@ -5,9 +5,12 @@ import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useNavigate } from 'react-router-dom';
+import KakaoMap from "../KakaoMap";
 
 function BD_House() {
   const navigate = useNavigate();
+
+  const [mapSize, setMapSize] = useState([400, 400]);
 
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
@@ -32,8 +35,6 @@ function BD_House() {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
   };
-
-  const [error, setError] = useState(null);
 
   const [inputData, setInputData] = useState([
     {
@@ -62,9 +63,6 @@ function BD_House() {
         setInputData(res);
         console.log(inputData);
       })
-      .catch((err) => {
-        setError(err.message);
-      });
     console.log(inputData);
   }, []);
 
@@ -108,7 +106,6 @@ function BD_House() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
-
         <StyledTab>
           <Tabs>
             <Tab eventKey="profile" title="일반 사용자">
@@ -171,6 +168,7 @@ function BD_House() {
                       </thead>
                       <tbody>
                         {filteredData.map((element, index) => {
+                          const markerPositions = [[element.latitude, element.longitude]];
                           return (
                             <React.Fragment key={index}>
                               <tr onClick={() => handleRowClick(index)}>
@@ -178,14 +176,20 @@ function BD_House() {
                                 <td headers="centerName-header">{element.centerName}</td>
                                 <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
                                 <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
-                                <td><div style={{ display: 'flex', flexDirection: 'column' }}>
-                                  <button onClick={handleReservation}>예약하기</button>
-                                  <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
-                                </div></td>
+                                <td>
+                                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <button onClick={handleReservation}>예약하기</button>
+                                    <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
+                                  </div>
+                                </td>
                               </tr>
                               {openIndex === index && (
                                 <tr>
-                                  <td colSpan="5">지도 나오게 하기</td>
+                                  <td colSpan={5}>
+                                    <div id="wrap">
+                                      <KakaoMap markerPositions={markerPositions} size={mapSize} />
+                                    </div>
+                                  </td>
                                 </tr>
                               )}
                             </React.Fragment>
@@ -194,7 +198,7 @@ function BD_House() {
                       </tbody>
                     </StyledTable>
                   </Styleddiv2>
-                </section>
+                </section> 
               </Tab.Content>
             </Tab>
             <Tab eventKey="home" title="병원">
@@ -203,7 +207,6 @@ function BD_House() {
           </Tabs>
         </StyledTab>
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll >
   );
 }

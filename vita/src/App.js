@@ -50,8 +50,6 @@ import SWatchList from './pages/5. Service/S_WatchList';
 import DMain from './pages/6. Donate/D_Main';
 // import DMain from './pages/6. Donate';
 
-import KakaoMap from './pages/KakaoMap';
-
 //관리자페이지 모음
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
