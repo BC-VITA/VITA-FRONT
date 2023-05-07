@@ -18,7 +18,9 @@ import Learn from './pages/1. Learn/Learn';
 
 import BDMain from './pages/2. Blood_Donation/BD_Main';
 import BDHouse from './pages/2. Blood_Donation/BD_House';
+import BDPostHouse from './pages/2. Blood_Donation/BD_PostHouse';
 import BDBus from './pages/2. Blood_Donation/BD_Bus';
+import BDPostBus from './pages/2. Blood_Donation/BD_PostBus';
 import BDReservationFirst from './pages/2. Blood_Donation/BD_ReservationFirst';
 import BDReservationSecond from './pages/2. Blood_Donation/BD_ReservationSecond';
 import BDReservationThird from './pages/2. Blood_Donation/BD_ReservationThird';
@@ -33,6 +35,7 @@ import DBDWatchList from './pages/3. Designated_Blood_Donation/DBD_WatchList';
 
 import BDStory from './pages/4. Community/BD_Story';
 import DBDStory from './pages/4. Community/DBD_Story';
+import MyPagetest from './pages/MyPage_test';
 // import BDDetails from './pages/4. Community/BD_Details';
 // import BDWrite from './pages/4. Community/BD_Write';
 // import DBDStory from './pages/4. Community/DBD_Story';
@@ -87,7 +90,9 @@ function App() {
           <Route path="/BD_Main" element={<BDMain />}></Route>
           {/*헌혈하자*/}
           <Route path="/BD_House" element={<BDHouse />}></Route>
+          <Route path="/BD_PostHouse" element={<BDPostHouse />}></Route>
           <Route path="/BD_Bus" element={<BDBus />}></Route>
+          <Route path="/BD_PostBus" element={<BDPostBus />}></Route>
           <Route
             path="/BD_ReservationFirst"
             element={<BDReservationFirst />}
@@ -115,6 +120,9 @@ function App() {
 
           <Route path="/BD_Story" element={<BDStory />}></Route>
           <Route path="/DBD_Story" element={<DBDStory />}></Route>
+
+          <Route path="/MyPage_test" element={<MyPagetest />}></Route>
+
           {/*이야기하자*/}
 
           {/* <Route

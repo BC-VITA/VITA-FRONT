@@ -169,7 +169,8 @@ const StyledTitleSub = styled.div`
 
   color: #787878;
 `;
-const StyledHr = styled.hr`
+const StyledHr = styled.div`
+  margin-top: 20px;
   width: 69em;
   border: 3px solid #333333;
 `;
