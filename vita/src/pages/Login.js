@@ -28,7 +28,6 @@ function LogIn() {
     const result = await response.text();
     console.log(result);
     if (result === '로그인 성공') {
-      // 세션에 저장
       sessionStorage.setItem('userId', id);
       navigate('/');
     }

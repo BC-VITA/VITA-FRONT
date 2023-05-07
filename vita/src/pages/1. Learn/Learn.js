@@ -44,7 +44,7 @@ function Learn() {
         </StyledSub> */}
         <hr />
       </StyledTop>
-      <StyledCommentTitle>헌혈이 왜 필요한가? </StyledCommentTitle>
+      <StyledCommentTitle2>헌혈이 왜 필요한가? </StyledCommentTitle2>
       <StyledCommentUL>
         <ul>
           <li>
@@ -93,7 +93,7 @@ function Learn() {
         alt="icHospitalonPhoto2"
       />
       <StyledHr />
-      <StyledCommentTitle>헌혈을 하면 안되는 유형</StyledCommentTitle>
+      <StyledCommentTitle2>헌혈을 하면 안되는 유형</StyledCommentTitle2>
       <StyledCommentUL>
         <ul>
           <li>
@@ -172,19 +172,33 @@ const StyledCommentTitle = styled.div`
   color: #333333;
   margin-top: 50px;
 `;
+const StyledCommentTitle2 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 48px;
+  margin-left: 50px;
+  /* width: 53ch; */
+  /* text-align: center; */
+
+  color: #333333;
+  margin-top: 50px;
+`;
 const StyledCommentUL = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 25px;
+  font-size: 18px;
   line-height: 35px;
 
   margin-bottom: 70px;
   margin-left: 40px;
-  width: 60ch;
-  text-align: center;
+  width: 82ch;
+  /* text-align: center; */
   /* background-color: black; */
   margin-top: 10px;
+  color: #757575;
 `;
 const StyledComment = styled.div`
   width: 1100px;

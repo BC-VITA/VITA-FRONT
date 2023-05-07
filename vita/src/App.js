@@ -20,7 +20,9 @@ import Learn from './pages/1. Learn/Learn';
 
 import BDMain from './pages/2. Blood_Donation/BD_Main';
 import BDHouse from './pages/2. Blood_Donation/BD_House';
+import BDPostHouse from './pages/2. Blood_Donation/BD_PostHouse';
 import BDBus from './pages/2. Blood_Donation/BD_Bus';
+import BDPostBus from './pages/2. Blood_Donation/BD_PostBus';
 import BDReservationFirst from './pages/2. Blood_Donation/BD_ReservationFirst';
 import BDReservationSecond from './pages/2. Blood_Donation/BD_ReservationSecond';
 import BDReservationThird from './pages/2. Blood_Donation/BD_ReservationThird';
@@ -85,11 +87,22 @@ function App() {
 
           {/*헌혈하자*/}
           <Route path="/BD_Main" element={<BDMain />}></Route>
-          <Route path="/BD_House" element={<BDHouse />}></Route>{/*헌혈의 집 목록*/}
+          <Route path="/BD_House" element={<BDHouse />}></Route>
+          <Route path="/BD_PostHouse" element={<BDPostHouse />}></Route>
           <Route path="/BD_Bus" element={<BDBus />}></Route>
-          <Route path="/BD_ReservationFirst" element={<BDReservationFirst />}></Route>
-          <Route path="/BD_ReservationSecond" element={<BDReservationSecond />}></Route>
-          <Route path="/BD_ReservationThird" element={<BDReservationThird />}></Route>
+          <Route path="/BD_PostBus" element={<BDPostBus />}></Route>
+          <Route
+            path="/BD_ReservationFirst"
+            element={<BDReservationFirst />}
+          ></Route>
+          <Route
+            path="/BD_ReservationSecond"
+            element={<BDReservationSecond />}
+          ></Route>
+          <Route
+            path="/BD_ReservationThird"
+            element={<BDReservationThird />}
+          ></Route>
           <Route path="/BD_History" element={<BDHistory />}></Route>
 
           {/*지정헌혈하자*/}
@@ -100,13 +113,30 @@ function App() {
           <Route path="/DBD_News" element={<DBDNews />}></Route>
           <Route path="/DBD_WatchList" element={<DBDWatchList />}></Route>
 
-          <Route path="/BD_Story" element={<BDStory />}></Route>{/*이야기하자*/}
+          <Route path="/BD_Story" element={<BDStory />}></Route>
+          <Route path="/DBD_Story" element={<DBDStory />}></Route>
 
-          <Route path="/S_Main" element={<SMain startDate={startDate} endDate={endDate} onReservation={onReservation} />}></Route>{/*봉사하자, 헌혈하자 캘린더실험용 사용중*/}
-          <Route path="/S_Other" element={<SOther />}></Route>
+          <Route path="/MyPage_test" element={<MyPagetest />}></Route>
+
+          {/*이야기하자*/}
+
+          {/* <Route
+            path="/S_Main"
+            element={
+              <SMain
+                startDate={startDate}
+                endDate={endDate}
+                onReservation={onReservation}
+              />
+            }
+          ></Route> */}
+          {/*봉사하자, 헌혈하자 캘린더실험용 사용중*/}
+          {/* <Route path="/S_Other" element={<SOther />}></Route> */}
+
+          {/* <Route path="/D_Main" element={<DMain />}></Route> */}
+          {/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
           <Route path="/S_WatchList" element={<SWatchList />}></Route>
 
-          <Route path="/D_Main" element={<DMain />}></Route>{/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
 
           {/*관리자 페이지 모음*/}
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>{/*헌혈의 집 정보 Insert하는 페이지*/}
