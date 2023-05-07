@@ -14,6 +14,8 @@ import Individual from './pages/SignUp/SignUpIndividual';
 import Home from './pages/Main';
 import MyPage from './pages/MyPage';
 
+import MyPagetest from './pages/MyPage_test';
+
 import Learn from './pages/1. Learn/Learn';
 
 import BDMain from './pages/2. Blood_Donation/BD_Main';
@@ -34,8 +36,6 @@ import DBDNews from './pages/3. Designated_Blood_Donation/DBD_News';
 import DBDWatchList from './pages/3. Designated_Blood_Donation/DBD_WatchList';
 
 import BDStory from './pages/4. Community/BD_Story';
-import DBDStory from './pages/4. Community/DBD_Story';
-import MyPagetest from './pages/MyPage_test';
 // import BDDetails from './pages/4. Community/BD_Details';
 // import BDWrite from './pages/4. Community/BD_Write';
 // import DBDStory from './pages/4. Community/DBD_Story';
@@ -45,13 +45,12 @@ import MyPagetest from './pages/MyPage_test';
 // import BDStory from './pages/4. Community/BD_Story';
 // import BDStory from './pages/4. Community/BD_Story';
 
-// import SMain from './pages/5. Service/S_Main';
+import SMain from './pages/5. Service/S_Main';
 import SOther from './pages/5. Service/S_Other';
+import SWatchList from './pages/5. Service/S_WatchList';
 
 import DMain from './pages/6. Donate/D_Main';
 // import DMain from './pages/6. Donate';
-
-//import KakaoMap from './components/';
 
 //관리자페이지 모음
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
@@ -69,7 +68,6 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          {/* <Route path="/BD_Main1" element={<BDMain1 />}></Route> */}
           {/* 메인 */}
           <Route path="/" element={<Home />}></Route>
 
@@ -85,10 +83,10 @@ function App() {
           <Route path="/SignUpHospital" element={<Hospital />}></Route>
           <Route path="/SignUpIndividual" element={<Individual />}></Route>
 
-          <Route path="/Learn" element={<Learn />}></Route>
-          {/* 알아보자 */}
-          <Route path="/BD_Main" element={<BDMain />}></Route>
+          <Route path="/Learn" element={<Learn />}></Route>{/* 알아보자 */}
+
           {/*헌혈하자*/}
+          <Route path="/BD_Main" element={<BDMain />}></Route>
           <Route path="/BD_House" element={<BDHouse />}></Route>
           <Route path="/BD_PostHouse" element={<BDPostHouse />}></Route>
           <Route path="/BD_Bus" element={<BDBus />}></Route>
@@ -107,11 +105,8 @@ function App() {
           ></Route>
           <Route path="/BD_History" element={<BDHistory />}></Route>
 
-          {/* <Route path="/BD_test" element={<BDtest />}></Route> */}
-          {/*헌혈의집 등록하는 관리자 화면*/}
-
-          <Route path="/DBD_Main" element={<DBDMain />}></Route>
           {/*지정헌혈하자*/}
+          <Route path="/DBD_Main" element={<DBDMain />}></Route>
           <Route path="/DBD_General" element={<DBDGeneral />}></Route>
           <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>
           <Route path="/DBD_PostHospital" element={<DBDPostHospital />}></Route>
@@ -140,17 +135,13 @@ function App() {
 
           {/* <Route path="/D_Main" element={<DMain />}></Route> */}
           {/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
-          {/* <Route path="/D_Main" element={<DMain />}></Route> */}
-          {/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
+          <Route path="/S_WatchList" element={<SWatchList />}></Route>
+
 
           {/*관리자 페이지 모음*/}
-          {/* <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route> */}
-          {/*헌혈의 집 정보 Insert하는 페이지*/}
-          {/* <Route
-            path="/M_Blood_Reservation"
-            element={<MBloodReservation />}
-          ></Route> */}
-          {/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
+          <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>{/*헌혈의 집 정보 Insert하는 페이지*/}
+          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>{/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
+          <Route path="/MyPagetest" element={<MyPagetest />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>

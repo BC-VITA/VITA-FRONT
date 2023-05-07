@@ -1,144 +1,119 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
-import RadioGroup from '../../components/RadioGroup';
-import Radio from '../../components/Radio';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import Select from 'react-select';
 
 function SignUpGroup() {
-  const [id, setId] = useState('');
+  const navigate = useNavigate();
+
+  const [id, setId] = useState(''); 
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
-  const [Name, setName] = useState('');
-  const [Date, setDate] = useState('');
-  const [Email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [birth, setBirth] = useState('');
+  const [blood, setBlood] = useState('');
+  const [sex, setSex] = useState('');
+  const [rh, setRh] = useState('');
+  const [history, setHistory] = useState('');
   const [Phon, setPhon] = useState('');
-  const [RH, setRH] = useState('');
-  const [sex, setsex] = useState('');
-  const [Blood, setBlood] = useState('');
-  const [History, setHistory] = useState('');
+
+  const options = [
+    { value: 'RH+', label: 'RH+' },
+    { value: 'RH-', label: 'RH-' },
+  ];
 
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
 
   const handleChangeId = ({ target: { value } }) => setId(value);
   const handleChangePassword = ({ target: { value } }) => setPassword(value);
-  const handleChangePasswordCheck = ({ target: { value } }) =>
-    setPasswordCheck(value);
+  const handleChangePasswordCheck = ({ target: { value } }) => setPasswordCheck(value);
   const handleChangeName = ({ target: { value } }) => setName(value);
-  const handleChangeDate = ({ target: { value } }) => setDate(value);
   const handleChangeEmail = ({ target: { value } }) => setEmail(value);
+  const handleChangeBirth = ({ target: { value } }) => setBirth(value);
   const handleChangePhon = ({ target: { value } }) => setPhon(value);
   const handleChangeHistory = ({ target: { value } }) => setHistory(value);
 
-  const navigate = useNavigate();
+  const num = parseInt(history);
+  
 
-  const [bloodtype, setbloodtype] = useState('');
-  const handleSelect3 = (e) => {
-    setbloodtype(e.target.value);
+  const handlebloodChange = (event) => {
+    setBlood(event.target.value);
   };
-  const selectList3 = ['RH-', 'RH+'];
+
+  const handlesexChange = (event) => {
+    setSex(event.target.value);
+  };
+
+  const handleSelectChange = (selectedOption) => {
+    setRh(selectedOption.value);
+  };
 
   const handleSubmit = async (event) => {
     setDisabled(true);
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
 
-    //back으로 정보 post함
-    fetch('http://localhost:8004/join', {
+    fetch('http://localhost:8004/user/join', {
       method: 'post',
+      headers:{
+        "Content-Type":'application/json'
+      },
       body: JSON.stringify({
-        id: 'userID',
-        password: 'userPW',
-        passwordCheck: 'userPW',
-        Name: 'userName',
-        Date: 'userBirth',
-        Email: 'userEmail',
-        Phon: 'userPhoneNumber',
-        RH: 'isRH',
-        sex: 'sex',
-        Blood: 'userBlood',
-        History: 'bloodHistory',
+        userID: id,
+        password: password,
+        confirmPassword :passwordCheck,
+        userName: name,
+        userEmail: email,
+        userBirth: birth,     
+        userBlood: blood,  
+        sex: sex, 
+        isRH: rh,
+        bloodHistory: num,
+        userPhoneNumber: Phon,
       }),
     })
-      //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
       .then((res) => res.json())
-      //회원가입 성공시 실행
-      .then((res) => {
-        navigate('/');
-      })
-      //회원가입 실패시 실행
+      //.then((res) => {
+     //   navigate('/');
+     // })
       .catch((err) => {
         setError(err.message);
-        //에러시 Loading메세지 사라지고
-        //에러메세지만 보이도록 설정
       });
     setDisabled(false);
     console.log(
-      'data: ' +
+      '정보: ' +
         JSON.stringify({
-          id: 'userID',
-          password: 'userPW',
-          passwordCheck: 'userPW',
-          Name: 'userName',
-          Date: 'userBirth',
-          Email: 'userEmail',
-          Phon: 'userPhoneNumber',
-          RH: 'isRH',
-          sex: 'sex',
-          Blood: 'userBlood',
-          History: 'bloodHistory',
+          userID: id,
+          password: password,
+          confirmPassword :passwordCheck,
+          userName: name,
+          userEmail: email,
+          userBirth: birth,     
+          userBlood: blood,  
+          sex: sex, 
+          isRH: rh,
+          bloodHistory: num,
+          userPhoneNumber: Phon,
         })
     );
   };
   return (
     <div
-      style={{
-        marginLeft: '370px',
-        marginRight: '370px',
-        marginTop: '44.2px',
-      }}
-    >
+      style={{ marginLeft: '370px', marginRight: '370px', marginTop: '44.2px', }}>
       <section>
         <Stylednav>회원가입</Stylednav>
         <Styleddiv1>
           자신에게 맞는 항목을 선택하여 회원가입 해주세요.
         </Styleddiv1>
-        <hr
-          style={{
-            width: '1180px',
-            border: 'solid 2px',
-          }}
-        ></hr>
-        <div
-          style={{
-            marginTop: '42px',
-            fontSize: '45px',
-            textAlign: 'center',
-            fontWeight: 'bold',
-          }}
-        >
+        <hr style={{ width: '1180px', border: 'solid 2px', }}></hr>
+        <div style={{ marginTop: '42px', fontSize: '45px', textAlign: 'center', fontWeight: 'bold', }}>
           개인
         </div>
       </section>
       <form onSubmit={handleSubmit}>
         <Styleddiv2>
-          {/* <FloatingLabel controlId="floatingInput" label="ID" className="mb-3">
-            <Form.Control type="id" placeholder="아이디" />
-          </FloatingLabel>
-
-          <Styleddiv>아이디</Styleddiv>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="ID"
-            placeholder="아이디"
-            className="mb-3"
-          >
-            <Form.Control type="id" />
-          </FloatingLabel> */}
-
           <Styledinput
             type="id"
             placeholder="아이디"
@@ -154,8 +129,7 @@ function SignUpGroup() {
                 placeholder="비밀번호"
                 name="password"
                 value={password}
-                onChange={handleChangePassword}
-              />
+                onChange={handleChangePassword}/>
             </StyledBlock>
             <StyledBlock1>
               <Styleddiv>비밀번호 확인</Styleddiv>
@@ -164,8 +138,7 @@ function SignUpGroup() {
                 placeholder="비밀번호 확인"
                 name="passwordCheck"
                 value={passwordCheck}
-                onChange={handleChangePasswordCheck}
-              />
+                onChange={handleChangePasswordCheck}/>
             </StyledBlock1>
           </StyledFlax>
           <StyledFlax>
@@ -175,9 +148,8 @@ function SignUpGroup() {
                 type="Name"
                 placeholder="성명"
                 name="Name"
-                value={Name}
-                onChange={handleChangeName}
-              />
+                value={name}
+                onChange={handleChangeName}/>
             </StyledBlock>
             <StyledBlock1>
               <Styleddiv>생년월일</Styleddiv>
@@ -185,9 +157,8 @@ function SignUpGroup() {
                 type="Date"
                 placeholder="생년월일"
                 name="Date"
-                value={Date}
-                onChange={handleChangeDate}
-              />
+                value={birth}
+                onChange={handleChangeBirth}/>
             </StyledBlock1>
           </StyledFlax>
           <StyledFlax>
@@ -197,9 +168,8 @@ function SignUpGroup() {
                 type="Email"
                 placeholder="이메일"
                 name="Email"
-                value={Email}
-                onChange={handleChangeEmail}
-              />
+                value={email}
+                onChange={handleChangeEmail}/>
             </StyledBlock>
             <StyledBlock1>
               <Styleddiv>전화번호</Styleddiv>
@@ -208,109 +178,60 @@ function SignUpGroup() {
                 placeholder="전화번호"
                 name="Phon"
                 value={Phon}
-                onChange={handleChangePhon}
-              />
+                onChange={handleChangePhon}/>
             </StyledBlock1>
           </StyledFlax>
-
           <StyledFlax>
-            <form>
-              <article
-                style={{
-                  width: '424px',
-                }}
-              >
-                <RadioGroup
-                  type="Blood"
-                  name="Blood"
-                  value={Blood}
-                  label="혈액형"
-                >
-                  <Radio name="contact" value="EMAIL" defaultChecked>
-                    A형
-                  </Radio>
-                  <Radio name="contact" value="PHONE">
-                    B형
-                  </Radio>
-                  <Radio name="contact" value="FAX">
-                    O형
-                  </Radio>
-                  <Radio name="contact" value="MAIL" disabled>
-                    AB형
-                  </Radio>
-                </RadioGroup>
-              </article>
+            <form style={{marginTop:'5%'}}>
+              <div>
+              <div style={{marginBottom:'2%', fontSize: '32px'}}>혈액형</div>
+                <label style={{ display: 'inline-block' ,  fontSize:'28px'}}>
+                  <input type="radio" name="blood" value="A형" checked={blood === 'A형'} onChange={handlebloodChange} />
+                  A형&nbsp;&nbsp;
+                </label>
+                <label style={{ display: 'inline-block' ,  fontSize:'28px'}}>
+                  <input type="radio" name="blood" value="B형" checked={blood === 'B형'} onChange={handlebloodChange} />
+                  B형&nbsp;&nbsp;
+                </label>
+                <label style={{ display: 'inline-block' ,  fontSize:'28px'}}>
+                  <input type="radio" name="blood" value="O형" checked={blood === 'O형'} onChange={handlebloodChange} />
+                  O형&nbsp;&nbsp;
+                </label>
+                <label style={{ display: 'inline-block' ,  fontSize:'28px'}}>
+                  <input type="radio" name="blood" value="AB형" checked={blood === 'AB형'} onChange={handlebloodChange} />
+                  AB형
+                </label>
+              </div>
             </form>
-
-            <form>
-              <article
-                style={{
-                  width: '199px',
-                }}
-              >
-                <RadioGroup
-                  type="sex"
-                  name="sex"
-                  value={sex}
-                  label="성별"
-                  style={{
-                    fontsize: '32px',
-                  }}
-                >
-                  <Radio name="contact" value="EMAIL" defaultChecked>
-                    남자
-                  </Radio>
-                  <Radio name="contact" value="PHONE">
-                    여자
-                  </Radio>
-                </RadioGroup>
-              </article>
+            <form style={{margin:'5%'}}>
+            <div style={{marginBottom:'5%', fontSize: '32px'}}>RH여부</div>
+              <div>
+                <Select options={options} value={rh} onChange={handleSelectChange} />
+              </div>
             </form>
-
-            <div>
-              <Styleddiv2>* 혈액형</Styleddiv2>
-              <select onChange={handleSelect3} value={bloodtype}>
-                {selectList3.map((item) => (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <form>
-              <article
-                style={{
-                  width: '230px',
-                }}
-              >
-                <RadioGroup type="RH" name="RH" value={RH} label="RH여부">
-                  <Radio name="contact" value="EMAIL" defaultChecked>
-                    RH-
-                  </Radio>
-                  <Radio name="contact" value="PHONE">
-                    RH+
-                  </Radio>
-                </RadioGroup>
-              </article>
-            </form>
-
             <StyledBlock>
               <Styleddiv>헌혈이력</Styleddiv>
               <Styledinput2
-                type="History"
+                type="text"
                 placeholder="1회"
                 name="History"
-                value={History}
-                onChange={handleChangeHistory}
-              />
+                value={history}
+                onChange={handleChangeHistory}/>
             </StyledBlock>
+            <form style={{margin:'5%'}}>
+              <div>
+              <div style={{marginBottom:'2%', fontSize: '32px'}}>성별</div>
+                <label style={{ display: 'inline-block' ,  fontSize:'32px'}}>
+                  <input type="radio" name="sex" value="남자" checked={sex === '남자'} onChange={handlesexChange} />
+                  남자&nbsp;&nbsp;
+                </label>
+                <label style={{ display: 'inline-block' ,  fontSize:'32px'}}>
+                  <input type="radio" name="sex" value="여자" checked={sex === '여자'} onChange={handlesexChange} />
+                  여자&nbsp;&nbsp;
+                </label>
+              </div>
+            </form>
           </StyledFlax>
-
-          {/* <select>
-        <option key="banana" value="banana">
-          1회
-        </option>
-      </select> */}
           <br />
           <StyledButton type="submit" disabled={disabled}>
             회원가입
@@ -318,6 +239,7 @@ function SignUpGroup() {
           <div className="home">{error && <div>{error}</div>}</div>
         </Styleddiv2>
       </form>
+      <div>{rh}</div>
     </div>
   );
 }
@@ -383,4 +305,5 @@ const StyledButton = styled.button`
   font-weight: bold;
   margin: 240px;
 `;
+
 export default SignUpGroup;

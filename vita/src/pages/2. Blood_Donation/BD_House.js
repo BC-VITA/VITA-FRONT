@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // 헌혈의집데이터를 가지고 다음페이지로 넘어감
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { useNavigate } from 'react-router-dom';
+import KakaoMap from "../KakaoMap";
 
 function BD_House() {
+  const navigate = useNavigate();
+
+  const [mapSize, setMapSize] = useState([400, 400]);
+
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
   const [secondListOptions, setSecondListOptions] = useState([]);
-  const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
@@ -30,9 +34,7 @@ function BD_House() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
-  }
-
-  const [error, setError] = useState(null);
+  };
 
   const [inputData, setInputData] = useState([
     {
@@ -48,6 +50,9 @@ function BD_House() {
     {},
   ]);
 
+  function handleReservation() {
+    navigate('/s_main');
+  }
   useEffect(() => {
     fetch('http://localhost:8004/blood/board/list ', {
       method: 'get',
@@ -58,16 +63,10 @@ function BD_House() {
         setInputData(res);
         console.log(inputData);
       })
-      .catch((err) => {
-        setError(err.message);
-      });
     console.log(inputData);
   }, []);
 
-  const filteredData =
-    firstListValue === '전체'
-      ? inputData
-      : inputData.filter((item) => item.area === firstListValue);
+  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
 
   return (
     <StyledAll>
@@ -75,187 +74,146 @@ function BD_House() {
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
-            <StyledSubDiv2_1>
+            <StyledSubDiv2One>
               <Nav.Link href="/BD_Main">
-                <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
+                <StyledSubDiv2Two>헌혈이란</StyledSubDiv2Two>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
+            </StyledSubDiv2One>
+            <StyledSubDiv2Onep>
               <Nav.Link href="/BD_House">
-                <StyledSubDiv2_2>헌혈의 집 찾기</StyledSubDiv2_2>
+                <StyledSubDiv2Two2>헌혈하기</StyledSubDiv2Two2>
               </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Bus">
-                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
+            </StyledSubDiv2Onep>
+            <StyledSubDiv2One>
+              <Nav.Link href="/DBD_WatchList">
+                <StyledSubDiv2Two>관심목록</StyledSubDiv2Two>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_ReservationFirst">
-                <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
+            </StyledSubDiv2One>
+            <StyledSubDiv2One>
+              <Nav.Link href="/DBD_News">
+                <StyledSubDiv2Two>따뜻한 사례</StyledSubDiv2Two>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_History">
-                <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
+            </StyledSubDiv2One>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>헌혈의 집 찾기</StyledTitle>
+          <StyledTitle>헌혈하기</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
         </StyledTop>
-
         <StyledTab>
-          <Tab.Content>
-            <StyledFilter>
-              <StyledFilterDiv1One>
-                <StyledFilterDivComment>
-                  <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
-                  <select
-                    onChange={handleFirstListChange}
-                    value={firstListValue}
-                    style={{ border: 'none' }}
-                  >
-                    {selectList1.map((item) => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </StyledFilterDivComment>
-                <StyledFilterDivComment>
-                  <select
-                    value={secondListOptions}
-                    onChange={setSecondListOptions}
-                  >
-                    {secondListOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </StyledFilterDivComment>
-              </StyledFilterDiv1One>
-              <StyledFilterDiv1One>
-                <StyledFilterDiv1Two>
-                  &nbsp;기&nbsp;간&nbsp;
-                </StyledFilterDiv1Two>
-                <select
-                  onChange={handleFirstListChange}
-                  value={firstListValue}
-                  style={{ border: 'none' }}
-                >
-                  {selectList1.map((item) => (
-                    <option value={item} key={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={secondListOptions}
-                  onChange={setSecondListOptions}
-                >
-                  {secondListOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </StyledFilterDiv1One>
-            </StyledFilter>
-            <section>
-              <Styleddiv2>
-                <StyledTable striped>
-                  <thead>
-                    <tr>
-                      <th id="area-header">지역</th>
-                      <th id="centerName-header">헌혈의 집</th>
-                      <th id="bloodHouseAddress-header">주소</th>
-                      <th id="bloodHousePhoneNumber-header">전화번호</th>
-                      <th>&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredData.map((element, index) => {
-                      return (
-                        <React.Fragment key={index}>
-                          <tr onClick={() => handleRowClick(index)}>
-                            <td headers="area-header">{element.area}</td>
-                            <td headers="centerName-header">
-                              {element.centerName}
-                            </td>
-                            <td headers="bloodHouseAddress-header">
-                              {element.bloodHouseAddress}
-                            </td>
-                            <td headers="bloodHousePhoneNumber-header">
-                              {element.bloodHousePhoneNumber}
-                            </td>
-                            <td>
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  flexDirection: 'column',
-                                }}
-                              >
-                                <button
-                                  onClick={() =>
-                                    navigate('/BD_Story', {
-                                      state: element.centerName,
-                                    })
-                                  }
-                                >
-                                  예약하기
-                                </button>
-                                <button
-                                  type="button"
-                                  style={{ marginTop: '10px' }}
-                                >
-                                  자세히보기
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                          {openIndex === index && (
-                            <tr>
-                              <td colSpan="5">지도 나오게 하기</td>
-                            </tr>
-                          )}
-                        </React.Fragment>
-                      );
-                    })}
-                  </tbody>
-                </StyledTable>
-              </Styleddiv2>
-            </section>
-          </Tab.Content>
-
-          {/* <Tabs>
+          <Tabs>
             <Tab eventKey="profile" title="일반 사용자">
-              
+              <Tab.Content>
+                <StyledFilter>
+                  <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+                    <select
+                      onChange={handleFirstListChange}
+                      value={firstListValue}
+                      style={{ border: 'none' }}
+                    >
+                      {selectList1.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                      {secondListOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </StyledFilterDiv1One>
+                  <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
+                    <select
+                      onChange={handleFirstListChange}
+                      value={firstListValue}
+                      style={{ border: 'none' }}
+                    >
+                      {selectList1.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                      {secondListOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </StyledFilterDiv1One>
+                </StyledFilter>
+                <section>
+                  <Styleddiv2>
+                    <StyledTable striped>
+                      <thead>
+                        <tr>
+                          <th id="area-header">지역</th>
+                          <th id="centerName-header">헌혈의 집</th>
+                          <th id="bloodHouseAddress-header">주소</th>
+                          <th id="bloodHousePhoneNumber-header">전화번호</th>
+                          <th>&nbsp;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredData.map((element, index) => {
+                          const markerPositions = [[element.latitude, element.longitude]];
+                          return (
+                            <React.Fragment key={index}>
+                              <tr onClick={() => handleRowClick(index)}>
+                                <td headers="area-header">{element.area}</td>
+                                <td headers="centerName-header">{element.centerName}</td>
+                                <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
+                                <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
+                                <td>
+                                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <button onClick={handleReservation}>예약하기</button>
+                                    <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
+                                  </div>
+                                </td>
+                              </tr>
+                              {openIndex === index && (
+                                <tr>
+                                  <td colSpan={5}>
+                                    <div id="wrap">
+                                      <KakaoMap markerPositions={markerPositions} size={mapSize} />
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                      </tbody>
+                    </StyledTable>
+                  </Styleddiv2>
+                </section> 
+              </Tab.Content>
             </Tab>
             <Tab eventKey="home" title="병원">
               <Tab.Content>skjfjsf</Tab.Content>
             </Tab>
-          </Tabs> */}
+          </Tabs>
         </StyledTab>
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
-    </StyledAll>
+    </StyledAll >
   );
 }
 const StyledTable = styled(Table)`
   border-collapse: collapse;
-  th,
-  tbody,
-  td td {
+  th,tbody,td
+  td {
     padding: 0;
   }
 `;
@@ -263,13 +221,13 @@ const StyledAll = styled.div`
   display: flex;
 `;
 const StyledSub = styled.div`
-  width: 170px;
+  width: 120px;
   /* height: 175px; */
   margin-top: 25px;
   margin-left: 205px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 190px;
+  width: 150px;
   height: 50px;
   /* left: 370px;
   top: 123px; */
@@ -288,25 +246,25 @@ const StyledSubDiv1 = styled.div`
 `;
 
 const StyledSubDiv2 = styled.div`
-  width: 190px;
-  height: 278px;
+  width: 150px;
+  height: 202.5px;
   border: 3px solid #d7d7d7;
 `;
-const StyledSubDiv2_1 = styled.div`
+const StyledSubDiv2One = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 55px;
-  margin-left: 3px;
-  margin-right: 3px;
+  height: 50px;
+  margin-left: 2px;
+  margin-right: 2px;
 `;
-const StyledSubDiv2_1p = styled.div`
+const StyledSubDiv2Onep = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 55px;
-  margin-left: 3px;
-  margin-right: 3px;
+  height: 50px;
+  margin-left: 2px;
+  margin-right: 2px;
 `;
-const StyledSubDiv2_2 = styled.div`
+const StyledSubDiv2Two2 = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -314,15 +272,15 @@ const StyledSubDiv2_2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 19px;
-  line-height: 38px;
+  font-size: 18px;
+  line-height: 26.5px;
   /* identical to box height, or 100% */
 
   text-align: center;
 
   color: #333333;
 `;
-const StyledSubDiv2_2g = styled.div`
+const StyledSubDiv2Two = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -330,8 +288,8 @@ const StyledSubDiv2_2g = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 19px;
-  line-height: 38px;
+  font-size: 18px;
+  line-height: 26.5px;
   /* identical to box height, or 100% */
 
   text-align: center;
@@ -344,10 +302,6 @@ const StyledFilter = styled.div`
   height: 145px;
   background: #ffe9e9;
   margin-bottom: 20px;
-`;
-const StyledFilterDivComment = styled.div`
-  margin-top: 24px;
-  display: flex;
 `;
 const StyledFilterDiv1One = styled.div`
   display: flex;
@@ -363,7 +317,7 @@ const StyledFilterDiv1Two = styled.div`
 `;
 const StyledSubcomment = styled.div`
   display: block;
-  width: 870px;
+  width: 924px;
   margin-left: 65px;
   margin-top: 25px;
 `;
@@ -374,7 +328,7 @@ const StyledTab = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 230px;
+  width: 203px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -391,7 +345,7 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 510px;
+  margin-left: 580px;
 
   background: #ff9f9f;
   border-radius: 9px;

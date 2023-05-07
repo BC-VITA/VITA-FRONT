@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import styled from 'styled-components';
-
-// import GroupPhoTO from './img/개인.png';
-// import groupPhoto from '../../img/개인.png';
 import Post from '../img/포스터.png';
 import Post1 from '../img/포스터-1.png';
 import Post2 from '../img/포스터-2.png';
@@ -16,6 +13,16 @@ import History from '../img/내역.png';
 import Nav from 'react-bootstrap/Nav';
 
 function Main() {
+  const [userInfo, setUserInfo] = useState(null);
+  const asd = sessionStorage.getItem('userId');
+
+  useEffect(() => {
+    fetch('http://localhost:8004/user/check')
+      .then(response => response.json())
+      .then(data => setUserInfo(data))
+      .catch(error => console.error(error));
+  }, []);
+
   return (
     <div>
       <Carousel variant="dark" style={{ height: '400px' }}>
@@ -144,9 +151,16 @@ function Main() {
             </StyledBtn4_4>
           </StyledDiv4_1B>
         </StyledDiv4_1>
-
         <StyledDiv4_2></StyledDiv4_2>
       </StyledDiv4>
+      <div>{userInfo ? (
+        <div>
+          <p>아이디: {asd}</p>
+          <p>유저이름: {userInfo.userName}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}</div>
     </div>
   );
 }

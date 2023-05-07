@@ -1,42 +1,9 @@
-import React, { useEffect, useState } from 'react';
-// import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
 function DBD_Main() {
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
-
-  useEffect(() => {
-    fetch('http://localhost:8004/user/board/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
-  }, []);
 
   return (
     <StyledAll>
@@ -157,7 +124,6 @@ function DBD_Main() {
           </ol>
         </StyledComment>
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
@@ -369,51 +335,5 @@ const StyledComment2 = styled.div`
   color: #ffffff;
   margin-bottom: 20px;
   margin-left: 10px;
-`;
-const StyledCommentLarge = styled.div``;
-const Styledimg = styled.img`
-  width: 400px;
-  height: 230px;
-  display: block;
-  margin-bottom: 10px;
-  border: solid 2px #a3a3a3;
-  padding: 30px;
-  border-radius: 15px;
-`;
-const StyledimgLarge = styled.img`
-  width: 860px;
-  height: 230px;
-  display: block;
-  border: solid 2px #a3a3a3;
-  padding: 30px;
-  padding-left: 230px;
-  padding-right: 230px;
-  border-radius: 15px;
-  /* margin: auto; */
-`;
-const StyledDiv = styled.div`
-  width: 400px;
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
-`;
-const StyledDivLarge = styled.div`
-  width: 860px;
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
-  margin-top: 10px;
-`;
-const StyledDivBold = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 28px;
-  color: red;
 `;
 export default DBD_Main;
