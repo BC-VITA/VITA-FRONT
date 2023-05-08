@@ -31,6 +31,7 @@ function LogIn() {
       // 세션에 저장
       sessionStorage.setItem('userId', id);
       navigate('/');
+      window.location.reload();
     }
   }
 
