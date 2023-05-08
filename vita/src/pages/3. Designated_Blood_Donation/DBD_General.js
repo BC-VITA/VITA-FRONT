@@ -6,7 +6,6 @@ import icon from './heart.png';
 
 
 function DBD_General() {
-  const [error, setError] = useState(null);
 
   const [inputData, setInputData] = useState([{
     hospitalName: '',
@@ -29,9 +28,6 @@ function DBD_General() {
         setInputData(res);
         console.log(inputData);
       })
-      .catch((err) => {
-        setError(err.message);
-      });
     console.log(inputData);
   }, []);
 
@@ -90,7 +86,6 @@ function DBD_General() {
           </Accordion>
         </Styleddiv2>
       </section>
-      <div className="home">{error && <div>{error}</div>}</div>
     </div>
   );
 }

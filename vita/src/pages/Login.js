@@ -30,6 +30,7 @@ function LogIn() {
     if (result === '로그인 성공') {
       sessionStorage.setItem('userId', id);
       navigate('/');
+      window.location.reload();
     }
   }
 
