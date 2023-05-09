@@ -88,7 +88,7 @@ function App() {
           <Route path="/BD_House" element={<BDHouse />}></Route>{/*헌혈의 집 목록*/}
           <Route path="/BD_Bus" element={<BDBus />}></Route>
           <Route path="/BD_ReservationFirst" element={<BDReservationFirst />}></Route>
-          <Route path="/BD_ReservationSecond" element={<BDReservationSecond />}></Route>
+          <Route path="/BD_ReservationSecond" element={<BDReservationSecond startDate={startDate} endDate={endDate} onReservation={onReservation} />}></Route>
           <Route path="/BD_ReservationThird" element={<BDReservationThird />}></Route>
           <Route path="/BD_History" element={<BDHistory />}></Route>
 

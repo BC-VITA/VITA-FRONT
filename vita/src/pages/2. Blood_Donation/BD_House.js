@@ -13,8 +13,8 @@ function BD_House() {
   const [mapSize, setMapSize] = useState([400, 400]);
 
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
-  const [firstListValue, setFirstListValue] = useState('');
-  const [secondListOptions, setSecondListOptions] = useState([]);
+  const [firstListValue, setFirstListValue] = useState('전체');
+  const [secondListOptions, setSecondListOptions] = useState(['검색할 지역을 골라주세요']);
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
@@ -24,7 +24,7 @@ function BD_House() {
     setFirstListValue(selectedValue);
 
     if (selectedValue === '전체') {
-      setSecondListOptions(['']);
+      setSecondListOptions(['검색할 지역을 골라주세요']);
     } else if (selectedValue === '서울') {
       setSecondListOptions(['가', '나', '다']);
     } else if (selectedValue === '인천') {
@@ -51,7 +51,7 @@ function BD_House() {
   ]);
 
   function handleReservation() {
-    navigate('/s_main');
+    navigate('/BD_ReservationSecond');
   }
   useEffect(() => {
     fetch('http://localhost:8004/blood/board/list ', {
@@ -64,6 +64,7 @@ function BD_House() {
         console.log(inputData);
       })
     console.log(inputData);
+    setFirstListValue('전체');
   }, []);
 
   const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);

@@ -89,7 +89,6 @@ function BD_ReservationFirst() {
           <StyledCircleg>
             <StyledCircleTxtg>예약완료</StyledCircleTxtg>
           </StyledCircleg>
-
           <StyledBarg />
         </StyledCurrent>
       </StyledSubcomment>

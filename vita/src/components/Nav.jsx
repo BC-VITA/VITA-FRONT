@@ -6,6 +6,13 @@ import icon from '../img/icon.png';
 const Nav = () => {
   const userId = sessionStorage.getItem('userId');
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('userId');
+    navigator('/');
+    window.location.reload();    
+  };
+  
+
   return (
     <Stylednav>
       <StyledDiv1>
@@ -54,9 +61,8 @@ const Nav = () => {
           </StyledDiv2_1>
         </Link>
       </StyledDiv2>
-
       <StyledDiv3>
-        <Link to={userId ? `/users/${userId}` : "/login"} style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to={userId ? `/mypage` : "/login"} style={{ textDecoration: 'none', color: 'white' }}>
           <StyledDiv3_1>
             <div>{userId ? `${userId}님 반갑습니다` : '로그인'}</div>
           </StyledDiv3_1>
@@ -64,7 +70,7 @@ const Nav = () => {
         <StyledDiv3_1m>
           <div>|</div>
         </StyledDiv3_1m>
-        <Link to={userId ? "/logout" : "/signup"} style={{ textDecoration: 'none', color: 'white' }}>
+        <Link to={userId ? "/" : "/signup"} style={{ textDecoration: 'none', color: 'white' }}onClick={handleLogout}>
           <StyledDiv3_1>
             <div>{userId ? '로그아웃' : '회원가입'}</div>
           </StyledDiv3_1>

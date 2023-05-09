@@ -16,12 +16,12 @@ function Main() {
   const [userInfo, setUserInfo] = useState(null);
   const asd = sessionStorage.getItem('userId');
 
-  useEffect(() => {
-    fetch('http://localhost:8004/user/check')
-      .then(response => response.json())
-      .then(data => setUserInfo(data))
-      .catch(error => console.error(error));
-  }, []);
+  //useEffect(() => {
+  //  fetch('http://localhost:8004/user/check')
+  //    .then(response => response.json())
+  //    .then(data => setUserInfo(data))
+  //    .catch(error => console.error(error));
+  //}, []);
 
   return (
     <div>
@@ -61,7 +61,7 @@ function Main() {
       </Carousel>
 
       <StyledDiv1>
-        <StyledDiv1_1>
+        <StyledDiv11>
           <StyledTxt1>
             <div>한부모가정 급격증가</div>
           </StyledTxt1>
@@ -71,15 +71,15 @@ function Main() {
           <StyledTxt3>
             <div>봉사시간 포인트로 기부하는 시스템</div>
           </StyledTxt3>
-        </StyledDiv1_1>
-        <StyledDiv1_2>
+        </StyledDiv11>
+        <StyledDiv12>
           {/* <Styledimg>
             <img src={Donation} alt="First slide" />
           </Styledimg> */}
           <Styledimg src={Donation} class name="groupPhoto" alt="groupPhoto" />
-          <StyledDiv1_3>
+          <StyledDiv13>
             <StyledPrice>누적 포인트 : 32.400.100원</StyledPrice>
-            <StyledDiv1_4>
+            <StyledDiv14>
               <StyledBtn>
                 <Nav.Link href="/D_Main">
                   <StyledBtnTxt>자세히 보기</StyledBtnTxt>
@@ -95,15 +95,14 @@ function Main() {
                   <StyledBtnTxt>봉사하러 가기</StyledBtnTxt>
                 </Nav.Link>
               </StyledBtn>
-            </StyledDiv1_4>
-          </StyledDiv1_3>
-        </StyledDiv1_2>
+            </StyledDiv14>
+          </StyledDiv13>
+        </StyledDiv12>
       </StyledDiv1>
-
       <StyledDiv4>
-        <StyledDiv4_1>
-          <StyledDiv4_1T>
-            <StyledBtn4_1>
+        <StyledDiv41>
+          <StyledDiv41T>
+            <StyledBtn41>
               <Nav.Link href="/BD_House">
                 <StyledBtnTxt4>헌혈의집 찾기</StyledBtnTxt4>
                 <Styledimg4
@@ -113,8 +112,8 @@ function Main() {
                   alt="groupPhoto"
                 />
               </Nav.Link>
-            </StyledBtn4_1>
-            <StyledBtn4_2>
+            </StyledBtn41>
+            <StyledBtn42>
               <Nav.Link href="/BD_History">
                 <StyledBtnTxt4>헌혈내역조회</StyledBtnTxt4>
                 <Styledimg4
@@ -124,10 +123,10 @@ function Main() {
                   alt="groupPhoto"
                 />
               </Nav.Link>
-            </StyledBtn4_2>
-          </StyledDiv4_1T>
-          <StyledDiv4_1B>
-            <StyledBtn4_3>
+            </StyledBtn42>
+          </StyledDiv41T>
+          <StyledDiv41B>
+            <StyledBtn43>
               <Nav.Link href="/DBD_General">
                 <StyledBtnTxt4>지정헌혈하기</StyledBtnTxt4>
                 <Styledimg4
@@ -137,8 +136,8 @@ function Main() {
                   alt="groupPhoto"
                 />
               </Nav.Link>
-            </StyledBtn4_3>
-            <StyledBtn4_4>
+            </StyledBtn43>
+            <StyledBtn44>
               <Nav.Link href="/S_GaneralTime">
                 <StyledBtnTxt4>봉사하기</StyledBtnTxt4>
                 <Styledimg4
@@ -148,19 +147,11 @@ function Main() {
                   alt="groupPhoto"
                 />
               </Nav.Link>
-            </StyledBtn4_4>
-          </StyledDiv4_1B>
-        </StyledDiv4_1>
-        <StyledDiv4_2></StyledDiv4_2>
+            </StyledBtn44>
+          </StyledDiv41B>
+        </StyledDiv41>
+        <StyledDiv42></StyledDiv42>
       </StyledDiv4>
-      <div>{userInfo ? (
-        <div>
-          <p>아이디: {asd}</p>
-          <p>유저이름: {userInfo.userName}</p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}</div>
     </div>
   );
 }
@@ -177,7 +168,7 @@ const StyledDiv1 = styled.div`
   border-radius: 15px;
   display: flex;
 `;
-const StyledDiv1_1 = styled.div`
+const StyledDiv11 = styled.div`
   margin-left: 55px;
   margin-top: 35px;
 `;
@@ -212,7 +203,7 @@ const StyledTxt3 = styled.div`
 
   color: #7a7a7a;
 `;
-const StyledDiv1_2 = styled.div`
+const StyledDiv12 = styled.div`
   margin-left: 165px;
   margin-top: 25px;
   display: flex;
@@ -222,7 +213,7 @@ const Styledimg = styled.img`
   width: 125px;
   height: 125px;
 `;
-const StyledDiv1_3 = styled.div`
+const StyledDiv13 = styled.div`
   margin-left: 20px;
 `;
 const StyledPrice = styled.div`
@@ -237,7 +228,7 @@ const StyledPrice = styled.div`
 
   color: #333333;
 `;
-const StyledDiv1_4 = styled.div`
+const StyledDiv14 = styled.div`
   display: flex;
   margin-top: 10px;
 `;
@@ -274,11 +265,11 @@ const StyledDiv4 = styled.div`
   border-radius: 15px; */
   display: flex;
 `;
-const StyledDiv4_1 = styled.div``;
-const StyledDiv4_1T = styled.div`
+const StyledDiv41 = styled.div``;
+const StyledDiv41T = styled.div`
   display: flex;
 `;
-const StyledBtn4_1 = styled.div`
+const StyledBtn41 = styled.div`
   margin-left: 19px;
   margin-bottom: 24px;
 
@@ -306,7 +297,7 @@ const Styledimg4 = styled.img`
   margin-top: 10px;
   margin-left: 115px;
 `;
-const StyledBtn4_2 = styled.div`
+const StyledBtn42 = styled.div`
   margin-left: 19px;
   margin-bottom: 24px;
 
@@ -317,10 +308,10 @@ const StyledBtn4_2 = styled.div`
   border-radius: 15px;
   filter: drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.15));
 `;
-const StyledDiv4_1B = styled.div`
+const StyledDiv41B = styled.div`
   display: flex;
 `;
-const StyledBtn4_3 = styled.div`
+const StyledBtn43 = styled.div`
   margin-left: 19px;
   margin-bottom: 24px;
 
@@ -331,7 +322,7 @@ const StyledBtn4_3 = styled.div`
   border-radius: 15px;
   filter: drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.15));
 `;
-const StyledBtn4_4 = styled.div`
+const StyledBtn44 = styled.div`
   margin-left: 19px;
   margin-bottom: 24px;
 
@@ -343,7 +334,7 @@ const StyledBtn4_4 = styled.div`
   filter: drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.15));
 `;
 
-const StyledDiv4_2 = styled.div`
+const StyledDiv42 = styled.div`
   margin-left: 40px;
 
   width: 590px;
