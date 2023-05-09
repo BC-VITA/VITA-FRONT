@@ -4,24 +4,26 @@ import Table from 'react-bootstrap/Table';
 import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
 
-
 function DBD_General() {
   const [error, setError] = useState(null);
 
-  const [inputData, setInputData] = useState([{
-    hospitalName: '',
-    title: '',
-    content: '',
-    patientBlood: '',
-    bloodType: '',
-    startDate: '',
-    DesignatedBloodWriteNumber: '',
-    bloodNumber: '',
-  }, {}]);
+  const [inputData, setInputData] = useState([
+    {
+      hospitalName: '',
+      title: '',
+      content: '',
+      patientBlood: '',
+      bloodType: '',
+      startDate: '',
+      DesignatedBloodWriteNumber: '',
+      bloodNumber: '',
+    },
+    {},
+  ]);
 
   useEffect(() => {
     fetch('http://localhost:8004/user/board/filter', {
-      method: 'get'
+      method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
@@ -58,10 +60,14 @@ function DBD_General() {
                       <Styledtd>
                         <Accordion.Item eventKey={index}>
                           <Accordion.Header>
-                            {element.title}<br />
-                            {element.startDate}<br />
-                            필요한 혈액형 : {element.patientBlood}<br />
-                            혈액 종류 : {element.bloodType}<br />
+                            {element.title}
+                            <br />
+                            {element.startDate}
+                            <br />
+                            필요한 혈액형 : {element.patientBlood}
+                            <br />
+                            혈액 종류 : {element.bloodType}
+                            <br />
                             장소 : {element.hospitalName}
                           </Accordion.Header>
                           <Accordion.Body colSpan={2}>
@@ -70,20 +76,23 @@ function DBD_General() {
                         </Accordion.Item>
                       </Styledtd>
                       <Styledtd>
-                        {element.bloodNumber}{/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
+                        {element.bloodNumber}
+                        {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
                         <br />
-                        <Styledimg src={icon} class name="main-icon" alt="logo" />{/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
+                        <Styledimg
+                          src={icon}
+                          class
+                          name="main-icon"
+                          alt="logo"
+                        />
+                        {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
                         <br />
-                        <button type="button">
-                          상세보기
-                        </button>
+                        <button type="button">상세보기</button>
                         <br />
-                        <button type="button">
-                          참여하기
-                        </button>
+                        <button type="button">참여하기</button>
                       </Styledtd>
                     </Styledtr>
-                  )
+                  );
                 })}
               </Styledtbody1>
             </Table>
@@ -116,18 +125,18 @@ const Styleddiv1 = styled.div`
   margin-left: 15%;
 `;
 const Styleddiv2 = styled.div`
- margin-right : 15%;
- margin-left: 15%;
- text-align: center;
+  margin-right: 15%;
+  margin-left: 15%;
+  text-align: center;
 `;
 const Styledtr = styled.tr`
- border:none;
+  border: none;
 `;
 const Styledtd = styled.td`
- border:none;
+  border: none;
 `;
 const Styledtbody1 = styled.tbody`
- border:none;
+  border: none;
 `;
 const Styledimg = styled.img`
   width: 30px;

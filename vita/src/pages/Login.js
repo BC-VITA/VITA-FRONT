@@ -18,27 +18,35 @@ function LogIn() {
     const response = await fetch('http://localhost:8004/user/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         userId: id,
-        userPw: password
-      })
+        userPw: password,
+      }),
     });
     const result = await response.text();
     console.log(result);
     if (result === '로그인 성공') {
       sessionStorage.setItem('userId', id);
       navigate('/');
+      window.location.reload();
     }
-  }
+  };
 
   return (
     <div>
       <section>
         <Styleddiv>로그인</Styleddiv>
         <Styleddiv1>회원일 경우 로그인 해주세요</Styleddiv1>
-        <hr style={{ width: '70%', size: '10', borderWidth: '2px', border: 'solid', marginLeft: '15%' }}
+        <hr
+          style={{
+            width: '70%',
+            size: '10',
+            borderWidth: '2px',
+            border: 'solid',
+            marginLeft: '15%',
+          }}
         ></hr>
       </section>
       <section
@@ -72,7 +80,9 @@ function LogIn() {
               로그인
             </StyledButton1>
             <br />
-            <StyledButton2 type="button" onClick={handleSubmit1}> {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
+            <StyledButton2 type="button" onClick={handleSubmit1}>
+              {' '}
+              {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
               회원가입
             </StyledButton2>
             {/* <StyledButton2 type="submit" disabled={disabled}>
