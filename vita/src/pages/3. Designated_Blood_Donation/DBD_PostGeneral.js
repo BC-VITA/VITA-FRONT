@@ -11,6 +11,7 @@ function DBD_PostGeneral() {
   const [age, setage] = useState('');
   const [roomnumber, setroomnumber] = useState('');
   const [hostipalname, sethostipalname] = useState('');
+  const [hostipaladdress, sethostipaladdress] = useState('');
   const [hostipalcall, sethostipalcall] = useState('');
   const [bloodtype, setbloodtype] = useState('');
   const [rhtype, setbrhtype] = useState('');
@@ -34,6 +35,8 @@ function DBD_PostGeneral() {
     setroomnumber(value);
   const handleChangehostipalname = ({ target: { value } }) =>
     sethostipalname(value);
+  const handleChangehostipaladdress = ({ target: { value } }) =>
+    sethostipaladdress(value);
   const handleChangehostipalcall = ({ target: { value } }) =>
     sethostipalcall(value);
   const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
@@ -98,6 +101,7 @@ function DBD_PostGeneral() {
         patientAge: age,
         hospitalRoomNumber: roomnumber,
         hospitalName: hostipalname,
+        hostipalAddress: hostipaladdress,
         hospitalPhoneNumber: hostipalcall,
         patientBlood: bloodtype,
         patientIsRH: rhtype,
@@ -134,6 +138,7 @@ function DBD_PostGeneral() {
           patientAge: age,
           hospitalRoomNumber: roomnumber,
           hospitalName: hostipalname,
+          hostipalAddress: hostipaladdress,
           hospitalPhoneNumber: hostipalcall,
           patientBlood: bloodtype,
           patientIsRH: rhtype,
@@ -185,7 +190,7 @@ function DBD_PostGeneral() {
                 <StyledGroupTitle>* 수혈자 등록번호</StyledGroupTitle>
                 <FloatingLabel
                   controlId="floatingInput"
-                  label="id"
+                  label="000000-0000000"
                   className="mb-3"
                   value={number}
                   onChange={handleChangenumber}
@@ -198,11 +203,11 @@ function DBD_PostGeneral() {
               <StyledGroup2_1>
                 <StyledGroupTitle>* 필요한 헌혈자 명수</StyledGroupTitle>
                 <FloatingLabel
-                  label="3명"
+                  label="3"
                   value={people}
                   onChange={handleChangepeople}
                 >
-                  <Form.Control type="textarea" />
+                  <Form.Control type="textarea" placeholder="name" />
                 </FloatingLabel>
               </StyledGroup2_1>
               <StyledGroup2_2>
@@ -212,17 +217,17 @@ function DBD_PostGeneral() {
                   value={age}
                   onChange={handleChangeage}
                 >
-                  <Form.Control type="textarea" />
+                  <Form.Control type="textarea" placeholder="name" />
                 </FloatingLabel>
               </StyledGroup2_2>
               <StyledGroup2_3>
                 <StyledGroupTitle>병실 호수</StyledGroupTitle>
                 <FloatingLabel
-                  label="000호"
+                  label="202"
                   value={roomnumber}
                   onChange={handleChangeroomnumber}
                 >
-                  <Form.Control type="textarea" />
+                  <Form.Control type="textarea" placeholder="name" />
                 </FloatingLabel>
               </StyledGroup2_3>
             </StyledGroup2>
@@ -230,27 +235,62 @@ function DBD_PostGeneral() {
               <StyledGroup3_1>
                 <StyledGroupTitle>* 의료기관 명</StyledGroupTitle>
                 <FloatingLabel
-                  label="id"
+                  label="인천병원"
                   value={hostipalname}
                   onChange={handleChangehostipalname}
                 >
-                  <Form.Control type="textarea" />
+                  <Form.Control type="textarea" placeholder="name" />
                 </FloatingLabel>
               </StyledGroup3_1>
               <StyledGroup3_2>
                 <StyledGroupTitle>* 의료기관 전화번호</StyledGroupTitle>
                 <FloatingLabel
-                  label="01033333333"
+                  label="032-500-0243"
                   value={hostipalcall}
                   onChange={handleChangehostipalcall}
                 >
-                  <Form.Control type="textarea" />
+                  <Form.Control type="textarea" placeholder="name" />
                 </FloatingLabel>
               </StyledGroup3_2>
             </StyledGroup3>
             <StyledGroup4>
               <StyledGroup4_1>
+                <StyledGroupTitle>의료기관 주소</StyledGroupTitle>
+                <FloatingLabel
+                  label="인천광역시 부평구 구산동 47-3"
+                  value={hostipaladdress}
+                  onChange={handleChangehostipaladdress}
+                >
+                  <Form.Control type="textarea" placeholder="name" />
+                </FloatingLabel>
+              </StyledGroup4_1>
+            </StyledGroup4>
+            {/* <StyledGroup5>
+              <StyledGroup5_1>
+                <StyledGroupTitle>보호자명</StyledGroupTitle>
+                <FloatingLabel
+                  label="옥영향"
+                  value={hostipalname}
+                  onChange={handleChangehostipalname}
+                >
+                  <Form.Control type="textarea" placeholder="name" />
+                </FloatingLabel>
+              </StyledGroup5_1>
+              <StyledGroup5_2>
+                <StyledGroupTitle>* 보호자 전화번호</StyledGroupTitle>
+                <FloatingLabel
+                  label="010-1234-1234"
+                  value={hostipalcall}
+                  onChange={handleChangehostipalcall}
+                >
+                  <Form.Control type="textarea" placeholder="name" />
+                </FloatingLabel>
+              </StyledGroup5_2>
+            </StyledGroup5> */}
+            <StyledGroup6>
+              <StyledGroup6_1>
                 <StyledGroupTitle>* 혈액형</StyledGroupTitle>
+
                 <StyledSelectBox>
                   <select onChange={handleSelect3} value={bloodtype}>
                     {selectList3.map((item) => (
@@ -260,8 +300,8 @@ function DBD_PostGeneral() {
                     ))}
                   </select>
                 </StyledSelectBox>
-              </StyledGroup4_1>
-              <StyledGroup4_2>
+              </StyledGroup6_1>
+              <StyledGroup6_2>
                 <StyledGroupTitle>* RH여부</StyledGroupTitle>
                 <RadioButton
                   label="&nbsp;RH-&nbsp;"
@@ -273,8 +313,8 @@ function DBD_PostGeneral() {
                   value={rhtype === 'RH+'}
                   onChange={handleRHPChange}
                 />
-              </StyledGroup4_2>
-              <StyledGroup4_3>
+              </StyledGroup6_2>
+              <StyledGroup6_3>
                 <StyledGroupTitle>* 혈액종류</StyledGroupTitle>
                 <select onChange={handleSelect} value={donationtype}>
                   {selectList.map((item) => (
@@ -283,8 +323,10 @@ function DBD_PostGeneral() {
                     </option>
                   ))}
                 </select>
-              </StyledGroup4_3>
-              <StyledGroup4_4>
+              </StyledGroup6_3>
+            </StyledGroup6>
+            <StyledGroup7>
+              <StyledGroup7_1>
                 <StyledGroupTitle>* 필요 혈액제제</StyledGroupTitle>
                 <select onChange={handleSelect1} value={bloodproduct}>
                   {selectList1.map((item) => (
@@ -293,20 +335,8 @@ function DBD_PostGeneral() {
                     </option>
                   ))}
                 </select>
-              </StyledGroup4_4>
-            </StyledGroup4>
-            <StyledGroup5>
-              <StyledGroup5_1>
-                <StyledGroupTitle>* 필요 혈액제제</StyledGroupTitle>
-                <select onChange={handleSelect1} value={bloodproduct}>
-                  {selectList1.map((item) => (
-                    <option value={item} key={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </StyledGroup5_1>
-              <StyledGroup5_2>
+              </StyledGroup7_1>
+              <StyledGroup7_2>
                 <StyledGroupTitle>* 혈액 일치여부</StyledGroupTitle>
                 <select onChange={handleSelect2} value={bloodmatch}>
                   {selectList2.map((item) => (
@@ -315,10 +345,8 @@ function DBD_PostGeneral() {
                     </option>
                   ))}
                 </select>
-              </StyledGroup5_2>
-            </StyledGroup5>
-            <StyledGroup6>
-              <StyledGroup6_1>
+              </StyledGroup7_2>
+              <StyledGroup7_3>
                 <StyledGroupTitle>* 신청자 후기 작성 여부</StyledGroupTitle>
                 <RadioButton
                   label="&nbsp;예&nbsp;"
@@ -330,25 +358,27 @@ function DBD_PostGeneral() {
                   value={review === 'false'}
                   onChange={handlereviewFChange}
                 />
-              </StyledGroup6_1>
-              <StyledGroup6_2>
+              </StyledGroup7_3>
+            </StyledGroup7>
+            <StyledGroup8>
+              <StyledGroup8_1>
                 <StyledGroupTitle>* 진행기간</StyledGroupTitle>
                 <input
                   type="Date"
                   value={startDate}
                   onChange={handleStartDateChange}
                 />
-              </StyledGroup6_2>
+              </StyledGroup8_1>
               <StyledGroupTitle>-</StyledGroupTitle>
-              <StyledGroup6_3>
+              <StyledGroup8_2>
                 <StyledGroupTitle>* 마감기간</StyledGroupTitle>
                 <input
                   type="Date"
                   value={endDate}
                   onChange={handleEndDateChange}
                 />
-              </StyledGroup6_3>
-            </StyledGroup6>
+              </StyledGroup8_2>
+            </StyledGroup8>
           </StyledDiv1>
           <StyledDiv2>
             <FloatingLabel
@@ -508,7 +538,7 @@ const StyledGroup2 = styled.div`
   margin-left: 20px;
 `;
 const StyledGroup2_1 = styled.div`
-  width: 500px;
+  width: 350px;
 `;
 const StyledGroup2_2 = styled.div`
   margin-left: 50px;
@@ -536,44 +566,29 @@ const StyledGroup3_2 = styled.div`
 const StyledGroup4 = styled.div`
   display: flex;
   margin-bottom: 20px;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-left: 20px;
 `;
 const StyledGroup4_1 = styled.div`
-  width: 200px;
-`;
-const StyledSelectBox = styled.div`
-  /* width: 200px;
-  height: 65px;
-  background: #ffffff;
-  border: 2px solid #e6e9ec;
-  border-radius: 8px; */
+  width: 800px;
 `;
 const StyledGroup4_2 = styled.div`
   margin-left: 50px;
-  width: 200px;
-`;
-const StyledGroup4_3 = styled.div`
-  margin-left: 50px;
-  width: 200px;
-`;
-const StyledGroup4_4 = styled.div`
-  margin-left: 50px;
-  width: 400px;
+  width: 500px;
 `;
 
 const StyledGroup5 = styled.div`
   display: flex;
   margin-bottom: 20px;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-left: 20px;
 `;
 const StyledGroup5_1 = styled.div`
-  width: 250px;
+  width: 300px;
 `;
 const StyledGroup5_2 = styled.div`
   margin-left: 50px;
-  width: 250px;
+  width: 500px;
 `;
 
 const StyledGroup6 = styled.div`
@@ -583,13 +598,57 @@ const StyledGroup6 = styled.div`
   margin-left: 20px;
 `;
 const StyledGroup6_1 = styled.div`
-  width: 320px;
+  width: 200px;
+`;
+const StyledSelectBox = styled.div`
+  /* width: 200px;
+  height: 65px;
+  background: #ffffff;
+  border: 2px solid #e6e9ec;
+  border-radius: 8px; */
 `;
 const StyledGroup6_2 = styled.div`
   margin-left: 50px;
   width: 200px;
 `;
 const StyledGroup6_3 = styled.div`
+  margin-left: 50px;
+  width: 200px;
+`;
+const StyledGroup6_4 = styled.div`
+  margin-left: 50px;
+  width: 400px;
+`;
+
+const StyledGroup7 = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
+`;
+const StyledGroup7_1 = styled.div`
+  width: 250px;
+`;
+const StyledGroup7_2 = styled.div`
+  margin-left: 50px;
+  width: 250px;
+`;
+const StyledGroup7_3 = styled.div`
+  margin-left: 50px;
+  width: 400px;
+`;
+
+const StyledGroup8 = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
+`;
+
+const StyledGroup8_1 = styled.div`
+  width: 200px;
+`;
+const StyledGroup8_2 = styled.div`
   margin-left: 50px;
   width: 200px;
 `;
