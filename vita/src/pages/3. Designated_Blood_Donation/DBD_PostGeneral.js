@@ -86,7 +86,7 @@ function DBD_PostGeneral() {
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
     //back으로 정보 post함
-    fetch('http://localhost:8004/user/board/1', {
+    fetch('http://localhost:8004/user/board', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',

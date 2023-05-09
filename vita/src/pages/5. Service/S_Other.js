@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 
@@ -11,22 +10,29 @@ const RadioButton = ({ label, value, onChange }) => {
     </label>
   );
 };
-
-
+//localDateTime // 예약날짜 
+//wholeBlood//전혈
+//plasma//혈장
+//platelet//혈소판
+//bloodHouseName//센터명
+//date//날짜
+//time//시간
 function S_Other() {
-  const location = useLocation();
-  const { selectedDate } = location.state;
-  console.log(selectedDate);
-  const formattedDate = selectedDate.toLocaleDateString();
   const navigate = useNavigate();
+
+  const [rhtype, setbrhtype] = useState('');
+  const [date, setDate] = useState('');
+
+  const [inputData, setInputData] = useState([{}, {}]);
+
+  const handleChangeDate = ({ target: { value } }) => setDate(value);
 
   const handleReservation = () => {
     navigate('/S_WatchList', {
-      state: { rhtype, formattedDate }
+      state: { rhtype,  } // 새로운 달력 인풋에서 날짜 값 받아오기
     });
   };
   
-
   const handleRHMChange = () => {
     setbrhtype('전혈');
   };
@@ -37,13 +43,33 @@ function S_Other() {
   const handleRHAChange = () => {
     setbrhtype('혈장');
   };
-  const [rhtype, setbrhtype] = useState('');
+
+// 유즈이펙트 사용해서 날짜값이 달라질때마다 가능한 헌혈종류를 보여줘야한다
+useEffect(() => {
+  fetch(`http://localhost:8004/blood/house/registerReservation/list`, {
+    method: 'get'
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      setInputData(res);
+      console.log(inputData);
+    })
+  console.log(inputData);
+}, []);
+
 
   return (
     <div>
-      <h1>날짜데이터가 잘 넘어왔는지 확인</h1>
-      <p>{formattedDate}</p>
+      <h1>전 페이지에서 센터정보 넘겨받기</h1>
       <div style={{ marginLeft: '15%', marginRight: '15%' }}>
+        <div>
+           <div>예약날짜 : </div>
+           <input
+            type="Date"
+            name="Date"
+            value={date}
+            onChange={handleChangeDate}/>
+        </div>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
