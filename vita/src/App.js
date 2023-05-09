@@ -38,11 +38,9 @@ import DBDWatchList from './pages/3. Designated_Blood_Donation/DBD_WatchList';
 import BDStory from './pages/4. Community/BD_Story';
 // import BDDetails from './pages/4. Community/BD_Details';
 // import BDWrite from './pages/4. Community/BD_Write';
-// import DBDStory from './pages/4. Community/DBD_Story';
+import DBDStory from './pages/4. Community/DBD_Story';
 // import DBDDetails from './pages/4. Community/DBD_Details';
 // import DBDWrite from './pages/4. Community/DBD_Write';
-// import BDStory from './pages/4. Community/BD_Story';
-// import BDStory from './pages/4. Community/BD_Story';
 // import BDStory from './pages/4. Community/BD_Story';
 
 import SMain from './pages/5. Service/S_Main';
@@ -83,7 +81,8 @@ function App() {
           <Route path="/SignUpHospital" element={<Hospital />}></Route>
           <Route path="/SignUpIndividual" element={<Individual />}></Route>
 
-          <Route path="/Learn" element={<Learn />}></Route>{/* 알아보자 */}
+          <Route path="/Learn" element={<Learn />}></Route>
+          {/* 알아보자 */}
 
           {/*헌혈하자*/}
           <Route path="/BD_Main" element={<BDMain />}></Route>
@@ -120,7 +119,7 @@ function App() {
 
           {/*이야기하자*/}
 
-          {/* <Route
+          <Route
             path="/S_Main"
             element={
               <SMain
@@ -129,18 +128,22 @@ function App() {
                 onReservation={onReservation}
               />
             }
-          ></Route> */}
+          ></Route>
           {/*봉사하자, 헌혈하자 캘린더실험용 사용중*/}
-          {/* <Route path="/S_Other" element={<SOther />}></Route> */}
+          <Route path="/S_Other" element={<SOther />}></Route>
 
-          {/* <Route path="/D_Main" element={<DMain />}></Route> */}
+          <Route path="/D_Main" element={<DMain />}></Route>
           {/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
           <Route path="/S_WatchList" element={<SWatchList />}></Route>
 
-
           {/*관리자 페이지 모음*/}
-          <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>{/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>{/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
+          <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
+          {/*헌혈의 집 정보 Insert하는 페이지*/}
+          <Route
+            path="/M_Blood_Reservation"
+            element={<MBloodReservation />}
+          ></Route>
+          {/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
           <Route path="/MyPagetest" element={<MyPagetest />}></Route>
         </Routes>
         <Foot />
