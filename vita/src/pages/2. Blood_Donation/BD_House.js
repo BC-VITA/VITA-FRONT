@@ -5,12 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useNavigate } from 'react-router-dom';
-import KakaoMap from "../KakaoMap";
+import KakaoMap from '../KakaoMap';
+import Form from 'react-bootstrap/Form';
 
 function BD_House() {
   const navigate = useNavigate();
 
-  const [mapSize, setMapSize] = useState([400, 400]);
+  const [mapSize, setMapSize] = useState([300, 300]);
 
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('');
@@ -34,7 +35,7 @@ function BD_House() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
-  };
+  }
 
   const [inputData, setInputData] = useState([
     {
@@ -62,11 +63,14 @@ function BD_House() {
         console.log(res);
         setInputData(res);
         console.log(inputData);
-      })
+      });
     console.log(inputData);
   }, []);
 
-  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
+  const filteredData =
+    firstListValue === '전체'
+      ? inputData
+      : inputData.filter((item) => item.area === firstListValue);
 
   return (
     <StyledAll>
@@ -74,39 +78,45 @@ function BD_House() {
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
-            <StyledSubDiv2One>
+            <StyledSubDiv2_1>
               <Nav.Link href="/BD_Main">
-                <StyledSubDiv2Two>헌혈이란</StyledSubDiv2Two>
+                <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
-            <StyledSubDiv2Onep>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1p>
               <Nav.Link href="/BD_House">
-                <StyledSubDiv2Two2>헌혈하기</StyledSubDiv2Two2>
+                <StyledSubDiv2_2>헌혈의 집 찾기</StyledSubDiv2_2>
               </Nav.Link>
-            </StyledSubDiv2Onep>
-            <StyledSubDiv2One>
-              <Nav.Link href="/DBD_WatchList">
-                <StyledSubDiv2Two>관심목록</StyledSubDiv2Two>
+            </StyledSubDiv2_1p>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_Bus">
+                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
-            <StyledSubDiv2One>
-              <Nav.Link href="/DBD_News">
-                <StyledSubDiv2Two>따뜻한 사례</StyledSubDiv2Two>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_ReservationFirst">
+                <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2One>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/BD_History">
+                <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
+
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>헌혈하기</StyledTitle>
+          <StyledTitle>헌혈의 집 찾기</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
         </StyledTop>
-        <StyledTab>
+        <StyledTab1>
           <Tabs>
             <Tab eventKey="profile" title="일반 사용자">
               <Tab.Content>
@@ -124,16 +134,45 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    {/* <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
                   </StyledFilterDiv1One>
                   <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>&nbsp;기&nbsp;간&nbsp;</StyledFilterDiv1Two>
+                    <StyledFilterDiv1Two>헌혈종류</StyledFilterDiv1Two>
+                    <Form>
+                      {['checkbox'].map((type) => (
+                        <div key={`default-${type}`} className="mb-3">
+                          <Form.Check
+                            type={type}
+                            id={`default-${type}`}
+                            label="전혈"
+                          />
+                          <Form.Check
+                            type={type}
+                            id={`default-${type}`}
+                            label="혈장"
+                          />
+                          <Form.Check
+                            type={type}
+                            id={`default-${type}`}
+                            label="혈소판"
+                          />
+                        </div>
+                      ))}
+                    </Form>
+                  </StyledFilterDiv1One>
+                  {/* <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>
+                      &nbsp;기&nbsp;간&nbsp;
+                    </StyledFilterDiv1Two>
                     <select
                       onChange={handleFirstListChange}
                       value={firstListValue}
@@ -145,14 +184,17 @@ function BD_House() {
                         </option>
                       ))}
                     </select>
-                    <select value={secondListOptions} onChange={setSecondListOptions}>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
                       {secondListOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
                         </option>
                       ))}
                     </select>
-                  </StyledFilterDiv1One>
+                  </StyledFilterDiv1One> */}
                 </StyledFilter>
                 <section>
                   <Styleddiv2>
@@ -168,28 +210,65 @@ function BD_House() {
                       </thead>
                       <tbody>
                         {filteredData.map((element, index) => {
-                          const markerPositions = [[element.latitude, element.longitude]];
+                          const markerPositions = [
+                            [element.latitude, element.longitude],
+                          ];
                           return (
                             <React.Fragment key={index}>
                               <tr onClick={() => handleRowClick(index)}>
                                 <td headers="area-header">{element.area}</td>
-                                <td headers="centerName-header">{element.centerName}</td>
-                                <td headers="bloodHouseAddress-header">{element.bloodHouseAddress}</td>
-                                <td headers="bloodHousePhoneNumber-header">{element.bloodHousePhoneNumber}</td>
+                                <td headers="centerName-header">
+                                  {element.centerName}
+                                </td>
+                                <td headers="bloodHouseAddress-header">
+                                  {element.bloodHouseAddress}
+                                </td>
+                                <td headers="bloodHousePhoneNumber-header">
+                                  {element.bloodHousePhoneNumber}
+                                </td>
                                 <td>
-                                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                    <button onClick={handleReservation}>예약하기</button>
-                                    <button type='button' style={{ marginTop: '10px' }}>자세히보기</button>
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      flexDirection: 'column',
+                                    }}
+                                  >
+                                    <button onClick={handleReservation}>
+                                      예약하기
+                                    </button>
+                                    <button
+                                      type="button"
+                                      style={{ marginTop: '10px' }}
+                                    >
+                                      자세히보기
+                                    </button>
                                   </div>
                                 </td>
                               </tr>
                               {openIndex === index && (
                                 <tr>
-                                  <td colSpan={5}>
+                                  <td colSpan={4}>
                                     <div id="wrap">
-                                      <KakaoMap markerPositions={markerPositions} size={mapSize} />
+                                      <KakaoMap
+                                        markerPositions={markerPositions}
+                                        size={mapSize}
+                                      />
                                     </div>
                                   </td>
+                                  <Styledtd colSpan={1}>
+                                    <Styledtxt>
+                                      평 일 : {element.weekdayTime}
+                                    </Styledtxt>
+                                    <Styledtxt>
+                                      토요일 : {element.saturdayTime}
+                                    </Styledtxt>
+                                    <Styledtxt>
+                                      일요일 : {element.sundayRestTime}
+                                    </Styledtxt>
+                                    <Styledtxt>
+                                      공휴일 : {element.restTime}
+                                    </Styledtxt>
+                                  </Styledtd>
                                 </tr>
                               )}
                             </React.Fragment>
@@ -205,29 +284,38 @@ function BD_House() {
               <Tab.Content>skjfjsf</Tab.Content>
             </Tab>
           </Tabs>
-        </StyledTab>
+        </StyledTab1>
       </StyledSubcomment>
-    </StyledAll >
+    </StyledAll>
   );
 }
-const StyledTable = styled(Table)`
-  border-collapse: collapse;
-  th,tbody,td
-  td {
-    padding: 0;
-  }
+const Styledtd = styled.div`
+  display: block;
+`;
+const Styledtxt = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 30px;
+  /* or 158% */
+
+  letter-spacing: 0.05em;
+
+  color: #333333;
 `;
 const StyledAll = styled.div`
   display: flex;
+  padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 120px;
+  width: 170px;
   /* height: 175px; */
   margin-top: 25px;
   margin-left: 205px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 150px;
+  width: 190px;
   height: 50px;
   /* left: 370px;
   top: 123px; */
@@ -246,25 +334,25 @@ const StyledSubDiv1 = styled.div`
 `;
 
 const StyledSubDiv2 = styled.div`
-  width: 150px;
-  height: 202.5px;
+  width: 190px;
+  height: 278px;
   border: 3px solid #d7d7d7;
 `;
-const StyledSubDiv2One = styled.div`
+const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
-const StyledSubDiv2Onep = styled.div`
+const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 50px;
-  margin-left: 2px;
-  margin-right: 2px;
+  height: 55px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
-const StyledSubDiv2Two2 = styled.div`
+const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -272,15 +360,15 @@ const StyledSubDiv2Two2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
 
   color: #333333;
 `;
-const StyledSubDiv2Two = styled.div`
+const StyledSubDiv2_2g = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -288,8 +376,8 @@ const StyledSubDiv2Two = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 26.5px;
+  font-size: 19px;
+  line-height: 38px;
   /* identical to box height, or 100% */
 
   text-align: center;
@@ -297,24 +385,6 @@ const StyledSubDiv2Two = styled.div`
   color: #969696;
 `;
 
-const StyledFilter = styled.div`
-  width: 100%;
-  height: 145px;
-  background: #ffe9e9;
-  margin-bottom: 20px;
-`;
-const StyledFilterDiv1One = styled.div`
-  display: flex;
-  margin-top: 20px;
-`;
-const StyledFilterDiv1Two = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  margin-right: 20px;
-  margin-left: 30px;
-`;
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
@@ -322,13 +392,8 @@ const StyledSubcomment = styled.div`
   margin-top: 25px;
 `;
 
-const StyledTab = styled.div`
-  margin-top: 5px;
-  padding-bottom: 500px;
-`;
-
 const StyledTitle = styled.div`
-  width: 203px;
+  width: 230px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -345,7 +410,7 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 580px;
+  margin-left: 510px;
 
   background: #ff9f9f;
   border-radius: 9px;
@@ -357,11 +422,47 @@ const StyledButtonDiv = styled.div`
   font-weight: 700;
   font-size: 18px;
   line-height: 38px;
+
   margin: auto;
   margin-left: 28px;
   /* identical to box height, or 100% */
 
   color: #ffffff;
+`;
+
+// 옛날
+const StyledTable = styled(Table)`
+  border-collapse: collapse;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+`;
+
+const StyledFilter = styled.div`
+  width: 865px;
+  height: 145px;
+  background: #ffe9e9;
+  margin-bottom: 20px;
+`;
+const StyledFilterDiv1One = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
+const StyledFilterDiv1Two = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 30px;
+`;
+
+const StyledTab1 = styled.div`
+  width: 865px;
+  margin-top: 5px;
+  padding-bottom: 500px;
 `;
 
 const Styleddiv2 = styled.div`

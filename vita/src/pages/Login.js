@@ -107,17 +107,19 @@ const StyledTitle = styled.div`
   font-weight: 700;
   font-size: 45px;
   line-height: 48px;
+
   color: #333333;
 `;
 const StyledTitleSub = styled.div`
   margin-top: 10px;
   margin-left: 10px;
+
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 24px;
-  /* identical to box height, or 100% */
+
   color: #787878;
 `;
 const StyledHr = styled.div`

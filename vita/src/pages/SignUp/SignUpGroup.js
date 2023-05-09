@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Select from 'react-select';
 
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+
 function SignUpGroup() {
   const navigate = useNavigate();
 
@@ -17,11 +20,6 @@ function SignUpGroup() {
   const [rh, setRh] = useState('');
   const [history, setHistory] = useState('');
   const [Phon, setPhon] = useState('');
-
-  const options = [
-    { value: 'RH+', label: 'RH+' },
-    { value: 'RH-', label: 'RH-' },
-  ];
 
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
@@ -46,8 +44,8 @@ function SignUpGroup() {
     setSex(event.target.value);
   };
 
-  const handleSelectChange = (selectedOption) => {
-    setRh(selectedOption.value);
+  const handleSelectChange = (event) => {
+    setRh(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -98,267 +96,341 @@ function SignUpGroup() {
     navigate('/');
   };
   return (
-    <div
-      style={{ marginLeft: '370px', marginRight: '370px', marginTop: '44.2px' }}
-    >
+    <StyledAll>
       <section>
-        <Stylednav>회원가입</Stylednav>
-        <Styleddiv1>
-          자신에게 맞는 항목을 선택하여 회원가입 해주세요.
-        </Styleddiv1>
-        <hr style={{ width: '1180px', border: 'solid 2px' }}></hr>
-        <div
-          style={{
-            marginTop: '42px',
-            fontSize: '45px',
-            textAlign: 'center',
-            fontWeight: 'bold',
-          }}
-        >
-          개인
-        </div>
+        <StyledTop>
+          <StyledTitle>회원가입</StyledTitle>
+          <StyledTitleSub>
+            자신에게 맞는 항목을 선택하여 회원가입 해주세요.
+          </StyledTitleSub>
+          <StyledHr />
+          <StyledTitleSub2>개인</StyledTitleSub2>
+        </StyledTop>
       </section>
-      <form onSubmit={handleSubmit}>
-        <Styleddiv2>
-          <Styledinput
-            type="id"
-            placeholder="아이디"
-            name="id"
-            value={id}
-            onChange={handleChangeId}
-          />
-          <StyledFlax>
-            <StyledBlock>
-              <Styleddiv>비밀번호</Styleddiv>
-              <Styledinput
-                type="password"
-                placeholder="비밀번호"
-                name="password"
-                value={password}
-                onChange={handleChangePassword}
-              />
-            </StyledBlock>
-            <StyledBlock1>
-              <Styleddiv>비밀번호 확인</Styleddiv>
-              <Styledinput
-                type="password"
-                placeholder="비밀번호 확인"
-                name="passwordCheck"
-                value={passwordCheck}
-                onChange={handleChangePasswordCheck}
-              />
-            </StyledBlock1>
-          </StyledFlax>
-          <StyledFlax>
-            <StyledBlock>
-              <Styleddiv>성명</Styleddiv>
-              <Styledinput
-                type="Name"
-                placeholder="성명"
-                name="Name"
-                value={name}
-                onChange={handleChangeName}
-              />
-            </StyledBlock>
-            <StyledBlock1>
-              <Styleddiv>생년월일</Styleddiv>
-              <Styledinput
-                type="Date"
-                placeholder="생년월일"
-                name="Date"
-                value={birth}
-                onChange={handleChangeBirth}
-              />
-            </StyledBlock1>
-          </StyledFlax>
-          <StyledFlax>
-            <StyledBlock>
-              <Styleddiv>이메일</Styleddiv>
-              <Styledinput
-                type="Email"
-                placeholder="이메일"
-                name="Email"
-                value={email}
-                onChange={handleChangeEmail}
-              />
-            </StyledBlock>
-            <StyledBlock1>
-              <Styleddiv>전화번호</Styleddiv>
-              <Styledinput
-                type="Phon"
-                placeholder="전화번호"
-                name="Phon"
-                value={Phon}
-                onChange={handleChangePhon}
-              />
-            </StyledBlock1>
-          </StyledFlax>
-          <StyledFlax>
-            <form style={{ marginTop: '5%' }}>
-              <div>
-                <div style={{ marginBottom: '2%', fontSize: '32px' }}>
-                  혈액형
-                </div>
-                <label style={{ display: 'inline-block', fontSize: '28px' }}>
-                  <input
-                    type="radio"
+      <section>
+        <form onSubmit={handleSubmit}>
+          <StyledDiv>
+            <StyledFlax>
+              <StyledBox>
+                <StyledBoxTitle>아이디</StyledBoxTitle>
+                <FloatingLabel
+                  label="ID"
+                  name="id"
+                  value={id}
+                  onChange={handleChangeId}
+                >
+                  <Form.Control type="id" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox>
+
+              <StyledBox></StyledBox>
+            </StyledFlax>
+            <StyledFlax>
+              <StyledBox>
+                <StyledBoxTitle>비밀번호</StyledBoxTitle>
+                <FloatingLabel
+                  label="Password"
+                  name="password"
+                  value={password}
+                  onChange={handleChangePassword}
+                >
+                  <Form.Control type="password" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox>
+              <StyledBox>
+                <StyledBoxTitle>비밀번호 확인</StyledBoxTitle>
+                <FloatingLabel
+                  label="Password 확인"
+                  name="passwordCheck"
+                  value={passwordCheck}
+                  onChange={handleChangePasswordCheck}
+                >
+                  <Form.Control type="password" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox>
+            </StyledFlax>
+            <StyledFlax>
+              <StyledBox>
+                <StyledBoxTitle>성명</StyledBoxTitle>
+                <FloatingLabel
+                  label="홍길동"
+                  name="Name"
+                  value={name}
+                  onChange={handleChangeName}
+                >
+                  <Form.Control type="text" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox>
+              <StyledBox>
+                <StyledBoxTitle>생년월일</StyledBoxTitle>
+                <FloatingLabel
+                  label="2023-03-03"
+                  name="Date"
+                  value={birth}
+                  onChange={handleChangeBirth}
+                >
+                  <Form.Control type="Date" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox>
+            </StyledFlax>
+            <StyledFlax>
+              <StyledBox>
+                <StyledBoxTitle>이메일</StyledBoxTitle>
+                <FloatingLabel
+                  label="blood@gmail.com"
+                  name="Email"
+                  value={email}
+                  onChange={handleChangeEmail}
+                >
+                  <Form.Control type="Email" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox>
+              <StyledBox>
+                <StyledBoxTitle>전화번호</StyledBoxTitle>
+
+                <FloatingLabel
+                  label="010-1234-1234"
+                  name="Phon"
+                  value={Phon}
+                  onChange={handleChangePhon}
+                >
+                  <Form.Control type="Phon" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox>
+            </StyledFlax>
+
+            <StyledFlax>
+              <StyledBox2>
+                <StyledBoxTitle>혈액형</StyledBoxTitle>
+                <Form.Select
+                  size="lg"
+                  checked={blood === 'A형'}
+                  onChange={handlebloodChange}
+                >
+                  <option selected disabled>
+                    선택해주세요.
+                  </option>
+                  <option
                     name="blood"
                     value="A형"
                     checked={blood === 'A형'}
                     onChange={handlebloodChange}
-                  />
-                  A형&nbsp;&nbsp;
-                </label>
-                <label style={{ display: 'inline-block', fontSize: '28px' }}>
-                  <input
-                    type="radio"
+                  >
+                    A형
+                  </option>
+                  <option
                     name="blood"
                     value="B형"
                     checked={blood === 'B형'}
                     onChange={handlebloodChange}
-                  />
-                  B형&nbsp;&nbsp;
-                </label>
-                <label style={{ display: 'inline-block', fontSize: '28px' }}>
-                  <input
-                    type="radio"
+                  >
+                    B형
+                  </option>
+                  <option
                     name="blood"
                     value="O형"
                     checked={blood === 'O형'}
                     onChange={handlebloodChange}
-                  />
-                  O형&nbsp;&nbsp;
-                </label>
-                <label style={{ display: 'inline-block', fontSize: '28px' }}>
-                  <input
-                    type="radio"
+                  >
+                    O형
+                  </option>
+                  <option
                     name="blood"
                     value="AB형"
                     checked={blood === 'AB형'}
                     onChange={handlebloodChange}
-                  />
-                  AB형
-                </label>
-              </div>
-            </form>
-            <form style={{ margin: '5%' }}>
-              <div style={{ marginBottom: '5%', fontSize: '32px' }}>RH여부</div>
-              <div>
-                <Select
-                  options={options}
-                  value={rh}
+                  >
+                    AB형
+                  </option>
+                </Form.Select>
+              </StyledBox2>
+
+              <StyledBox2>
+                <StyledBoxTitle>RH여부</StyledBoxTitle>
+                <Form.Select
+                  size="lg"
+                  checked={rh === 'RH-'}
                   onChange={handleSelectChange}
-                />
-              </div>
-            </form>
-            <StyledBlock>
-              <Styleddiv>헌혈이력</Styleddiv>
-              <Styledinput2
-                type="text"
-                placeholder="1회"
-                name="History"
-                value={history}
-                onChange={handleChangeHistory}
-              />
-            </StyledBlock>
-            <form style={{ margin: '5%' }}>
-              <div>
-                <div style={{ marginBottom: '2%', fontSize: '32px' }}>성별</div>
-                <label style={{ display: 'inline-block', fontSize: '32px' }}>
-                  <input
-                    type="radio"
+                >
+                  <option selected disabled>
+                    선택해주세요.
+                  </option>
+                  <option
+                    name="rh"
+                    value="RH-"
+                    checked={rh === 'RH-'}
+                    onChange={handleSelectChange}
+                  >
+                    RH-
+                  </option>
+                  <option
+                    name="rh"
+                    value="RH+"
+                    checked={rh === 'RH+'}
+                    onChange={handleSelectChange}
+                  >
+                    RH+
+                  </option>
+                </Form.Select>
+              </StyledBox2>
+              <StyledBox2>
+                <StyledBoxTitle>헌혈이력</StyledBoxTitle>
+                <FloatingLabel
+                  label="1회"
+                  name="History"
+                  value={history}
+                  onChange={handleChangeHistory}
+                >
+                  <Form.Control type="text" placeholder="label" />
+                </FloatingLabel>
+              </StyledBox2>
+              <StyledBox2>
+                <StyledBoxTitle>성별</StyledBoxTitle>
+                <Form.Select
+                  size="lg"
+                  checked={sex === '남자'}
+                  onChange={handlesexChange}
+                >
+                  <option selected disabled>
+                    선택해주세요.
+                  </option>
+                  <option
                     name="sex"
                     value="남자"
                     checked={sex === '남자'}
                     onChange={handlesexChange}
-                  />
-                  남자&nbsp;&nbsp;
-                </label>
-                <label style={{ display: 'inline-block', fontSize: '32px' }}>
-                  <input
-                    type="radio"
+                  >
+                    남자
+                  </option>
+                  <option
                     name="sex"
                     value="여자"
                     checked={sex === '여자'}
                     onChange={handlesexChange}
-                  />
-                  여자&nbsp;&nbsp;
-                </label>
-              </div>
-            </form>
-          </StyledFlax>
-          <br />
-          <StyledButton type="submit" disabled={disabled}>
-            회원가입
-          </StyledButton>
-          <div className="home">{error && <div>{error}</div>}</div>
-        </Styleddiv2>
-      </form>
+                  >
+                    여자
+                  </option>
+                </Form.Select>
+              </StyledBox2>
+            </StyledFlax>
+            <br />
+            <StyledButton type="submit" disabled={disabled}>
+              회원가입
+            </StyledButton>
+            <div className="home">{error && <div>{error}</div>}</div>
+          </StyledDiv>
+        </form>
+      </section>
+      <div>{blood}</div>
       <div>{rh}</div>
-    </div>
+    </StyledAll>
   );
 }
 
-const Stylednav = styled.nav`
-  position: static;
-  bottom: 100;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  padding: auto;
+const StyledAll = styled.div`
+  width: 125ch;
   margin: auto;
-  font-size: 48px;
-  font-weight: bold;
+  margin-bottom: 300px;
 `;
-const StyledBlock = styled.div`
-  display: block;
+
+const StyledTop = styled.div`
+  margin-top: 44.2px;
 `;
-const StyledBlock1 = styled.div`
-  margin-left: 148px;
-  display: block;
+const StyledTitle = styled.div`
+  /* width: 230px; */
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 48px;
+
+  color: #333333;
 `;
+const StyledTitleSub = styled.div`
+  margin-top: 10px;
+  margin-left: 10px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+
+  color: #787878;
+`;
+const StyledHr = styled.hr`
+  margin-top: 20px;
+  width: 69em;
+  border: 3px solid #333333;
+`;
+const StyledTitleSub2 = styled.div`
+  margin-top: 50px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 48px;
+  text-align: center;
+  letter-spacing: 1em;
+
+  color: #333333;
+`;
+const StyledDiv = styled.div`
+  width: 1100px;
+  margin: auto;
+`;
+const StyledBox = styled.div`
+  width: 450px;
+  margin: auto;
+  /* margin-right: 70px; */
+`;
+
+const StyledBox2 = styled.div`
+  width: 180px;
+  margin: auto;
+  /* margin-right: 55px; */
+`;
+
+const StyledBoxTitle = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 80px;
+  color: #333333;
+
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+`;
+
 const StyledFlax = styled.div`
   display: flex;
 `;
-const Styledinput = styled.input`
-  width: 450px;
-  height: 68px;
-  margin-top: 14px;
-  font-size: 20px;
-`;
-const Styledinput2 = styled.input`
-  width: 199px;
-  height: 68px;
-  margin-top: 14px;
-  font-size: 20px;
-`;
-const Styleddiv = styled.div`
-  margin-top: 44px;
-  font-size: 32px;
-`;
-const Styleddiv1 = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  color: black;
-  text-decoration-line: none;
-  font-size: 24px;
-`;
-const Styleddiv2 = styled.div`
-  margin-left: 66px;
+
+const StyledBlock = styled.div`
+  display: block;
 `;
 const StyledButton = styled.button`
-  background-color: #ff9f9f;
-  color: white;
-  border-radius: 8px;
-  font-size: 40px;
-  border: none;
-  cursor: pointer;
   width: 568px;
-  height: 99px;
-  font-weight: bold;
-  margin: 240px;
+  height: 72.18px;
+  background: #ff9f9f;
+  border: none;
+  border-radius: 8px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 37px;
+  letter-spacing: 0.3em;
+  color: #ffffff;
+
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-left: 270px;
 `;
 
 export default SignUpGroup;
