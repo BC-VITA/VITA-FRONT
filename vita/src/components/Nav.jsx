@@ -18,62 +18,62 @@ const Nav = () => {
       <StyledDiv1>
         <Styledimg src={icon} class name="main-icon" alt="logo" />
         <Link to="/" style={{ textDecoration: 'none' }}>
-          <StyledDiv1_1>
+          <StyledDiv11>
             <div>vita</div>
-          </StyledDiv1_1>
+          </StyledDiv11>
         </Link>
       </StyledDiv1>
 
       <StyledDiv2>
         <Link to="Learn" style={{ textDecoration: 'none' }}>
-          <StyledDiv2_1>
+          <StyledDiv21>
             <div>알아보자</div>
-          </StyledDiv2_1>
+          </StyledDiv21>
         </Link>
 
         <Link to="BD_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv2_1>
+          <StyledDiv21>
             <div>헌혈하자</div>
-          </StyledDiv2_1>
+          </StyledDiv21>
         </Link>
 
         <Link to="DBD_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv2_1L>
+          <StyledDiv21L>
             <div>지정헌혈하자</div>
-          </StyledDiv2_1L>
+          </StyledDiv21L>
         </Link>
 
         <Link to="BD_Story" style={{ textDecoration: 'none' }}>
-          <StyledDiv2_1M>
+          <StyledDiv21M>
             <div>이야기하자</div>
-          </StyledDiv2_1M>
+          </StyledDiv21M>
         </Link>
 
         <Link to="S_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv2_1>
+          <StyledDiv21>
             <div>봉사하자</div>
-          </StyledDiv2_1>
+          </StyledDiv21>
         </Link>
 
         <Link to="D_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv2_1>
+          <StyledDiv21>
             <div>기부하자</div>
-          </StyledDiv2_1>
+          </StyledDiv21>
         </Link>
       </StyledDiv2>
       <StyledDiv3>
         <Link to={userId ? `/mypage` : "/login"} style={{ textDecoration: 'none', color: 'white' }}>
-          <StyledDiv3_1>
+          <StyledDiv31>
             <div>{userId ? `${userId}님 반갑습니다` : '로그인'}</div>
-          </StyledDiv3_1>
+          </StyledDiv31>
         </Link>
-        <StyledDiv3_1m>
+        <StyledDiv31m>
           <div>|</div>
-        </StyledDiv3_1m>
+        </StyledDiv31m>
         <Link to={userId ? "/" : "/signup"} style={{ textDecoration: 'none', color: 'white' }}onClick={handleLogout}>
-          <StyledDiv3_1>
+          <StyledDiv31>
             <div>{userId ? '로그아웃' : '회원가입'}</div>
-          </StyledDiv3_1>
+          </StyledDiv31>
         </Link>
       </StyledDiv3>
     </Stylednav>
@@ -106,7 +106,7 @@ const Styledimg = styled.img`
   height: 30px;
   /* object-fit: cover; */
 `;
-const StyledDiv1_1 = styled.div`
+const StyledDiv11 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -129,7 +129,7 @@ const StyledDiv2 = styled.div`
   margin-left: 120px;
   margin-right: 120px;
 `;
-const StyledDiv2_1 = styled.div`
+const StyledDiv21 = styled.div`
   width: 110px;
   font-family: 'Noto Sans KR';
   font-style: normal;
@@ -139,7 +139,7 @@ const StyledDiv2_1 = styled.div`
 
   color: #ffffff;
 `;
-const StyledDiv2_1L = styled.div`
+const StyledDiv21L = styled.div`
   width: 150px;
   font-family: 'Noto Sans KR';
   font-style: normal;
@@ -149,7 +149,7 @@ const StyledDiv2_1L = styled.div`
 
   color: #ffffff;
 `;
-const StyledDiv2_1M = styled.div`
+const StyledDiv21M = styled.div`
   width: 130px;
   font-family: 'Noto Sans KR';
   font-style: normal;
@@ -167,7 +167,7 @@ const StyledDiv3 = styled.div`
   align-items: center;
   text-decoration-line: none;
 `;
-const StyledDiv3_1 = styled.div`
+const StyledDiv31 = styled.div`
   /* flex-direction: row; */
   text-decoration-line: none;
 
@@ -179,7 +179,7 @@ const StyledDiv3_1 = styled.div`
 
   color: #ffffff;
 `;
-const StyledDiv3_1m = styled.div`
+const StyledDiv31m = styled.div`
   /* flex-direction: row; */
   text-decoration-line: none;
 

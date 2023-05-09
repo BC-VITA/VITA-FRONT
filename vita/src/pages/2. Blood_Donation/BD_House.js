@@ -199,7 +199,7 @@ function BD_House() {
                       </tbody>
                     </StyledTable>
                   </Styleddiv2>
-                </section> 
+                </section>
               </Tab.Content>
             </Tab>
             <Tab eventKey="home" title="병원">
