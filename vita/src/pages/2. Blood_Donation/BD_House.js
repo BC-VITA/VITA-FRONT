@@ -12,7 +12,6 @@ function BD_House() {
   const navigate = useNavigate();
 
   const [mapSize, setMapSize] = useState([300, 300]);
-
   const selectList1 = [
     '전체',
     '인천',
@@ -24,6 +23,7 @@ function BD_House() {
     '충북',
     '제주',
   ];
+
   const [firstListValue, setFirstListValue] = useState('전체');
   const [secondListOptions, setSecondListOptions] = useState([
     '검색할 지역을 골라주세요',
