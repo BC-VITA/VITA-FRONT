@@ -13,10 +13,10 @@ function M_Blood_Reservation() {
   const [options, setOptions] = useState([]);
   const [reservations, setReservations] = useState([]);
 
-  const [wholeBlood,setWholeBlood] = useState('F');
-  const [plasma,setPlasma] = useState('F');
-  const [platelet,setPlatelet] = useState('F');
-  
+  const [wholeBlood, setWholeBlood] = useState('F');
+  const [plasma, setPlasma] = useState('F');
+  const [platelet, setPlatelet] = useState('F');
+
   const navigate = useNavigate();
 
   const handleDateChange = (date) => {
@@ -31,11 +31,14 @@ function M_Blood_Reservation() {
     setOptions(options);
   };
 
-  const handleChangeCenterName = ({ target: { value } }) => setCenterName(value);
+  const handleChangeCenterName = ({ target: { value } }) =>
+    setCenterName(value);
 
   const handleSave = (event) => {
     event.preventDefault();
-    const iswholeBloodIncluded = options.some((option) => option.value === '전혈');
+    const iswholeBloodIncluded = options.some(
+      (option) => option.value === '전혈'
+    );
     if (iswholeBloodIncluded) {
       setWholeBlood('Y');
     }
@@ -43,11 +46,16 @@ function M_Blood_Reservation() {
     if (isPlasmaIncluded) {
       setPlasma('Y');
     }
-    const isplateletIncluded = options.some((option) => option.value === '혈소판');
+    const isplateletIncluded = options.some(
+      (option) => option.value === '혈소판'
+    );
     if (isplateletIncluded) {
       setPlatelet('Y');
     }
-    setReservations((prevReservations) => [...prevReservations, { date, time, options }]);
+    setReservations((prevReservations) => [
+      ...prevReservations,
+      { date, time, options },
+    ]);
   };
 
   const handleDelete = (index) => {
@@ -65,45 +73,42 @@ function M_Blood_Reservation() {
       body: JSON.stringify({
         date: date ? date.toString() : null,
         time: time.value,
-        wholeBlood: wholeBlood,  //전혈
-        plasma: plasma,  //혈장
-        platelet: platelet,  //혈소판
-        centerName: centerName,  //센터명
+        wholeBlood: wholeBlood, //전혈
+        plasma: plasma, //혈장
+        platelet: platelet, //혈소판
+        centerName: centerName, //센터명
       }),
-    })
-      .then((res) => {
-        res.json();
-        if (res.ok) {
-          navigate('/');
-        }
-      })
-      console.log(
-        'data: ' +
-          JSON.stringify({
-            date: date ? date.toString() : null,
-            time: time.value,
-        wholeBlood: wholeBlood,  //전혈
-        plasma: plasma,  //혈장
-        platelet: platelet,  //혈소판
-        centerName: centerName,  //센터명
-          })
-      );
+    }).then((res) => {
+      res.json();
+      if (res.ok) {
+        navigate('/');
+      }
+    });
+    console.log(
+      'data: ' +
+        JSON.stringify({
+          date: date ? date.toString() : null,
+          time: time.value,
+          wholeBlood: wholeBlood, //전혈
+          plasma: plasma, //혈장
+          platelet: platelet, //혈소판
+          centerName: centerName, //센터명
+        })
+    );
   };
 
   return (
     <div style={{ marginLeft: '15%', marginRight: '15%' }}>
       <form onSubmit={handleSave}>
         <div>
-          <div>
-          센터명 : 
-          </div>
-        <input
-                type="centerName"
-                name="centerName"
-                value={centerName}
-                onChange={handleChangeCenterName}
-              />
-              </div>
+          <div>센터명 :</div>
+          <input
+            type="centerName"
+            name="centerName"
+            value={centerName}
+            onChange={handleChangeCenterName}
+          />
+        </div>
         <div>
           <label htmlFor="date">날짜:</label>
           <DatePicker id="date" selected={date} onChange={handleDateChange} />
@@ -153,14 +158,23 @@ function M_Blood_Reservation() {
             <div>센터 명 : {centerName}</div>
             <div>날짜: {element.date.toString()}</div>
             <div>시간: {element.time.value}</div>
-             <div>헌혈종류: {element.options.map((option) => option.value).join(", ")}</div>
+            <div>
+              헌혈종류:{' '}
+              {element.options.map((option) => option.value).join(', ')}
+            </div>
             <button onClick={() => handleDelete(index)}>삭제</button>
-            <div><br /></div>
+            <div>
+              <br />
+            </div>
           </div>
         ))}
       </div>
-      <div>setPlasma : {plasma},{wholeBlood},{platelet}</div>
-      <button type="button" onClick={handleSubmit}>저장</button>
+      <div>
+        setPlasma : {plasma},{wholeBlood},{platelet}
+      </div>
+      <button type="button" onClick={handleSubmit}>
+        저장
+      </button>
       <div>{time.value}</div>
     </div>
   );
