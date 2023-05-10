@@ -15,7 +15,9 @@ function BD_House() {
 
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('전체');
-  const [secondListOptions, setSecondListOptions] = useState(['검색할 지역을 골라주세요']);//여기는 ~~시를 고르면 더 자세하게 ~~구를 고를 수 있게 한다
+  const [secondListOptions, setSecondListOptions] = useState([
+    '검색할 지역을 골라주세요',
+  ]);
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
@@ -35,7 +37,7 @@ function BD_House() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
-  }
+ 
 
   const [inputData, setInputData] = useState([
     {
@@ -51,12 +53,11 @@ function BD_House() {
     {},
   ]);
 
-  const handleReservation = (centerName) => {
-    navigate('/BD_ReservationSecond', { state: { centerName } });
-  };
-  
+  function handleReservation() {
+    navigate('/BD_ReservationSecond');
+  }
   useEffect(() => {
-    fetch('http://localhost:8004/blood/board/list', {
+    fetch('http://localhost:8004/blood/board/list ', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -69,7 +70,10 @@ function BD_House() {
     setFirstListValue('전체');
   }, []);
 
-  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
+  const filteredData =
+    firstListValue === '전체'
+      ? inputData
+      : inputData.filter((item) => item.area === firstListValue);
 
   return (
     <StyledAll>
@@ -110,30 +114,27 @@ function BD_House() {
         <StyledTop>
           <StyledTitle>헌혈의 집 찾기</StyledTitle>
           <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
+            <Nav.Link href="/BD_PostHouse">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
         </StyledTop>
         <StyledTab1>
-          <Tabs>
-            <Tab eventKey="profile" title="일반 사용자">
-              <Tab.Content>
-                <StyledFilter>
-                  <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
-                    <select
-                      onChange={handleFirstListChange}
-                      value={firstListValue}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList1.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                    {/* <select
+          <StyledFilter>
+            <StyledFilterDiv1One>
+              <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+              <select
+                onChange={handleFirstListChange}
+                value={firstListValue}
+                style={{ border: 'none' }}
+              >
+                {selectList1.map((item) => (
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+              {/* <select
                       value={secondListOptions}
                       onChange={setSecondListOptions}
                     >
@@ -142,128 +143,129 @@ function BD_House() {
                           {option}
                         </option>
                       ))}
-                    </select>              여기는 ~~시를 고르면 더 자세하게 ~~구를 고를 수 있게 한다*/} 
-                  </StyledFilterDiv1One>
-                  <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>헌혈종류</StyledFilterDiv1Two>
-                    <Form>
-                      {['checkbox'].map((type) => (
-                        <div key={`default-${type}`} className="mb-3">
-                          <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label="전혈"
-                          />
-                          <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label="혈장"
-                          />
-                          <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label="혈소판"
-                          />
-                        </div>
-                      ))}
-                    </Form>
-                  </StyledFilterDiv1One>
-                </StyledFilter>
-                <section>
-                  <Styleddiv2>
-                    <StyledTable striped>
-                      <thead>
-                        <tr>
-                          <th id="area-header">지역</th>
-                          <th id="centerName-header">헌혈의 집</th>
-                          <th id="bloodHouseAddress-header">주소</th>
-                          <th id="bloodHousePhoneNumber-header">전화번호</th>
-                          <th>&nbsp;</th>
+                    </select> */}
+            </StyledFilterDiv1One>
+            <StyledFilterDiv1One>
+              <StyledFilterDiv1Two>헌혈종류</StyledFilterDiv1Two>
+              <Form>
+                {['checkbox'].map((type) => (
+                  <div key={`default-${type}`} className="mb-3">
+                    <Form.Check
+                      type={type}
+                      id={`default-${type}`}
+                      label="전혈"
+                    />
+                    <Form.Check
+                      type={type}
+                      id={`default-${type}`}
+                      label="혈장"
+                    />
+                    <Form.Check
+                      type={type}
+                      id={`default-${type}`}
+                      label="혈소판"
+                    />
+                  </div>
+                ))}
+              </Form>
+            </StyledFilterDiv1One>
+          </StyledFilter>
+          <section>
+            <Styleddiv2>
+              <StyledTable striped>
+                <thead>
+                  <tr>
+                    <th id="area-header">지역</th>
+                    <th id="centerName-header">헌혈의 집</th>
+                    <th id="bloodHouseAddress-header">주소</th>
+                    <th id="bloodHousePhoneNumber-header">전화번호</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredData.map((element, index) => {
+                    const markerPositions = [
+                      [element.latitude, element.longitude],
+                    ];
+                    return (
+                      <React.Fragment key={index}>
+                        <tr onClick={() => handleRowClick(index)}>
+                          <td headers="area-header">{element.area}</td>
+                          <td headers="centerName-header">
+                            {element.centerName}
+                          </td>
+                          <td headers="bloodHouseAddress-header">
+                            {element.bloodHouseAddress}
+                          </td>
+                          <td headers="bloodHousePhoneNumber-header">
+                            {element.bloodHousePhoneNumber}
+                          </td>
+                          <td>
+                            <div
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                              }}
+                            >
+                              <button onClick={handleReservation}>
+                                예약하기
+                              </button>
+                              <button
+                                type="button"
+                                style={{ marginTop: '10px' }}
+                              >
+                                자세히보기
+                              </button>
+                            </div>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {filteredData.map((element, index) => {
-                          const markerPositions = [
-                            [element.latitude, element.longitude],
-                          ];
-                          return (
-                            <React.Fragment key={index}>
-                              <tr onClick={() => handleRowClick(index)}>
-                                <td headers="area-header">{element.area}</td>
-                                <td headers="centerName-header">
-                                  {element.centerName}
-                                </td>
-                                <td headers="bloodHouseAddress-header">
-                                  {element.bloodHouseAddress}
-                                </td>
-                                <td headers="bloodHousePhoneNumber-header">
-                                  {element.bloodHousePhoneNumber}
-                                </td>
-                                <td>
-                                  <div
-                                    style={{
-                                      display: 'flex',
-                                      flexDirection: 'column',
-                                    }}
-                                  >
-                                    <button onClick={() => handleReservation(element.centerName)}>
-                                      예약하기
-                                    </button>
-                                    <button
-                                      type="button"
-                                      style={{ marginTop: '10px' }}
-                                    >
-                                      자세히보기
-                                    </button>
-                                  </div>
-                                </td>
-                              </tr>
-                              {openIndex === index && (
-                                <tr>
-                                  <td colSpan={4}>
-                                    <div id="wrap">
-                                      <KakaoMap
-                                        markerPositions={markerPositions}
-                                        size={mapSize}
-                                      />
-                                    </div>
-                                  </td>
-                                  <Styledtd colSpan={1}>
-                                    <Styledtxt>
-                                      평 일 : {element.weekdayTime}
-                                    </Styledtxt>
-                                    <Styledtxt>
-                                      토요일 : {element.saturdayTime}
-                                    </Styledtxt>
-                                    <Styledtxt>
-                                      일요일 : {element.sundayRestTime}
-                                    </Styledtxt>
-                                    <Styledtxt>
-                                      공휴일 : {element.restTime}
-                                    </Styledtxt>
-                                  </Styledtd>
-                                </tr>
-                              )}
-                            </React.Fragment>
-                          );
-                        })}
-                      </tbody>
-                    </StyledTable>
-                  </Styleddiv2>
-                </section>
-              </Tab.Content>
-            </Tab>
-            <Tab eventKey="home" title="병원">
-              <Tab.Content>skjfjsf</Tab.Content>
-            </Tab>
-          </Tabs>
+                        {openIndex === index && (
+                          <tr>
+                            <td colSpan={3}>
+                              <Styledtd1 id="wrap">
+                                <KakaoMap
+                                  markerPositions={markerPositions}
+                                  size={mapSize}
+                                />
+                              </Styledtd1>
+                            </td>
+                            <Styledtd2 colSpan={2}>
+                              <Styledtxt>
+                                헌혈종류 :
+                                <br /> 전혈, 혈장, 혈소판
+                              </Styledtxt>
+                              <br />
+                              <Styledtxt>
+                                평 일 : {element.weekdayTime}
+                              </Styledtxt>
+                              <Styledtxt>
+                                토요일 : {element.saturdayTime}
+                              </Styledtxt>
+                              <Styledtxt>
+                                일요일 : {element.sundayRestTime}
+                              </Styledtxt>
+                              <Styledtxt>공휴일 : {element.restTime}</Styledtxt>
+                            </Styledtd2>
+                          </tr>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
+                </tbody>
+              </StyledTable>
+            </Styleddiv2>
+          </section>
         </StyledTab1>
       </StyledSubcomment>
     </StyledAll>
   );
 }
-const Styledtd = styled.div`
-  display: block;
+const Styledtd1 = styled.div`
+  width: 500px;
+`;
+const Styledtd2 = styled.div`
+  /* display: block; */
+  margin-top: 50px;
 `;
 const Styledtxt = styled.div`
   font-family: 'Gmarket Sans TTF';
