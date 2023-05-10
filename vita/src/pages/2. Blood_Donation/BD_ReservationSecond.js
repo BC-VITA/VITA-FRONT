@@ -42,21 +42,21 @@ function S_Other() {
   const handleReservation = () => {
     const formattedDate = format(date, 'yyyy-MM-dd');
     const centerName = location.state?.centerName;
-    navigate('/S_WatchList', {
+    navigate('/BD_ReservationThird', {
       state: { selectedOptions, formattedDate, centerName },
     });
   };
 
-  // 유즈이펙트 사용해서 날짜값이 달라질때마다 가능한 헌혈종류를 보여줘야한다
-  // useEffect(() => {
-  //   fetch(`http://localhost:8004/blood/house/registerReservation/list`, {
-  //     method: 'get',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       setInputData(res);
-  //     });
-  // }, []);
+  //유즈이펙트 사용해서 날짜값이 달라질때마다 가능한 헌혈종류를 보여줘야한다
+  useEffect(() => {
+    fetch(`http://localhost:8004/blood/house/registerReservation/list`, {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setInputData(res);
+      });
+  }, []);
 
   const filteredData = inputData.filter(
     (data) => data.centerName === centerName

@@ -114,7 +114,7 @@ function BD_House() {
         <StyledTop>
           <StyledTitle>헌혈의 집 찾기</StyledTitle>
           <StyledButton>
-            <Nav.Link href="/BD_PostHouse">
+            <Nav.Link href="/M_HouseInfo">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
