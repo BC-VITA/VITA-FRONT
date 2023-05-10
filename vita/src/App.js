@@ -123,7 +123,6 @@ function App() {
 
           <Route path="/BD_Story" element={<BDStory />}></Route>
           {/*이야기하자*/}
-
           <Route
             path="/S_Main"
             element={

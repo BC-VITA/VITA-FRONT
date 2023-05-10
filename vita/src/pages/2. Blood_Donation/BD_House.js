@@ -37,7 +37,7 @@ function BD_House() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
- 
+  }
 
   const [inputData, setInputData] = useState([
     {
@@ -53,9 +53,9 @@ function BD_House() {
     {},
   ]);
 
-  function handleReservation() {
-    navigate('/BD_ReservationSecond');
-  }
+  const handleReservation = (centerName) => {
+    navigate('/BD_ReservationSecond', { state: { centerName } });
+  };
   useEffect(() => {
     fetch('http://localhost:8004/blood/board/list ', {
       method: 'get',
@@ -207,7 +207,11 @@ function BD_House() {
                                 flexDirection: 'column',
                               }}
                             >
-                              <button onClick={handleReservation}>
+                              <button
+                                onClick={() =>
+                                  handleReservation(element.centerName)
+                                }
+                              >
                                 예약하기
                               </button>
                               <button
