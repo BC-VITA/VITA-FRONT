@@ -41,7 +41,7 @@ function LogIn() {
       <section>
         <StyledTop>
           <StyledTitle>로그인</StyledTitle>
-          <StyledTitleSub>회원일 경우 로그인 해주세요</StyledTitleSub>
+          {/* <StyledTitleSub>회원일 경우 로그인 해주세요</StyledTitleSub> */}
           <StyledHr />
         </StyledTop>
       </section>
@@ -49,26 +49,30 @@ function LogIn() {
         <form onSubmit={handleSubmit}>
           <StyledGroup1>
             <StyledGroup1_1>
-              <FloatingLabel
-                controlId="floatingInput"
-                label="ID"
-                className="id"
-                value={id}
-                onChange={handleChangeId}
-              >
-                <Form.Control type="id" placeholder="id" />
-              </FloatingLabel>
+              <StyledFloating>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="ID"
+                  className="id"
+                  value={id}
+                  onChange={handleChangeId}
+                >
+                  <Form.Control type="id" placeholder="id" />
+                </FloatingLabel>
+              </StyledFloating>
             </StyledGroup1_1>
             <StyledGroup1_1>
-              <FloatingLabel
-                controlId="floatingInput"
-                label="Password"
-                className="password"
-                value={password}
-                onChange={handleChangePassword}
-              >
-                <Form.Control type="password" placeholder="password" />
-              </FloatingLabel>
+              <StyledFloating>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Password"
+                  className="password"
+                  value={password}
+                  onChange={handleChangePassword}
+                >
+                  <Form.Control type="password" placeholder="password" />
+                </FloatingLabel>
+              </StyledFloating>
             </StyledGroup1_1>
             <StyledGroup1_1>
               <StyledButton1 type="button" onClick={handleSubmit}>
@@ -80,12 +84,15 @@ function LogIn() {
                 {' '}
                 {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
                 회원가입
-              </StyledButton2>
-            </StyledGroup1_1>
-            {/* <StyledButton2 type="submit" disabled={disabled}>
+                {/* </StyledButton2>
+            </StyledGroup1_1> */}
+                {/* <StyledButton2 type="submit" disabled={disabled}>
                 아이디/비밀번호찾기
               </StyledButton2> */}
-            {/* <div className="home">{error && <div>{error}</div>}</div> */}
+                {/* <div className="home">{error && <div>{error}</div>}</div> */}
+                {/* </StyledGroup1_1> */}
+              </StyledButton2>
+            </StyledGroup1_1>
           </StyledGroup1>
         </form>
       </section>
@@ -93,12 +100,12 @@ function LogIn() {
   );
 }
 const StyledAll = styled.div`
-  width: 125ch;
+  width: 75ch;
   margin: auto;
   margin-bottom: 300px;
 `;
 const StyledTop = styled.div`
-  margin-top: 44.2px;
+  margin-top: 60px;
 `;
 const StyledTitle = styled.div`
   /* width: 230px; */
@@ -107,6 +114,7 @@ const StyledTitle = styled.div`
   font-weight: 700;
   font-size: 45px;
   line-height: 48px;
+  text-align: center;
 
   color: #333333;
 `;
@@ -119,30 +127,33 @@ const StyledTitleSub = styled.div`
   font-weight: 500;
   font-size: 24px;
   line-height: 24px;
+  text-align: center;
 
   color: #787878;
 `;
 const StyledHr = styled.div`
-  margin-top: 20px;
-  width: 69em;
+  margin-top: 30px;
+  /* width: 69em; */
   border: 3px solid #333333;
 `;
 
 const StyledGroup1 = styled.div`
-  width: 69em;
+  /* width: 69em; */
   margin: auto;
   margin-top: 50px;
 `;
 const StyledGroup1_1 = styled.div`
   /* width: 200px; */
-  width: 639.92px;
+  width: 500px;
   height: 72.18px;
   margin: auto;
 `;
+
+const StyledFloating = styled.div``;
 const StyledButton1 = styled.button`
   color: white;
-  width: 639.92px;
-  height: 72.18px;
+  width: 500px;
+  height: 70px;
   filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.2));
   background: #ff9f9f;
   border: none;
@@ -156,22 +167,26 @@ const StyledButton1 = styled.button`
   color: #ffffff;
   margin: auto;
   padding: auto;
+  margin-top: 10px;
 `;
 const StyledButton2 = styled.button`
   color: #333333;
   border: none;
   width: 210.02px;
   height: 57.47px;
+
+  filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.2));
   background: #ffd7d7;
   border-radius: 8px;
+
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
+
   text-align: center;
-  margin: auto;
-  margin: 0 auto;
-  margin-top: 13px;
+  /* margin: auto; */
+  margin-top: 25px;
 `;
 export default LogIn;

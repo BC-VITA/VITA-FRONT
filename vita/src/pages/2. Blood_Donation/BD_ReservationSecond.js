@@ -7,7 +7,6 @@ import { format } from 'date-fns';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 
-
 const RadioButton = ({ label, value, onChange }) => {
   return (
     <label>
@@ -25,17 +24,14 @@ function S_Other() {
 
   const [date, setDate] = useState('');
   const [selectedOptions, setSelectedOptions] = useState({});
-  const [date1, setDate1] = useState('');
-
-
   const [inputData, setInputData] = useState([
     {
       date: '', //날짜
       time: '', //시간
-      wholeBlood: '',  //전혈
-      plasma: '',  //혈장
-      platelet: '',  //혈소판
-      centerName: '',  //센터명
+      wholeBlood: '', //전혈
+      plasma: '', //혈장
+      platelet: '', //혈소판
+      centerName: '', //센터명
     },
     {},
   ]);
@@ -54,15 +50,17 @@ function S_Other() {
   // 유즈이펙트 사용해서 날짜값이 달라질때마다 가능한 헌혈종류를 보여줘야한다
   useEffect(() => {
     fetch(`http://localhost:8004/blood/house/registerReservation/list`, {
-      method: 'get'
+      method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
         setInputData(res);
-      })
+      });
   }, []);
 
-  const filteredData = inputData.filter((data) => data.centerName === centerName);
+  const filteredData = inputData.filter(
+    (data) => data.centerName === centerName
+  );
 
   const filterInputDataByDate = (input) => {
     const inputDate = new Date(input.date);
@@ -84,19 +82,19 @@ function S_Other() {
     const data = filteredInputData.find((data) => data.time === time);
     return (
       <>
-        {data?.wholeBlood === "Y" && (
+        {data?.wholeBlood === 'Y' && (
           <>
             <input
               type="radio"
               name="bloodType"
               value="wholeBlood"
-              checked={selectedOptions[time] === "wholeBlood"}
+              checked={selectedOptions[time] === 'wholeBlood'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>전혈</label>
           </>
         )}
-        {data?.plasma === "Y" && (
+        {data?.plasma === 'Y' && (
           <>
             <input
               type="radio"
@@ -108,13 +106,13 @@ function S_Other() {
             <label htmlFor={time}>혈장</label>
           </>
         )}
-        {data?.platelet === "Y" && (
+        {data?.platelet === 'Y' && (
           <>
             <input
               type="radio"
               name="bloodType"
               value="platelet"
-              checked={selectedOptions[time] === "platelet"}
+              checked={selectedOptions[time] === 'platelet'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>혈소판</label>
@@ -123,8 +121,6 @@ function S_Other() {
       </>
     );
   };
-
-
   const handleOptionChange = (event, time) => {
     setSelectedOptions({ [time]: event.target.value });
   };

@@ -11,7 +11,6 @@ const Nav = () => {
     navigator('/');
     window.location.reload();
   };
-  
 
   return (
     <Stylednav>
@@ -62,18 +61,25 @@ const Nav = () => {
         </Link>
       </StyledDiv2>
       <StyledDiv3>
-        <Link to={userId ? `/mypage` : "/login"} style={{ textDecoration: 'none', color: 'white' }}>
-          <StyledDiv31>
-            <div>{userId ? `${userId}님 반갑습니다` : '로그인'}</div>
-          </StyledDiv31>
+        <Link
+          to={userId ? `/mypage` : '/login'}
+          style={{ textDecoration: 'none', color: 'white' }}
+        >
+          <StyledDiv31L>
+            <div>{userId ? `${userId}님` : '로그인'}</div>
+          </StyledDiv31L>
         </Link>
         <StyledDiv31m>
           <div>|</div>
         </StyledDiv31m>
-        <Link to={userId ? "/" : "/signup"} style={{ textDecoration: 'none', color: 'white' }}onClick={handleLogout}>
-          <StyledDiv31>
+        <Link
+          to={userId ? '/' : '/signup'}
+          style={{ textDecoration: 'none', color: 'white' }}
+          onClick={handleLogout}
+        >
+          <StyledDiv31R>
             <div>{userId ? '로그아웃' : '회원가입'}</div>
-          </StyledDiv31>
+          </StyledDiv31R>
         </Link>
       </StyledDiv3>
     </Stylednav>
@@ -167,7 +173,7 @@ const StyledDiv3 = styled.div`
   align-items: center;
   text-decoration-line: none;
 `;
-const StyledDiv31 = styled.div`
+const StyledDiv31L = styled.div`
   /* flex-direction: row; */
   text-decoration-line: none;
 
@@ -176,6 +182,20 @@ const StyledDiv31 = styled.div`
   font-weight: 400;
   font-size: 15px;
   letter-spacing: -2px;
+  text-align: right;
+
+  color: #ffffff;
+`;
+const StyledDiv31R = styled.div`
+  /* flex-direction: row; */
+  text-decoration-line: none;
+
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: -2px;
+  text-align: left;
 
   color: #ffffff;
 `;
@@ -188,6 +208,7 @@ const StyledDiv31m = styled.div`
   font-weight: 400;
   font-size: 15px;
   letter-spacing: -2px;
+  text-align: center;
 
   margin-left: 15px;
   margin-right: 15px;
