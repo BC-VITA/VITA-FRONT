@@ -12,8 +12,18 @@ function BD_House() {
   const navigate = useNavigate();
 
   const [mapSize, setMapSize] = useState([300, 300]);
+  const selectList1 = [
+    '전체',
+    '인천',
+    '서울',
+    '경기',
+    '강원',
+    '부산',
+    '광주',
+    '충북',
+    '제주',
+  ];
 
-  const selectList1 = ['전체', '인천', '서울', '경기', '강원', '광주', '부산', '제주'];
   const [firstListValue, setFirstListValue] = useState('전체');
   const [secondListOptions, setSecondListOptions] = useState([
     '검색할 지역을 골라주세요',
@@ -32,13 +42,13 @@ function BD_House() {
       setSecondListOptions(['가', '나', '다']);
     } else if (selectedValue === '인천') {
       setSecondListOptions(['가가', '나나', '다다']);
-    } else if (selectedValue === '경기도') {
+    } else if (selectedValue === '경기') {
       setSecondListOptions(['가가가', '나나나', '다다다']);
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
   }
-  
+
   const [inputData, setInputData] = useState([
     {
       hospitalName: '',
