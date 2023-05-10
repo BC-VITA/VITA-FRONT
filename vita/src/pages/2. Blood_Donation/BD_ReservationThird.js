@@ -1,3 +1,4 @@
+import React, { useState,useEffect } from 'react';
 import { useLocation ,useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
@@ -6,31 +7,33 @@ function BD_ReservationThird() {
   const navigate = useNavigate();
   const location = useLocation();
   const { state: { selectedOptions, formattedDate, centerName } = {} } = useLocation();
+  const [times, setTimes] = useState('');
+  const [asd, setAsd] = useState('F');
+  const [zxc, setZxc] = useState('F');
+  const [qwe, setQwe] = useState('F');
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    await new Promise((r) => setTimeout(r, 1000));
-    fetch('http://localhost:8004/blood/reservation', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        wholeBlood: 'b',
-        plasma: 'c',
-        platelet: 'd',
-        bloodHouseName: 'e',
-        date: 'f',
-        time: 'g',
-      }),
+  event.preventDefault();
+  await new Promise((r) => setTimeout(r, 1000));
+  fetch('http://localhost:8004/blood/reservation', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({
+      wholeBlood: zxc,
+      plasma: asd,
+      platelet: qwe,
+      bloodHouseName: centerName,
+      date: formattedDate,
+      time: times,
+    }),
+  })
+    .then((res) => {
+      res.json();
     })
-      .then((res) => {
-        res.json();
-      })
-      navigate('/');
-  };
-
-  console.log()
+    .then(() => navigate('/'))
+};
 
   return (
     <StyledAll>
@@ -66,18 +69,15 @@ function BD_ReservationThird() {
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
-
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>예약하기</StyledTitle>
         </StyledTop>
-
         <StyledCurrent>
           <StyledBar />
           <StyledCircle>
             <StyledCircleTxt>센터선택</StyledCircleTxt>
           </StyledCircle>
-
           <StyledBarM />
           <StyledCircle>
             <StyledCircleTxt>예약하기</StyledCircleTxt>
@@ -90,16 +90,15 @@ function BD_ReservationThird() {
           <StyledBar />
         </StyledCurrent>
         <StyledDiv>헌혈 예약이 완료되었습니다.</StyledDiv>
-
         <StyledBox>
           {Object.keys(selectedOptions).map((time) => (
             <div key={time}>
               <StyledDiv1>
-                <StyledDiv2>일시</StyledDiv2>
+                <StyledDiv2>시간</StyledDiv2>
                 <StyledDiv3>{time}</StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
-                <StyledDiv2>일시</StyledDiv2>
+                <StyledDiv2>헌혈종류</StyledDiv2>
                 <StyledDiv3>
                   {selectedOptions[time] === "plasma"
                     ? "혈장"
@@ -115,14 +114,14 @@ function BD_ReservationThird() {
                 <StyledDiv3>{formattedDate}</StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
-                <StyledDiv2>일시</StyledDiv2>
+                <StyledDiv2>위치</StyledDiv2>
                 <StyledDiv3>{centerName}</StyledDiv3>
               </StyledDiv1>
             </div>
           ))}
         </StyledBox>
         <button type="button" onClick={handleSubmit}>
-          서버저장
+          예약완료하기
         </button>
       </StyledSubcomment>
     </StyledAll>
