@@ -9,7 +9,7 @@ const Nav = () => {
   const handleLogout = () => {
     sessionStorage.removeItem('userId');
     navigator('/');
-    window.location.reload();    
+    window.location.reload();
   };
   
 

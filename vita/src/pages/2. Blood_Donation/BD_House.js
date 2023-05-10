@@ -15,7 +15,7 @@ function BD_House() {
 
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const [firstListValue, setFirstListValue] = useState('전체');
-  const [secondListOptions, setSecondListOptions] = useState(['검색할 지역을 골라주세요']);
+  const [secondListOptions, setSecondListOptions] = useState(['검색할 지역을 골라주세요']);//여기는 ~~시를 고르면 더 자세하게 ~~구를 고를 수 있게 한다
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
@@ -51,11 +51,12 @@ function BD_House() {
     {},
   ]);
 
-  function handleReservation() {
-    navigate('/BD_ReservationSecond');
-  }
+  const handleReservation = (centerName) => {
+    navigate('/BD_ReservationSecond', { state: { centerName } });
+  };
+  
   useEffect(() => {
-    fetch('http://localhost:8004/blood/board/list ', {
+    fetch('http://localhost:8004/blood/board/list', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -68,10 +69,7 @@ function BD_House() {
     setFirstListValue('전체');
   }, []);
 
-  const filteredData =
-    firstListValue === '전체'
-      ? inputData
-      : inputData.filter((item) => item.area === firstListValue);
+  const filteredData = firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
 
   return (
     <StyledAll>
@@ -144,7 +142,7 @@ function BD_House() {
                           {option}
                         </option>
                       ))}
-                    </select> */}
+                    </select>              여기는 ~~시를 고르면 더 자세하게 ~~구를 고를 수 있게 한다*/} 
                   </StyledFilterDiv1One>
                   <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>헌혈종류</StyledFilterDiv1Two>
@@ -170,32 +168,6 @@ function BD_House() {
                       ))}
                     </Form>
                   </StyledFilterDiv1One>
-                  {/* <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>
-                      &nbsp;기&nbsp;간&nbsp;
-                    </StyledFilterDiv1Two>
-                    <select
-                      onChange={handleFirstListChange}
-                      value={firstListValue}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList1.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </StyledFilterDiv1One> */}
                 </StyledFilter>
                 <section>
                   <Styleddiv2>
@@ -234,7 +206,7 @@ function BD_House() {
                                       flexDirection: 'column',
                                     }}
                                   >
-                                    <button onClick={handleReservation}>
+                                    <button onClick={() => handleReservation(element.centerName)}>
                                       예약하기
                                     </button>
                                     <button
