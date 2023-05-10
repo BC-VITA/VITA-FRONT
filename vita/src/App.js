@@ -13,6 +13,7 @@ import Individual from './pages/SignUp/SignUpIndividual';
 
 import Home from './pages/Main';
 import MyPage from './pages/MyPage';
+import MyPageMaine from './pages/mypage/MyPageMaine';
 
 import MyPagetest from './pages/MyPage_test';
 
@@ -72,6 +73,7 @@ function App() {
 
           {/* 마이페이지 */}
           <Route path="/MyPage" element={<MyPage />}></Route>
+          <Route path="/MyPageMaine" element={<MyPageMaine />}></Route>
 
           {/*로그인*/}
           <Route path="/Login" element={<Login />}></Route>

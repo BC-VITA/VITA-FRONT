@@ -10,6 +10,8 @@ import Service from '../img/봉사.png';
 import Reservation from '../img/헌혈.png';
 import House from '../img/헌혈의_집.png';
 import History from '../img/내역.png';
+import img from '../img/Group 10.png';
+import img2 from '../img/image 3.png';
 import Nav from 'react-bootstrap/Nav';
 
 function Main() {
@@ -99,6 +101,9 @@ function Main() {
           </StyledDiv13>
         </StyledDiv12>
       </StyledDiv1>
+      <StyledDiv2>
+        <Styledimg2 src={img2} class name="groupPhoto" alt="groupPhoto" />
+      </StyledDiv2>
       <StyledDiv4>
         <StyledDiv41>
           <StyledDiv41T>
@@ -150,7 +155,10 @@ function Main() {
             </StyledBtn44>
           </StyledDiv41B>
         </StyledDiv41>
-        <StyledDiv42></StyledDiv42>
+        <StyledDiv42>
+          {' '}
+          <Styledimg5 src={img} class name="groupPhoto" alt="groupPhoto" />
+        </StyledDiv42>
       </StyledDiv4>
     </div>
   );
@@ -265,6 +273,18 @@ const StyledDiv4 = styled.div`
   border-radius: 15px; */
   display: flex;
 `;
+const StyledDiv2 = styled.div`
+  /* background-color: black; */
+  width: 120ch;
+  margin: auto;
+`;
+const Styledimg2 = styled.img`
+  width: 120ch;
+  /* height: 102.46px; */
+  /* margin-top: 10px;
+  margin-left: 115px; */
+  margin-bottom: 50px;
+`;
 const StyledDiv41 = styled.div``;
 const StyledDiv41T = styled.div`
   display: flex;
@@ -296,6 +316,14 @@ const Styledimg4 = styled.img`
   height: 102.46px;
   margin-top: 10px;
   margin-left: 115px;
+`;
+const Styledimg5 = styled.img`
+  margin-left: 25px;
+  margin-top: 15px;
+  width: 90%;
+  /* height: 102.46px; */
+  /* margin-top: 10px;
+  margin-left: 115px; */
 `;
 const StyledBtn42 = styled.div`
   margin-left: 19px;
