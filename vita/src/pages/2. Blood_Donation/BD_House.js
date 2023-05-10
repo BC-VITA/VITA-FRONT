@@ -37,7 +37,7 @@ function BD_House() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
-  }
+ 
 
   const [inputData, setInputData] = useState([
     {
