@@ -15,8 +15,6 @@ import Home from './pages/Main';
 import MyPage from './pages/MyPage';
 import MyPageMaine from './pages/mypage/MyPageMaine';
 
-import MyPagetest from './pages/MyPage_test';
-
 import Learn from './pages/1. Learn/Learn';
 
 import BDMain from './pages/2. Blood_Donation/BD_Main';
@@ -55,6 +53,7 @@ import DMain from './pages/6. Donate/D_Main';
 //관리자페이지 모음
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
+import MPostDonation from './pages/0. Master/M_PostDonation';
 
 const startDate = '2022-01-01';
 const endDate = '2022-01-10';
@@ -143,12 +142,9 @@ function App() {
           {/*관리자 페이지 모음*/}
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
           {/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route
-            path="/M_Blood_Reservation"
-            element={<MBloodReservation />}
-          ></Route>
-          {/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
-          <Route path="/MyPagetest" element={<MyPagetest />}></Route>
+          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>
+          {/*기부하기 정보 넣는 페이지*/}
+          <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>
