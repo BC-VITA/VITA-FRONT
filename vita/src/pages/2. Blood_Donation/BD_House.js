@@ -107,7 +107,7 @@ function BD_House() {
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/BD_ReservationFirst">
+              <Nav.Link href="/BD_Reservation">
                 <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
@@ -128,6 +128,11 @@ function BD_House() {
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
+          <StyledButton2>
+            <Nav.Link href="/M_Blood_Reservation">
+              <StyledButtonDiv2>예약하기 넣기</StyledButtonDiv2>
+            </Nav.Link>
+          </StyledButton2>
         </StyledTop>
         <StyledTab1>
           <StyledFilter>
@@ -399,13 +404,37 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 510px;
+  margin-left: 330px;
 
   background: #ff9f9f;
   border-radius: 9px;
 `;
 
 const StyledButtonDiv = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 38px;
+
+  margin: auto;
+  margin-left: 28px;
+  /* identical to box height, or 100% */
+
+  color: #ffffff;
+`;
+
+const StyledButton2 = styled.div`
+  margin-top: 10px;
+  width: 165px;
+  height: 35px;
+  margin-left: 10px;
+
+  background: #ff9f9f;
+  border-radius: 9px;
+`;
+
+const StyledButtonDiv2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;

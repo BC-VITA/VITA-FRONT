@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 function BD_Story() {
   const [error, setError] = useState(null);
 
@@ -52,11 +55,6 @@ function BD_Story() {
                 <StyledSubDiv2_2g>지정헌혈후기</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Bus">
-                <StyledSubDiv2_2g>봉사후기</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -69,6 +67,48 @@ function BD_Story() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
+
+        <StyledBox>
+          <StyledBox2>
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+        </StyledBox>
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
@@ -105,7 +145,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 167px;
+  height: 112px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -197,6 +237,15 @@ const StyledButtonDiv = styled.div`
   /* identical to box height, or 100% */
 
   color: #ffffff;
+`;
+
+const StyledBox = styled.div`
+  margin-top: 30px;
+  display: flex;
+`;
+const StyledBox2 = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
 `;
 
 export default BD_Story;

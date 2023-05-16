@@ -1,40 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
+import { useNavigate } from 'react-router-dom';
+import KakaoMap from '../KakaoMap';
+import Form from 'react-bootstrap/Form';
 
-function BD_ReservationThird() {
+function BD_Reservation() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { state: { selectedOptions, formattedDate, centerName } = {} } =
-    useLocation();
-  const [times, setTimes] = useState('');
-  const [asd, setAsd] = useState('F');
-  const [zxc, setZxc] = useState('F');
-  const [qwe, setQwe] = useState('F');
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await new Promise((r) => setTimeout(r, 1000));
-    fetch('http://localhost:8004/blood/reservation', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        wholeBlood: zxc,
-        plasma: asd,
-        platelet: qwe,
-        bloodHouseName: centerName,
-        date: formattedDate,
-        time: times,
-      }),
-    })
-      .then((res) => {
-        res.json();
-      })
-      .then(() => navigate('/'));
-  };
 
   return (
     <StyledAll>
@@ -58,7 +31,7 @@ function BD_ReservationThird() {
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/BD_ReservationFirst">
+              <Nav.Link href="/BD_Reservation">
                 <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
@@ -72,58 +45,37 @@ function BD_ReservationThird() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>예약하기</StyledTitle>
+          <StyledTitle>헌혈 예약</StyledTitle>
         </StyledTop>
         <StyledCurrent>
           <StyledBar />
           <StyledCircle>
-            <StyledCircleTxt>센터선택</StyledCircleTxt>
+            <StyledCircleTxt>유의사항</StyledCircleTxt>
           </StyledCircle>
-          <StyledBarM />
-          <StyledCircle>
-            <StyledCircleTxt>예약하기</StyledCircleTxt>
-          </StyledCircle>
+          <StyledBarMg />
+          <StyledCircleg>
+            <StyledCircleTxtg>센터선택</StyledCircleTxtg>
+          </StyledCircleg>
 
-          <StyledBarM />
-          <StyledCircle>
-            <StyledCircleTxt>예약완료</StyledCircleTxt>
-          </StyledCircle>
-          <StyledBar />
+          <StyledBarMg />
+          <StyledCircleg>
+            <StyledCircleTxtg>예약하기</StyledCircleTxtg>
+          </StyledCircleg>
+
+          <StyledBarMg />
+          <StyledCircleg>
+            <StyledCircleTxtg>예약완료</StyledCircleTxtg>
+          </StyledCircleg>
+          <StyledBarg />
         </StyledCurrent>
-        <StyledDiv>헌혈 예약이 완료되었습니다.</StyledDiv>
         <StyledBox>
-          {Object.keys(selectedOptions).map((time) => (
-            <div key={time}>
-              <StyledDiv1>
-                <StyledDiv2>시간</StyledDiv2>
-                <StyledDiv3>{time}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>헌혈종류</StyledDiv2>
-                <StyledDiv3>
-                  {selectedOptions[time] === 'plasma'
-                    ? '혈장'
-                    : selectedOptions[time] === 'wholeBlood'
-                    ? '전혈'
-                    : selectedOptions[time] === 'platelet'
-                    ? '혈소판'
-                    : selectedOptions[time]}
-                </StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>일시</StyledDiv2>
-                <StyledDiv3>{formattedDate}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>위치</StyledDiv2>
-                <StyledDiv3>{centerName}</StyledDiv3>
-              </StyledDiv1>
-            </div>
-          ))}
+          <StyledBoxTitle>헌혈예약이란</StyledBoxTitle>
+          <StyledBoxComment>
+            헌혈하기 전에 홈페이지, 모바일앱(레드커넥트), CRM센터 또는 혈액원
+            직원을 통해 헌혈장소, 날짜, 시간 및 헌혈종류를 미리 예약하고 헌혈에
+            참여하는 것을 말합니다.
+          </StyledBoxComment>
         </StyledBox>
-        {/* <button type="button" onClick={handleSubmit}>
-          예약완료하기
-        </button> */}
       </StyledSubcomment>
     </StyledAll>
   );
@@ -217,7 +169,7 @@ const StyledSubcomment = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 230px;
+  width: 203px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -226,22 +178,9 @@ const StyledTitle = styled.div`
 
   color: #333333;
 `;
+
 const StyledTop = styled.div`
   display: flex;
-`;
-
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
 `;
 
 const StyledCurrent = styled.div`
@@ -250,25 +189,25 @@ const StyledCurrent = styled.div`
 `;
 
 const StyledBar = styled.div`
-  width: 130px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #ff6565;
   margin-top: 35px;
 `;
 const StyledBarg = styled.div`
-  width: 130px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
 `;
-const StyledBarM = styled.div`
-  width: 190px;
-  height: 0;
-  border: 3.5px solid #ff6565;
-  margin-top: 35px;
-`;
+// const StyledBarM = styled.div`
+//   width: 190px;
+//   height: 0;
+//   border: 3.5px solid #ff6565;
+//   margin-top: 35px;
+// `;
 const StyledBarMg = styled.div`
-  width: 190px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
@@ -298,8 +237,8 @@ const StyledCircleg = styled.div`
 const StyledCircleTxt = styled.div`
   width: 42.49px;
   height: 51px;
-  margin-left: 11px;
-  margin-top: 7px;
+  margin-left: 13px;
+  margin-top: 9px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -307,15 +246,16 @@ const StyledCircleTxt = styled.div`
   font-size: 19.5px;
   line-height: 25px;
   /* or 125% */
-  text-align: center;
+
+  letter-spacing: 0.1em;
 
   color: #333333;
 `;
 const StyledCircleTxtg = styled.div`
   width: 42.49px;
   height: 51px;
-  margin-left: 11px;
-  margin-top: 7px;
+  margin-left: 13px;
+  margin-top: 9px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -323,55 +263,13 @@ const StyledCircleTxtg = styled.div`
   font-size: 19.5px;
   line-height: 25px;
   /* or 125% */
-  text-align: center;
+
+  letter-spacing: 0.1em;
 
   color: #828282;
 `;
 
 const StyledBox = styled.div``;
-const StyledDiv = styled.div`
-  margin-top: 25px;
-  margin-bottom: 25px;
-
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 55px;
-
-  color: #2d3c89;
-`;
-const StyledDiv1 = styled.div`
-  display: flex;
-`;
-const StyledDiv2 = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 27px;
-  line-height: 50px;
-  text-align: center;
-
-  color: #333333;
-
-  width: 130px;
-  height: 60px;
-  background: #eff3ff;
-  border: 2px solid #626b8b;
-`;
-const StyledDiv3 = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 27px;
-  line-height: 50px;
-  text-align: center;
-
-  color: #101a79;
-
-  width: 49ch;
-  height: 60px;
-  background: #ffffff;
-  border: 2px solid #626b8b;
-`;
-export default BD_ReservationThird;
+const StyledBoxTitle = styled.div``;
+const StyledBoxComment = styled.div``;
+export default BD_Reservation;
