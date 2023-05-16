@@ -23,6 +23,7 @@ import BDMain from './pages/2. Blood_Donation/BD_Main';
 import BDHouse from './pages/2. Blood_Donation/BD_House';
 import BDPostHouse from './pages/2. Blood_Donation/BD_PostHouse';
 import BDBus from './pages/2. Blood_Donation/BD_Bus';
+import BDReservation from './pages/2. Blood_Donation/BD_Reservation';
 import BDReservationFirst from './pages/2. Blood_Donation/BD_ReservationFirst';
 import BDReservationSecond from './pages/2. Blood_Donation/BD_ReservationSecond';
 import BDReservationThird from './pages/2. Blood_Donation/BD_ReservationThird';
@@ -36,21 +37,30 @@ import DBDNews from './pages/3. Designated_Blood_Donation/DBD_News';
 import DBDWatchList from './pages/3. Designated_Blood_Donation/DBD_WatchList';
 
 import BDStory from './pages/4. Community/BD_Story';
-// import BDDetails from './pages/4. Community/BD_Details';
-// import BDWrite from './pages/4. Community/BD_Write';
-// import DBDStory from './pages/4. Community/DBD_Story';
-// import DBDDetails from './pages/4. Community/DBD_Details';
-// import DBDWrite from './pages/4. Community/DBD_Write';
-// import BDStory from './pages/4. Community/BD_Story';
-// import BDStory from './pages/4. Community/BD_Story';
-// import BDStory from './pages/4. Community/BD_Story';
+import BDDetails from './pages/4. Community/BD_Details';
+import BDPost from './pages/4. Community/BD_Post';
+import DBDStory from './pages/4. Community/DBD_Story';
+import DBDDetails from './pages/4. Community/DBD_Details';
+import DBDPost from './pages/4. Community/DBD_Post';
 
 import SMain from './pages/5. Service/S_Main';
+import SGaneral from './pages/5. Service/S_Ganeral';
+import SPostGT from './pages/5. Service/S_PostGT';
+import SPostGA from './pages/5. Service/S_PostGA';
+import SGroup from './pages/5. Service/S_Group';
+import SPostGroup from './pages/5. Service/S_PostGroup';
 import SOther from './pages/5. Service/S_Other';
+import SPostOther from './pages/5. Service/S_PostOther';
 import SWatchList from './pages/5. Service/S_WatchList';
+import SHistory from './pages/5. Service/S_History';
 
 import DMain from './pages/6. Donate/D_Main';
-// import DMain from './pages/6. Donate';
+import DDonation from './pages/6. Donate/D_Donation';
+import DDonationDetails from './pages/6. Donate/D_DonationDetails';
+import DSelectDonation from './pages/6. Donate/D_SelectDonation.js';
+import DReceipt from './pages/6. Donate/D_Receipt';
+import DReceiptDetails from './pages/6. Donate/D_ReceiptDetails';
+import DSelectReceipt from './pages/6. Donate/D_SelectReceipt';
 
 //관리자페이지 모음
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
@@ -84,15 +94,15 @@ function App() {
           <Route path="/SignUpHospital" element={<Hospital />}></Route>
           <Route path="/SignUpIndividual" element={<Individual />}></Route>
 
-          <Route path="/Learn" element={<Learn />}></Route>
           {/* 알아보자 */}
+          <Route path="/Learn" element={<Learn />}></Route>
 
           {/*헌혈하자*/}
           <Route path="/BD_Main" element={<BDMain />}></Route>
-          {/*헌혈의 집 목록*/}
           <Route path="/BD_House" element={<BDHouse />}></Route>
           <Route path="/BD_PostHouse" element={<BDPostHouse />}></Route>
           <Route path="/BD_Bus" element={<BDBus />}></Route>
+          <Route path="/BD_Reservation" element={<BDReservation />}></Route>
           <Route
             path="/BD_ReservationFirst"
             element={<BDReservationFirst />}
@@ -121,8 +131,15 @@ function App() {
           <Route path="/DBD_News" element={<DBDNews />}></Route>
           <Route path="/DBD_WatchList" element={<DBDWatchList />}></Route>
 
-          <Route path="/BD_Story" element={<BDStory />}></Route>
           {/*이야기하자*/}
+          <Route path="/BD_Story" element={<BDStory />}></Route>
+          <Route path="/BD_Details" element={<BDDetails />}></Route>
+          <Route path="/BD_Post" element={<BDPost />}></Route>
+          <Route path="/DBD_Story" element={<DBDStory />}></Route>
+          <Route path="/DBD_Details" element={<DBDDetails />}></Route>
+          <Route path="/DBD_Post" element={<DBDPost />}></Route>
+
+          {/*봉사하자*/}
           <Route
             path="/S_Main"
             element={
@@ -133,20 +150,37 @@ function App() {
               />
             }
           ></Route>
-          {/*봉사하자, 헌혈하자 캘린더실험용 사용중*/}
+          <Route path="/S_Ganeral" element={<SGaneral />}></Route>
+          <Route path="/S_PostGT" element={<SPostGT />}></Route>
+          <Route path="/S_PostGA" element={<SPostGA />}></Route>
+          <Route path="/S_Group" element={<SGroup />}></Route>
+          <Route path="/S_PostGroup" element={<SPostGroup />}></Route>
           <Route path="/S_Other" element={<SOther />}></Route>
+          <Route path="/S_PostOther" element={<SPostOther />}></Route>
           <Route path="/S_WatchList" element={<SWatchList />}></Route>
+          <Route path="/S_History" element={<SHistory />}></Route>
 
+          {/*기부하자*/}
           <Route path="/D_Main" element={<DMain />}></Route>
-          {/*기부하자, 지정헌혈 채팅api실험용으로 사용중*/}
+          <Route path="/D_Donation" element={<DDonation />}></Route>
+          <Route
+            path="/D_DonationDetails"
+            element={<DDonationDetails />}
+          ></Route>
+          <Route path="/D_SelectDonation" element={<DSelectDonation />}></Route>
+          <Route path="/D_Receipt" element={<DReceipt />}></Route>
+          <Route path="/D_ReceiptDetails" element={<DReceiptDetails />}></Route>
+          <Route path="/D_SelectReceipt" element={<DSelectReceipt />}></Route>
 
           {/*관리자 페이지 모음*/}
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
+
           {/*헌혈의 집 정보 Insert하는 페이지*/}
           <Route
             path="/M_Blood_Reservation"
             element={<MBloodReservation />}
           ></Route>
+
           {/*날짜별 가능한 예약 목록을 저장하는 페이지*/}
           <Route path="/MyPagetest" element={<MyPagetest />}></Route>
         </Routes>

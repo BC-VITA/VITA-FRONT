@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
 
-function S_Ganeral() {
+import serviceimg from '../../img/serviceimg.png';
+
+function D_DonationDetails() {
   const [error, setError] = useState(null);
 
   const [inputData, setInputData] = useState([
@@ -39,36 +41,21 @@ function S_Ganeral() {
     <StyledAll>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>봉사하자</StyledSubDiv1>
+          <StyledSubDiv1>기부하기</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1>
-              <Nav.Link href="/S_Main">
-                <StyledSubDiv2_2g>자원봉사란</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_Ganeral">
-                <StyledSubDiv2_2g>개인봉사</StyledSubDiv2_2g>
+              <Nav.Link href="/D_Main">
+                <StyledSubDiv2_2g>기부란</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/S_Group">
-                <StyledSubDiv2_2>기업 단체 봉사</StyledSubDiv2_2>
+              <Nav.Link href="/D_Donation">
+                <StyledSubDiv2_2>기부하기</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
             <StyledSubDiv2_1>
-              <Nav.Link href="/S_Other">
-                <StyledSubDiv2_2g>타기관 봉사정보</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_WatchList">
-                <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_History">
-                <StyledSubDiv2_2g>봉사 활동 기록</StyledSubDiv2_2g>
+              <Nav.Link href="/D_Receipt">
+                <StyledSubDiv2_2g>기부 영수증</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
           </StyledSubDiv2>
@@ -76,7 +63,7 @@ function S_Ganeral() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>기업 단체 봉사</StyledTitle>
+          <StyledTitle>기부란?</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
@@ -87,7 +74,6 @@ function S_Ganeral() {
     </StyledAll>
   );
 }
-
 const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
@@ -102,7 +88,7 @@ const StyledSubDiv1 = styled.div`
   width: 190px;
   height: 50px;
   /* left: 370px;
-  top: 123px; */
+          top: 123px; */
 
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
@@ -119,7 +105,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 332px;
+  height: 167px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -177,7 +163,7 @@ const StyledSubcomment = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 223px;
+  width: 203px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -189,11 +175,12 @@ const StyledTitle = styled.div`
 const StyledTop = styled.div`
   display: flex;
 `;
+
 const StyledButton = styled.div`
   margin-top: 3px;
   width: 125px;
   height: 35px;
-  margin-left: 520px;
+  margin-left: 540px;
 
   background: #ff9f9f;
   border-radius: 9px;
@@ -212,15 +199,24 @@ const StyledButtonDiv = styled.div`
   color: #ffffff;
 `;
 
+const StyledCommentTitle = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 48px;
+  /* margin-left: 375px; */
+  margin-bottom: 10px;
+
+  color: #333333;
+`;
 const StyledComment = styled.div`
   /* width: 1100px; */
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
-  line-height: 28px;
-  margin-top: 10px;
   margin-bottom: 50px;
   margin-right: 60px;
 `;
-export default S_Ganeral;
+export default D_DonationDetails;

@@ -75,7 +75,7 @@ function BD_Main() {
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/BD_ReservationFirst">
+              <Nav.Link href="/BD_Reservation">
                 <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>

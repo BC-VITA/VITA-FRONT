@@ -236,8 +236,138 @@ function DBD_General() {
                 </Styleddiv2>
               </Tab.Content>
             </Tab>
+
             <Tab eventKey="home" title="병원">
-              <Tab.Content>skjfjsf</Tab.Content>
+              <Tab.Content>
+                <StyledFilter>
+                  <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+                    <select
+                      onChange={handleFirstListChange}
+                      value={firstListValue}
+                      style={{ border: 'none' }}
+                    >
+                      {selectList1.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    {/* <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
+                      {secondListOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select> */}
+                  </StyledFilterDiv1One>
+                  <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
+                    <Form>
+                      {['checkbox'].map((type) => (
+                        <div key={`default-${type}`} className="mb-3">
+                          <Form.Check
+                            type={type}
+                            id={`default-${type}`}
+                            label="RH-"
+                          />
+                          <Form.Check
+                            type={type}
+                            id={`default-${type}`}
+                            label="RH+"
+                          />
+                        </div>
+                      ))}
+                    </Form>
+                  </StyledFilterDiv1One>
+                  {/* <StyledFilterDiv1One>
+                    <StyledFilterDiv1Two>
+                      &nbsp;기&nbsp;간&nbsp;
+                    </StyledFilterDiv1Two>
+                    <select
+                      onChange={handleFirstListChange}
+                      value={firstListValue}
+                      style={{ border: 'none' }}
+                    >
+                      {selectList1.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={secondListOptions}
+                      onChange={setSecondListOptions}
+                    >
+                      {secondListOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </StyledFilterDiv1One> */}
+                </StyledFilter>
+
+                <Styleddiv2>
+                  <Accordion defaultActiveKey="0">
+                    <Table striped bordered hover size="sm">
+                      <thead>
+                        <tr>
+                          <th>제목 / 내용</th>
+                          <th>모집인원 및 현황</th>
+                        </tr>
+                      </thead>
+
+                      <Styledtbody1>
+                        {inputData.map((element, index) => {
+                          return (
+                            <Styledtr>
+                              <Styledtd>
+                                <Accordion.Item eventKey={index}>
+                                  <Accordion.Header>
+                                    {element.title}
+                                    <br />
+                                    {element.startDate}
+                                    <br />
+                                    필요한 혈액형 : {element.patientBlood}
+                                    <br />
+                                    혈액 종류 : {element.bloodType}
+                                    <br />
+                                    장소 : {element.hospitalName}
+                                  </Accordion.Header>
+                                  <Accordion.Body colSpan={2}>
+                                    {element.content}
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                              </Styledtd>
+                              <Styledtd>
+                                {element.bloodNumber}
+                                {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
+                                <br />
+                                <Styledimg
+                                  src={icon}
+                                  class
+                                  name="main-icon"
+                                  alt="logo"
+                                />
+                                {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
+                                <br />
+                                {/* <Nav.Link type="button" href="/DBD_PostGeneral">
+                                  <StyledButtonDiv>참여하기</StyledButtonDiv>
+                                </Nav.Link> */}
+                                <button type="button">참여하기</button>
+                              </Styledtd>
+                            </Styledtr>
+                          );
+                        })}
+                      </Styledtbody1>
+                    </Table>
+                  </Accordion>
+                </Styleddiv2>
+              </Tab.Content>
             </Tab>
           </Tabs>
         </StyledTab1>
