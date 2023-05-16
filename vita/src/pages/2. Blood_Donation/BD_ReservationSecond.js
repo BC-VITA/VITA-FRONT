@@ -54,6 +54,7 @@ function S_Other() {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         setInputData(res);
       });
   }, []);
@@ -87,8 +88,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="wholeBlood"
-              checked={selectedOptions[time] === 'wholeBlood'}
+              value="전혈"
+              checked={selectedOptions[time] === '전혈'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>전혈</label>
@@ -99,8 +100,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="plasma"
-              checked={selectedOptions[time] === "plasma"}
+              value="혈장"
+              checked={selectedOptions[time] === "혈장"}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>혈장</label>
@@ -111,8 +112,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="platelet"
-              checked={selectedOptions[time] === 'platelet'}
+              value="혈소판"
+              checked={selectedOptions[time] === '혈소판'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>혈소판</label>
