@@ -4,6 +4,7 @@ const M_PostDonation = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
+    const userId = sessionStorage.getItem('userId');
 
     const handleChangeTitle = (event) => {
         setTitle(event.target.value);
@@ -30,7 +31,8 @@ const M_PostDonation = () => {
         }
 
         const data = {
-            image: selectedImage,
+            userId: userId,
+            imageUrl: selectedImage,
             title: title,
             content: content
         };

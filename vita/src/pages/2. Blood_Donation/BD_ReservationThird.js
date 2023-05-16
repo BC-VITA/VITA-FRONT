@@ -8,35 +8,48 @@ function BD_ReservationThird() {
   const location = useLocation();
   const { state: { selectedOptions, formattedDate, centerName } = {} } = useLocation();
   const [times, setTimes] = useState('');
-  const [asd, setAsd] = useState('F');
-  const [zxc, setZxc] = useState('F');
-  const [qwe, setQwe] = useState('F');
+  const [isBloodType,setIsBloodType] = useState('');
 
+    useEffect(() => {
+      const times = Object.keys(selectedOptions);
+     
+
+      const bloodTypeString = Object.values(selectedOptions)
+        .map((times) => Object.values(times).join(''))
+        .join('');
+      setIsBloodType(bloodTypeString);
+      const bloodTypesString = bloodTypeString.toString();
+      setIsBloodType(bloodTypesString);
+
+      const timeString = times.join(',');
+      setTimes(timeString);
+      }, [selectedOptions]);
+      
   const handleSubmit = async (event) => {
-  event.preventDefault();
-  await new Promise((r) => setTimeout(r, 1000));
-  fetch('http://localhost:8004/blood/reservation', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-    },
-    body: JSON.stringify({
-      wholeBlood: zxc,
-      plasma: asd,
-      platelet: qwe,
-      bloodHouseName: centerName,
-      date: formattedDate,
-      time: times,
-    }),
-  })
-    .then((res) => {
-      res.json();
+    event.preventDefault();
+    await new Promise((r) => setTimeout(r, 1000));
+    
+    fetch('http://localhost:8004/blood/reservation', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        isBloodType: isBloodType,
+        bloodHouseName: centerName,
+        date: formattedDate,
+        time: times,
+      }),
     })
-    .then(() => navigate('/'))
-};
-
+      .then((res) => {
+        res.json();
+      })
+      .then(() => navigate('/'));
+  };
+  
   return (
     <StyledAll>
+      <div>{isBloodType},{times}</div>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
@@ -82,7 +95,6 @@ function BD_ReservationThird() {
           <StyledCircle>
             <StyledCircleTxt>예약하기</StyledCircleTxt>
           </StyledCircle>
-
           <StyledBarM />
           <StyledCircle>
             <StyledCircleTxt>예약완료</StyledCircleTxt>
@@ -100,13 +112,7 @@ function BD_ReservationThird() {
               <StyledDiv1>
                 <StyledDiv2>헌혈종류</StyledDiv2>
                 <StyledDiv3>
-                  {selectedOptions[time] === "plasma"
-                    ? "혈장"
-                    : selectedOptions[time] === "wholeBlood"
-                      ? "전혈"
-                      : selectedOptions[time] === "platelet"
-                        ? "혈소판"
-                        : selectedOptions[time]}
+                  {selectedOptions[time]}
                 </StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
