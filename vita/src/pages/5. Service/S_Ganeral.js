@@ -46,16 +46,16 @@ function S_Ganeral() {
                 <StyledSubDiv2_2g>자원봉사란</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_Ganeral">
-                <StyledSubDiv2_2g>개인봉사</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/S_Group">
-                <StyledSubDiv2_2>기업 단체 봉사</StyledSubDiv2_2>
+              <Nav.Link href="/S_Ganeral">
+                <StyledSubDiv2_2>개인봉사</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/S_Group">
+                <StyledSubDiv2_2g>기업 단체 봉사</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
             <StyledSubDiv2_1>
               <Nav.Link href="/S_Other">
                 <StyledSubDiv2_2g>타기관 봉사정보</StyledSubDiv2_2g>
@@ -76,7 +76,7 @@ function S_Ganeral() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>기업 단체 봉사</StyledTitle>
+          <StyledTitle>개인봉사</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
@@ -177,7 +177,7 @@ const StyledSubcomment = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 223px;
+  width: 203px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -193,7 +193,7 @@ const StyledButton = styled.div`
   margin-top: 3px;
   width: 125px;
   height: 35px;
-  margin-left: 520px;
+  margin-left: 540px;
 
   background: #ff9f9f;
   border-radius: 9px;

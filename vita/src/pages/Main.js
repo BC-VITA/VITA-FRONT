@@ -93,7 +93,7 @@ function Main() {
                 </Nav.Link>
               </StyledBtn>
               <StyledBtn>
-                <Nav.Link href="/S_GaneralTime">
+                <Nav.Link href="/S_Ganeral">
                   <StyledBtnTxt>봉사하러 가기</StyledBtnTxt>
                 </Nav.Link>
               </StyledBtn>

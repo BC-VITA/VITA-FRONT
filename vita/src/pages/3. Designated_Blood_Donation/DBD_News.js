@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 function DBD_News() {
   const [hostipalcall, sethostipalcall] = useState('');
   const [bloodtype, setbloodtype] = useState('');
@@ -117,8 +120,9 @@ function DBD_News() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
+        c
       </StyledSubcomment>
-      z<div className="home">{error && <div>{error}</div>}</div>
+      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
@@ -248,4 +252,12 @@ const StyledButtonDiv = styled.div`
   color: #ffffff;
 `;
 
+const StyledBox = styled.div`
+  margin-top: 30px;
+  display: flex;
+`;
+const StyledBox2 = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
+`;
 export default DBD_News;
