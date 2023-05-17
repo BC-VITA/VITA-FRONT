@@ -176,6 +176,7 @@ function App() {
 
           {/*헌혈의 집 정보 Insert하는 페이지*/}
           <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>
+          <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>

@@ -1,7 +1,6 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -21,7 +20,7 @@ function MyPageMaine() {
   const [userBlood, setuserBlood] = useState('');
   const [sex, setUserSex] = useState('');
   const [isRH, setisRH] = useState('');
-  const [BloodHistory, setBloodHistory] = useState('');
+  const [bloodHistory, setBloodHistory] = useState('');
 
   const handleChangePw = ({ target: { value } }) => setUserPw(value);
   const handleChangePw1 = ({ target: { value } }) => setUserPw1(value);
@@ -61,12 +60,10 @@ function MyPageMaine() {
       userBlood: userBlood,
       sex: sex,
       isRH: isRH,
-      BloodHistory: BloodHistory,
-      password: userPw,
-      confirmPassword: userPw1,
+      bloodHistory: bloodHistory,
     };
   
-    fetch('http://localhost:8004/user/mypage1', {
+    fetch('http://localhost:8004/user/mypage', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -78,9 +75,9 @@ function MyPageMaine() {
         // 응답 처리
       })
       .catch((error) => {
-        // 에러 처리
+        console.log("오류났음")
       });
-    console.log("123");
+    console.log("전송완료");
   }
   
 
@@ -105,6 +102,15 @@ function MyPageMaine() {
       <StyledBox id="myInformation">
         <StyledDiv>
           <StyledDiv1>
+            <div>{userId}</div>
+            <div>{userName}</div>
+            <div>{userPhoneNumber}</div>
+            <div>{userEmail}</div>
+            <div>{userBirth}</div>
+            <div>{userBlood}</div>
+            <div>{sex}</div>
+            <div>{isRH}</div>
+            <div>{bloodHistory}</div>
             <StyledTxtB>나의 정보</StyledTxtB>
             <StyledButton type="button" onClick={writeDonateBoard}>
                 <StyledButtonTxt>정보 수정하기</StyledButtonTxt>
@@ -215,40 +221,40 @@ function MyPageMaine() {
         </StyledDiv4>
       </StyledBox2>
       <StyledBox3 id="write">
-        <StyledDiv3_1>
+        <StyledDiv31>
           <StyledTxtB>내가 작성한 게시물</StyledTxtB>
           <StyledTxt2>지정헌혈 | 봉사 | 후기</StyledTxt2>
-        </StyledDiv3_1>
+        </StyledDiv31>
       </StyledBox3>
       <StyledBox3 id="write">
-        <StyledDiv3_1>
+        <StyledDiv31>
           <StyledTxtB>신청기록</StyledTxtB>
           <StyledTxt2>헌혈 에약 | 봉사 | 지정헌혈</StyledTxt2>
-        </StyledDiv3_1>
+        </StyledDiv31>
       </StyledBox3>
       <StyledBox4>
-        <StyledDiv3_2>
+        <StyledDiv32>
           <StyledTxtB>헌혈 예약</StyledTxtB>
-        </StyledDiv3_2>
+        </StyledDiv32>
       </StyledBox4>
       <StyledBox3 id="write">
-        <StyledDiv3_1>
+        <StyledDiv31>
           <StyledTxtB>관심목록</StyledTxtB>
           <StyledTxt2>헌혈 에약 | 봉사 | 지정헌혈</StyledTxt2>
-        </StyledDiv3_1>
+        </StyledDiv31>
       </StyledBox3>
       <StyledBox5 id="record">
-        <StyledDiv3_2>
+        <StyledDiv32>
           <StyledTxtB>지정헌혈</StyledTxtB>
-        </StyledDiv3_2>
+        </StyledDiv32>
       </StyledBox5>
       <StyledBox3 id="write">
-        <StyledDiv3_1>
+        <StyledDiv31>
           <StyledTxtB>채팅</StyledTxtB>
-        </StyledDiv3_1>
+        </StyledDiv31>
       </StyledBox3>
       <StyledBox6 id="chat">
-        <StyledDiv3_2></StyledDiv3_2>
+        <StyledDiv32></StyledDiv32>
       </StyledBox6>
     </StyledAll>
   );
@@ -459,146 +465,14 @@ const StyledTxt2 = styled.div`
 
   color: #333333;
 `;
-const StyledDiv3_1 = styled.div`
+const StyledDiv31 = styled.div`
   padding-top: 20px;
   margin-left: 30px;
   display: flex;
 `;
-const StyledBox3_1 = styled.div`
-  margin-left: 10px;
-
-  margin-bottom: 30px;
-
-  padding-bottom: 10px;
-
-  width: 1100px;
-  border: 1px solid #666666;
-`;
-const StyledDiv3_2 = styled.div`
+const StyledDiv32 = styled.div`
   padding-top: 20px;
   margin-left: 30px;
-`;
-const StyledDiv3_3 = styled.div`
-  padding-top: 20px;
-  /* margin-left: 30px; */
-  display: flex;
-  /* margin-left: 10px; */
-
-  margin-bottom: 30px;
-
-  padding-bottom: 10px;
-
-  width: 1030px;
-  /* height: 45px; */
-  border: 1px solid #666666;
-`;
-const StyledTxt3 = styled.div`
-  margin-left: 50px;
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 25px;
-  /* or 96% */
-
-  color: #333333;
-`;
-
-// 따온거
-const Styledtr = styled.div`
-  display: flex;
-`;
-const Styledth1 = styled.div`
-  width: 400px;
-  background-color: beige;
-`;
-const Styledth2 = styled.div`
-  width: 200px;
-  background-color: beige;
-`;
-const Styledth3 = styled.div`
-  width: 200px;
-  background-color: beige;
-`;
-const Styledtd = styled.div`
-  display: flex;
-  width: 300px;
-  background-color: beige;
-`;
-const StyledTdButton = styled.button`
-  width: 130px;
-  height: 35px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
-  border: none;
-
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 35px;
-  /* identical to box height, or 114% */
-
-  color: #ffffff;
-`;
-const StyledTdButton2 = styled.button`
-  width: 130px;
-  height: 35px;
-
-  background: #f55757;
-  border-radius: 9px;
-  border: none;
-
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 35px;
-  /* identical to box height, or 114% */
-
-  color: #ffffff;
-`;
-const Styledtd1 = styled.div`
-  width: 500px;
-`;
-const Styledtd2 = styled.div`
-  /* display: block; */
-  margin-top: 50px;
-`;
-const Styledtxt = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 19px;
-  line-height: 30px;
-  /* or 158% */
-
-  letter-spacing: 0.05em;
-
-  color: #333333;
-`;
-
-// 옛날
-const StyledTable = styled(Table)`
-  border-collapse: collapse;
-  th,
-  tbody,
-  td td {
-    padding: 0;
-  }
-`;
-
-const StyledTab1 = styled.div`
-  width: 95%;
-  margin-top: 5px;
-  padding-bottom: 500px;
-`;
-
-const Styleddiv2 = styled.div`
-  /* margin-right: 100px;
-  margin-left: 100px; */
-  text-align: center;
 `;
 
 const StyledBox4 = styled.div`

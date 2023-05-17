@@ -3,61 +3,41 @@ import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
 
-import serviceimg from '../../img/serviceimg.png';
-
 function D_Donation() {
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [boardList, setBoardList] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
+    fetchBoardList();
   }, []);
+
+  const fetchBoardList = () => {
+    fetch("http://localhost:8004/donate/board")
+      .then((response) => response.json())
+      .then((data) => setBoardList(data.content))
+      .catch((error) => console.error("Error fetching board list:", error));
+  };
+
   return (
     <StyledAll>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>기부하기</StyledSubDiv1>
           <StyledSubDiv2>
-            <StyledSubDiv2_1>
+            <StyledSubDiv21>
               <Nav.Link href="/D_Main">
-                <StyledSubDiv2_2g>기부란</StyledSubDiv2_2g>
+                <StyledSubDiv22g>기부란</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
+            </StyledSubDiv21>
+            <StyledSubDiv21p>
               <Nav.Link href="/D_Donation">
-                <StyledSubDiv2_2>기부하기</StyledSubDiv2_2>
+                <StyledSubDiv22>기부하기</StyledSubDiv22>
               </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
+            </StyledSubDiv21p>
+            <StyledSubDiv21>
               <Nav.Link href="/D_Receipt">
-                <StyledSubDiv2_2g>기부 영수증</StyledSubDiv2_2g>
+                <StyledSubDiv22g>기부 영수증</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
+            </StyledSubDiv21>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -71,6 +51,16 @@ function D_Donation() {
           </StyledButton>
         </StyledTop>
       </StyledSubcomment>
+      <div>
+      <h2>Board List</h2>
+      {boardList.map((board) => (
+        <div key={board.boardId}>
+          <h3>{board.title}</h3>
+          {board.imageUrl && <img src={board.imageUrl} alt="Board Image" />}
+          <p>{board.content}</p>
+        </div>
+      ))}
+    </div>
     </StyledAll>
   );
 }
@@ -108,21 +98,21 @@ const StyledSubDiv2 = styled.div`
   height: 167px;
   border: 3px solid #d7d7d7;
 `;
-const StyledSubDiv2_1 = styled.div`
+const StyledSubDiv21 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
   height: 55px;
   margin-left: 3px;
   margin-right: 3px;
 `;
-const StyledSubDiv2_1p = styled.div`
+const StyledSubDiv21p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
   height: 55px;
   margin-left: 3px;
   margin-right: 3px;
 `;
-const StyledSubDiv2_2 = styled.div`
+const StyledSubDiv22 = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -138,7 +128,7 @@ const StyledSubDiv2_2 = styled.div`
 
   color: #333333;
 `;
-const StyledSubDiv2_2g = styled.div`
+const StyledSubDiv22g = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -197,26 +187,5 @@ const StyledButtonDiv = styled.div`
   /* identical to box height, or 100% */
 
   color: #ffffff;
-`;
-
-const StyledCommentTitle = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 48px;
-  /* margin-left: 375px; */
-  margin-bottom: 10px;
-
-  color: #333333;
-`;
-const StyledComment = styled.div`
-  /* width: 1100px; */
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  margin-bottom: 50px;
-  margin-right: 60px;
 `;
 export default D_Donation;
