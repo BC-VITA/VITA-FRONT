@@ -35,11 +35,11 @@ function BD_Reservation() {
                 <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
+            {/* <StyledSubDiv2_1>
               <Nav.Link href="/BD_History">
                 <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2_1>
+            </StyledSubDiv2_1> */}
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -68,6 +68,7 @@ function BD_Reservation() {
           </StyledCircleg>
           <StyledBarg />
         </StyledCurrent>
+        <StyledDiv1>01. 유의사항</StyledDiv1>
         <StyledBox>
           <StyledBoxTitle>헌혈예약이란</StyledBoxTitle>
           <StyledBoxComment>
@@ -111,7 +112,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 278px;
+  height: 223px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -269,7 +270,47 @@ const StyledCircleTxtg = styled.div`
   color: #828282;
 `;
 
-const StyledBox = styled.div``;
-const StyledBoxTitle = styled.div``;
-const StyledBoxComment = styled.div``;
+const StyledDiv1 = styled.div`
+  margin-top: 25px;
+  margin-bottom: 25px;
+
+  // padding-left : 20px;
+  // padding-top : 15px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 32px;
+
+  color: #333333;
+`;
+
+const StyledBox = styled.div`
+  width: 885px;
+  height: 150px;
+
+  background: #ffefef;
+  border: 1px solid #ff6565;
+`;
+const StyledBoxTitle = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 32px;
+  /* identical to box height, or 100% */
+
+  color: #000000;
+`;
+const StyledBoxComment = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  /* or 133% */
+
+  color: #000000;
+`;
 export default BD_Reservation;

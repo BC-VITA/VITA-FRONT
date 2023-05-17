@@ -229,7 +229,7 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 580px;
+  margin-left: 535px;
 
   background: #ff9f9f;
   border-radius: 9px;

@@ -75,11 +75,11 @@ function BD_ReservationThird() {
                 <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
+            {/* <StyledSubDiv2_1>
               <Nav.Link href="/BD_History">
                 <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2_1>
+            </StyledSubDiv2_1> */}
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -90,18 +90,25 @@ function BD_ReservationThird() {
         <StyledCurrent>
           <StyledBar />
           <StyledCircle>
-            <StyledCircleTxt>센터선택</StyledCircleTxt>
+            <StyledCircleTxt>유의사항</StyledCircleTxt>
           </StyledCircle>
-          <StyledBarM />
-          <StyledCircle>
-            <StyledCircleTxt>예약하기</StyledCircleTxt>
-          </StyledCircle>
-          <StyledBarM />
-          <StyledCircle>
-            <StyledCircleTxt>예약완료</StyledCircleTxt>
-          </StyledCircle>
-          <StyledBar />
+          <StyledBarMg />
+          <StyledCircleg>
+            <StyledCircleTxtg>센터선택</StyledCircleTxtg>
+          </StyledCircleg>
+
+          <StyledBarMg />
+          <StyledCircleg>
+            <StyledCircleTxtg>예약하기</StyledCircleTxtg>
+          </StyledCircleg>
+
+          <StyledBarMg />
+          <StyledCircleg>
+            <StyledCircleTxtg>예약완료</StyledCircleTxtg>
+          </StyledCircleg>
+          <StyledBarg />
         </StyledCurrent>
+
         <StyledDiv>헌혈 예약이 완료되었습니다.</StyledDiv>
         <StyledBox>
           {Object.keys(selectedOptions).map((time) => (
@@ -171,7 +178,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 278px;
+  height: 223px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -229,7 +236,7 @@ const StyledSubcomment = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 230px;
+  width: 203px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -238,22 +245,9 @@ const StyledTitle = styled.div`
 
   color: #333333;
 `;
+
 const StyledTop = styled.div`
   display: flex;
-`;
-
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
 `;
 
 const StyledCurrent = styled.div`
@@ -262,25 +256,25 @@ const StyledCurrent = styled.div`
 `;
 
 const StyledBar = styled.div`
-  width: 130px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #ff6565;
   margin-top: 35px;
 `;
 const StyledBarg = styled.div`
-  width: 130px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
 `;
-const StyledBarM = styled.div`
-  width: 190px;
-  height: 0;
-  border: 3.5px solid #ff6565;
-  margin-top: 35px;
-`;
+// const StyledBarM = styled.div`
+//   width: 190px;
+//   height: 0;
+//   border: 3.5px solid #ff6565;
+//   margin-top: 35px;
+// `;
 const StyledBarMg = styled.div`
-  width: 190px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
@@ -310,8 +304,8 @@ const StyledCircleg = styled.div`
 const StyledCircleTxt = styled.div`
   width: 42.49px;
   height: 51px;
-  margin-left: 11px;
-  margin-top: 7px;
+  margin-left: 13px;
+  margin-top: 9px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -319,15 +313,16 @@ const StyledCircleTxt = styled.div`
   font-size: 19.5px;
   line-height: 25px;
   /* or 125% */
-  text-align: center;
+
+  letter-spacing: 0.1em;
 
   color: #333333;
 `;
 const StyledCircleTxtg = styled.div`
   width: 42.49px;
   height: 51px;
-  margin-left: 11px;
-  margin-top: 7px;
+  margin-left: 13px;
+  margin-top: 9px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -335,7 +330,8 @@ const StyledCircleTxtg = styled.div`
   font-size: 19.5px;
   line-height: 25px;
   /* or 125% */
-  text-align: center;
+
+  letter-spacing: 0.1em;
 
   color: #828282;
 `;
