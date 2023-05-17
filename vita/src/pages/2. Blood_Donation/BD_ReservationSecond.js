@@ -55,7 +55,6 @@ function S_Other() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setInputData(res);
       });
   }, []);
@@ -89,8 +88,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="전혈"
-              checked={selectedOptions[time] === '전혈'}
+              value="wholeBlood"
+              checked={selectedOptions[time] === 'wholeBlood'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>전혈</label>
@@ -101,11 +100,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-          //
-              //value="plasma"
-              //checked={selectedOptions[time] === 'plasma'}
-//               value="혈장"
-//               checked={selectedOptions[time] === "혈장"}
+              value="plasma"
+              checked={selectedOptions[time] === 'plasma'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>혈장</label>
@@ -116,8 +112,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="혈소판"
-              checked={selectedOptions[time] === '혈소판'}
+              value="platelet"
+              checked={selectedOptions[time] === 'platelet'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>혈소판</label>
@@ -175,17 +171,17 @@ function S_Other() {
           <StyledCircle>
             <StyledCircleTxt>유의사항</StyledCircleTxt>
           </StyledCircle>
-          <StyledBarMg />
-          <StyledCircleg>
-            <StyledCircleTxtg>센터선택</StyledCircleTxtg>
-          </StyledCircleg>
+          <StyledBar />
+          <StyledCircle>
+            <StyledCircleTxt>센터선택</StyledCircleTxt>
+          </StyledCircle>
 
-          <StyledBarMg />
-          <StyledCircleg>
-            <StyledCircleTxtg>예약하기</StyledCircleTxtg>
-          </StyledCircleg>
+          <StyledBar />
+          <StyledCircle>
+            <StyledCircleTxt>예약하기</StyledCircleTxt>
+          </StyledCircle>
 
-          <StyledBarMg />
+          <StyledBar />
           <StyledCircleg>
             <StyledCircleTxtg>예약완료</StyledCircleTxtg>
           </StyledCircleg>
