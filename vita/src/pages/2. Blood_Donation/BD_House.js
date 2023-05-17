@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
 import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 function BD_House() {
+  const [id, setId] = useState('');
+  const handleChangeId = ({ target: { value } }) => setId(value);
+
   const navigate = useNavigate();
 
   const [mapSize, setMapSize] = useState([300, 300]);
@@ -123,7 +125,7 @@ function BD_House() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>헌혈의 집 찾기</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/M_HouseInfo">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
@@ -132,12 +134,12 @@ function BD_House() {
             <Nav.Link href="/M_Blood_Reservation">
               <StyledButtonDiv2>예약하기 넣기</StyledButtonDiv2>
             </Nav.Link>
-          </StyledButton2>
+          </StyledButton2> */}
         </StyledTop>
         <StyledTab1>
           <StyledFilter>
-            <StyledFilterDiv1One>
-              <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+            <StyledFilterDiv1>
+              <StyledFilterDivTitle>지역선택</StyledFilterDivTitle>
               <select
                 onChange={handleFirstListChange}
                 value={firstListValue}
@@ -159,31 +161,17 @@ function BD_House() {
                         </option>
                       ))}
                     </select> */}
-            </StyledFilterDiv1One>
-            <StyledFilterDiv1One>
-              <StyledFilterDiv1Two>헌혈종류</StyledFilterDiv1Two>
-              <Form>
-                {['checkbox'].map((type) => (
-                  <div key={`default-${type}`} className="mb-3">
-                    <Form.Check
-                      type={type}
-                      id={`default-${type}`}
-                      label="전혈"
-                    />
-                    <Form.Check
-                      type={type}
-                      id={`default-${type}`}
-                      label="혈장"
-                    />
-                    <Form.Check
-                      type={type}
-                      id={`default-${type}`}
-                      label="혈소판"
-                    />
-                  </div>
-                ))}
-              </Form>
-            </StyledFilterDiv1One>
+            </StyledFilterDiv1>
+            <StyledFilterDiv2>
+              <FloatingLabel
+                label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
+                name="id"
+                value={id}
+                onChange={handleChangeId}
+              >
+                <Form.Control type="id" placeholder="label" />
+              </FloatingLabel>
+            </StyledFilterDiv2>
           </StyledFilter>
           <section>
             <Styleddiv2>
@@ -464,17 +452,23 @@ const StyledFilter = styled.div`
   background: #ffe9e9;
   margin-bottom: 20px;
 `;
-const StyledFilterDiv1One = styled.div`
+const StyledFilterDiv1 = styled.div`
   display: flex;
   margin-top: 20px;
 `;
-const StyledFilterDiv1Two = styled.div`
+const StyledFilterDivTitle = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   margin-right: 20px;
   margin-left: 30px;
+`;
+
+const StyledFilterDiv2 = styled.div`
+  width: 850px;
+  margin: auto;
+  margin-top: 10px;
 `;
 
 const StyledTab1 = styled.div`
@@ -484,8 +478,6 @@ const StyledTab1 = styled.div`
 `;
 
 const Styleddiv2 = styled.div`
-  /* margin-right: 100px;
-  margin-left: 100px; */
   text-align: center;
 `;
 export default BD_House;

@@ -62,7 +62,7 @@ const Nav = () => {
       </StyledDiv2>
       <StyledDiv3>
         <Link
-          to={userId ? `/mypage` : '/login'}
+          to={userId ? `/` : '/login'}
           style={{ textDecoration: 'none', color: 'white' }}
         >
           <StyledDiv31L>
@@ -70,7 +70,15 @@ const Nav = () => {
           </StyledDiv31L>
         </Link>
         <StyledDiv31m>
-          <div>|</div>
+          {/* <div>|</div> */}
+          <Link
+            to={userId ? `/mypage` : '/'}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <StyledDiv31L>
+              <div>{userId ? `| 마이페이지 |` : '|'}</div>
+            </StyledDiv31L>
+          </Link>
         </StyledDiv31m>
         <Link
           to={userId ? '/' : '/signup'}
@@ -124,7 +132,7 @@ const StyledDiv11 = styled.div`
 `;
 
 const StyledDiv2 = styled.div`
-  width: 655px;
+  width: 700px;
   display: flex;
   /* text-decoration-line: none; */
   color: white;
@@ -132,11 +140,11 @@ const StyledDiv2 = styled.div`
   text-decoration: none;
   text-decoration-line: none;
   margin-top: 15px;
-  margin-left: 120px;
-  margin-right: 120px;
+  margin-left: 95px;
+  margin-right: 35px;
 `;
 const StyledDiv21 = styled.div`
-  width: 110px;
+  width: 100px;
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 700;
@@ -168,13 +176,17 @@ const StyledDiv21M = styled.div`
 
 const StyledDiv3 = styled.div`
   /* flex-direction: row; */
-  width: 125px;
+  width: 200px;
   display: flex;
   align-items: center;
   text-decoration-line: none;
+
+  /* background-color: yellow; */
 `;
 const StyledDiv31L = styled.div`
   /* flex-direction: row; */
+  /* width: 50px; */
+
   text-decoration-line: none;
 
   font-family: 'Noto Sans';
@@ -187,6 +199,7 @@ const StyledDiv31L = styled.div`
   color: #ffffff;
 `;
 const StyledDiv31R = styled.div`
+  /* width: 50px; */
   /* flex-direction: row; */
   text-decoration-line: none;
 
@@ -210,8 +223,8 @@ const StyledDiv31m = styled.div`
   letter-spacing: -2px;
   text-align: center;
 
-  margin-left: 15px;
-  margin-right: 15px;
+  /* margin-left: 5px;
+  margin-right: 5px; */
 
   color: #ffffff;
 `;

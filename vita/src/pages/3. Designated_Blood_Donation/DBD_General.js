@@ -378,6 +378,13 @@ function DBD_General() {
 // const Styledtd = styled.div`
 //   display: block;
 // `;
+
+const StyledTab1 = styled.div`
+  width: 865px;
+  margin-top: 5px;
+  padding-bottom: 500px;
+`;
+
 const Styledtxt = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -561,12 +568,6 @@ const StyledFilterDiv1Two = styled.div`
   font-size: 18px;
   margin-right: 20px;
   margin-left: 30px;
-`;
-
-const StyledTab1 = styled.div`
-  width: 865px;
-  margin-top: 5px;
-  padding-bottom: 500px;
 `;
 
 // const Styleddiv2 = styled.div`

@@ -70,7 +70,7 @@ function BD_Story() {
 
         <StyledBox>
           <StyledBox2>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '17rem' }}>
               <Card.Img variant="top" src="holder.js/100px180" />
               <Card.Body>
                 <Card.Title>Card Title</Card.Title>
@@ -83,7 +83,7 @@ function BD_Story() {
             </Card>
           </StyledBox2>
           <StyledBox2>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '17rem' }}>
               <Card.Img variant="top" src="holder.js/100px180" />
               <Card.Body>
                 <Card.Title>Card Title</Card.Title>
@@ -96,7 +96,7 @@ function BD_Story() {
             </Card>
           </StyledBox2>
           <StyledBox2>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '17rem' }}>
               <Card.Img variant="top" src="holder.js/100px180" />
               <Card.Body>
                 <Card.Title>Card Title</Card.Title>
@@ -220,7 +220,7 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 580px;
+  margin-left: 535px;
 
   background: #ff9f9f;
   border-radius: 9px;

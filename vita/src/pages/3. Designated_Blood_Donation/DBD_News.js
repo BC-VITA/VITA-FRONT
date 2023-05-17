@@ -120,7 +120,47 @@ function DBD_News() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
-        c
+        <StyledBox>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+        </StyledBox>
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
@@ -233,7 +273,7 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 580px;
+  margin-left: 535px;
 
   background: #ff9f9f;
   border-radius: 9px;

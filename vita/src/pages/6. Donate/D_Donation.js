@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 
 import serviceimg from '../../img/serviceimg.png';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 function D_Donation() {
   const [error, setError] = useState(null);
@@ -64,13 +66,50 @@ function D_Donation() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부하기</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
         </StyledTop>
+        <StyledBox>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+        </StyledBox>
       </StyledSubcomment>
+      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
@@ -176,47 +215,12 @@ const StyledTop = styled.div`
   display: flex;
 `;
 
-const StyledButton = styled.div`
-  margin-top: 3px;
-  width: 125px;
-  height: 35px;
-  margin-left: 540px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
+const StyledBox = styled.div`
+  margin-top: 30px;
+  display: flex;
 `;
-
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
-`;
-
-const StyledCommentTitle = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 48px;
-  /* margin-left: 375px; */
-  margin-bottom: 10px;
-
-  color: #333333;
-`;
-const StyledComment = styled.div`
-  /* width: 1100px; */
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  margin-bottom: 50px;
-  margin-right: 60px;
+const StyledBox2 = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
 `;
 export default D_Donation;

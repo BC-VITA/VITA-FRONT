@@ -90,11 +90,6 @@ function BD_Main() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>헌혈이란</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
         </StyledTop>
         <StyledTopComment>
           생명을 나누는 고귀한 행위 입니다

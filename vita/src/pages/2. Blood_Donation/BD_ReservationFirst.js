@@ -109,11 +109,11 @@ function BD_ReservationFirst() {
                 <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
+            {/* <StyledSubDiv2_1>
               <Nav.Link href="/BD_History">
                 <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
               </Nav.Link>
-            </StyledSubDiv2_1>
+            </StyledSubDiv2_1> */}
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -124,12 +124,12 @@ function BD_ReservationFirst() {
         <StyledCurrent>
           <StyledBar />
           <StyledCircle>
-            <StyledCircleTxt>센터선택</StyledCircleTxt>
+            <StyledCircleTxt>유의사항</StyledCircleTxt>
           </StyledCircle>
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>센터선택</StyledCircleTxt>
-          </StyledCircle>
+          <StyledBarMg />
+          <StyledCircleg>
+            <StyledCircleTxtg>센터선택</StyledCircleTxtg>
+          </StyledCircleg>
 
           <StyledBarMg />
           <StyledCircleg>
@@ -144,6 +144,7 @@ function BD_ReservationFirst() {
         </StyledCurrent>
 
         <StyledTab1>
+          <StyledDiv1>02. 헌혈할 센터 선택하기</StyledDiv1>
           <StyledFilter>
             <StyledFilterDiv1One>
               <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
@@ -319,7 +320,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 278px;
+  height: 223px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -397,13 +398,13 @@ const StyledCurrent = styled.div`
 `;
 
 const StyledBar = styled.div`
-  width: 120px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #ff6565;
   margin-top: 35px;
 `;
 const StyledBarg = styled.div`
-  width: 120px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
@@ -415,7 +416,7 @@ const StyledBarg = styled.div`
 //   margin-top: 35px;
 // `;
 const StyledBarMg = styled.div`
-  width: 190px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
@@ -475,6 +476,22 @@ const StyledCircleTxtg = styled.div`
   letter-spacing: 0.1em;
 
   color: #828282;
+`;
+
+const StyledDiv1 = styled.div`
+  margin-top: 25px;
+  margin-bottom: 25px;
+
+  // padding-left : 20px;
+  // padding-top : 15px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 32px;
+
+  color: #333333;
 `;
 
 const StyledFilter = styled.div`
