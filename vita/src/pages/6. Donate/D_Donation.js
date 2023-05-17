@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
-
 function D_Donation() {
   const [boardList, setBoardList] = useState([]);
 
@@ -44,12 +43,48 @@ function D_Donation() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부하기</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
         </StyledTop>
+        <StyledBox>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+          <StyledBox2>
+            <Card style={{ width: '17rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </StyledBox2>
+        </StyledBox>
       </StyledSubcomment>
       <div>
       <h2>Board List</h2>

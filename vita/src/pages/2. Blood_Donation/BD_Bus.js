@@ -72,11 +72,11 @@ function BD_Bus() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>헌혈 버스 찾기</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
       </StyledSubcomment>
       <div className="home">{error && <div>{error}</div>}</div>

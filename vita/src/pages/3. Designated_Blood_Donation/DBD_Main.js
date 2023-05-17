@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 
 function DBD_Main() {
-
   return (
     <StyledAll>
       <StyledSub>
@@ -37,11 +36,11 @@ function DBD_Main() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>지정헌혈이란</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
         <StyledTopComment>
           헌혈자가 헌혈카페에서 의료기관 및 환자를 지정하여 헌혈하는 것을

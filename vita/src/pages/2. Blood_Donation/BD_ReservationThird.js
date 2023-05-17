@@ -8,23 +8,10 @@ function BD_ReservationThird() {
   const location = useLocation();
   const { state: { selectedOptions, formattedDate, centerName } = {} } = useLocation();
   const [times, setTimes] = useState('');
-  const [isBloodType,setIsBloodType] = useState('');
+  const [asd, setAsd] = useState('F');
+  const [zxc, setZxc] = useState('F');
+  const [qwe, setQwe] = useState('F');
 
-    useEffect(() => {
-      const times = Object.keys(selectedOptions);
-     
-
-      const bloodTypeString = Object.values(selectedOptions)
-        .map((times) => Object.values(times).join(''))
-        .join('');
-      setIsBloodType(bloodTypeString);
-      const bloodTypesString = bloodTypeString.toString();
-      setIsBloodType(bloodTypesString);
-
-      const timeString = times.join(',');
-      setTimes(timeString);
-      }, [selectedOptions]);
-      
   const handleSubmit = async (event) => {
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
@@ -49,7 +36,6 @@ function BD_ReservationThird() {
   
   return (
     <StyledAll>
-      <div>{isBloodType},{times}</div>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
@@ -95,6 +81,7 @@ function BD_ReservationThird() {
           <StyledCircle>
             <StyledCircleTxt>예약하기</StyledCircleTxt>
           </StyledCircle>
+
           <StyledBarM />
           <StyledCircle>
             <StyledCircleTxt>예약완료</StyledCircleTxt>
