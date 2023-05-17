@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
+import { useLocation ,useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 
 function BD_ReservationThird() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { state: { selectedOptions, formattedDate, centerName } = {} } =
-    useLocation();
+  const { state: { selectedOptions, formattedDate, centerName } = {} } = useLocation();
   const [times, setTimes] = useState('');
   const [asd, setAsd] = useState('F');
   const [zxc, setZxc] = useState('F');
@@ -16,15 +15,14 @@ function BD_ReservationThird() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
+    
     fetch('http://localhost:8004/blood/reservation', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
-        wholeBlood: zxc,
-        plasma: asd,
-        platelet: qwe,
+        isBloodType: isBloodType,
         bloodHouseName: centerName,
         date: formattedDate,
         time: times,
@@ -35,7 +33,7 @@ function BD_ReservationThird() {
       })
       .then(() => navigate('/'));
   };
-
+  
   return (
     <StyledAll>
       <StyledSub>
@@ -101,13 +99,7 @@ function BD_ReservationThird() {
               <StyledDiv1>
                 <StyledDiv2>헌혈종류</StyledDiv2>
                 <StyledDiv3>
-                  {selectedOptions[time] === 'plasma'
-                    ? '혈장'
-                    : selectedOptions[time] === 'wholeBlood'
-                    ? '전혈'
-                    : selectedOptions[time] === 'platelet'
-                    ? '혈소판'
-                    : selectedOptions[time]}
+                  {selectedOptions[time]}
                 </StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
@@ -121,9 +113,9 @@ function BD_ReservationThird() {
             </div>
           ))}
         </StyledBox>
-        {/* <button type="button" onClick={handleSubmit}>
+        <button type="button" onClick={handleSubmit}>
           예약완료하기
-        </button> */}
+        </button>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -312,66 +304,68 @@ const StyledCircleTxt = styled.div`
   color: #333333;
 `;
 const StyledCircleTxtg = styled.div`
-  width: 42.49px;
-  height: 51px;
-  margin-left: 11px;
-  margin-top: 7px;
+width: 42.49px;
+height: 51px;
+margin-left: 11px;
+margin-top: 7px;
 
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 19.5px;
-  line-height: 25px;
-  /* or 125% */
-  text-align: center;
+font-family: 'Gmarket Sans TTF';
+font-style: normal;
+font-weight: 700;
+font-size: 19.5px;
+line-height: 25px;
+/* or 125% */
+text-align: center;
 
   color: #828282;
 `;
 
-const StyledBox = styled.div``;
+const StyledBox = styled.div`
+
+`;
 const StyledDiv = styled.div`
-  margin-top: 25px;
-  margin-bottom: 25px;
+margin-top : 25px;
+margin-bottom : 25px;
 
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 55px;
+font-family: 'Gmarket Sans TTF';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
+line-height: 55px;
 
-  color: #2d3c89;
+color: #2D3C89;
 `;
 const StyledDiv1 = styled.div`
-  display: flex;
+display : flex;
 `;
 const StyledDiv2 = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 27px;
-  line-height: 50px;
-  text-align: center;
+font-family: 'Gmarket Sans TTF';
+font-style: normal;
+font-weight: 700;
+font-size: 27px;
+line-height: 50px;
+text-align: center;
 
-  color: #333333;
+color: #333333;
 
-  width: 130px;
-  height: 60px;
-  background: #eff3ff;
-  border: 2px solid #626b8b;
+width: 130px;
+height: 60px;
+background: #EFF3FF;
+border: 2px solid #626B8B;
 `;
 const StyledDiv3 = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 27px;
-  line-height: 50px;
-  text-align: center;
+font-family: 'Gmarket Sans TTF';
+font-style: normal;
+font-weight: 500;
+font-size: 27px;
+line-height: 50px;
+text-align: center;
 
-  color: #101a79;
+color: #101A79;
 
-  width: 49ch;
-  height: 60px;
-  background: #ffffff;
-  border: 2px solid #626b8b;
+width: 49ch;
+height: 60px;
+background: #fffffff;
+border: 2px solid #626B8B;
 `;
 export default BD_ReservationThird;

@@ -3,31 +3,33 @@ import React, { useEffect, useState } from 'react';
 const MyPage = () => {
   const [userData, setUserData] = useState(null);
 
+  const userId = 'asd';
+
   useEffect(() => {
-    // API 호출
-    fetch('http://localhost:8004/user/check', {
-      method: 'GET',
-      credentials: 'include',
+    const url = `http://localhost:8004/user/mypage?userId=${userId}`;
+
+    fetch(url, {
+      method: 'get',
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // 사용자 정보 설정
-        setUserData(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setUserData(res);
+        console.log(userData);
       });
+
+    console.log(userData);
   }, []);
 
+  
   return (
     <div>
       <h1>My Page</h1>
       {userData ? (
         <div>
-          <p>User ID: {userData.userID}</p>
+          <p>User ID: {userData.userId}</p>
           <p>User Name: {userData.userName}</p>
           <p>User Email: {userData.userEmail}</p>
-          {/* Display other user data properties */}
         </div>
       ) : (
         <p>Loading user data...</p>
