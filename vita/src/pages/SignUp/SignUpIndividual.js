@@ -10,8 +10,6 @@ function SignUpIndividual() {
   const [passwordCheck, setPasswordCheck] = useState('');
   const [Name, setName] = useState('');
   const [Phon, setPhon] = useState('');
-
-  const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
 
   const handleChangeId = ({ target: { value } }) => setId(value);
@@ -28,34 +26,22 @@ function SignUpIndividual() {
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
 
-    //back으로 정보 post함
-    fetch('http://localhost:8003/join', {
+    fetch('http://localhost:8004/volunteer/join', {
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
-        id: 'userID',
-        password: 'userPW',
-        passwordCheck: 'userPW',
-        Name: 'userName',
-        Date: 'userBirth',
-        Email: 'userEmail',
-        Phon: 'userPhoneNumber',
-
-        History: 'bloodHistory',
+        volunteerId: id,
+        volunteerPw: password,
+        volunteerGroupName: Name,
+        volunteerPhoneNumber: Phon,
+        volunteerField: '카테고리',
       }),
     })
-      //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
       .then((res) => res.json())
-      //회원가입 성공시 실행
-      .then((res) => {
-        navigate('/');
-      })
-      //회원가입 실패시 실행
-      .catch((err) => {
-        setError(err.message);
-        //에러시 Loading메세지 사라지고
-        //에러메세지만 보이도록 설정
-      });
     setDisabled(false);
+    navigate('/');
   };
   return (
     <div
@@ -155,7 +141,6 @@ function SignUpIndividual() {
           <StyledButton type="submit" disabled={disabled}>
             회원가입
           </StyledButton>
-          <div className="home">{error && <div>{error}</div>}</div>
         </Styleddiv2>
       </form>
     </div>
