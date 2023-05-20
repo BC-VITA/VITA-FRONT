@@ -8,9 +8,22 @@ function BD_ReservationThird() {
   const location = useLocation();
   const { state: { selectedOptions, formattedDate, centerName } = {} } = useLocation();
   const [times, setTimes] = useState('');
-  const [asd, setAsd] = useState('F');
-  const [zxc, setZxc] = useState('F');
-  const [qwe, setQwe] = useState('F');
+  const [isBloodType,setIsBloodType] = useState('');
+
+  useEffect(() => {
+  const times = Object.keys(selectedOptions);
+
+
+  const bloodTypeString = Object.values(selectedOptions)
+  .map((times) => Object.values(times).join(''))
+  .join('');
+  setIsBloodType(bloodTypeString);
+  const bloodTypesString = bloodTypeString.toString();
+  setIsBloodType(bloodTypesString);
+
+  const timeString = times.join(',');
+  setTimes(timeString);
+  }, [selectedOptions]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
