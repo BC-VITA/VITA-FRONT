@@ -27,8 +27,9 @@ function S_PostGT() {
   const handleChangelongitude = ({ target: { value } }) => setlongitude(value);
 
   // 모집기간
-  // const [volunteerSeekStartDate, setvolunteerSeekStartDate] = useState('');
-  // const [volunteerSeekEndDate, setvolunteerSeekEndDate] = useState('');
+  //const [volunteerSeekStartDate, setvolunteerSeekStartDate] = useState('');
+  //const [volunteerSeekEndDate, setvolunteerSeekEndDate] = useState('');
+
   // 모집인원
   const [needVolunteerNumber, setneedVolunteerNumber] = useState('');
   const handleChangeneedVolunteerNumber = ({ target: { value } }) =>
@@ -37,9 +38,50 @@ function S_PostGT() {
   // 봉사기간
   // const [volunteerStartDate, setvolunteerStartDate] = useState('');
   // const [volunteerEndDate, setvolunteerEndDate] = useState('');
+
   // 봉사시간
-  // const [volunteerStartTime, setvolunteerStartTime] = useState('');
-  // const [volunteerEndTime, setvolunteerEndTime] = useState('');
+  const selectTime = ['시간을', '09:00', '09:30', '10:00', '10:30', '11:00'];
+  const [volunteerStartTime, setvolunteerStartTime] = useState('시간을'); //실제로 사용하는 시간의 첫번째 값
+  const [volunteerEndTime, setvolunteerEndTime] = useState([
+    '골라주세요'
+  ]);
+  const [volunteerEndTime1, setvolunteerEndTime1] = useState(''); //실제로 사용하는 시간의 두번째 값 
+
+  function handleTimeChange(event) {
+    const selectedValue = event.target.value;
+    setvolunteerStartTime(selectedValue);
+
+    if (selectedValue === '시간을') {
+      setvolunteerEndTime(['골라주세요']);
+      setvolunteerEndTime1(['골라주세요']);
+    } else if (selectedValue === '09:00') {
+      setvolunteerEndTime(['09:30', '10:00', '10:30', '11:00']);
+      setvolunteerEndTime1('09:30');
+    } else if (selectedValue === '09:30') {
+      setvolunteerEndTime(['10:00', '10:30', '11:00']);
+      setvolunteerEndTime1('10:00');
+    } else if (selectedValue === '10:00') {
+      setvolunteerEndTime(['10:30', '11:00']);
+      setvolunteerEndTime1('10:30');
+    } else if (selectedValue === '10:30') {
+      setvolunteerEndTime(['11:00']);
+      setvolunteerEndTime1('11:00');
+    } else if (selectedValue === '11:00') {
+      setvolunteerEndTime(['이후 시간대']);
+      setvolunteerEndTime1('이후 시간대');
+    }
+  }
+  function handleTimeChange1(event) {
+    const selectedValue = event.target.value;
+    setvolunteerEndTime1(selectedValue);
+
+    const updatedSelectTime = volunteerEndTime.filter(item => item !== selectedValue);
+    updatedSelectTime.sort();
+    updatedSelectTime.unshift(selectedValue);
+
+    setvolunteerEndTime(updatedSelectTime);
+  }
+
 
   // 활동요일
   const [volunteerActivityWeek, setvolunteerActivityWeek] = useState('');
@@ -129,62 +171,55 @@ function S_PostGT() {
 
   const selectVolunteerPersonType = ['성인', '청소년'];
 
-  // function handleFirstFieldChange2(event) {
-  //   const selectedValue2 = event.target.value;
-  //   setFirstFieldValue2(selectedValue2);
+  //봉사분야
+  const selectType = ['전체', '생활편의시설', '주거환경', '교육', '보건의료', '환경보호'];
+  const [volunteerBigType, setvolunteerBigType] = useState('전체'); // 실제로 사용하는 분야의 첫번째
+  const [volunteerSmallType, setvolunteerSmallType] = useState([
+    '검색할 봉사분야를 골라주세요'
+  ]);
+  const [volunteerSmallType1, setvolunteerSmallType1] = useState(''); //실제로 사용하는 분야의 두번째 값 
 
-  //   if (selectedValue2 === '전체') {
-  //     setSecondFieldOptions2(['검색할 봉사분야를 골라주세요']);
-  //   } else if (selectedValue2 === '생활편의시설') {
-  //     setSecondFieldOptions2([
-  //       '전체',
-  //       '활동보조',
-  //       '이동지원',
-  //       '청결지도',
-  //       '급식지원',
-  //       '식사반찬지원',
-  //       '기타',
-  //     ]);
-  //   } else if (selectedValue2 === '주거환경') {
-  //     setSecondFieldOptions2(['전체', '주거개선', '마을공동체활동', '기타']);
-  //   } else if (selectedValue2 === '안전예방') {
-  //     setSecondFieldOptions2([
-  //       '전체',
-  //       '지역안전',
-  //       '교통안전',
-  //       '어린이 안전',
-  //       '청소년 안전',
-  //       '취약계층 안전',
-  //       '안전신고활동',
-  //       '기타',
-  //     ]);
-  //   } else if (selectedValue2 === '교육') {
-  //     setSecondFieldOptions2([
-  //       '전체',
-  //       '방과후 교육',
-  //       '학습지도 교육',
-  //       '특수교육',
-  //       '평생교육',
-  //       '전문교육',
-  //       '진로체험교육',
-  //       '기타',
-  //     ]);
-  //   } else if (selectedValue2 === '보건의료') {
-  //     setSecondFieldOptions2(['전체', '간호간병', '의료지원', '헌혈', '기타']);
-  //   } else if (selectedValue2 === '문화행사') {
-  //     setSecondFieldOptions2([
-  //       '전체',
-  //       '행사보조',
-  //       '공연활동',
-  //       '캠페인',
-  //       '관광안내',
-  //       '사진촬영',
-  //       '기타',
-  //     ]);
-  //   } else if (selectedValue2 === '환경보호 ') {
-  //     setSecondFieldOptions2(['전체', '환경정화', '환경감시', '기타']);
-  //   }
-  // }
+  function handleTypeChange(event) {
+    const selectedValue1 = event.target.value;
+    setvolunteerBigType(selectedValue1);
+
+    if (selectedValue1 === '전체') {
+      setvolunteerSmallType(['검색할 봉사분야를 골라주세요']);
+      setvolunteerSmallType1(['검색할 봉사분야를 골라주세요']);
+    } else if (selectedValue1 === '생활편의시설') {
+      setvolunteerSmallType(['전체', '활동보조', '아동보조', '청결지도', '급식지원', '식사반찬지원', '기타']);
+      setvolunteerSmallType1('전체');
+    } else if (selectedValue1 === '주거환경') {
+      setvolunteerSmallType(['전체', '주거개선', '마을공동체활동', '기타']);
+      setvolunteerSmallType1('전체');
+    } else if (selectedValue1 === '안전예방') {
+      setvolunteerSmallType(['전체', '지역안전', '교통안전', '어린이 안전', '청소년 안전', '취약계층 안전', '안신고활동', '기타']);
+      setvolunteerSmallType1('전체');
+    } else if (selectedValue1 === '교육') {
+      setvolunteerSmallType(['전체', '방과후 교육', '학습지도 교육', '특수교육', '평생교육', '전문교육', '진로체험교육', '기타']);
+      setvolunteerSmallType1('전체');
+    } else if (selectedValue1 === '보건의료') {
+      setvolunteerSmallType(['전체', '간호간병', '의료지원', '헌혈', '기타']);
+      setvolunteerSmallType1('전체');
+    } else if (selectedValue1 === '문화행사') {
+      setvolunteerSmallType(['전체', '행사보조', '공연활동', '켐페인', '관광안내', '사진촬영', '기타']);
+      setvolunteerSmallType1('전체');
+    } else if (selectedValue1 === '환경보호') {
+      setvolunteerSmallType(['전체', '환경정화', '환경감시', '기타']);
+      setvolunteerSmallType1('전체');
+    }
+  }
+  function handleTypeChange1(event) {
+    const selectedValue = event.target.value;
+    setvolunteerSmallType1(selectedValue);
+
+    const updatedSelectTime = volunteerSmallType.filter(item => item !== selectedValue);
+    updatedSelectTime.sort();// 정렬 어떻게 할지 
+    updatedSelectTime.unshift(selectedValue);
+
+    setvolunteerSmallType(updatedSelectTime);
+  }
+
 
   const handleSubmit = async (event) => {
     setDisabled(true);
@@ -216,9 +251,9 @@ function S_PostGT() {
     setDisabled(false);
     console.log(
       'data: ' +
-        JSON.stringify({
-          volunteerArea: volunteerArea,
-        })
+      JSON.stringify({
+        volunteerArea: volunteerArea,
+      })
     );
   };
 
@@ -328,23 +363,32 @@ function S_PostGT() {
                   <Form.Control type="textarea" placeholder="label" />
                 </FloatingLabel>
               </StyledGroup4_1> */}
-              {/* <StyledGroup4_2>
+              <StyledGroup4_2>
                 <StyledGroupTitle>봉사시간</StyledGroupTitle>
-                <FloatingLabel
-                  label="인천광역시 부평구 구산동 47-3"
-                  value={hostipaladdress}
-                  onChange={handleChangehostipaladdress}
+                <select
+                  onChange={handleTimeChange}
+                  value={volunteerStartTime}
+                  style={{ border: 'none' }}
                 >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-                <FloatingLabel
-                  label="인천광역시 부평구 구산동 47-3"
-                  value={hostipaladdress}
-                  onChange={handleChangehostipaladdress}
+                  {selectTime.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  onChange={handleTimeChange1}
+                  value={volunteerEndTime}
+                  style={{ border: 'none' }}
                 >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-              </StyledGroup4_2> */}
+                  {volunteerEndTime.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <div>첫번째,{volunteerStartTime},두번쨰 {volunteerEndTime1}</div>
+              </StyledGroup4_2>
             </StyledGroup4>
             <StyledGroup5>
               <StyledGroup5_1>
@@ -367,23 +411,32 @@ function S_PostGT() {
                   <Form.Control type="textarea" placeholder="label" />
                 </FloatingLabel>
               </StyledGroup5_2>
-              {/* <StyledGroup5_3>
+              <div>
                 <StyledGroupTitle>봉사분야</StyledGroupTitle>
-                <FloatingLabel
-                  label="010-1234-1234"
-                  value={hostipalcall}
-                  onChange={handleChangehostipalcall}
+                <select
+                  onChange={handleTypeChange}
+                  value={volunteerBigType}
+                  style={{ border: 'none' }}
                 >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-                <FloatingLabel
-                  label="010-1234-1234"
-                  value={hostipalcall}
-                  onChange={handleChangehostipalcall}
+                  {selectType.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  onChange={handleTypeChange1}
+                  value={volunteerSmallType}
+                  style={{ border: 'none' }}
                 >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-              </StyledGroup5_3> */}
+                  {volunteerSmallType.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <div>첫번째,{volunteerBigType},두번쨰 {volunteerSmallType1}</div>
+              </div>
             </StyledGroup5>
             <StyledGroup6>
               <StyledGroup6_1>
@@ -480,6 +533,7 @@ function S_PostGT() {
     </StyledAll>
   );
 }
+
 
 const StyledAll = styled.div`
   margin: auto;
