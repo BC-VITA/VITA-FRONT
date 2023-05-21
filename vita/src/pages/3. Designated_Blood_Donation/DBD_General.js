@@ -5,7 +5,6 @@ import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useNavigate } from 'react-router-dom';
-import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
@@ -177,7 +176,6 @@ function DBD_General() {
                     </select>
                   </StyledFilterDiv1One> */}
                 </StyledFilter>
-
                 <Styleddiv2>
                   <Accordion defaultActiveKey="0">
                     <Table striped bordered hover size="sm">
@@ -187,7 +185,6 @@ function DBD_General() {
                           <th>모집인원 및 현황</th>
                         </tr>
                       </thead>
-
                       <Styledtbody1>
                         {inputData.map((element, index) => {
                           return (
