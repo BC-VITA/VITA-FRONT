@@ -267,6 +267,7 @@ function BD_House() {
     </StyledAll>
   );
 }
+
 const Styledtd1 = styled.div`
   width: 500px;
 `;

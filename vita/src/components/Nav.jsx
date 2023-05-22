@@ -179,13 +179,14 @@ const StyledDiv3 = styled.div`
   width: 200px;
   display: flex;
   align-items: center;
+  justify-content: end;
   text-decoration-line: none;
 
-  /* background-color: yellow; */
+  background-color: red;
 `;
 const StyledDiv31L = styled.div`
   /* flex-direction: row; */
-  /* width: 50px; */
+  width: 100px;
 
   text-decoration-line: none;
 
