@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 import Nav from 'react-bootstrap/Nav';
 
@@ -205,6 +207,14 @@ const StyledTop = styled.div`
   display: flex;
 `;
 
+const StyledBox = styled.div`
+  margin-top: 30px;
+  display: flex;
+`;
+const StyledBox2 = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
+`;
 const StyledBox = styled.div`
   margin-top: 30px;
   display: flex;

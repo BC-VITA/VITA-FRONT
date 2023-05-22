@@ -16,7 +16,7 @@ const RadioButton = ({ label, value, onChange }) => {
   );
 };
 
-function S_Other() {
+function BD_ReservationSecond() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -48,7 +48,6 @@ function S_Other() {
     });
   };
 
-  // 유즈이펙트 사용해서 날짜값이 달라질때마다 가능한 헌혈종류를 보여줘야한다
   useEffect(() => {
     fetch(`http://localhost:8004/blood/house/registerReservation/list`, {
       method: 'get',
@@ -88,8 +87,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="wholeBlood"
-              checked={selectedOptions[time] === 'wholeBlood'}
+              value="전혈"
+              checked={selectedOptions[time] === '전혈'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>전혈</label>
@@ -100,8 +99,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="plasma"
-              checked={selectedOptions[time] === 'plasma'}
+              value="혈장"
+              checked={selectedOptions[time] === '혈장'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>혈장</label>
@@ -112,8 +111,8 @@ function S_Other() {
             <input
               type="radio"
               name="bloodType"
-              value="platelet"
-              checked={selectedOptions[time] === 'platelet'}
+              value="혈소판"
+              checked={selectedOptions[time] === '혈소판'}
               onChange={(event) => handleOptionChange(event, time)}
             />
             <label htmlFor={time}>혈소판</label>
@@ -152,11 +151,6 @@ function S_Other() {
                 <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
-            {/* <StyledSubDiv2_1>
-              <Nav.Link href="/BD_History">
-                <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1> */}
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -582,4 +576,4 @@ const StyledButton = styled.button`
   color: #ffffff;
   border: none;
 `;
-export default S_Other;
+export default BD_ReservationSecond;
