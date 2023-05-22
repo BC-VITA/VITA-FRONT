@@ -126,10 +126,10 @@ function BD_ReservationFirst() {
           <StyledCircle>
             <StyledCircleTxt>유의사항</StyledCircleTxt>
           </StyledCircle>
-          <StyledBarMg />
-          <StyledCircleg>
-            <StyledCircleTxtg>센터선택</StyledCircleTxtg>
-          </StyledCircleg>
+          <StyledBar />
+          <StyledCircle>
+            <StyledCircleTxt>센터선택</StyledCircleTxt>
+          </StyledCircle>
 
           <StyledBarMg />
           <StyledCircleg>

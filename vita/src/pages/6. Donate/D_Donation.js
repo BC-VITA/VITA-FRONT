@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
+
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 function D_Donation() {
   const [boardList, setBoardList] = useState([]);
 
@@ -10,10 +14,10 @@ function D_Donation() {
   }, []);
 
   const fetchBoardList = () => {
-    fetch("http://localhost:8004/donate/board")
+    fetch('http://localhost:8004/donate/board')
       .then((response) => response.json())
       .then((data) => setBoardList(data.content))
-      .catch((error) => console.error("Error fetching board list:", error));
+      .catch((error) => console.error('Error fetching board list:', error));
   };
 
   return (
@@ -87,15 +91,15 @@ function D_Donation() {
         </StyledBox>
       </StyledSubcomment>
       <div>
-      <h2>Board List</h2>
-      {boardList.map((board) => (
-        <div key={board.boardId}>
-          <h3>{board.title}</h3>
-          {board.imageUrl && <img src={board.imageUrl} alt="Board Image" />}
-          <p>{board.content}</p>
-        </div>
-      ))}
-    </div>
+        <h2>Board List</h2>
+        {boardList.map((board) => (
+          <div key={board.boardId}>
+            <h3>{board.title}</h3>
+            {board.imageUrl && <img src={board.imageUrl} alt="Board Image" />}
+            <p>{board.content}</p>
+          </div>
+        ))}
+      </div>
     </StyledAll>
   );
 }
@@ -201,26 +205,12 @@ const StyledTop = styled.div`
   display: flex;
 `;
 
-const StyledButton = styled.div`
-  margin-top: 3px;
-  width: 125px;
-  height: 35px;
-  margin-left: 540px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
+const StyledBox = styled.div`
+  margin-top: 30px;
+  display: flex;
 `;
-
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
+const StyledBox2 = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
 `;
 export default D_Donation;
