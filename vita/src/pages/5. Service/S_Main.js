@@ -68,11 +68,6 @@ function S_Main() {
                 <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_History">
-                <StyledSubDiv2_2g>봉사 활동 기록</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -196,7 +191,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 332px;
+  height: 278px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`

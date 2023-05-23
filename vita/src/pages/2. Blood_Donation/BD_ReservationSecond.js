@@ -537,7 +537,7 @@ const StyledLabel = styled.div`
 const StyledDivTable = styled.div`
   margin-left: 15px;
 
-  width: 100ch;
+  width: 82ch;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -560,7 +560,7 @@ const StyledButton = styled.button`
   margin-top: 10px;
   width: 140px;
   height: 40px;
-  margin-left: 67ch;
+  margin-left: 57ch;
 
   background: #ff9f9f;
   border-radius: 9px;

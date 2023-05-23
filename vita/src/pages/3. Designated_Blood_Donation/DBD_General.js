@@ -11,7 +11,9 @@ import icon from './heart.png';
 
 function DBD_General() {
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
+  const selectList2 = ['최신순', '마감순'];
   const [firstListValue, setFirstListValue] = useState('전체');
+  const [firstList2Value, setFirstList2Value] = useState('최신순');
   const [secondListOptions, setSecondListOptions] = useState([
     '검색할 지역을 골라주세요',
   ]);
@@ -34,6 +36,10 @@ function DBD_General() {
     } else {
       setSecondListOptions(['가가가가', '나나나나', '다다다다']);
     }
+  }
+  function handleSecondListChange(event) {
+    const selected2Value = event.target.value;
+    setFirstList2Value(selected2Value);
   }
 
   const [inputData, setInputData] = useState([
@@ -130,6 +136,7 @@ function DBD_General() {
                       ))}
                     </select> */}
                   </StyledFilterDiv1One>
+
                   <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
                     <Form>
@@ -148,6 +155,19 @@ function DBD_General() {
                         </div>
                       ))}
                     </Form>
+                  </StyledFilterDiv1One>
+                  <StyledFilterDiv1One>
+                    <select
+                      onChange={handleSecondListChange}
+                      value={firstList2Value}
+                      style={{ border: 'none' }}
+                    >
+                      {selectList2.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
                   </StyledFilterDiv1One>
                   {/* <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>
@@ -237,20 +257,21 @@ function DBD_General() {
             <Tab eventKey="home" title="병원">
               <Tab.Content>
                 <StyledFilter>
-                  <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
-                    <select
-                      onChange={handleFirstListChange}
-                      value={firstListValue}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList1.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                    {/* <select
+                  <StyledFilterDiv1>
+                    <StyledFilterDiv1One>
+                      <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+                      <select
+                        onChange={handleFirstListChange}
+                        value={firstListValue}
+                        style={{ border: 'none' }}
+                      >
+                        {selectList1.map((item) => (
+                          <option value={item} key={item}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                      {/* <select
                       value={secondListOptions}
                       onChange={setSecondListOptions}
                     >
@@ -260,27 +281,27 @@ function DBD_General() {
                         </option>
                       ))}
                     </select> */}
-                  </StyledFilterDiv1One>
-                  <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
-                    <Form>
-                      {['checkbox'].map((type) => (
-                        <div key={`default-${type}`} className="mb-3">
-                          <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label="RH-"
-                          />
-                          <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label="RH+"
-                          />
-                        </div>
-                      ))}
-                    </Form>
-                  </StyledFilterDiv1One>
-                  {/* <StyledFilterDiv1One>
+                    </StyledFilterDiv1One>
+                    <StyledFilterDiv1One>
+                      <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
+                      <Form>
+                        {['checkbox'].map((type) => (
+                          <div key={`default-${type}`} className="mb-3">
+                            <Form.Check
+                              type={type}
+                              id={`default-${type}`}
+                              label="RH-"
+                            />
+                            <Form.Check
+                              type={type}
+                              id={`default-${type}`}
+                              label="RH+"
+                            />
+                          </div>
+                        ))}
+                      </Form>
+                    </StyledFilterDiv1One>
+                    {/* <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>
                       &nbsp;기&nbsp;간&nbsp;
                     </StyledFilterDiv1Two>
@@ -306,6 +327,7 @@ function DBD_General() {
                       ))}
                     </select>
                   </StyledFilterDiv1One> */}
+                  </StyledFilterDiv1>
                 </StyledFilter>
 
                 <Styleddiv2>
@@ -553,6 +575,9 @@ const StyledFilter = styled.div`
   height: 145px;
   background: #ffe9e9;
   margin-bottom: 20px;
+`;
+const StyledFilterDiv1 = styled.div`
+  display: flex;
 `;
 const StyledFilterDiv1One = styled.div`
   display: flex;

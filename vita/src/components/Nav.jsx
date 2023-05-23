@@ -75,9 +75,9 @@ const Nav = () => {
             to={userId ? `/mypage` : '/'}
             style={{ textDecoration: 'none', color: 'white' }}
           >
-            <StyledDiv31L>
+            <StyledDiv31m>
               <div>{userId ? `| 마이페이지 |` : '|'}</div>
-            </StyledDiv31L>
+            </StyledDiv31m>
           </Link>
         </StyledDiv31m>
         <Link
@@ -179,14 +179,12 @@ const StyledDiv3 = styled.div`
   width: 200px;
   display: flex;
   align-items: center;
+  justify-content: end;
   text-decoration-line: none;
-
-  /* background-color: yellow; */
 `;
 const StyledDiv31L = styled.div`
-  /* flex-direction: row; */
   /* width: 50px; */
-
+  /* flex-direction: row; */
   text-decoration-line: none;
 
   font-family: 'Noto Sans';
@@ -198,21 +196,8 @@ const StyledDiv31L = styled.div`
 
   color: #ffffff;
 `;
-const StyledDiv31R = styled.div`
-  /* width: 50px; */
-  /* flex-direction: row; */
-  text-decoration-line: none;
-
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  letter-spacing: -2px;
-  text-align: left;
-
-  color: #ffffff;
-`;
 const StyledDiv31m = styled.div`
+  /* width: 50px; */
   /* flex-direction: row; */
   text-decoration-line: none;
 
@@ -223,8 +208,22 @@ const StyledDiv31m = styled.div`
   letter-spacing: -2px;
   text-align: center;
 
-  /* margin-left: 5px;
-  margin-right: 5px; */
+  margin-left: 5px;
+  margin-right: 5px;
+
+  color: #ffffff;
+`;
+const StyledDiv31R = styled.div`
+  /* width: 70px; */
+  /* flex-direction: row; */
+  text-decoration-line: none;
+
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: -2px;
+  text-align: left;
 
   color: #ffffff;
 `;

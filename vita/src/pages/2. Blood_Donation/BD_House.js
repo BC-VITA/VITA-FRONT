@@ -295,29 +295,12 @@ function BD_House() {
     </StyledAll>
   );
 }
-const Styledtd1 = styled.div`
-  width: 500px;
-`;
-const Styledtd2 = styled.div`
-  /* display: block; */
-  margin-top: 50px;
-`;
-const Styledtxt = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 19px;
-  line-height: 30px;
-  /* or 158% */
 
-  letter-spacing: 0.05em;
-
-  color: #333333;
-`;
 const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
 `;
+// 서브탭
 const StyledSub = styled.div`
   width: 170px;
   /* height: 175px; */
@@ -395,13 +378,16 @@ const StyledSubDiv2_2g = styled.div`
   color: #969696;
 `;
 
+// 콘텐즈 상단
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
   margin-left: 65px;
   margin-top: 25px;
 `;
-
+const StyledTop = styled.div`
+  display: flex;
+`;
 const StyledTitle = styled.div`
   width: 230px;
   font-family: 'Gmarket Sans TTF';
@@ -412,68 +398,13 @@ const StyledTitle = styled.div`
 
   color: #333333;
 `;
-const StyledTop = styled.div`
-  display: flex;
+
+// 필터
+const StyledTab1 = styled.div`
+  width: 865px;
+  margin-top: 5px;
+  padding-bottom: 500px;
 `;
-
-const StyledButton = styled.div`
-  margin-top: 10px;
-  width: 125px;
-  height: 35px;
-  margin-left: 330px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
-`;
-
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
-`;
-
-const StyledButton2 = styled.div`
-  margin-top: 10px;
-  width: 165px;
-  height: 35px;
-  margin-left: 10px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
-`;
-
-const StyledButtonDiv2 = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
-`;
-
-// 옛날
-const StyledTable = styled(Table)`
-  border-collapse: collapse;
-  th,
-  tbody,
-  td td {
-    padding: 0;
-  }
-`;
-
 const StyledFilter = styled.div`
   width: 865px;
   height: 145px;
@@ -492,20 +423,41 @@ const StyledFilterDivTitle = styled.div`
   margin-right: 20px;
   margin-left: 30px;
 `;
-
 const StyledFilterDiv2 = styled.div`
   width: 850px;
   margin: auto;
   margin-top: 10px;
 `;
 
-const StyledTab1 = styled.div`
-  width: 865px;
-  margin-top: 5px;
-  padding-bottom: 500px;
-`;
-
+// 집만의 콘텐츠
 const Styleddiv2 = styled.div`
   text-align: center;
+`;
+const StyledTable = styled(Table)`
+  border-collapse: collapse;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+`;
+const Styledtd1 = styled.div`
+  width: 500px;
+`;
+const Styledtd2 = styled.div`
+  /* display: block; */
+  margin-top: 50px;
+`;
+const Styledtxt = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 30px;
+  /* or 158% */
+
+  letter-spacing: 0.05em;
+
+  color: #333333;
 `;
 export default BD_House;
