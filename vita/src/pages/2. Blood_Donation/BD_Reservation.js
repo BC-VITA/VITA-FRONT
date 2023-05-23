@@ -163,6 +163,9 @@ function BD_Reservation() {
             </StyledBoxComment>
           </StyledBox3>
         </StyledBox2>
+        <StyledButton>
+          <Nav.Link href="/BD_ReservationFirst">예약하기</Nav.Link>
+        </StyledButton>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -452,5 +455,26 @@ const StyledBoxComment2 = styled.div`
   /* or 133% */
 
   color: #c16d13;
+`;
+
+const StyledButton = styled.button`
+  margin-top: 10px;
+  width: 140px;
+  height: 40px;
+  margin-left: 57ch;
+
+  background: #ff9f9f;
+  border-radius: 9px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+
+  // margin-left: 28px;
+  /* identical to box height, or 100% */
+
+  color: #ffffff;
+  border: none;
 `;
 export default BD_Reservation;
