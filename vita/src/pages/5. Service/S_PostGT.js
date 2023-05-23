@@ -5,11 +5,17 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
 function S_PostGT() {
+  const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+  const navigate = useNavigate();
+
   // 지역
+  const selectArea = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'];
   const [volunteerArea, setvolunteerArea] = useState('');
   const handleSelectArea = (e) => {
     setvolunteerArea(e.target.value);
   };
+
   // 장소
   const [volunteerPlace, setvolunteerPlace] = useState('');
   const handleChangevolunteerPlace = ({ target: { value } }) =>
@@ -19,9 +25,11 @@ function S_PostGT() {
   const [volunteerAddress, setvolunteerAddress] = useState('');
   const handleChangevolunteerAddress = ({ target: { value } }) =>
     setvolunteerAddress(value);
+  
   // 위도
   const [latitude, setlatitude] = useState('');
   const handleChangelatitude = ({ target: { value } }) => setlatitude(value);
+  
   // 경도
   const [longitude, setlongitude] = useState('');
   const handleChangelongitude = ({ target: { value } }) => setlongitude(value);
@@ -98,16 +106,19 @@ function S_PostGT() {
     setvolunteerType(value);
 
   // 활동구분
+  const selectActivitySection = ['전체', '온라인', '오프라인'];
   const [activitySection, setactivitySection] = useState('');
   const handleSelectActivitySection = (e) => {
     setactivitySection(e.target.value);
   };
   // 봉사대상
+  const selectVolunteerTarget = ['전체', '아동.청소년', '장애인', '노인', '쪽방촌', '다문화가정', '여성', '환경', '사회적기업', '고향봉사', '기타'];
   const [volunteerTarget, setvolunteerTarget] = useState('');
   const handleSelectVolunteerTarget = (e) => {
     setvolunteerTarget(e.target.value);
   };
   // 봉사자유형
+  const selectVolunteerPersonType = ['성인', '청소년'];
   const [volunteerPersonType, setvolunteerPersonType] = useState('');
   const handleSelectVolunteerPersonType = (e) => {
     setvolunteerPersonType(e.target.value);
@@ -128,51 +139,6 @@ function S_PostGT() {
   // 내용
   const [content, setcontent] = useState('');
   const handleChangecontent = ({ target: { value } }) => setcontent(value);
-
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(false);
-
-  const navigate = useNavigate();
-
-  const selectArea = [
-    '전체',
-    '서울',
-    '부산',
-    '대구',
-    '인천',
-    '광주',
-    '대전',
-    '울산',
-    '세종',
-    '경기',
-    '강원',
-    '충북',
-    '충남',
-    '전북',
-    '전남',
-    '경북',
-    '경남',
-    '제주',
-  ];
-
-  const selectActivitySection = ['전체', '온라인', '오프라인'];
-
-  const selectVolunteerTarget = [
-    '전체',
-    '아동.청소년',
-    '장애인',
-    '노인',
-    '쪽방촌',
-    '다문화가정',
-    '여성',
-    '환경',
-    '사회적기업',
-    '고향봉사',
-    '기타',
-  ];
-
-  const selectVolunteerPersonType = ['성인', '청소년'];
-
   //봉사분야
   const selectType = [
     '전체',
@@ -269,29 +235,42 @@ function S_PostGT() {
     setDisabled(true);
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
-    //back으로 정보 post함
-    fetch('http://localhost:8004/volunteer/board/list', {
+    fetch('http://localhost:8004/volunteer/board', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
         volunteerArea: volunteerArea,
+        volunteerPlace: volunteerPlace,
+        volunteerAddress: volunteerAddress,
+        latitude: latitude,
+        longitude: longitude,
+        volunteerSeekStartDate: wantstartDate,
+        volunteerSeekEndDate: wantendDate,
+        needVolunteerNumber: needVolunteerNumber,
+        volunteerStartDate: startDate,
+        volunteerEndDate: endDate,
+        volunteerStartTime: volunteerStartTime,
+        volunteerEndTime: volunteerEndTime1,
+        volunteerActivityWeek: volunteerActivityWeek,
+        volunteerType: 'time',
+        activitySection: activitySection,
+        volunteerTarget: volunteerTarget,
+        volunteerPersonType: volunteerPersonType,
+        managerName: managerName,
+        managerEmail: managerEmail,
+        title: title,
+        content: content,
+        volunteerField: volunteerBigType
       }),
     })
-      //보낸거를 문자열 받아 다시 json(객체)으로 변환하여 비교
       .then((res) => {
         res.json();
         if (res.ok) {
-          navigate('/DBD_General');
+          navigate('/');
         }
       })
-      //회원가입 실패시 실행
-      .catch((err) => {
-        setError(err.message);
-        //에러시 Loading메세지 사라지고
-        //에러메세지만 보이도록 설정
-      });
     setDisabled(false);
     console.log(
       'data: ' +

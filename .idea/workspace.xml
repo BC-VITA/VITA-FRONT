@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a06c25-6f7b-44d1-9863-67e50fd8c97c" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vita/src/pages/2. Blood_Donation/BD_House.js" beforeDir="false" afterPath="$PROJECT_DIR$/vita/src/pages/2. Blood_Donation/BD_House.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vita/src/pages/2. Blood_Donation/BD_ReservationSecond.js" beforeDir="false" afterPath="$PROJECT_DIR$/vita/src/pages/2. Blood_Donation/BD_ReservationSecond.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vita/src/pages/2. Blood_Donation/BD_ReservationThird.js" beforeDir="false" afterPath="$PROJECT_DIR$/vita/src/pages/2. Blood_Donation/BD_ReservationThird.js" afterDir="false" />
-    </list>
+    <list default="true" id="21a06c25-6f7b-44d1-9863-67e50fd8c97c" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,6 +53,7 @@
       <workItem from="1683592105707" duration="3000" />
       <workItem from="1683684019058" duration="84000" />
       <workItem from="1683686176783" duration="13000" />
+      <workItem from="1684827523362" duration="426000" />
     </task>
     <servers />
   </component>
