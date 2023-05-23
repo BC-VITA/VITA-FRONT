@@ -5,8 +5,8 @@ import Card from 'react-bootstrap/Card';
 
 import Nav from 'react-bootstrap/Nav';
 
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+// import Button from 'react-bootstrap/Button';
+// import Card from 'react-bootstrap/Card';
 
 function D_Donation() {
   const [boardList, setBoardList] = useState([]);
@@ -50,7 +50,7 @@ function D_Donation() {
         <StyledTop>
           <StyledTitle>기부하기</StyledTitle>
         </StyledTop>
-        <StyledBox>
+        {/* <StyledBox>
           <StyledBox2>
             <Card style={{ width: '17rem' }}>
               <Card.Img variant="top" src="holder.js/100px180" />
@@ -90,7 +90,7 @@ function D_Donation() {
               </Card.Body>
             </Card>
           </StyledBox2>
-        </StyledBox>
+        </StyledBox> */}
       </StyledSubcomment>
       <div>
         <h2>Board List</h2>
@@ -207,20 +207,20 @@ const StyledTop = styled.div`
   display: flex;
 `;
 
-const StyledBox = styled.div`
-  margin-top: 30px;
-  display: flex;
-`;
-const StyledBox2 = styled.div`
-  margin-left: 5px;
-  margin-right: 5px;
-`;
-const StyledBox = styled.div`
-  margin-top: 30px;
-  display: flex;
-`;
-const StyledBox2 = styled.div`
-  margin-left: 5px;
-  margin-right: 5px;
-`;
+// const StyledBox = styled.div`
+//   margin-top: 30px;
+//   display: flex;
+// `;
+// const StyledBox2 = styled.div`
+//   margin-left: 5px;
+//   margin-right: 5px;
+// `;
+// const StyledBox = styled.div`
+//   margin-top: 30px;
+//   display: flex;
+// `;
+// const StyledBox2 = styled.div`
+//   margin-left: 5px;
+//   margin-right: 5px;
+// `;
 export default D_Donation;
