@@ -11,7 +11,6 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 function S_Ganeral() {
   const [id, setId] = useState('');
-  // const [id, setId] = useState('');
   const handleChangeId = ({ target: { value } }) => setId(value);
 
   const navigate = useNavigate();
@@ -178,7 +177,11 @@ function S_Ganeral() {
   };
 
   //봉사기간
-  const selectField7 = ['봉사기간'];
+  // const selectField7 = ['봉사기간'];
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
+  const handleEndDateChange = ({ target: { value } }) => setendDate(value);
 
   //봉사명
   const [volunteer, setVolunteer] = useState('');
@@ -393,29 +396,25 @@ function S_Ganeral() {
                       ))}
                     </select>
                     <StyledFilterDivTitle>봉사기간</StyledFilterDivTitle>
-                    {/* <select
-                      onChange={handleFirstFieldChange2}
-                      value={firstFieldValue2}
-                      style={{ border: 'none' }}
-                    >
-                      {selectField6.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
+                    <input
+                      type="Date"
+                      value={startDate}
+                      style={{
+                        border: 'none',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                      }}
+                      onChange={handleStartDateChange}
+                    />
                     <StyledFilterDivTitle>&nbsp;-&nbsp;</StyledFilterDivTitle>
-                    <select
-                      onChange={handleFirstFieldChange2}
-                      value={secondFieldOptions2}
-                      style={{ border: 'none' }}
-                    >
-                      {selectField6.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select> */}
+                    <input
+                      type="Date"
+                      value={endDate}
+                      style={{
+                        border: 'none',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                      }}
+                      onChange={handleEndDateChange}
+                    />
                   </StyledFilterDiv1>
                   <StyledFilterDiv2>
                     <FloatingLabel

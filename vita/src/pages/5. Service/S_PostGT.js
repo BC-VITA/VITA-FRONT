@@ -27,8 +27,12 @@ function S_PostGT() {
   const handleChangelongitude = ({ target: { value } }) => setlongitude(value);
 
   // 모집기간
-  //const [volunteerSeekStartDate, setvolunteerSeekStartDate] = useState('');
-  //const [volunteerSeekEndDate, setvolunteerSeekEndDate] = useState('');
+  const [wantstartDate, setwantstartDate] = useState('');
+  const [wantendDate, setwantendDate] = useState('');
+  const handleWantStartDateChange = ({ target: { value } }) =>
+    setwantstartDate(value);
+  const handleWantEndDateChange = ({ target: { value } }) =>
+    setwantendDate(value);
 
   // 모집인원
   const [needVolunteerNumber, setneedVolunteerNumber] = useState('');
@@ -36,8 +40,10 @@ function S_PostGT() {
     setneedVolunteerNumber(value);
 
   // 봉사기간
-  // const [volunteerStartDate, setvolunteerStartDate] = useState('');
-  // const [volunteerEndDate, setvolunteerEndDate] = useState('');
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
+  const handleEndDateChange = ({ target: { value } }) => setendDate(value);
 
   // 봉사시간
   const selectTime = ['시간을', '09:00', '09:30', '10:00', '10:30', '11:00'];
@@ -90,9 +96,6 @@ function S_PostGT() {
   const [volunteerType, setvolunteerType] = useState('');
   const handleChangevolunteerType = ({ target: { value } }) =>
     setvolunteerType(value);
-  // 봉사분야
-  // const [volunteerField, setvolunteerField] = useState('');
-  // const [needVolunteerNumber, setneedVolunteerNumber] = useState('');
 
   // 활동구분
   const [activitySection, setactivitySection] = useState('');
@@ -376,27 +379,27 @@ function S_PostGT() {
               </StyledGroup2_1>
             </StyledGroup2>
             <StyledGroup3>
-              {/* <StyledGroup3_1>
+              <div>
                 <StyledGroupTitle>모집기간</StyledGroupTitle>
-                <FloatingLabel
-                  label="인천병원"
-                  value={hostipalname}
-                  onChange={handleChangehostipalname}
-                >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-                <FloatingLabel
-                  label="인천병원"
-                  value={hostipalname}
-                  onChange={handleChangehostipalname}
-                >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-              </StyledGroup3_1> */}
+                <input
+                  type="Date"
+                  value={wantstartDate}
+                  onChange={handleWantStartDateChange}
+                />
+              </div>
+              <StyledGroupTitle>-</StyledGroupTitle>
+              <div>
+                <StyledGroupTitle>마감기간</StyledGroupTitle>
+                <input
+                  type="Date"
+                  value={wantendDate}
+                  onChange={handleWantEndDateChange}
+                />
+              </div>
               <StyledGroup3_2>
                 <StyledGroupTitle>모집인원</StyledGroupTitle>
                 <FloatingLabel
-                  label="032-500-0243"
+                  label="모집인원"
                   value={needVolunteerNumber}
                   onChange={handleChangeneedVolunteerNumber}
                 >
@@ -405,23 +408,23 @@ function S_PostGT() {
               </StyledGroup3_2>
             </StyledGroup3>
             <StyledGroup4>
-              {/* <StyledGroup4_1>
+              <div>
                 <StyledGroupTitle>봉사기간</StyledGroupTitle>
-                <FloatingLabel
-                  label="인천광역시 부평구 구산동 47-3"
-                  value={hostipaladdress}
-                  onChange={handleChangehostipaladdress}
-                >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-                <FloatingLabel
-                  label="인천광역시 부평구 구산동 47-3"
-                  value={hostipaladdress}
-                  onChange={handleChangehostipaladdress}
-                >
-                  <Form.Control type="textarea" placeholder="label" />
-                </FloatingLabel>
-              </StyledGroup4_1> */}
+                <input
+                  type="Date"
+                  value={startDate}
+                  onChange={handleStartDateChange}
+                />
+              </div>
+              <StyledGroupTitle>-</StyledGroupTitle>
+              <div>
+                <StyledGroupTitle>마감기간</StyledGroupTitle>
+                <input
+                  type="Date"
+                  value={endDate}
+                  onChange={handleEndDateChange}
+                />
+              </div>
               <StyledGroup4_2>
                 <StyledGroupTitle>봉사시간</StyledGroupTitle>
                 <select
@@ -486,22 +489,14 @@ function S_PostGT() {
               </StyledGroup5_2>
               <div>
                 <StyledGroupTitle>봉사분야</StyledGroupTitle>
-                <select
-                  onChange={handleTypeChange}
-                  value={volunteerBigType}
-                  style={{ border: 'none' }}
-                >
+                <select onChange={handleTypeChange} value={volunteerBigType}>
                   {selectType.map((item) => (
                     <option value={item} key={item}>
                       {item}
                     </option>
                   ))}
                 </select>
-                <select
-                  onChange={handleTypeChange1}
-                  value={volunteerSmallType}
-                  style={{ border: 'none' }}
-                >
+                <select onChange={handleTypeChange1} value={volunteerSmallType}>
                   {volunteerSmallType.map((option) => (
                     <option key={option} value={option}>
                       {option}

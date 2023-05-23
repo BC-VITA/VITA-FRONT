@@ -62,11 +62,6 @@ function BD_History() {
                 <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
-              <Nav.Link href="/BD_History">
-                <StyledSubDiv2_2>헌혈내역조회</StyledSubDiv2_2>
-              </Nav.Link>
-            </StyledSubDiv2_1p>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -115,7 +110,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 278px;
+  height: 223px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
