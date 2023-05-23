@@ -50,7 +50,7 @@ import SPostGroup from './pages/5. Service/S_PostGroup';
 import SOther from './pages/5. Service/S_Other';
 import SPostOther from './pages/5. Service/S_PostOther';
 import SWatchList from './pages/5. Service/S_WatchList';
-import SHistory from './pages/5. Service/S_History';
+// import SHistory from './pages/5. Service/S_History';
 
 import DMain from './pages/6. Donate/D_Main';
 import DDonation from './pages/6. Donate/D_Donation';
@@ -157,7 +157,7 @@ function App() {
           <Route path="/S_Other" element={<SOther />}></Route>
           <Route path="/S_PostOther" element={<SPostOther />}></Route>
           <Route path="/S_WatchList" element={<SWatchList />}></Route>
-          <Route path="/S_History" element={<SHistory />}></Route>
+          {/* <Route path="/S_History" element={<SHistory />}></Route> */}
 
           {/*기부하자*/}
           <Route path="/D_Main" element={<DMain />}></Route>
@@ -175,7 +175,10 @@ function App() {
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
 
           {/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>
+          <Route
+            path="/M_Blood_Reservation"
+            element={<MBloodReservation />}
+          ></Route>
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
         </Routes>
         <Foot />

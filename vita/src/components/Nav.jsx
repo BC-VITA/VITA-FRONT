@@ -181,8 +181,6 @@ const StyledDiv3 = styled.div`
   align-items: center;
   justify-content: end;
   text-decoration-line: none;
-
-  background-color: red;
 `;
 const StyledDiv31L = styled.div`
   /* width: 50px; */
