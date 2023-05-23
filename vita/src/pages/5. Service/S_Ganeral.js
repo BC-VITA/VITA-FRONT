@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Accordion from 'react-bootstrap/Accordion';
+import icon from './heart.png';
 
 function S_Ganeral() {
   const [id, setId] = useState('');
@@ -125,31 +127,54 @@ function S_Ganeral() {
 
   const [inputData, setInputData] = useState([
     {
-      hospitalName: '',
-      title: '',
+      volunteerType: '',
       content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
+      title: '',
+      volunteerStartDate: '',
+      volunteerEndDate: '',
+      volunteerStartTime: '',
+      volunteerEndTime: '',
+      volunteerArea: '',
+      activitySection: '',
+      volunteerField: '',
+      volunteerSeekStartDate: '',
+      volunteerSeekEndDate: '',
+      volunteerAddress: '',
+      volunteerTarget: '',
+      volunteerPlace: '',
+      latitude: '',
+      longitude: '',
+      volunteerActivityWeek: '',
+      qualification: '',
+      volunteerPersonType: '',
+      volunteerActivityNumber: '',
+      requirements: '',
+      managerName: '',
+      managerEmail: '',
+      requireGroup: '',
+      url: '',
     },
     {},
   ]);
-
-  const handleReservation = (centerName) => {
-    navigate('/BD_ReservationSecond', { state: { centerName } });
-  };
+  const userId = 'time';
   useEffect(() => {
-    fetch('http://localhost:8004/volunteer/board/list', {
+    const url = `http://localhost:8004/volunteer/board/list?volunteerType=${userId}`;
+
+    fetch(url, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setInputData(res);
+        console.log(res);   
+        setInputData(res);         
+        console.log(inputData);
       });
+    console.log(inputData);
   }, []);
+
+  const handleReservation = (centerName) => {
+    navigate('/BD_ReservationSecond', { state: { centerName } });
+  };
 
   // const filteredData =           //전체 api 완성하면 필터 완성하겟음
   //   firstAreaValue === '전체'
@@ -332,6 +357,76 @@ function S_Ganeral() {
                   </StyledFilterDiv2>
                 </StyledFilter>
                 <section>
+                <Accordion defaultActiveKey="0">
+                    <Table striped bordered hover size="sm">
+                      <thead>
+                        <tr>
+                          <th>제목 / 내용</th>
+                          <th>모집인원 및 현황</th>
+                        </tr>
+                      </thead>
+                      <Styledtbody1>
+                        {inputData.map((element, index) => {
+                          const markerPositions = [
+                            [element.latitude, element.longitude],
+                          ];
+                          return (
+                            <Styledtr>
+                              <Styledtd>
+                                <Accordion.Item eventKey={index}>
+                                  <Accordion.Header>
+                                    {element.title}
+                                    <br />
+                                    글을 올린 날짜 : {element.startDate}
+                                    <br />
+                                    모집기간 : {element.volunteerSeekStartDate}-{element.volunteerSeekEndDate}
+                                    <br />
+                                    활동날짜 : {element.volunteerStartTime}-{element.volunteerEndTime}
+                                    <br />
+                                    활동요일 : {element.volunteerActivityWeek}
+                                    <br />
+                                    봉사시간 : {element.volunteerStartTime}-{element.volunteerEndTime}
+                                    <br />
+                                    봉사장소 : {element.volunteerPlace}
+                                  </Accordion.Header>
+                                  <Accordion.Body colSpan={2}>
+                                    모집인원 : {element.needVolunteerNumber}
+                                    <br />
+                                    신청인원 : {element.bloodType}
+                                    <br />
+                                    봉사자 유형 : {element.volunteerPersonType}
+                                    <br />
+                                    주소 : {element.volunteerAddress}
+                                    <br />
+                                    <KakaoMap
+                                      markerPositions={markerPositions}
+                                      size={mapSize}
+                                    />
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                              </Styledtd>
+                              <Styledtd>
+                                모집중
+                                <br />
+                                <Styledimg
+                                  src={icon}
+                                  class
+                                  name="main-icon"
+                                  alt="logo"
+                                />
+                                {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
+                                <br />
+                                {/* <Nav.Link type="button" href="/DBD_PostGeneral">
+                                  <StyledButtonDiv>참여하기</StyledButtonDiv>
+                                </Nav.Link> */}
+                                <button type="button">참여하기</button>
+                              </Styledtd>
+                            </Styledtr>
+                          );
+                        })}
+                      </Styledtbody1>
+                    </Table>
+                  </Accordion>
 
                 </section>
               </Tab.Content>
@@ -557,5 +652,19 @@ const Styledtxt = styled.div`
   letter-spacing: 0.05em;
 
   color: #333333;
+`;
+const Styledtr = styled.tr`
+  border: none;
+`;
+const Styledtd = styled.td`
+  border: none;
+`;
+const Styledimg = styled.img`
+  width: 30px;
+  height: 25px;
+  object-fit: cover;
+`;
+const Styledtbody1 = styled.tbody`
+  border: none;
 `;
 export default S_Ganeral;
