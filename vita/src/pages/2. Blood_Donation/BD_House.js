@@ -13,8 +13,18 @@ function BD_House() {
 
   const navigate = useNavigate();
 
-  const [mapSize, setMapSize] = useState([300, 300]);
-  const selectList1 = ['전체', '인천', '서울', '경기', '강원', '부산', '광주', '충북', '제주'];
+  const [mapSize, setMapSize] = useState([400, 400]);
+  const selectList1 = [
+    '전체',
+    '인천',
+    '서울',
+    '경기',
+    '강원',
+    '부산',
+    '광주',
+    '충북',
+    '제주',
+  ];
 
   const [firstListValue, setFirstListValue] = useState('전체');
   const [secondListOptions, setSecondListOptions] = useState([
@@ -31,54 +41,286 @@ function BD_House() {
     if (selectedValue === '전체') {
       setSecondListOptions(['검색할 지역을 골라주세요']);
     } else if (selectedValue === '서울') {
-      setSecondListOptions(['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구',
-        '도봉구', '동대문구', '동작구', '마포구', '서대문구', '사초구', '성동구', '성북구', '송파구', '양천구',
-        '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구']);
+      setSecondListOptions([
+        '강남구',
+        '강동구',
+        '강북구',
+        '강서구',
+        '관악구',
+        '광진구',
+        '구로구',
+        '금천구',
+        '노원구',
+        '도봉구',
+        '동대문구',
+        '동작구',
+        '마포구',
+        '서대문구',
+        '사초구',
+        '성동구',
+        '성북구',
+        '송파구',
+        '양천구',
+        '영등포구',
+        '용산구',
+        '은평구',
+        '종로구',
+        '중구',
+        '중랑구',
+      ]);
     } else if (selectedValue === '부산') {
-      setSecondListOptions(['강서구', '금정구', '기장군', '남군', '동구', '동래구', '부산진구', '북구', '사상구',
-        '사하구', '서구', '수영구', '연제구', '영동구', '중구', '해운대구']);
+      setSecondListOptions([
+        '강서구',
+        '금정구',
+        '기장군',
+        '남군',
+        '동구',
+        '동래구',
+        '부산진구',
+        '북구',
+        '사상구',
+        '사하구',
+        '서구',
+        '수영구',
+        '연제구',
+        '영동구',
+        '중구',
+        '해운대구',
+      ]);
     } else if (selectedValue === '대구') {
-      setSecondListOptions(['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구']);
+      setSecondListOptions([
+        '남구',
+        '달서구',
+        '달성군',
+        '동구',
+        '북구',
+        '서구',
+        '수성구',
+        '중구',
+      ]);
     } else if (selectedValue === '인천') {
-      setSecondListOptions(['강화군', '계양구', '남구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진구', '중구']);
+      setSecondListOptions([
+        '강화군',
+        '계양구',
+        '남구',
+        '남동구',
+        '동구',
+        '미추홀구',
+        '부평구',
+        '서구',
+        '연수구',
+        '옹진구',
+        '중구',
+      ]);
     } else if (selectedValue === '울산') {
       setSecondListOptions(['남구', '동구', '북구', '울주군', '중구']);
     } else if (selectedValue === '세종') {
       setSecondListOptions(['']);
     } else if (selectedValue === '경기') {
-      setSecondListOptions(['가평군', '고양시 덕양구', '고양시 일산동구', '고양시 일산서구', '과천시', '광명시',
-        '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '부천시 소사구', '부천시 오정구',
-        '부천시 원미구', '성남시 분당구', '성남시 수정구', '성남시 중원구', '수원시 권선구', '수원시 영통구', '수원시 장안구',
-        '수원시 팔달구', '시흥시', '안산시 단원구', '안산시 상록구', '안성시', '안양시 동안구', '안양시 만안구',
-        '양주시', '양평군', '여주시', '연천군', '오산시', '용인시 기흥구', '용인시 수지구', '용인시 처인구', '의왕시',
-        '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']);
+      setSecondListOptions([
+        '가평군',
+        '고양시 덕양구',
+        '고양시 일산동구',
+        '고양시 일산서구',
+        '과천시',
+        '광명시',
+        '광주시',
+        '구리시',
+        '군포시',
+        '김포시',
+        '남양주시',
+        '동두천시',
+        '부천시',
+        '부천시 소사구',
+        '부천시 오정구',
+        '부천시 원미구',
+        '성남시 분당구',
+        '성남시 수정구',
+        '성남시 중원구',
+        '수원시 권선구',
+        '수원시 영통구',
+        '수원시 장안구',
+        '수원시 팔달구',
+        '시흥시',
+        '안산시 단원구',
+        '안산시 상록구',
+        '안성시',
+        '안양시 동안구',
+        '안양시 만안구',
+        '양주시',
+        '양평군',
+        '여주시',
+        '연천군',
+        '오산시',
+        '용인시 기흥구',
+        '용인시 수지구',
+        '용인시 처인구',
+        '의왕시',
+        '의정부시',
+        '이천시',
+        '파주시',
+        '평택시',
+        '포천시',
+        '하남시',
+        '화성시',
+      ]);
     } else if (selectedValue === '강원') {
-      setSecondListOptions(['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군',
-        '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평찬군', '홍천군', '화천군', '횡성군']);
+      setSecondListOptions([
+        '강릉시',
+        '고성군',
+        '동해시',
+        '삼척시',
+        '속초시',
+        '양구군',
+        '양양군',
+        '영월군',
+        '원주시',
+        '인제군',
+        '정선군',
+        '철원군',
+        '춘천시',
+        '태백시',
+        '평찬군',
+        '홍천군',
+        '화천군',
+        '횡성군',
+      ]);
     } else if (selectedValue === '충북') {
-      setSecondListOptions(['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '증평군', '진천군',
-        '청주시 상당구', '청주시 서원구', '청주시 청원구', '청주시 흥덕구', '충주시']);
+      setSecondListOptions([
+        '괴산군',
+        '단양군',
+        '보은군',
+        '영동군',
+        '옥천군',
+        '음성군',
+        '제천시',
+        '증평군',
+        '진천군',
+        '청주시 상당구',
+        '청주시 서원구',
+        '청주시 청원구',
+        '청주시 흥덕구',
+        '충주시',
+      ]);
     } else if (selectedValue === '대전') {
       setSecondListOptions(['대덕구', '동구', '서구', '유성구', '중구']);
     } else if (selectedValue === '충남') {
-      setSecondListOptions(['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군',
-        '아산시', '예산군', '천안시 동남구', '천안시 서북구', '청양군', '태안군', '홍성군', '']);
+      setSecondListOptions([
+        '계룡시',
+        '공주시',
+        '금산군',
+        '논산시',
+        '당진시',
+        '보령시',
+        '부여군',
+        '서산시',
+        '서천군',
+        '아산시',
+        '예산군',
+        '천안시 동남구',
+        '천안시 서북구',
+        '청양군',
+        '태안군',
+        '홍성군',
+        '',
+      ]);
     } else if (selectedValue === '전북') {
-      setSecondListOptions(['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시',
-        '임실군', '장수군', '전주시 덕진구', '전주시 완산구', '정읍시', '진안군']);
+      setSecondListOptions([
+        '고창군',
+        '군산시',
+        '김제시',
+        '남원시',
+        '무주군',
+        '부안군',
+        '순창군',
+        '완주군',
+        '익산시',
+        '임실군',
+        '장수군',
+        '전주시 덕진구',
+        '전주시 완산구',
+        '정읍시',
+        '진안군',
+      ]);
     } else if (selectedValue === '광주') {
       setSecondListOptions(['광산구', '남구', '동구', '북구', '서구']);
     } else if (selectedValue === '전남') {
-      setSecondListOptions(['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군',
-        '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군']);
+      setSecondListOptions([
+        '강진군',
+        '고흥군',
+        '곡성군',
+        '광양시',
+        '구례군',
+        '나주시',
+        '담양군',
+        '목포시',
+        '무안군',
+        '보성군',
+        '순천시',
+        '신안군',
+        '여수시',
+        '영광군',
+        '영암군',
+        '완도군',
+        '장성군',
+        '장흥군',
+        '진도군',
+        '함평군',
+        '해남군',
+        '화순군',
+      ]);
     } else if (selectedValue === '경북') {
-      setSecondListOptions(['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시',
-        '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군',
-        '칠곡군', '포항시 남구', '포항시 남구']);
+      setSecondListOptions([
+        '경산시',
+        '경주시',
+        '고령군',
+        '구미시',
+        '군위군',
+        '김천시',
+        '문경시',
+        '봉화군',
+        '상주시',
+        '성주군',
+        '안동시',
+        '영덕군',
+        '영양군',
+        '영주시',
+        '영천시',
+        '예천군',
+        '울릉군',
+        '울진군',
+        '의성군',
+        '청도군',
+        '청송군',
+        '칠곡군',
+        '포항시 남구',
+        '포항시 남구',
+      ]);
     } else if (selectedValue === '경남') {
-      setSecondListOptions(['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시',
-        '의령군', '진주시', '창녕군', '창원시 마산합포구', '창원시 마산회원구', '창원시 성산구', '창원시 의창구', '창원시 진해구',
-        '통영시', '하동군', '함안군', '함양군', '합천군']);
+      setSecondListOptions([
+        '거제시',
+        '거창군',
+        '고성군',
+        '김해시',
+        '남해군',
+        '밀양시',
+        '사천시',
+        '산청군',
+        '양산시',
+        '의령군',
+        '진주시',
+        '창녕군',
+        '창원시 마산합포구',
+        '창원시 마산회원구',
+        '창원시 성산구',
+        '창원시 의창구',
+        '창원시 진해구',
+        '통영시',
+        '하동군',
+        '함안군',
+        '함양군',
+        '합천군',
+      ]);
     } else if (selectedValue === '제주') {
       setSecondListOptions(['서귀포시', '제주시']);
     }
@@ -166,12 +408,14 @@ function BD_House() {
         </StyledTop>
         <StyledTab1>
           <StyledFilter>
-            <StyledFilterDiv1>
-              <StyledFilterDivTitle>지역선택</StyledFilterDivTitle>
+            <StyledFilterDiv1 style={{ paddingTop: '20px' }}>
+              <StyledFilterDivTitle style={{ paddingTop: '8px' }}>
+                지역선택
+              </StyledFilterDivTitle>
               <select
                 onChange={handleFirstListChange}
                 value={firstListValue}
-                style={{ border: 'none' }}
+                style={{ height: '40px' }}
               >
                 {selectList1.map((item) => (
                   <option value={item} key={item}>
@@ -179,16 +423,13 @@ function BD_House() {
                   </option>
                 ))}
               </select>
-              <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
+              {/* <select value={secondListOptions} onChange={setSecondListOptions}>
+                {secondListOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select> */}
             </StyledFilterDiv1>
             <StyledFilterDiv2>
               <FloatingLabel
@@ -196,6 +437,11 @@ function BD_House() {
                 name="id"
                 value={id}
                 onChange={handleChangeId}
+                style={{
+                  marginTop: '10px',
+                  marginLeft: '20px',
+                  marginRight: '20px',
+                }}
               >
                 <Form.Control type="id" placeholder="label" />
               </FloatingLabel>
@@ -203,13 +449,77 @@ function BD_House() {
           </StyledFilter>
           <section>
             <Styleddiv2>
-              <StyledTable striped>
+              <StyledTable>
                 <thead>
                   <tr>
-                    <th id="area-header">지역</th>
-                    <th id="centerName-header">헌혈의 집</th>
-                    <th id="bloodHouseAddress-header">주소</th>
-                    <th id="bloodHousePhoneNumber-header">전화번호</th>
+                    <th
+                      id="area-header"
+                      style={{
+                        width: '80px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      지역
+                    </th>
+                    <th
+                      id="centerName-header"
+                      style={{
+                        width: '120px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      헌혈의 집
+                    </th>
+                    <th
+                      id="bloodHouseAddress-header"
+                      style={{
+                        width: '350px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      주소
+                    </th>
+                    <th
+                      id="bloodHousePhoneNumber-header"
+                      style={{
+                        width: '130px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      전화번호
+                    </th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
@@ -221,14 +531,72 @@ function BD_House() {
                     return (
                       <React.Fragment key={index}>
                         <tr onClick={() => handleRowClick(index)}>
-                          <td headers="area-header">{element.area}</td>
-                          <td headers="centerName-header">
+                          <td
+                            headers="area-header"
+                            style={{
+                              width: '80px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '18px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
+                            {element.area}
+                          </td>
+                          <td
+                            headers="centerName-header"
+                            style={{
+                              width: '120px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '18px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.centerName}
                           </td>
-                          <td headers="bloodHouseAddress-header">
+                          <td
+                            headers="bloodHouseAddress-header"
+                            style={{
+                              width: '130px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.bloodHouseAddress}
                           </td>
-                          <td headers="bloodHousePhoneNumber-header">
+                          <td
+                            headers="bloodHousePhoneNumber-header"
+                            style={{
+                              width: '130px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.bloodHousePhoneNumber}
                           </td>
                           <td>
@@ -242,12 +610,42 @@ function BD_House() {
                                 onClick={() =>
                                   handleReservation(element.centerName)
                                 }
+                                style={{
+                                  height: '37px',
+                                  background: '#D9D9D9',
+                                  borderRadius: '10px',
+                                  border: 'none',
+                                  fontFamily: 'Gmarket Sans TTF',
+                                  fontStyle: 'normal',
+                                  fontWeight: '500',
+                                  fontSize: '15px',
+                                  lineHeight: '37px',
+
+                                  textAlign: 'center',
+
+                                  color: '#333333',
+                                }}
                               >
                                 예약하기
                               </button>
                               <button
                                 type="button"
-                                style={{ marginTop: '10px' }}
+                                style={{
+                                  height: '37px',
+                                  marginTop: '10px',
+                                  background: '#FF9F9F',
+                                  borderRadius: '10px',
+                                  border: 'none',
+                                  fontFamily: 'Gmarket Sans TTF',
+                                  fontStyle: 'normal',
+                                  fontWeight: '500',
+                                  fontSize: '15px',
+                                  lineHeight: '37px',
+
+                                  textAlign: 'center',
+
+                                  color: '#333333',
+                                }}
                               >
                                 자세히보기
                               </button>
@@ -264,7 +662,13 @@ function BD_House() {
                                 />
                               </Styledtd1>
                             </td>
-                            <Styledtd2 colSpan={2}>
+                            <Styledtd2
+                              colSpan={2}
+                              style={{
+                                width: '240px',
+                                marginLeft: '-110px',
+                              }}
+                            >
                               <Styledtxt>
                                 헌혈종류 :
                                 <br /> 전혈, 혈장, 혈소판

@@ -9,21 +9,20 @@ function BD_ReservationThird() {
   const { state: { selectedOptions, formattedDate, centerName } = {} } =
     useLocation();
   const [times, setTimes] = useState('');
-  const [isBloodType,setIsBloodType] = useState('');
+  const [isBloodType, setIsBloodType] = useState('');
 
   useEffect(() => {
-  const times = Object.keys(selectedOptions);
+    const times = Object.keys(selectedOptions);
 
+    const bloodTypeString = Object.values(selectedOptions)
+      .map((times) => Object.values(times).join(''))
+      .join('');
+    setIsBloodType(bloodTypeString);
+    const bloodTypesString = bloodTypeString.toString();
+    setIsBloodType(bloodTypesString);
 
-  const bloodTypeString = Object.values(selectedOptions)
-  .map((times) => Object.values(times).join(''))
-  .join('');
-  setIsBloodType(bloodTypeString);
-  const bloodTypesString = bloodTypeString.toString();
-  setIsBloodType(bloodTypesString);
-
-  const timeString = times.join(',');
-  setTimes(timeString);
+    const timeString = times.join(',');
+    setTimes(timeString);
   }, [selectedOptions]);
 
   const handleSubmit = async (event) => {
@@ -70,15 +69,10 @@ function BD_ReservationThird() {
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/BD_ReservationFirst">
+              <Nav.Link href="/BD_Reservation">
                 <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_History">
-                <StyledSubDiv2_2g>헌혈내역조회</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -89,45 +83,51 @@ function BD_ReservationThird() {
         <StyledCurrent>
           <StyledBar />
           <StyledCircle>
+            <StyledCircleTxt>유의사항</StyledCircleTxt>
+          </StyledCircle>
+          <StyledBar />
+          <StyledCircle>
             <StyledCircleTxt>센터선택</StyledCircleTxt>
           </StyledCircle>
-          <StyledBarM />
+
+          <StyledBar />
           <StyledCircle>
             <StyledCircleTxt>예약하기</StyledCircleTxt>
           </StyledCircle>
 
-          <StyledBarM />
+          <StyledBar />
           <StyledCircle>
             <StyledCircleTxt>예약완료</StyledCircleTxt>
           </StyledCircle>
           <StyledBar />
         </StyledCurrent>
+
         <StyledDiv>헌혈 예약이 완료되었습니다.</StyledDiv>
         <StyledBox>
           {Object.keys(selectedOptions).map((time) => (
             <div key={time}>
               <StyledDiv1>
-                <StyledDiv2>시간</StyledDiv2>
-                <StyledDiv3>{time}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>헌혈종류</StyledDiv2>
-                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
                 <StyledDiv2>일시</StyledDiv2>
                 <StyledDiv3>{formattedDate}</StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
-                <StyledDiv2>위치</StyledDiv2>
+                <StyledDiv2>시간</StyledDiv2>
+                <StyledDiv3>{time}</StyledDiv3>
+              </StyledDiv1>
+              <StyledDiv1>
+                <StyledDiv2>헌혈의 집</StyledDiv2>
                 <StyledDiv3>{centerName}</StyledDiv3>
+              </StyledDiv1>
+              <StyledDiv1>
+                <StyledDiv2>헌혈 종류</StyledDiv2>
+                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
               </StyledDiv1>
             </div>
           ))}
         </StyledBox>
-        <button type="button" onClick={handleSubmit}>
+        <Styledbutton type="button" onClick={handleSubmit}>
           예약완료하기
-        </button>
+        </Styledbutton>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -163,7 +163,7 @@ const StyledSubDiv1 = styled.div`
 
 const StyledSubDiv2 = styled.div`
   width: 190px;
-  height: 278px;
+  height: 223px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -254,25 +254,25 @@ const StyledCurrent = styled.div`
 `;
 
 const StyledBar = styled.div`
-  width: 130px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #ff6565;
   margin-top: 35px;
 `;
 const StyledBarg = styled.div`
-  width: 130px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
 `;
-const StyledBarM = styled.div`
-  width: 190px;
-  height: 0;
-  border: 3.5px solid #ff6565;
-  margin-top: 35px;
-`;
+// const StyledBarM = styled.div`
+//   width: 190px;
+//   height: 0;
+//   border: 3.5px solid #ff6565;
+//   margin-top: 35px;
+// `;
 const StyledBarMg = styled.div`
-  width: 190px;
+  width: 115px;
   height: 0;
   border: 3.5px solid #828282;
   margin-top: 35px;
@@ -302,8 +302,8 @@ const StyledCircleg = styled.div`
 const StyledCircleTxt = styled.div`
   width: 42.49px;
   height: 51px;
-  margin-left: 11px;
-  margin-top: 7px;
+  margin-left: 13px;
+  margin-top: 9px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -311,15 +311,16 @@ const StyledCircleTxt = styled.div`
   font-size: 19.5px;
   line-height: 25px;
   /* or 125% */
-  text-align: center;
+
+  letter-spacing: 0.1em;
 
   color: #333333;
 `;
 const StyledCircleTxtg = styled.div`
   width: 42.49px;
   height: 51px;
-  margin-left: 11px;
-  margin-top: 7px;
+  margin-left: 13px;
+  margin-top: 9px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -327,7 +328,8 @@ const StyledCircleTxtg = styled.div`
   font-size: 19.5px;
   line-height: 25px;
   /* or 125% */
-  text-align: center;
+
+  letter-spacing: 0.1em;
 
   color: #828282;
 `;
@@ -340,7 +342,7 @@ const StyledDiv = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 33px;
   line-height: 55px;
 
   color: #2d3c89;
@@ -353,13 +355,13 @@ const StyledDiv2 = styled.div`
   font-style: normal;
   font-weight: 700;
   font-size: 27px;
-  line-height: 50px;
+  line-height: 70px;
   text-align: center;
 
   color: #333333;
 
-  width: 130px;
-  height: 60px;
+  width: 180px;
+  height: 70px;
   background: #eff3ff;
   border: 2px solid #626b8b;
 `;
@@ -368,14 +370,37 @@ const StyledDiv3 = styled.div`
   font-style: normal;
   font-weight: 500;
   font-size: 27px;
-  line-height: 50px;
+  line-height: 70px;
   text-align: center;
 
   color: #101a79;
 
-  width: 49ch;
-  height: 60px;
+  width: 37ch;
+  height: 70px;
   background: #ffffff;
   border: 2px solid #626b8b;
+`;
+
+const Styledbutton = styled.div`
+  margin-top: 10px;
+  width: 140px;
+  height: 40px;
+  margin-left: 57ch;
+
+  background: #ff9f9f;
+  border-radius: 9px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 40px;
+
+  text-align: center;
+  // margin-left: 28px;
+  /* identical to box height, or 100% */
+
+  color: #ffffff;
+  border: none;
 `;
 export default BD_ReservationThird;
