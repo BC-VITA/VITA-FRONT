@@ -511,7 +511,6 @@ const StyledDiv = styled.div`
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  line-height: 20px;
 
   color: #333333;
 `;

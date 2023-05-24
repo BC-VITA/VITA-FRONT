@@ -50,7 +50,8 @@ import SPostGroup from './pages/5. Service/S_PostGroup';
 import SOther from './pages/5. Service/S_Other';
 import SPostOther from './pages/5. Service/S_PostOther';
 import SWatchList from './pages/5. Service/S_WatchList';
-// import SHistory from './pages/5. Service/S_History';
+import SReservationFirst from './pages/5. Service/S_ReservationFirst';
+import SReservationSecond from './pages/5. Service/S_ReservationSecond';
 
 import DMain from './pages/6. Donate/D_Main';
 import DDonation from './pages/6. Donate/D_Donation';
@@ -157,7 +158,14 @@ function App() {
           <Route path="/S_Other" element={<SOther />}></Route>
           <Route path="/S_PostOther" element={<SPostOther />}></Route>
           <Route path="/S_WatchList" element={<SWatchList />}></Route>
-          {/* <Route path="/S_History" element={<SHistory />}></Route> */}
+          <Route
+            path="/S_ReservationFirst"
+            element={<SReservationFirst />}
+          ></Route>
+          <Route
+            path="/S_ReservationSecond"
+            element={<SReservationSecond />}
+          ></Route>
 
           {/*기부하자*/}
           <Route path="/D_Main" element={<DMain />}></Route>
