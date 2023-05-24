@@ -8,37 +8,22 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function DBD_Story() {
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const reviewType = 'designatedBlood';
+  const [inputData, setInputData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
+    const url = `http://localhost:8004/review/board/list?reviewType=${reviewType}`;
+
+    fetch(url, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
         setInputData(res);
-        console.log(inputData);
       })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
   }, []);
+
   return (
     <StyledAll>
       <StyledSub>
@@ -69,48 +54,21 @@ function DBD_Story() {
         </StyledTop>
 
         <StyledBox>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
+          {inputData.map((data, index) => (
+            <StyledBox2 key={index}>
+              <Card style={{ width: '17rem' }}>
+                <Card.Img variant="top" src='C:\\vita\\화면 캡처 2023-05-24 140930.png' />
+                <Card.Body>
+                  <Card.Title>{data.title}</Card.Title>
+                  <Card.Text>{data.content}</Card.Text>
+                  <Button variant="primary">자세히 보기</Button>
+                </Card.Body>
+              </Card>
+              <div>{data.imageUrl},asd</div>
+            </StyledBox2>
+          ))}
         </StyledBox>
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
