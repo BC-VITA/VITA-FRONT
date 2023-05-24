@@ -5,8 +5,11 @@ import Nav from 'react-bootstrap/Nav';
 import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 function BD_ReservationFirst() {
+  const [id, setId] = useState('');
+  const handleChangeId = ({ target: { value } }) => setId(value);
   const navigate = useNavigate();
 
   const [mapSize, setMapSize] = useState([300, 300]);
@@ -146,12 +149,14 @@ function BD_ReservationFirst() {
         <StyledTab1>
           <StyledDiv1>02. 헌혈할 센터 선택하기</StyledDiv1>
           <StyledFilter>
-            <StyledFilterDiv1One>
-              <StyledFilterDiv1Two>지역선택</StyledFilterDiv1Two>
+            <StyledFilterDiv1 style={{ paddingTop: '20px' }}>
+              <StyledFilterDivTitle style={{ paddingTop: '8px' }}>
+                지역선택
+              </StyledFilterDivTitle>
               <select
                 onChange={handleFirstListChange}
                 value={firstListValue}
-                style={{ border: 'none' }}
+                style={{ height: '40px' }}
               >
                 {selectList1.map((item) => (
                   <option value={item} key={item}>
@@ -159,51 +164,103 @@ function BD_ReservationFirst() {
                   </option>
                 ))}
               </select>
-              {/* <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select> */}
-            </StyledFilterDiv1One>
-            <StyledFilterDiv1One>
-              <StyledFilterDiv1Two>헌혈종류</StyledFilterDiv1Two>
-              <Form>
-                {['checkbox'].map((type) => (
-                  <div key={`default-${type}`} className="mb-3">
-                    <Form.Check
-                      type={type}
-                      id={`default-${type}`}
-                      label="전혈"
-                    />
-                    <Form.Check
-                      type={type}
-                      id={`default-${type}`}
-                      label="혈장"
-                    />
-                    <Form.Check
-                      type={type}
-                      id={`default-${type}`}
-                      label="혈소판"
-                    />
-                  </div>
+              {/* <select value={secondListOptions} onChange={setSecondListOptions}>
+                {secondListOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
                 ))}
-              </Form>
-            </StyledFilterDiv1One>
+              </select> */}
+            </StyledFilterDiv1>
+            <StyledFilterDiv2>
+              <FloatingLabel
+                label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
+                name="id"
+                value={id}
+                onChange={handleChangeId}
+                style={{
+                  marginTop: '10px',
+                  marginLeft: '20px',
+                  marginRight: '20px',
+                }}
+              >
+                <Form.Control type="id" placeholder="label" />
+              </FloatingLabel>
+            </StyledFilterDiv2>
           </StyledFilter>
           <section>
             <Styleddiv2>
-              <StyledTable striped>
+              <StyledTable>
                 <thead>
                   <tr>
-                    <th id="area-header">지역</th>
-                    <th id="centerName-header">헌혈의 집</th>
-                    <th id="bloodHouseAddress-header">주소</th>
-                    <th id="bloodHousePhoneNumber-header">전화번호</th>
+                    <th
+                      id="area-header"
+                      style={{
+                        width: '80px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      지역
+                    </th>
+                    <th
+                      id="centerName-header"
+                      style={{
+                        width: '120px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      헌혈의 집
+                    </th>
+                    <th
+                      id="bloodHouseAddress-header"
+                      style={{
+                        width: '350px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      주소
+                    </th>
+                    <th
+                      id="bloodHousePhoneNumber-header"
+                      style={{
+                        width: '130px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      전화번호
+                    </th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
@@ -215,14 +272,72 @@ function BD_ReservationFirst() {
                     return (
                       <React.Fragment key={index}>
                         <tr onClick={() => handleRowClick(index)}>
-                          <td headers="area-header">{element.area}</td>
-                          <td headers="centerName-header">
+                          <td
+                            headers="area-header"
+                            style={{
+                              width: '80px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '18px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
+                            {element.area}
+                          </td>
+                          <td
+                            headers="centerName-header"
+                            style={{
+                              width: '120px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '18px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.centerName}
                           </td>
-                          <td headers="bloodHouseAddress-header">
+                          <td
+                            headers="bloodHouseAddress-header"
+                            style={{
+                              width: '130px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.bloodHouseAddress}
                           </td>
-                          <td headers="bloodHousePhoneNumber-header">
+                          <td
+                            headers="bloodHousePhoneNumber-header"
+                            style={{
+                              width: '130px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.bloodHousePhoneNumber}
                           </td>
                           <td>
@@ -236,12 +351,42 @@ function BD_ReservationFirst() {
                                 onClick={() =>
                                   handleReservation(element.centerName)
                                 }
+                                style={{
+                                  height: '37px',
+                                  background: '#D9D9D9',
+                                  borderRadius: '10px',
+                                  border: 'none',
+                                  fontFamily: 'Gmarket Sans TTF',
+                                  fontStyle: 'normal',
+                                  fontWeight: '500',
+                                  fontSize: '15px',
+                                  lineHeight: '37px',
+
+                                  textAlign: 'center',
+
+                                  color: '#333333',
+                                }}
                               >
                                 예약하기
                               </button>
                               <button
                                 type="button"
-                                style={{ marginTop: '10px' }}
+                                style={{
+                                  height: '37px',
+                                  marginTop: '10px',
+                                  background: '#FF9F9F',
+                                  borderRadius: '10px',
+                                  border: 'none',
+                                  fontFamily: 'Gmarket Sans TTF',
+                                  fontStyle: 'normal',
+                                  fontWeight: '500',
+                                  fontSize: '15px',
+                                  lineHeight: '37px',
+
+                                  textAlign: 'center',
+
+                                  color: '#333333',
+                                }}
                               >
                                 자세히보기
                               </button>
@@ -258,7 +403,13 @@ function BD_ReservationFirst() {
                                 />
                               </Styledtd1>
                             </td>
-                            <Styledtd2 colSpan={2}>
+                            <Styledtd2
+                              colSpan={2}
+                              style={{
+                                width: '240px',
+                                marginLeft: '-110px',
+                              }}
+                            >
                               <Styledtxt>
                                 헌혈종류 :
                                 <br /> 전혈, 혈장, 혈소판
@@ -500,17 +651,22 @@ const StyledFilter = styled.div`
   background: #ffe9e9;
   margin-bottom: 20px;
 `;
-const StyledFilterDiv1One = styled.div`
+const StyledFilterDiv1 = styled.div`
   display: flex;
   margin-top: 20px;
 `;
-const StyledFilterDiv1Two = styled.div`
+const StyledFilterDivTitle = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   margin-right: 20px;
   margin-left: 30px;
+`;
+const StyledFilterDiv2 = styled.div`
+  width: 850px;
+  margin: auto;
+  margin-top: 10px;
 `;
 
 const StyledTab1 = styled.div`

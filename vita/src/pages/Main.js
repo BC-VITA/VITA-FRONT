@@ -64,11 +64,8 @@ function Main() {
 
       <StyledDiv1>
         <StyledDiv11>
-          <StyledTxt1>
-            <div>한부모가정 급격증가</div>
-          </StyledTxt1>
           <StyledTxt2>
-            <div>성금 모집현황</div>
+            <div>이달의 기부 성금 모집현황</div>
           </StyledTxt2>
           <StyledTxt3>
             <div>봉사시간 포인트로 기부하는 시스템</div>
@@ -177,8 +174,8 @@ const StyledDiv1 = styled.div`
   display: flex;
 `;
 const StyledDiv11 = styled.div`
-  margin-left: 55px;
-  margin-top: 35px;
+  margin-left: 40px;
+  margin-top: 55px;
 `;
 const StyledTxt1 = styled.div`
   font-family: 'Gmarket Sans TTF';
@@ -195,7 +192,7 @@ const StyledTxt2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 33px;
+  font-size: 40px;
   line-height: 36px;
   /* or 100% */
 
@@ -212,7 +209,7 @@ const StyledTxt3 = styled.div`
   color: #7a7a7a;
 `;
 const StyledDiv12 = styled.div`
-  margin-left: 165px;
+  margin-left: 50px;
   margin-top: 25px;
   display: flex;
 `;
