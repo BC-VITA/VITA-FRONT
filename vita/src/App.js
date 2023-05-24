@@ -51,6 +51,7 @@ import SOther from './pages/5. Service/S_Other';
 import SPostOther from './pages/5. Service/S_PostOther';
 import SWatchList from './pages/5. Service/S_WatchList';
 import SReservationFirst from './pages/5. Service/S_ReservationFirst';
+import SReservationSecond from './pages/5. Service/S_ReservationSecond';
 
 import DMain from './pages/6. Donate/D_Main';
 import DDonation from './pages/6. Donate/D_Donation';
@@ -160,6 +161,10 @@ function App() {
           <Route
             path="/S_ReservationFirst"
             element={<SReservationFirst />}
+          ></Route>
+          <Route
+            path="/S_ReservationSecond"
+            element={<SReservationSecond />}
           ></Route>
 
           {/*기부하자*/}

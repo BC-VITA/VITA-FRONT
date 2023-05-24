@@ -37,38 +37,6 @@ function S_ReservationFirst() {
   }, []);
   return (
     <StyledAll>
-      <StyledSub>
-        <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>봉사하자</StyledSubDiv1>
-          <StyledSubDiv2>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_Main">
-                <StyledSubDiv2_2g>자원봉사란</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
-              <Nav.Link href="/S_Ganeral">
-                <StyledSubDiv2_2>개인봉사</StyledSubDiv2_2>
-              </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_Group">
-                <StyledSubDiv2_2g>기업 단체 봉사</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_Other">
-                <StyledSubDiv2_2g>타기관 봉사정보</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/S_WatchList">
-                <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-          </StyledSubDiv2>
-        </Nav>
-      </StyledSub>
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>봉사 신청하기</StyledTitle>
@@ -338,7 +306,7 @@ const StyledSubDiv2_2g = styled.div`
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
-  margin-left: 65px;
+  margin: auto;
   margin-top: 25px;
 `;
 
