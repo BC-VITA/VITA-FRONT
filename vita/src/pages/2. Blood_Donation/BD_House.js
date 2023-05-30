@@ -285,6 +285,7 @@ function BD_House() {
                                   markerPositions={markerPositions}
                                   onClick={handleMarkerClick}
                                   size={mapSize}
+                                  inputData={inputData}
                                 />
                               </Styledtd1>
                             </td>

@@ -1,11 +1,13 @@
 /* global kakao */
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function KakaoMap(props) {
   const { markerPositions, size, inputData } = props;
   const [kakaoMap, setKakaoMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const infoWindowRef = useRef(null);
+  const navigate = useNavigate();
 
   const container = useRef();
 
@@ -23,8 +25,7 @@ export default function KakaoMap(props) {
           level: 3
         };
         const map = new kakao.maps.Map(container.current, options);
-
-        // Wait for map tiles to be loaded
+        
         kakao.maps.event.addListener(map, "tilesloaded", () => {
           setKakaoMap(map);
         });
@@ -38,25 +39,21 @@ export default function KakaoMap(props) {
     }
 
     const positions = markerPositions.map(pos => new kakao.maps.LatLng(...pos));
-
-    // Clear previous markers
+    
     markers.forEach(marker => {
       marker.setMap(null);
       kakao.maps.event.removeListener(marker, "click");
     });
-
-    // Assign new markers
+    
     const newMarkers = positions.map((position, index) => {
       const marker = new kakao.maps.Marker({ map: kakaoMap, position });
-    
-      // Add click event listener to each marker
+      
       kakao.maps.event.addListener(marker, "click", () => {
-        // Close the previous InfoWindow if it exists
+        
         if (infoWindowRef.current) {
           infoWindowRef.current.close();
         }
-    
-        // Create and open new InfoWindow
+        
         const { latitude, longitude } = inputData[index];
         const matchingData = inputData.find(data => data.latitude === latitude && data.longitude === longitude);
         const { centerName, bloodHouseAddress, bloodHousePhoneNumber } = matchingData;
@@ -66,16 +63,29 @@ export default function KakaoMap(props) {
             <div>${centerName}</div>
             <div>${bloodHouseAddress}</div>
             <div>${bloodHousePhoneNumber}</div>
+            <button id="reservationButton_${index}">
+              예약하기
+            </button>
+            <button type="button">
+              자세히보기
+            </button>
           </div>
         `;
+        
         const infoWindow = new kakao.maps.InfoWindow({
           content: infoContent,
           position: marker.getPosition()
         });
         infoWindow.open(kakaoMap, marker);
-    
-        // Update infoWindowRef
+        
         infoWindowRef.current = infoWindow;
+        
+        const reservationButton = document.getElementById(`reservationButton_${index}`);
+        if (reservationButton) {
+          reservationButton.addEventListener("click", () => {
+            handleReservation(centerName);
+          });
+        }
       });
     
       return marker;
@@ -96,19 +106,20 @@ export default function KakaoMap(props) {
     if (kakaoMap === null) {
       return;
     }
-
-    // Save center position
+    
     const center = kakaoMap.getCenter();
-
-    // Change viewport size
+    
     const [width, height] = size;
     container.current.style.width = `${width}px`;
     container.current.style.height = `${height}px`;
-
-    // Relayout and restore
+    
     kakaoMap.relayout();
     kakaoMap.setCenter(center);
   }, [kakaoMap, size]);
+
+  const handleReservation = (centerName) => {
+    navigate('/BD_ReservationSecond', { state: { centerName } });
+  };
 
   return <div id="container" ref={container} />;
 }
