@@ -184,10 +184,7 @@ function BD_House() {
             </StyledFilterDiv2>
           </StyledFilter>
           <section>
-            <KakaoMap
-              markerPositions={markerPositions}
-              size={mapSize}
-            />
+            <KakaoMap markerPositions={inputData.map(data => [data.latitude, data.longitude])} size={[850, 400]} inputData={inputData} />
           </section>
           <section>
             <Styleddiv2>
