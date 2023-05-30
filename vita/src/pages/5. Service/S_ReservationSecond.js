@@ -5,8 +5,7 @@ import styled from 'styled-components';
 function S_ReservationSecond() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { state: { selectedOptions, formattedDate, centerName } = {} } =
-    useLocation();
+  const { state: { selectedOptions, formattedDate, centerName } = {} } = useLocation();
   const [times, setTimes] = useState('');
   const [isBloodType, setIsBloodType] = useState('');
 
