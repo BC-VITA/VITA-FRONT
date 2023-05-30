@@ -9,28 +9,35 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 
 function BD_House() {
-  const [id, setId] = useState('');
-  const handleChangeId = ({ target: { value } }) => setId(value);
-
   const navigate = useNavigate();
+  const [id, setId] = useState('');
+  const handleChangeId = (event) => {
+    const newId = event.target.value;
+
+    // inputData를 필터링하여 centerName과 비교하여 필터링된 데이터만 남기기
+    const filteredData1 =
+      newId === '' ? inputData : inputData.filter((item) => item.centerName === newId);
+
+    setInputData(filteredData1);
+  };
+
+  // const filteredData =
+  //   firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
 
   const [mapSize, setMapSize] = useState([400, 400]);
-  const selectList1 = [
-    '전체',
-    '인천',
-    '서울',
-    '경기',
-    '강원',
-    '부산',
-    '광주',
-    '충북',
-    '제주',
-  ];
+  const [markerPositions, setMarkerPositions] = useState([]);
+
+  const handleMarkerClick = (marker) => {
+    // 마커를 클릭했을 때 수행할 작업을 여기에 작성합니다.
+    // 예를 들어, 간단한 정보를 생성하거나 팝업을 표시할 수 있습니다.
+    console.log('Clicked marker:', marker);
+    // 추가적인 작업을 수행하고 싶다면 여기에 작성합니다.
+  };
+
+
+  const selectList1 = ['전체', '인천', '서울', '경기', '강원', '부산', '광주', '충북', '제주'];
 
   const [firstListValue, setFirstListValue] = useState('전체');
-  const [secondListOptions, setSecondListOptions] = useState([
-    '검색할 지역을 골라주세요',
-  ]);
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
@@ -38,308 +45,9 @@ function BD_House() {
   function handleFirstListChange(event) {
     const selectedValue = event.target.value;
     setFirstListValue(selectedValue);
-
-    if (selectedValue === '전체') {
-      setSecondListOptions(['검색할 지역을 골라주세요']);
-    } else if (selectedValue === '서울') {
-      setSecondListOptions([
-        '강남구',
-        '강동구',
-        '강북구',
-        '강서구',
-        '관악구',
-        '광진구',
-        '구로구',
-        '금천구',
-        '노원구',
-        '도봉구',
-        '동대문구',
-        '동작구',
-        '마포구',
-        '서대문구',
-        '사초구',
-        '성동구',
-        '성북구',
-        '송파구',
-        '양천구',
-        '영등포구',
-        '용산구',
-        '은평구',
-        '종로구',
-        '중구',
-        '중랑구',
-      ]);
-    } else if (selectedValue === '부산') {
-      setSecondListOptions([
-        '강서구',
-        '금정구',
-        '기장군',
-        '남군',
-        '동구',
-        '동래구',
-        '부산진구',
-        '북구',
-        '사상구',
-        '사하구',
-        '서구',
-        '수영구',
-        '연제구',
-        '영동구',
-        '중구',
-        '해운대구',
-      ]);
-    } else if (selectedValue === '대구') {
-      setSecondListOptions([
-        '남구',
-        '달서구',
-        '달성군',
-        '동구',
-        '북구',
-        '서구',
-        '수성구',
-        '중구',
-      ]);
-    } else if (selectedValue === '인천') {
-      setSecondListOptions([
-        '강화군',
-        '계양구',
-        '남구',
-        '남동구',
-        '동구',
-        '미추홀구',
-        '부평구',
-        '서구',
-        '연수구',
-        '옹진구',
-        '중구',
-      ]);
-    } else if (selectedValue === '울산') {
-      setSecondListOptions(['남구', '동구', '북구', '울주군', '중구']);
-    } else if (selectedValue === '세종') {
-      setSecondListOptions(['']);
-    } else if (selectedValue === '경기') {
-      setSecondListOptions([
-        '가평군',
-        '고양시 덕양구',
-        '고양시 일산동구',
-        '고양시 일산서구',
-        '과천시',
-        '광명시',
-        '광주시',
-        '구리시',
-        '군포시',
-        '김포시',
-        '남양주시',
-        '동두천시',
-        '부천시',
-        '부천시 소사구',
-        '부천시 오정구',
-        '부천시 원미구',
-        '성남시 분당구',
-        '성남시 수정구',
-        '성남시 중원구',
-        '수원시 권선구',
-        '수원시 영통구',
-        '수원시 장안구',
-        '수원시 팔달구',
-        '시흥시',
-        '안산시 단원구',
-        '안산시 상록구',
-        '안성시',
-        '안양시 동안구',
-        '안양시 만안구',
-        '양주시',
-        '양평군',
-        '여주시',
-        '연천군',
-        '오산시',
-        '용인시 기흥구',
-        '용인시 수지구',
-        '용인시 처인구',
-        '의왕시',
-        '의정부시',
-        '이천시',
-        '파주시',
-        '평택시',
-        '포천시',
-        '하남시',
-        '화성시',
-      ]);
-    } else if (selectedValue === '강원') {
-      setSecondListOptions([
-        '강릉시',
-        '고성군',
-        '동해시',
-        '삼척시',
-        '속초시',
-        '양구군',
-        '양양군',
-        '영월군',
-        '원주시',
-        '인제군',
-        '정선군',
-        '철원군',
-        '춘천시',
-        '태백시',
-        '평찬군',
-        '홍천군',
-        '화천군',
-        '횡성군',
-      ]);
-    } else if (selectedValue === '충북') {
-      setSecondListOptions([
-        '괴산군',
-        '단양군',
-        '보은군',
-        '영동군',
-        '옥천군',
-        '음성군',
-        '제천시',
-        '증평군',
-        '진천군',
-        '청주시 상당구',
-        '청주시 서원구',
-        '청주시 청원구',
-        '청주시 흥덕구',
-        '충주시',
-      ]);
-    } else if (selectedValue === '대전') {
-      setSecondListOptions(['대덕구', '동구', '서구', '유성구', '중구']);
-    } else if (selectedValue === '충남') {
-      setSecondListOptions([
-        '계룡시',
-        '공주시',
-        '금산군',
-        '논산시',
-        '당진시',
-        '보령시',
-        '부여군',
-        '서산시',
-        '서천군',
-        '아산시',
-        '예산군',
-        '천안시 동남구',
-        '천안시 서북구',
-        '청양군',
-        '태안군',
-        '홍성군',
-        '',
-      ]);
-    } else if (selectedValue === '전북') {
-      setSecondListOptions([
-        '고창군',
-        '군산시',
-        '김제시',
-        '남원시',
-        '무주군',
-        '부안군',
-        '순창군',
-        '완주군',
-        '익산시',
-        '임실군',
-        '장수군',
-        '전주시 덕진구',
-        '전주시 완산구',
-        '정읍시',
-        '진안군',
-      ]);
-    } else if (selectedValue === '광주') {
-      setSecondListOptions(['광산구', '남구', '동구', '북구', '서구']);
-    } else if (selectedValue === '전남') {
-      setSecondListOptions([
-        '강진군',
-        '고흥군',
-        '곡성군',
-        '광양시',
-        '구례군',
-        '나주시',
-        '담양군',
-        '목포시',
-        '무안군',
-        '보성군',
-        '순천시',
-        '신안군',
-        '여수시',
-        '영광군',
-        '영암군',
-        '완도군',
-        '장성군',
-        '장흥군',
-        '진도군',
-        '함평군',
-        '해남군',
-        '화순군',
-      ]);
-    } else if (selectedValue === '경북') {
-      setSecondListOptions([
-        '경산시',
-        '경주시',
-        '고령군',
-        '구미시',
-        '군위군',
-        '김천시',
-        '문경시',
-        '봉화군',
-        '상주시',
-        '성주군',
-        '안동시',
-        '영덕군',
-        '영양군',
-        '영주시',
-        '영천시',
-        '예천군',
-        '울릉군',
-        '울진군',
-        '의성군',
-        '청도군',
-        '청송군',
-        '칠곡군',
-        '포항시 남구',
-        '포항시 남구',
-      ]);
-    } else if (selectedValue === '경남') {
-      setSecondListOptions([
-        '거제시',
-        '거창군',
-        '고성군',
-        '김해시',
-        '남해군',
-        '밀양시',
-        '사천시',
-        '산청군',
-        '양산시',
-        '의령군',
-        '진주시',
-        '창녕군',
-        '창원시 마산합포구',
-        '창원시 마산회원구',
-        '창원시 성산구',
-        '창원시 의창구',
-        '창원시 진해구',
-        '통영시',
-        '하동군',
-        '함안군',
-        '함양군',
-        '합천군',
-      ]);
-    } else if (selectedValue === '제주') {
-      setSecondListOptions(['서귀포시', '제주시']);
-    }
   }
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [inputData, setInputData] = useState([{}, {},]);
 
   const handleReservation = (centerName) => {
     navigate('/BD_ReservationSecond', { state: { centerName } });
@@ -350,18 +58,46 @@ function BD_House() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setInputData(res);
-        console.log(inputData);
+        const extractedData = res.map(item => [item.latitude, item.longitude]);
+        setMarkerPositions(extractedData);
       });
-    console.log(inputData);
     setFirstListValue('전체');
   }, []);
 
+  //필터
   const filteredData =
     firstListValue === '전체'
       ? inputData
       : inputData.filter((item) => item.area === firstListValue);
+
+  const thStyle = {
+    width: '80px',
+    fontFamily: 'Gmarket Sans TTF',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: '22px',
+    lineHeight: '35px',
+    textAlign: 'center',
+    color: '#333333'
+  };
+  const tdStyle = {
+    ...thStyle,
+    fontWeight: '500',
+    fontSize: '18px',
+    lineHeight: '30px'
+  }
+  const btStyle = {
+    ...thStyle,
+    height: '37px',
+    background: '#D9D9D9',
+    borderRadius: '10px',
+    border: 'none',
+    fontWeight: '500',
+    fontSize: '15px',
+    lineHeight: '37px'
+  }
+  delete btStyle.width;
 
   return (
     <StyledAll>
@@ -369,26 +105,26 @@ function BD_House() {
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
-            <StyledSubDiv2_1>
+            <StyledSubDiv21>
               <Nav.Link href="/BD_Main">
-                <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
+                <StyledSubDiv22g>헌혈이란</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
+            </StyledSubDiv21>
+            <StyledSubDiv21p>
               <Nav.Link href="/BD_House">
-                <StyledSubDiv2_2>헌혈의 집 찾기</StyledSubDiv2_2>
+                <StyledSubDiv22>헌혈의 집 찾기</StyledSubDiv22>
               </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
+            </StyledSubDiv21p>
+            <StyledSubDiv21>
               <Nav.Link href="/BD_Bus">
-                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
+                <StyledSubDiv22g>헌혈 버스 찾기</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
               <Nav.Link href="/BD_Reservation">
-                <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
+                <StyledSubDiv22g>헌혈 예약</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
+            </StyledSubDiv21>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -488,76 +224,26 @@ function BD_House() {
             </StyledFilterDiv2>
           </StyledFilter>
           <section>
+            <KakaoMap
+              markerPositions={markerPositions}
+              size={mapSize}
+            />
+          </section>
+          <section>
             <Styleddiv2>
               <StyledTable>
                 <thead>
                   <tr>
-                    <th
-                      id="area-header"
-                      style={{
-                        width: '80px',
-                        fontFamily: 'Gmarket Sans TTF',
-                        fontStyle: 'normal',
-                        fontWeight: '700',
-                        fontSize: '22px',
-                        lineHeight: '35px',
-
-                        textAlign: 'center',
-
-                        color: '#333333',
-                      }}
-                    >
+                    <th id="area-header" style={thStyle}>
                       지역
                     </th>
-                    <th
-                      id="centerName-header"
-                      style={{
-                        width: '120px',
-                        fontFamily: 'Gmarket Sans TTF',
-                        fontStyle: 'normal',
-                        fontWeight: '700',
-                        fontSize: '22px',
-                        lineHeight: '35px',
-
-                        textAlign: 'center',
-
-                        color: '#333333',
-                      }}
-                    >
+                    <th id="centerName-header" style={{ ...thStyle, width: '120px' }}>
                       헌혈의 집
                     </th>
-                    <th
-                      id="bloodHouseAddress-header"
-                      style={{
-                        width: '350px',
-                        fontFamily: 'Gmarket Sans TTF',
-                        fontStyle: 'normal',
-                        fontWeight: '700',
-                        fontSize: '22px',
-                        lineHeight: '35px',
-
-                        textAlign: 'center',
-
-                        color: '#333333',
-                      }}
-                    >
+                    <th id="bloodHouseAddress-header" style={{ ...thStyle, width: '350px' }} >
                       주소
                     </th>
-                    <th
-                      id="bloodHousePhoneNumber-header"
-                      style={{
-                        width: '130px',
-                        fontFamily: 'Gmarket Sans TTF',
-                        fontStyle: 'normal',
-                        fontWeight: '700',
-                        fontSize: '22px',
-                        lineHeight: '35px',
-
-                        textAlign: 'center',
-
-                        color: '#333333',
-                      }}
-                    >
+                    <th id="bloodHousePhoneNumber-header" style={{ ...thStyle, width: '130px' }} >
                       전화번호
                     </th>
                     <th>&nbsp;</th>
@@ -571,122 +257,24 @@ function BD_House() {
                     return (
                       <React.Fragment key={index}>
                         <tr onClick={() => handleRowClick(index)}>
-                          <td
-                            headers="area-header"
-                            style={{
-                              width: '80px',
-                              fontFamily: 'Gmarket Sans TTF',
-                              fontStyle: 'normal',
-                              fontWeight: '500',
-                              fontSize: '18px',
-                              lineHeight: '30px',
-
-                              textAlign: 'center',
-
-                              color: '#333333',
-                            }}
-                          >
+                          <td headers="area-header" style={{ ...tdStyle }} >
                             {element.area}
                           </td>
-                          <td
-                            headers="centerName-header"
-                            style={{
-                              width: '120px',
-                              fontFamily: 'Gmarket Sans TTF',
-                              fontStyle: 'normal',
-                              fontWeight: '500',
-                              fontSize: '18px',
-                              lineHeight: '30px',
-
-                              textAlign: 'center',
-
-                              color: '#333333',
-                            }}
-                          >
+                          <td headers="centerName-header" style={{ ...tdStyle, width: '120px', }} >
                             {element.centerName}
                           </td>
-                          <td
-                            headers="bloodHouseAddress-header"
-                            style={{
-                              width: '130px',
-                              fontFamily: 'Gmarket Sans TTF',
-                              fontStyle: 'normal',
-                              fontWeight: '500',
-                              fontSize: '15px',
-                              lineHeight: '30px',
-
-                              textAlign: 'center',
-
-                              color: '#333333',
-                            }}
-                          >
+                          <td headers="bloodHouseAddress-header" style={{ ...tdStyle, width: '130px', fontSize: '15px' }}>
                             {element.bloodHouseAddress}
                           </td>
-                          <td
-                            headers="bloodHousePhoneNumber-header"
-                            style={{
-                              width: '130px',
-                              fontFamily: 'Gmarket Sans TTF',
-                              fontStyle: 'normal',
-                              fontWeight: '500',
-                              fontSize: '15px',
-                              lineHeight: '30px',
-
-                              textAlign: 'center',
-
-                              color: '#333333',
-                            }}
-                          >
+                          <td headers="bloodHousePhoneNumber-header" style={{ ...tdStyle, width: '130px', fontSize: '15px' }}>
                             {element.bloodHousePhoneNumber}
                           </td>
                           <td>
-                            <div
-                              style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                              }}
-                            >
-                              <button
-                                onClick={() =>
-                                  handleReservation(element.centerName)
-                                }
-                                style={{
-                                  height: '37px',
-                                  background: '#D9D9D9',
-                                  borderRadius: '10px',
-                                  border: 'none',
-                                  fontFamily: 'Gmarket Sans TTF',
-                                  fontStyle: 'normal',
-                                  fontWeight: '500',
-                                  fontSize: '15px',
-                                  lineHeight: '37px',
-
-                                  textAlign: 'center',
-
-                                  color: '#333333',
-                                }}
-                              >
+                            <div style={{ display: 'flex', flexDirection: 'column' }} >
+                              <button onClick={() => handleReservation(element.centerName)} style={{ ...btStyle }}>
                                 예약하기
                               </button>
-                              <button
-                                type="button"
-                                style={{
-                                  height: '37px',
-                                  marginTop: '10px',
-                                  background: '#FF9F9F',
-                                  borderRadius: '10px',
-                                  border: 'none',
-                                  fontFamily: 'Gmarket Sans TTF',
-                                  fontStyle: 'normal',
-                                  fontWeight: '500',
-                                  fontSize: '15px',
-                                  lineHeight: '37px',
-
-                                  textAlign: 'center',
-
-                                  color: '#333333',
-                                }}
-                              >
+                              <button type="button" style={{ ...btStyle, marginTop: '10px', background: '#FF9F9F' }}>
                                 자세히보기
                               </button>
                             </div>
@@ -698,17 +286,14 @@ function BD_House() {
                               <Styledtd1 id="wrap">
                                 <KakaoMap
                                   markerPositions={markerPositions}
+                                  onClick={handleMarkerClick}
                                   size={mapSize}
                                 />
                               </Styledtd1>
                             </td>
                             <Styledtd2
                               colSpan={2}
-                              style={{
-                                width: '240px',
-                                marginLeft: '-110px',
-                              }}
-                            >
+                              style={{ width: '240px', marginLeft: '-110px' }} >
                               <Styledtxt>
                                 헌혈종류 :
                                 <br /> 전혈, 혈장, 혈소판
@@ -775,21 +360,21 @@ const StyledSubDiv2 = styled.div`
   height: 223px;
   border: 3px solid #d7d7d7;
 `;
-const StyledSubDiv2_1 = styled.div`
+const StyledSubDiv21 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
   height: 55px;
   margin-left: 3px;
   margin-right: 3px;
 `;
-const StyledSubDiv2_1p = styled.div`
+const StyledSubDiv21p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
   height: 55px;
   margin-left: 3px;
   margin-right: 3px;
 `;
-const StyledSubDiv2_2 = styled.div`
+const StyledSubDiv22 = styled.div`
   border: solid white 3px;
 
   height: 24px;
@@ -805,7 +390,7 @@ const StyledSubDiv2_2 = styled.div`
 
   color: #333333;
 `;
-const StyledSubDiv2_2g = styled.div`
+const StyledSubDiv22g = styled.div`
   border: solid white 3px;
 
   height: 24px;
