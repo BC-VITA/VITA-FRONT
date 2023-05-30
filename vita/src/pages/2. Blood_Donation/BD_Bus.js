@@ -458,13 +458,77 @@ function BD_Bus() {
           </StyledFilter>
           <section>
             <Styleddiv2>
-              <StyledTable striped>
+              <StyledTable>
                 <thead>
                   <tr>
-                    <th id="area-header">지역</th>
-                    <th id="centerName-header">헌혈의 집</th>
-                    <th id="bloodHouseAddress-header">주소</th>
-                    <th id="bloodHousePhoneNumber-header">전화번호</th>
+                    <th
+                      id="area-header"
+                      style={{
+                        width: '80px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      지역
+                    </th>
+                    <th
+                      id="centerName-header"
+                      style={{
+                        width: '120px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      헌혈 버스
+                    </th>
+                    <th
+                      id="bloodHouseAddress-header"
+                      style={{
+                        width: '350px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      주소
+                    </th>
+                    <th
+                      id="bloodHousePhoneNumber-header"
+                      style={{
+                        width: '130px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      전화번호
+                    </th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
@@ -476,14 +540,72 @@ function BD_Bus() {
                     return (
                       <React.Fragment key={index}>
                         <tr onClick={() => handleRowClick(index)}>
-                          <td headers="area-header">{element.area}</td>
-                          <td headers="centerName-header">
+                          <td
+                            headers="area-header"
+                            style={{
+                              width: '80px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '18px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
+                            {element.area}
+                          </td>
+                          <td
+                            headers="centerName-header"
+                            style={{
+                              width: '120px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '18px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.centerName}
                           </td>
-                          <td headers="bloodHouseAddress-header">
+                          <td
+                            headers="bloodHouseAddress-header"
+                            style={{
+                              width: '130px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.bloodHouseAddress}
                           </td>
-                          <td headers="bloodHousePhoneNumber-header">
+                          <td
+                            headers="bloodHousePhoneNumber-header"
+                            style={{
+                              width: '130px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
                             {element.bloodHousePhoneNumber}
                           </td>
                           <td>
@@ -497,12 +619,42 @@ function BD_Bus() {
                                 onClick={() =>
                                   handleReservation(element.centerName)
                                 }
+                                style={{
+                                  height: '37px',
+                                  background: '#D9D9D9',
+                                  borderRadius: '10px',
+                                  border: 'none',
+                                  fontFamily: 'Gmarket Sans TTF',
+                                  fontStyle: 'normal',
+                                  fontWeight: '500',
+                                  fontSize: '15px',
+                                  lineHeight: '37px',
+
+                                  textAlign: 'center',
+
+                                  color: '#333333',
+                                }}
                               >
                                 예약하기
                               </button>
                               <button
                                 type="button"
-                                style={{ marginTop: '10px' }}
+                                style={{
+                                  height: '37px',
+                                  marginTop: '10px',
+                                  background: '#FF9F9F',
+                                  borderRadius: '10px',
+                                  border: 'none',
+                                  fontFamily: 'Gmarket Sans TTF',
+                                  fontStyle: 'normal',
+                                  fontWeight: '500',
+                                  fontSize: '15px',
+                                  lineHeight: '37px',
+
+                                  textAlign: 'center',
+
+                                  color: '#333333',
+                                }}
                               >
                                 자세히보기
                               </button>

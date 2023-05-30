@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Button from 'react-bootstrap/Button';
 
 function BD_House() {
   const [id, setId] = useState('');
@@ -408,11 +409,50 @@ function BD_House() {
         </StyledTop>
         <StyledTab1>
           <StyledFilter>
-            <StyledFilterDiv1 style={{ paddingTop: '20px' }}>
-              <StyledFilterDivTitle style={{ paddingTop: '8px' }}>
+            <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
+              <StyledFilterbutton>전체</StyledFilterbutton>
+              <StyledFilterbutton>서울</StyledFilterbutton>
+              <StyledFilterbutton>부산</StyledFilterbutton>
+              <StyledFilterbutton>대구</StyledFilterbutton>
+              <StyledFilterbutton>인천</StyledFilterbutton>
+              <StyledFilterbutton>울산</StyledFilterbutton>
+              <StyledFilterbutton>세종</StyledFilterbutton>
+              <StyledFilterbutton>경기</StyledFilterbutton>
+              <StyledFilterbutton>강원</StyledFilterbutton>
+            </StyledFilterDiv1>
+            <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
+              <StyledFilterbutton>충북</StyledFilterbutton>
+              <StyledFilterbutton>대전</StyledFilterbutton>
+              <StyledFilterbutton>충남</StyledFilterbutton>
+              <StyledFilterbutton>전북</StyledFilterbutton>
+              <StyledFilterbutton>광주</StyledFilterbutton>
+              <StyledFilterbutton>전남</StyledFilterbutton>
+              <StyledFilterbutton>경북</StyledFilterbutton>
+              <StyledFilterbutton>경남</StyledFilterbutton>
+              <StyledFilterbutton>제주</StyledFilterbutton>
+            </StyledFilterDiv1>
+            {/* <Button variant="light">전체</Button>
+              <Button variant="light">서울</Button>
+              <Button variant="light">부산</Button>
+              <Button variant="light">대구</Button>
+              <Button variant="light">인천</Button>
+              <Button variant="light">울산</Button>
+              <Button variant="light">세종</Button>
+              <Button variant="light">경기</Button>
+              <Button variant="light">강원</Button>
+              <Button variant="light">충북</Button>
+              <Button variant="light">대전</Button>
+              <Button variant="light">충남</Button>
+              <Button variant="light">전북</Button>
+              <Button variant="light">광주</Button>
+              <Button variant="light">전남</Button>
+              <Button variant="light">경북</Button>
+              <Button variant="light">경남</Button>
+              <Button variant="light">제주</Button> */}
+            {/* <StyledFilterDivTitle style={{ paddingTop: '8px' }}>
                 지역선택
-              </StyledFilterDivTitle>
-              <select
+              </StyledFilterDivTitle> */}
+            {/* <select
                 onChange={handleFirstListChange}
                 value={firstListValue}
                 style={{ height: '40px' }}
@@ -422,15 +462,15 @@ function BD_House() {
                     {item}
                   </option>
                 ))}
-              </select>
-              {/* <select value={secondListOptions} onChange={setSecondListOptions}>
+              </select> */}
+            {/* <select value={secondListOptions} onChange={setSecondListOptions}>
                 {secondListOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
                   </option>
                 ))}
               </select> */}
-            </StyledFilterDiv1>
+            {/* </StyledFilterDiv1> */}
             <StyledFilterDiv2>
               <FloatingLabel
                 label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
@@ -811,13 +851,38 @@ const StyledTab1 = styled.div`
 `;
 const StyledFilter = styled.div`
   width: 865px;
-  height: 145px;
+  /* height: 145px; */
+  padding-bottom: 15px;
   background: #ffe9e9;
   margin-bottom: 20px;
 `;
 const StyledFilterDiv1 = styled.div`
   display: flex;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  margin-left: 2px;
+  margin-right: 2px;
+`;
+const StyledFilterbutton = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 40px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  width: 94px;
+  font-size: 20px;
+  text-align: center;
+  /* margin-right: 5px; */
+  display: block;
+  margin: auto;
+
+  background-color: #fcfcfc;
+  border: 1px;
+  border-color: #d7d7d7;
+  border-style: solid;
 `;
 const StyledFilterDivTitle = styled.div`
   font-family: 'Gmarket Sans TTF';

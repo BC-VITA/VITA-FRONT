@@ -238,8 +238,8 @@ function S_Ganeral() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);   
-        setInputData(res);         
+        console.log(res);
+        setInputData(res);
         console.log(inputData);
       });
     console.log(inputData);
@@ -291,22 +291,74 @@ function S_Ganeral() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>개인봉사</StyledTitle>
+          <StyledButton>
+            <Nav.Link href="/S_PostGT">
+              <StyledButtonDiv>작성하기</StyledButtonDiv>
+            </Nav.Link>
+          </StyledButton>
         </StyledTop>
         <StyledTab1>
           <Tabs>
             <Tab eventKey="Time" title="시간인증">
               <Tab.Content>
                 <StyledFilter>
+                  <StyledFilterDiv1
+                    style={{
+                      marginTop: '10px',
+                    }}
+                  >
+                    <StyledFilterDivTitle
+                      style={{
+                        width: '100px',
+                      }}
+                    >
+                      지역선택
+                    </StyledFilterDivTitle>
+                    <StyledFilterDivTitle
+                      style={{
+                        width: '260px',
+                      }}
+                    >
+                      봉사분야
+                    </StyledFilterDivTitle>
+                    <StyledFilterDivTitle
+                      style={{
+                        width: '110px',
+                      }}
+                    >
+                      활동 구분
+                    </StyledFilterDivTitle>
+                    <StyledFilterDivTitle
+                      style={{
+                        width: '120px',
+                      }}
+                    >
+                      봉사 대상
+                    </StyledFilterDivTitle>
+                    <StyledFilterDivTitle
+                      style={{
+                        width: '110px',
+                      }}
+                    >
+                      모집상태
+                    </StyledFilterDivTitle>
+                    <StyledFilterDivTitle
+                      style={{
+                        width: '110px',
+                      }}
+                    >
+                      봉사자 유형
+                    </StyledFilterDivTitle>
+                  </StyledFilterDiv1>
                   <StyledFilterDiv1>
-                    <StyledFilterDivTitle>지역선택</StyledFilterDivTitle>
                     <select
                       onChange={handleAreaChange}
                       value={volunteerArea}
                       style={{
                         border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '80px',
+                        width: '100px',
                       }}
+                      multiple
                     >
                       {selectArea1.map((item) => (
                         <option value={item} key={item}>
@@ -314,16 +366,16 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
-                    <StyledFilterDivTitle>봉사분야</StyledFilterDivTitle>
+
                     <select
                       onChange={handleTypeChange}
                       value={volunteerBigType}
                       style={{
                         border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
                         width: '130px',
-                        marginRight: '20px',
+                        // marginRight: '20px',
                       }}
+                      multiple
                     >
                       {selectType.map((item) => (
                         <option value={item} key={item}>
@@ -331,15 +383,16 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
+
                     <select
                       onChange={handleTypeChange1}
                       value={volunteerSmallType}
                       style={{
                         border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
                         width: '130px',
-                        marginRight: '100px',
+                        // marginRight: '100px',
                       }}
+                      multiple
                     >
                       {volunteerSmallType.map((option) => (
                         <option key={option} value={option}>
@@ -347,22 +400,16 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
-                    <StyledButton>
-                      <Nav.Link href="/S_PostGT">
-                        <StyledButtonDiv>작성하기</StyledButtonDiv>
-                      </Nav.Link>
-                    </StyledButton>
-                  </StyledFilterDiv1>
-                  <StyledFilterDiv1>
-                    <StyledFilterDivTitle>활동 구분</StyledFilterDivTitle>
+
                     <select
                       onChange={handleSelectActivitySection}
                       value={activitySection}
                       style={{
                         border: 'none',
                         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '100px',
+                        width: '110px',
                       }}
+                      multiple
                     >
                       {selectField3.map((item) => (
                         <option value={item} key={item}>
@@ -370,7 +417,7 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
-                    <StyledFilterDivTitle>봉사 대상</StyledFilterDivTitle>
+
                     <select
                       onChange={handleSelectVolunteerTarget}
                       value={volunteerTarget}
@@ -379,6 +426,7 @@ function S_Ganeral() {
                         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
                         width: '120px',
                       }}
+                      multiple
                     >
                       {selectVolunteerTarget.map((item) => (
                         <option value={item} key={item}>
@@ -386,15 +434,16 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
-                    <StyledFilterDivTitle>모집상태</StyledFilterDivTitle>
+
                     <select
                       onChange={handleSelectVolunteerState}
                       value={volunteerState}
                       style={{
                         border: 'none',
                         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '100px',
+                        width: '110px',
                       }}
+                      multiple
                     >
                       {selectField5.map((item) => (
                         <option value={item} key={item}>
@@ -402,17 +451,15 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
-                  </StyledFilterDiv1>
-                  <StyledFilterDiv1>
-                    <StyledFilterDivTitle>봉사자 유형</StyledFilterDivTitle>
                     <select
                       onChange={handleSelectVolunteerCategory}
                       value={volunteerCategory}
                       style={{
                         border: 'none',
                         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '90px',
+                        width: '110px',
                       }}
+                      multiple
                     >
                       {selectField6.map((item) => (
                         <option value={item} key={item}>
@@ -420,7 +467,13 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
-                    <StyledFilterDivTitle>봉사기간</StyledFilterDivTitle>
+                  </StyledFilterDiv1>
+                  <StyledFilterDiv1
+                    style={{
+                      marginTop: '15px',
+                    }}
+                  >
+                    <StyledFilterDivTitle2>봉사기간</StyledFilterDivTitle2>
                     <input
                       type="Date"
                       value={startDate}
@@ -430,7 +483,7 @@ function S_Ganeral() {
                       }}
                       onChange={handleStartDateChange}
                     />
-                    <StyledFilterDivTitle>&nbsp;-&nbsp;</StyledFilterDivTitle>
+                    <StyledFilterDivTitle2>&nbsp;-&nbsp;</StyledFilterDivTitle2>
                     <input
                       type="Date"
                       value={endDate}
@@ -473,7 +526,7 @@ function S_Ganeral() {
                   </StyledFilterDiv2>
                 </StyledFilter>
                 <section>
-                <Accordion defaultActiveKey="0">
+                  <Accordion defaultActiveKey="0">
                     <Table striped bordered hover size="sm">
                       <thead>
                         <tr>
@@ -495,13 +548,16 @@ function S_Ganeral() {
                                     <br />
                                     글을 올린 날짜 : {element.startDate}
                                     <br />
-                                    모집기간 : {element.volunteerSeekStartDate}-{element.volunteerSeekEndDate}
+                                    모집기간 : {element.volunteerSeekStartDate}-
+                                    {element.volunteerSeekEndDate}
                                     <br />
-                                    활동날짜 : {element.volunteerStartTime}-{element.volunteerEndTime}
+                                    활동날짜 : {element.volunteerStartTime}-
+                                    {element.volunteerEndTime}
                                     <br />
                                     활동요일 : {element.volunteerActivityWeek}
                                     <br />
-                                    봉사시간 : {element.volunteerStartTime}-{element.volunteerEndTime}
+                                    봉사시간 : {element.volunteerStartTime}-
+                                    {element.volunteerEndTime}
                                     <br />
                                     봉사장소 : {element.volunteerPlace}
                                   </Accordion.Header>
@@ -543,7 +599,6 @@ function S_Ganeral() {
                       </Styledtbody1>
                     </Table>
                   </Accordion>
-
                 </section>
               </Tab.Content>
             </Tab>
@@ -666,6 +721,7 @@ const StyledButton = styled.div`
 
   background: #ff9f9f;
   border-radius: 9px;
+  margin-left: 33em;
 `;
 
 const StyledButtonDiv = styled.div`
@@ -675,8 +731,7 @@ const StyledButtonDiv = styled.div`
   font-size: 18px;
   line-height: 38px;
   margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
+  text-align: center;
 
   color: #ffffff;
 `;
@@ -717,23 +772,46 @@ const StyledTable = styled(Table)`
 
 const StyledFilter = styled.div`
   /* width: 865px; */
-  height: 250px;
+  /* height: 250px; */
   background: #ffe9e9;
   margin-top: 10px;
   margin-bottom: 20px;
   padding: 5px;
+  padding-bottom: 25px;
 `;
 const StyledFilterDiv1 = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-left: 20px;
 `;
 const StyledFilterDivTitle = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
-  margin-right: 20px;
-  margin-left: 30px;
+  /* margin-right: 10px;
+  margin-left: 20px; */
+  background-color: #fefefe;
+  border: 1px;
+  border-color: #d7d7d7;
+  border-style: solid;
+  text-align: center;
+  padding-top: 5px;
+  height: 35px;
+`;
+const StyledFilterDivTitle2 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 10px;
+  /* background-color: #fefefe;
+  border: 1px;
+  border-color: #d7d7d7;
+  border-style: solid;
+  text-align: center;
+  padding-top: 5px;
+  height: 35px; */
 `;
 
 const StyledFilterDiv2 = styled.div`
