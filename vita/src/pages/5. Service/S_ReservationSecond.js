@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Nav from 'react-bootstrap/Nav';
 
 function S_ReservationSecond() {
   const navigate = useNavigate();
@@ -51,48 +50,44 @@ function S_ReservationSecond() {
     <StyledAll>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>예약하기</StyledTitle>
+          <StyledTitle>봉사 신청하기</StyledTitle>
         </StyledTop>
-        <StyledCurrent>
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>유의사항</StyledCircleTxt>
-          </StyledCircle>
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>센터선택</StyledCircleTxt>
-          </StyledCircle>
 
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>예약하기</StyledCircleTxt>
-          </StyledCircle>
+        <StyledDiv>봉사 예약이 완료되었습니다.</StyledDiv>
 
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>예약완료</StyledCircleTxt>
-          </StyledCircle>
-          <StyledBar />
-        </StyledCurrent>
-
-        <StyledDiv>헌혈 예약이 완료되었습니다.</StyledDiv>
         <StyledBox>
           {Object.keys(selectedOptions).map((time) => (
             <div key={time}>
               <StyledDiv1>
-                <StyledDiv2>일시</StyledDiv2>
+                <StyledDiv2>상태</StyledDiv2>
                 <StyledDiv3>{formattedDate}</StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
-                <StyledDiv2>시간</StyledDiv2>
+                <StyledDiv2>봉사일자</StyledDiv2>
                 <StyledDiv3>{time}</StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
-                <StyledDiv2>헌혈의 집</StyledDiv2>
+                <StyledDiv2>봉사시간</StyledDiv2>
                 <StyledDiv3>{centerName}</StyledDiv3>
               </StyledDiv1>
               <StyledDiv1>
-                <StyledDiv2>헌혈 종류</StyledDiv2>
+                <StyledDiv2>주소</StyledDiv2>
+                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
+              </StyledDiv1>
+              <StyledDiv1>
+                <StyledDiv2>봉사장소</StyledDiv2>
+                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
+              </StyledDiv1>
+              <StyledDiv1>
+                <StyledDiv2>봉사유형</StyledDiv2>
+                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
+              </StyledDiv1>
+              <StyledDiv1>
+                <StyledDiv2>담당자 명</StyledDiv2>
+                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
+              </StyledDiv1>
+              <StyledDiv1>
+                <StyledDiv2>전화번호</StyledDiv2>
                 <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
               </StyledDiv1>
             </div>
