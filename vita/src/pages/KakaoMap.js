@@ -25,7 +25,7 @@ export default function KakaoMap(props) {
           level: 3
         };
         const map = new kakao.maps.Map(container.current, options);
-        
+
         kakao.maps.event.addListener(map, "tilesloaded", () => {
           setKakaoMap(map);
         });
@@ -39,25 +39,25 @@ export default function KakaoMap(props) {
     }
 
     const positions = markerPositions.map(pos => new kakao.maps.LatLng(...pos));
-    
+
     markers.forEach(marker => {
       marker.setMap(null);
       kakao.maps.event.removeListener(marker, "click");
     });
-    
+
     const newMarkers = positions.map((position, index) => {
       const marker = new kakao.maps.Marker({ map: kakaoMap, position });
-      
+
       kakao.maps.event.addListener(marker, "click", () => {
-        
+
         if (infoWindowRef.current) {
           infoWindowRef.current.close();
         }
-        
+
         const { latitude, longitude } = inputData[index];
         const matchingData = inputData.find(data => data.latitude === latitude && data.longitude === longitude);
         const { centerName, bloodHouseAddress, bloodHousePhoneNumber } = matchingData;
-    
+
         const infoContent = `
           <div>
             <div>${centerName}</div>
@@ -71,15 +71,15 @@ export default function KakaoMap(props) {
             </button>
           </div>
         `;
-        
+
         const infoWindow = new kakao.maps.InfoWindow({
           content: infoContent,
           position: marker.getPosition()
         });
         infoWindow.open(kakaoMap, marker);
-        
+
         infoWindowRef.current = infoWindow;
-        
+
         const reservationButton = document.getElementById(`reservationButton_${index}`);
         if (reservationButton) {
           reservationButton.addEventListener("click", () => {
@@ -87,7 +87,7 @@ export default function KakaoMap(props) {
           });
         }
       });
-    
+
       return marker;
     });
 
@@ -106,13 +106,13 @@ export default function KakaoMap(props) {
     if (kakaoMap === null) {
       return;
     }
-    
+
     const center = kakaoMap.getCenter();
-    
+
     const [width, height] = size;
     container.current.style.width = `${width}px`;
     container.current.style.height = `${height}px`;
-    
+
     kakaoMap.relayout();
     kakaoMap.setCenter(center);
   }, [kakaoMap, size]);

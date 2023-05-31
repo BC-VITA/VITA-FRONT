@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import { useLocation } from 'react-router-dom';
 
 function S_PostGT() {
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory } = location?.state || {};
 
   // 지역
   const selectArea = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'];
-  const [volunteerArea, setvolunteerArea] = useState('');
+  const [volunteerArea, setvolunteerArea] = useState(volunteerArea1 || '');
+
   const handleSelectArea = (e) => {
     setvolunteerArea(e.target.value);
   };
@@ -25,11 +27,11 @@ function S_PostGT() {
   const [volunteerAddress, setvolunteerAddress] = useState('');
   const handleChangevolunteerAddress = ({ target: { value } }) =>
     setvolunteerAddress(value);
-  
+
   // 위도
   const [latitude, setlatitude] = useState('');
   const handleChangelatitude = ({ target: { value } }) => setlatitude(value);
-  
+
   // 경도
   const [longitude, setlongitude] = useState('');
   const handleChangelongitude = ({ target: { value } }) => setlongitude(value);
@@ -107,19 +109,22 @@ function S_PostGT() {
 
   // 활동구분
   const selectActivitySection = ['전체', '온라인', '오프라인'];
-  const [activitySection, setactivitySection] = useState('');
+  const [activitySection, setactivitySection] = useState(activitySection1 || '');
+
   const handleSelectActivitySection = (e) => {
     setactivitySection(e.target.value);
   };
   // 봉사대상
   const selectVolunteerTarget = ['전체', '아동.청소년', '장애인', '노인', '쪽방촌', '다문화가정', '여성', '환경', '사회적기업', '고향봉사', '기타'];
-  const [volunteerTarget, setvolunteerTarget] = useState('');
+  const [volunteerTarget, setvolunteerTarget] = useState(volunteerTarget1 || '');
+
   const handleSelectVolunteerTarget = (e) => {
     setvolunteerTarget(e.target.value);
   };
   // 봉사자유형
-  const selectVolunteerPersonType = ['성인', '청소년'];
-  const [volunteerPersonType, setvolunteerPersonType] = useState('');
+  const selectVolunteerPersonType = ['전체', '성인', '청소년'];
+  const [volunteerPersonType, setvolunteerPersonType] = useState(volunteerCategory || '');
+
   const handleSelectVolunteerPersonType = (e) => {
     setvolunteerPersonType(e.target.value);
   };
@@ -140,19 +145,11 @@ function S_PostGT() {
   const [content, setcontent] = useState('');
   const handleChangecontent = ({ target: { value } }) => setcontent(value);
   //봉사분야
-  const selectType = [
-    '전체',
-    '생활편의시설',
-    '주거환경',
-    '교육',
-    '보건의료',
-    '환경보호',
-  ];
-  const [volunteerBigType, setvolunteerBigType] = useState('전체'); // 실제로 사용하는 분야의 첫번째
-  const [volunteerSmallType, setvolunteerSmallType] = useState([
-    '검색할 봉사분야를 골라주세요',
-  ]);
+  const selectType = ['전체', '생활편의시설', '주거환경', '교육', '보건의료', '환경보호'];
+  const [volunteerBigType, setvolunteerBigType] = useState(volunteerBigType1 || '전체');// 실제로 사용하는 분야의 첫번째
+  const [volunteerSmallType, setvolunteerSmallType] = useState([volunteerSmallType11]||'검색할 봉사분야를 골라주세요');
   const [volunteerSmallType1, setvolunteerSmallType1] = useState(''); //실제로 사용하는 분야의 두번째 값
+
 
   function handleTypeChange(event) {
     const selectedValue1 = event.target.value;
@@ -162,56 +159,22 @@ function S_PostGT() {
       setvolunteerSmallType(['검색할 봉사분야를 골라주세요']);
       setvolunteerSmallType1(['검색할 봉사분야를 골라주세요']);
     } else if (selectedValue1 === '생활편의시설') {
-      setvolunteerSmallType([
-        '전체',
-        '활동보조',
-        '아동보조',
-        '청결지도',
-        '급식지원',
-        '식사반찬지원',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '활동보조', '아동보조', '청결지도', '급식지원', '식사반찬지원', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '주거환경') {
       setvolunteerSmallType(['전체', '주거개선', '마을공동체활동', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '안전예방') {
-      setvolunteerSmallType([
-        '전체',
-        '지역안전',
-        '교통안전',
-        '어린이 안전',
-        '청소년 안전',
-        '취약계층 안전',
-        '안신고활동',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '지역안전', '교통안전', '어린이 안전', '청소년 안전', '취약계층 안전', '안신고활동', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '교육') {
-      setvolunteerSmallType([
-        '전체',
-        '방과후 교육',
-        '학습지도 교육',
-        '특수교육',
-        '평생교육',
-        '전문교육',
-        '진로체험교육',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '방과후 교육', '학습지도 교육', '특수교육', '평생교육', '전문교육', '진로체험교육', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '보건의료') {
       setvolunteerSmallType(['전체', '간호간병', '의료지원', '헌혈', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '문화행사') {
-      setvolunteerSmallType([
-        '전체',
-        '행사보조',
-        '공연활동',
-        '켐페인',
-        '관광안내',
-        '사진촬영',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '행사보조', '공연활동', '켐페인', '관광안내', '사진촬영', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '환경보호') {
       setvolunteerSmallType(['전체', '환경정화', '환경감시', '기타']);
@@ -232,7 +195,6 @@ function S_PostGT() {
   }
 
   const handleSubmit = async (event) => {
-    setDisabled(true);
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
     fetch('http://localhost:8004/volunteer/board', {
@@ -271,13 +233,6 @@ function S_PostGT() {
           navigate('/');
         }
       })
-    setDisabled(false);
-    console.log(
-      'data: ' +
-        JSON.stringify({
-          volunteerArea: volunteerArea,
-        })
-    );
   };
 
   return (
@@ -290,24 +245,20 @@ function S_PostGT() {
         <form onSubmit={handleSubmit}>
           <StyledDiv1>
             <StyledGroup1>
-              <StyledGroup1_1>
+              <StyledGroup11>
                 <StyledGroupTitle>봉사 지역</StyledGroupTitle>
                 <select
                   onChange={handleSelectArea}
-                  value={setvolunteerArea}
-                  style={{
-                    width: '145px',
-                    height: '50px',
-                  }}
-                >
+                  value={volunteerArea}
+                  style={{ width: '145px', height: '50px' }}>
                   {selectArea.map((item) => (
                     <option value={item} key={item}>
                       <div>{item}</div>
                     </option>
                   ))}
                 </select>
-              </StyledGroup1_1>
-              <StyledGroup1_2>
+              </StyledGroup11>
+              <StyledGroup12>
                 <StyledGroupTitle>봉사장소</StyledGroupTitle>
                 <FloatingLabel
                   label="사랑의 집"
@@ -317,34 +268,24 @@ function S_PostGT() {
                 >
                   <Form.Control type="text" placeholder="label" />
                 </FloatingLabel>
-              </StyledGroup1_2>
+              </StyledGroup12>
             </StyledGroup1>
             <StyledGroup2>
-              <StyledGroup2_1>
+              <StyledGroup21>
                 <StyledGroupTitle>봉사주소</StyledGroupTitle>
-                <StyledGroup2_2>
+                <StyledGroup22>
                   <FloatingLabel
                     label="인천 연수구 "
                     value={volunteerAddress}
                     onChange={handleChangevolunteerAddress}
-                    style={{
-                      width: '392px',
-                      height: '50px',
-                      marginRight: '30px',
-                    }}
-                  >
+                    style={{ width: '392px', height: '50px', marginRight: '30px' }}>
                     <Form.Control type="textarea" placeholder="label" />
                   </FloatingLabel>
                   <FloatingLabel
                     label="위도"
                     value={latitude}
                     onChange={handleChangelatitude}
-                    style={{
-                      // width: '392px',
-                      height: '50px',
-                      marginRight: '30px',
-                    }}
-                  >
+                    style={{ height: '50px', marginRight: '30px' }}>
                     <Form.Control type="textarea" placeholder="label" />
                   </FloatingLabel>
                   <FloatingLabel
@@ -354,8 +295,8 @@ function S_PostGT() {
                   >
                     <Form.Control type="textarea" placeholder="label" />
                   </FloatingLabel>
-                </StyledGroup2_2>
-              </StyledGroup2_1>
+                </StyledGroup22>
+              </StyledGroup21>
             </StyledGroup2>
             <StyledGroup3>
               <div>
@@ -375,7 +316,7 @@ function S_PostGT() {
                   onChange={handleWantEndDateChange}
                 />
               </div>
-              <StyledGroup3_2>
+              <StyledGroup32>
                 <StyledGroupTitle>모집인원</StyledGroupTitle>
                 <FloatingLabel
                   label="모집인원"
@@ -384,7 +325,7 @@ function S_PostGT() {
                 >
                   <Form.Control type="textarea" placeholder="label" />
                 </FloatingLabel>
-              </StyledGroup3_2>
+              </StyledGroup32>
             </StyledGroup3>
             <StyledGroup4>
               <div>
@@ -404,17 +345,12 @@ function S_PostGT() {
                   onChange={handleEndDateChange}
                 />
               </div>
-              <StyledGroup4_2>
+              <StyledGroup42>
                 <StyledGroupTitle>봉사시간</StyledGroupTitle>
                 <select
                   onChange={handleTimeChange}
                   value={volunteerStartTime}
-                  style={{
-                    width: '145px',
-                    height: '50px',
-                    marginRight: '50px',
-                  }}
-                >
+                  style={{ width: '145px', height: '50px', marginRight: '50px' }}>
                   {selectTime.map((item) => (
                     <option value={item} key={item}>
                       {item}
@@ -435,18 +371,10 @@ function S_PostGT() {
                     </option>
                   ))}
                 </select>
-                <div
-                  style={{
-                    width: '145px',
-                    height: '50px',
-                  }}
-                >
-                  첫번째,{volunteerStartTime},두번쨰 {volunteerEndTime1}
-                </div>
-              </StyledGroup4_2>
+              </StyledGroup42>
             </StyledGroup4>
             <StyledGroup5>
-              <StyledGroup5_1>
+              <StyledGroup51>
                 <StyledGroupTitle>활동요일</StyledGroupTitle>
                 <FloatingLabel
                   label="월,화,금"
@@ -455,8 +383,8 @@ function S_PostGT() {
                 >
                   <Form.Control type="textarea" placeholder="label" />
                 </FloatingLabel>
-              </StyledGroup5_1>
-              <StyledGroup5_2>
+              </StyledGroup51>
+              <StyledGroup52>
                 <StyledGroupTitle>봉사종류</StyledGroupTitle>
                 <FloatingLabel
                   label="시간"
@@ -465,7 +393,7 @@ function S_PostGT() {
                 >
                   <Form.Control type="textarea" placeholder="label" />
                 </FloatingLabel>
-              </StyledGroup5_2>
+              </StyledGroup52>
               <div>
                 <StyledGroupTitle>봉사분야</StyledGroupTitle>
                 <select onChange={handleTypeChange} value={volunteerBigType}>
@@ -482,13 +410,10 @@ function S_PostGT() {
                     </option>
                   ))}
                 </select>
-                <div>
-                  첫번째,{volunteerBigType},두번쨰 {volunteerSmallType1}
-                </div>
               </div>
             </StyledGroup5>
             <StyledGroup6>
-              <StyledGroup6_1>
+              <StyledGroup61>
                 <StyledGroupTitle>활동구분</StyledGroupTitle>
                 <select
                   onChange={handleSelectActivitySection}
@@ -500,8 +425,8 @@ function S_PostGT() {
                     </option>
                   ))}
                 </select>
-              </StyledGroup6_1>
-              <StyledGroup6_2>
+              </StyledGroup61>
+              <StyledGroup62>
                 <StyledGroupTitle>봉사대상</StyledGroupTitle>
                 <select
                   onChange={handleSelectVolunteerTarget}
@@ -513,8 +438,8 @@ function S_PostGT() {
                     </option>
                   ))}
                 </select>
-              </StyledGroup6_2>
-              <StyledGroup6_3>
+              </StyledGroup62>
+              <StyledGroup63>
                 <StyledGroupTitle>봉사자유형</StyledGroupTitle>
                 <select
                   onChange={handleSelectVolunteerPersonType}
@@ -526,10 +451,10 @@ function S_PostGT() {
                     </option>
                   ))}
                 </select>
-              </StyledGroup6_3>
+              </StyledGroup63>
             </StyledGroup6>
             <StyledGroup7>
-              <StyledGroup7_1>
+              <StyledGroup71>
                 <StyledGroupTitle>담당자명</StyledGroupTitle>
                 <FloatingLabel
                   label="김수임"
@@ -538,8 +463,8 @@ function S_PostGT() {
                 >
                   <Form.Control type="textarea" placeholder="label" />
                 </FloatingLabel>
-              </StyledGroup7_1>
-              <StyledGroup7_2>
+              </StyledGroup71>
+              <StyledGroup72>
                 <StyledGroupTitle>이메일</StyledGroupTitle>
                 <FloatingLabel
                   label="apple@naver.com"
@@ -548,7 +473,7 @@ function S_PostGT() {
                 >
                   <Form.Control type="textarea" placeholder="label" />
                 </FloatingLabel>
-              </StyledGroup7_2>
+              </StyledGroup72>
             </StyledGroup7>
           </StyledDiv1>
           <StyledDiv2>
@@ -572,17 +497,14 @@ function S_PostGT() {
           <StyledButton1
             type="button"
             onClick={handleSubmit}
-            disabled={disabled}
           >
             게시하기
           </StyledButton1>
-          <div className="home">{error && <div>{error}</div>}</div>
         </form>
       </Styledsec2>
     </StyledAll>
   );
 }
-
 const StyledAll = styled.div`
   margin: auto;
   padding-bottom: 300px;
@@ -610,45 +532,6 @@ const StyledTitle2 = styled.div`
 
   margin-left: 10px;
 `;
-const Styledsec = styled.div`
-  margin-top: 20px;
-  margin-left: 10px;
-
-  width: 1100px;
-  height: 130px;
-  /* left: 378px;
-  top: 259px; */
-
-  background: #ebebeb;
-  border-radius: 10px;
-`;
-const StyledTxt = styled.div`
-  padding-top: 25px;
-  padding-left: 25px;
-`;
-const StyledTxtB = styled.div`
-  margin-bottom: 10px;
-
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 25px;
-  /* or 96% */
-
-  color: #333333;
-`;
-const StyledTxtL = styled.div`
-  margin-bottom: 3px;
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 25px;
-  /* or 96% */
-
-  color: #333333;
-`;
 const Styledsec2 = styled.div`
   margin-top: 30px;
   margin-left: 10px;
@@ -672,10 +555,10 @@ const StyledGroup1 = styled.div`
   margin-top: 40px;
   margin-left: 20px;
 `;
-const StyledGroup1_1 = styled.div`
+const StyledGroup11 = styled.div`
   width: 200px;
 `;
-const StyledGroup1_2 = styled.div`
+const StyledGroup12 = styled.div`
   margin-left: 50px;
   width: 500px;
 `;
@@ -691,128 +574,81 @@ const StyledGroupTitle = styled.div`
 
   color: #333333;
 `;
-
 const StyledGroup2 = styled.div`
   display: flex;
   margin-bottom: 20px;
   margin-top: 30px;
   margin-left: 20px;
 `;
-const StyledGroup2_1 = styled.div`
+const StyledGroup21 = styled.div`
   /* width: 350px; */
 `;
-const StyledGroup2_2 = styled.div`
+const StyledGroup22 = styled.div`
   display: flex;
 `;
-const StyledGroup2_3 = styled.div`
-  margin-left: 50px;
-  width: 200px;
-`;
-
 const StyledGroup3 = styled.div`
   display: flex;
   margin-bottom: 20px;
   margin-top: 30px;
   margin-left: 20px;
 `;
-const StyledGroup3_1 = styled.div`
-  width: 300px;
-`;
-const StyledGroup3_2 = styled.div`
+const StyledGroup32 = styled.div`
   margin-left: 50px;
   /* width: 500px; */
 `;
-
 const StyledGroup4 = styled.div`
   display: flex;
   margin-bottom: 20px;
   margin-top: 30px;
   margin-left: 20px;
 `;
-const StyledGroup4_1 = styled.div`
-  width: 800px;
-`;
-const StyledGroup4_2 = styled.div`
+const StyledGroup42 = styled.div`
   margin-left: 50px;
   /* width: 500px; */
 `;
-
 const StyledGroup5 = styled.div`
   display: flex;
   margin-bottom: 20px;
   margin-top: 30px;
   margin-left: 20px;
 `;
-const StyledGroup5_1 = styled.div`
+const StyledGroup51 = styled.div`
   width: 300px;
 `;
-const StyledGroup5_2 = styled.div`
+const StyledGroup52 = styled.div`
   margin-left: 50px;
   width: 500px;
 `;
-
 const StyledGroup6 = styled.div`
   display: flex;
   margin-bottom: 20px;
   margin-top: 40px;
   margin-left: 20px;
 `;
-const StyledGroup6_1 = styled.div`
+const StyledGroup61 = styled.div`
   width: 200px;
 `;
-const StyledSelectBox = styled.div`
-  /* width: 200px;
-  height: 65px;
-  background: #ffffff;
-  border: 2px solid #e6e9ec;
-  border-radius: 8px; */
-`;
-const StyledGroup6_2 = styled.div`
+const StyledGroup62 = styled.div`
   margin-left: 50px;
   width: 200px;
 `;
-const StyledGroup6_3 = styled.div`
+const StyledGroup63 = styled.div`
   margin-left: 50px;
   width: 200px;
 `;
-const StyledGroup6_4 = styled.div`
-  margin-left: 50px;
-  width: 400px;
-`;
-
 const StyledGroup7 = styled.div`
   display: flex;
   margin-bottom: 20px;
   margin-top: 40px;
   margin-left: 20px;
 `;
-const StyledGroup7_1 = styled.div`
+const StyledGroup71 = styled.div`
   width: 250px;
 `;
-const StyledGroup7_2 = styled.div`
+const StyledGroup72 = styled.div`
   margin-left: 50px;
   width: 250px;
 `;
-const StyledGroup7_3 = styled.div`
-  margin-left: 50px;
-  width: 400px;
-`;
-
-const StyledGroup8 = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-  margin-top: 40px;
-  margin-left: 20px;
-`;
-
-const StyledGroup8_1 = styled.div`
-  width: 200px;
-`;
-const StyledGroup8_2 = styled.div`
-  margin-left: 50px;
-  width: 200px;
-`;
-
 const StyledDiv2 = styled.div`
   margin-top: 40px;
   margin-left: 30px;
@@ -823,38 +659,6 @@ const StyledDiv3 = styled.div`
   margin-left: 30px;
   width: 115ch;
 `;
-
-const Styledsec3 = styled.div`
-  margin-top: 40px;
-  margin-left: 20px;
-
-  width: 120ch;
-  height: 110px;
-  /* left: 378px;
-  top: 259px; */
-
-  background: #ebebeb;
-  border-radius: 10px;
-`;
-const StyledTxt2 = styled.div`
-  /* padding-top: 25px;
-  padding-left: 25px; */
-  width: 67ch;
-  margin-left: 20px;
-  padding-top: 25px;
-  margin-bottom: 10px;
-
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 30px;
-  /* or 96% */
-
-  color: #333333;
-  text-align: center;
-`;
-
 const StyledButton1 = styled.button`
   background-color: #ff9f9f;
   color: white;
