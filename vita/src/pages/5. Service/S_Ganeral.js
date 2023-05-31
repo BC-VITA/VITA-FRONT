@@ -20,46 +20,20 @@ function S_Ganeral() {
   const [mapSize, setMapSize] = useState([300, 300]);
 
   //지역선택
-  const selectArea1 = [
-    '전체',
-    '서울',
-    '부산',
-    '대구',
-    '인천',
-    '광주',
-    '대전',
-    '울산',
-    '세종',
-    '경기',
-    '강원',
-    '충북',
-    '충남',
-    '전북',
-    '전남',
-    '경북',
-    '경남',
-    '제주',
-  ];
-  const [volunteerArea, setvolunteerArea] = useState('전체'); //지역선택에서 사용하는 값
+  const selectArea1 = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'];
+  const [volunteerArea1, setvolunteerArea] = useState('전체'); //지역선택에서 사용하는 값
   function handleAreaChange(event) {
     const selectedValue = event.target.value;
     setvolunteerArea(selectedValue);
   }
 
   //봉사분야
-  const selectType = [
-    '전체',
-    '생활편의시설',
-    '주거환경',
-    '교육',
-    '보건의료',
-    '환경보호',
-  ];
-  const [volunteerBigType, setvolunteerBigType] = useState('전체'); // 실제로 사용하는 분야의 첫번째 값
+  const selectType = ['전체', '생활편의시설', '주거환경', '교육', '보건의료', '환경보호'];
+  const [volunteerBigType1, setvolunteerBigType] = useState('전체'); // 실제로 사용하는 분야의 첫번째 값
   const [volunteerSmallType, setvolunteerSmallType] = useState([
     '검색할 봉사분야를 골라주세요',
   ]);
-  const [volunteerSmallType1, setvolunteerSmallType1] = useState(''); //실제로 사용하는 분야의 두번째 값
+  const [volunteerSmallType11, setvolunteerSmallType1] = useState(''); //실제로 사용하는 분야의 두번째 값
 
   function handleTypeChange(event) {
     const selectedValue1 = event.target.value;
@@ -69,56 +43,22 @@ function S_Ganeral() {
       setvolunteerSmallType(['검색할 봉사분야를 골라주세요']);
       setvolunteerSmallType1(['검색할 봉사분야를 골라주세요']);
     } else if (selectedValue1 === '생활편의시설') {
-      setvolunteerSmallType([
-        '전체',
-        '활동보조',
-        '아동보조',
-        '청결지도',
-        '급식지원',
-        '식사반찬지원',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '활동보조', '아동보조', '청결지도', '급식지원', '식사반찬지원', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '주거환경') {
       setvolunteerSmallType(['전체', '주거개선', '마을공동체활동', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '안전예방') {
-      setvolunteerSmallType([
-        '전체',
-        '지역안전',
-        '교통안전',
-        '어린이 안전',
-        '청소년 안전',
-        '취약계층 안전',
-        '안신고활동',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '지역안전', '교통안전', '어린이 안전', '청소년 안전', '취약계층 안전', '안신고활동', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '교육') {
-      setvolunteerSmallType([
-        '전체',
-        '방과후 교육',
-        '학습지도 교육',
-        '특수교육',
-        '평생교육',
-        '전문교육',
-        '진로체험교육',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '방과후 교육', '학습지도 교육', '특수교육', '평생교육', '전문교육', '진로체험교육', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '보건의료') {
       setvolunteerSmallType(['전체', '간호간병', '의료지원', '헌혈', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '문화행사') {
-      setvolunteerSmallType([
-        '전체',
-        '행사보조',
-        '공연활동',
-        '켐페인',
-        '관광안내',
-        '사진촬영',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '행사보조', '공연활동', '켐페인', '관광안내', '사진촬영', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '환경보호') {
       setvolunteerSmallType(['전체', '환경정화', '환경감시', '기타']);
@@ -128,38 +68,18 @@ function S_Ganeral() {
   function handleTypeChange1(event) {
     const selectedValue = event.target.value;
     setvolunteerSmallType1(selectedValue);
-
-    const updatedSelectTime = volunteerSmallType.filter(
-      (item) => item !== selectedValue
-    );
-    updatedSelectTime.sort(); // 정렬 어떻게 할지
-    updatedSelectTime.unshift(selectedValue);
-
-    setvolunteerSmallType(updatedSelectTime);
   }
 
   //활동구분
   const selectField3 = ['전체', '온라인', '오프라인'];
-  const [activitySection, setactivitySection] = useState('전체'); //활동구분에서 실제 사용하는 값
+  const [activitySection1, setactivitySection] = useState('전체'); //활동구분에서 실제 사용하는 값
   const handleSelectActivitySection = (e) => {
     setactivitySection(e.target.value);
   };
 
   //봉사대상
-  const selectVolunteerTarget = [
-    '전체',
-    '아동.청소년',
-    '장애인',
-    '노인',
-    '쪽방촌',
-    '다문화가정',
-    '여성',
-    '환경',
-    '사회적기업',
-    '고향봉사',
-    '기타',
-  ];
-  const [volunteerTarget, setvolunteerTarget] = useState('전체'); //봉사대상에서 실제 사용하는 값
+  const selectVolunteerTarget = ['전체', '아동.청소년', '장애인', '노인', '쪽방촌', '다문화가정', '여성', '환경', '사회적기업', '고향봉사', '기타'];
+  const [volunteerTarget1, setvolunteerTarget] = useState('전체'); //봉사대상에서 실제 사용하는 값
   const handleSelectVolunteerTarget = (e) => {
     setvolunteerTarget(e.target.value);
   };
@@ -198,37 +118,7 @@ function S_Ganeral() {
     setOpenIndex(index === openIndex ? -1 : index);
   };
 
-  const [inputData, setInputData] = useState([
-    {
-      volunteerType: '',
-      content: '',
-      title: '',
-      volunteerStartDate: '',
-      volunteerEndDate: '',
-      volunteerStartTime: '',
-      volunteerEndTime: '',
-      volunteerArea: '',
-      activitySection: '',
-      volunteerField: '',
-      volunteerSeekStartDate: '',
-      volunteerSeekEndDate: '',
-      volunteerAddress: '',
-      volunteerTarget: '',
-      volunteerPlace: '',
-      latitude: '',
-      longitude: '',
-      volunteerActivityWeek: '',
-      qualification: '',
-      volunteerPersonType: '',
-      volunteerActivityNumber: '',
-      requirements: '',
-      managerName: '',
-      managerEmail: '',
-      requireGroup: '',
-      url: '',
-    },
-    {},
-  ]);
+  const [inputData, setInputData] = useState([{}, {},]);
   const userId = 'time';
   useEffect(() => {
     const url = `http://localhost:8004/volunteer/board/list?volunteerType=${userId}`;
@@ -238,15 +128,12 @@ function S_Ganeral() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setInputData(res);
-        console.log(inputData);
       });
-    console.log(inputData);
   }, []);
 
-  const handleReservation = (centerName) => {
-    navigate('/BD_ReservationSecond', { state: { centerName } });
+  const handleReservation = (volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory) => {
+    navigate('/S_PostGT', { state: { volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory } });
   };
 
   // const filteredData =           //전체 api 완성하면 필터 완성하겟음
@@ -291,10 +178,8 @@ function S_Ganeral() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>개인봉사</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/S_PostGT">
-              <StyledButtonDiv>작성하기</StyledButtonDiv>
-            </Nav.Link>
+          <StyledButton onClick={() => handleReservation(volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory)}>
+            작성하기
           </StyledButton>
         </StyledTop>
         <StyledTab1>
@@ -302,151 +187,120 @@ function S_Ganeral() {
             <Tab eventKey="Time" title="시간인증">
               <Tab.Content>
                 <StyledFilter>
-                  <StyledFilterDiv1
-                    style={{
-                      marginTop: '10px',
-                    }}
-                  >
+                  <StyledFilterDiv1 style={{ marginTop: '10px' }}>
                     <StyledFilterDivTitle
-                      style={{
-                        width: '100px',
-                      }}
-                    >
+                      style={{ width: '100px' }}>
                       지역선택
                     </StyledFilterDivTitle>
-                    <StyledFilterDivTitle
-                      style={{
-                        width: '260px',
-                      }}
-                    >
+                    <StyledFilterDivTitle style={{ width: '260px' }}>
                       봉사분야
                     </StyledFilterDivTitle>
-                    <StyledFilterDivTitle
-                      style={{
-                        width: '110px',
-                      }}
-                    >
+                    <StyledFilterDivTitle style={{ width: '110px' }}>
                       활동 구분
                     </StyledFilterDivTitle>
-                    <StyledFilterDivTitle
-                      style={{
-                        width: '120px',
-                      }}
-                    >
+                    <StyledFilterDivTitle style={{ width: '120px' }}>
                       봉사 대상
                     </StyledFilterDivTitle>
-                    <StyledFilterDivTitle
-                      style={{
-                        width: '110px',
-                      }}
-                    >
+                    <StyledFilterDivTitle style={{ width: '110px' }}>
                       모집상태
                     </StyledFilterDivTitle>
-                    <StyledFilterDivTitle
-                      style={{
-                        width: '110px',
-                      }}
-                    >
+                    <StyledFilterDivTitle style={{ width: '110px' }} >
                       봉사자 유형
                     </StyledFilterDivTitle>
                   </StyledFilterDiv1>
                   <StyledFilterDiv1>
                     <select
                       onChange={handleAreaChange}
-                      value={volunteerArea}
-                      style={{
-                        border: 'none',
-                        width: '100px',
-                      }}
+                      value={volunteerArea1}
+                      style={{ border: 'none', width: '100px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
                       multiple
                     >
                       {selectArea1.map((item) => (
-                        <option value={item} key={item}>
+                        <option value={item} key={item}
+                          style={{
+                            backgroundColor: volunteerArea1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            color: volunteerArea1.includes(item) ? 'white' : 'black'
+                          }}>
                           {item}
                         </option>
                       ))}
                     </select>
-
                     <select
                       onChange={handleTypeChange}
-                      value={volunteerBigType}
-                      style={{
-                        border: 'none',
-                        width: '130px',
-                        // marginRight: '20px',
-                      }}
+                      value={volunteerBigType1}
+                      style={{ border: 'none', width: '130px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
                       multiple
                     >
                       {selectType.map((item) => (
-                        <option value={item} key={item}>
+                        <option value={item} key={item}
+                          style={{
+                            backgroundColor: volunteerBigType1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            color: volunteerBigType1.includes(item) ? 'white' : 'black'
+                          }}>
                           {item}
                         </option>
                       ))}
                     </select>
-
                     <select
                       onChange={handleTypeChange1}
-                      value={volunteerSmallType}
-                      style={{
-                        border: 'none',
-                        width: '130px',
-                        // marginRight: '100px',
-                      }}
+                      value={volunteerSmallType11}
+                      style={{ border: 'none', width: '130px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
                       multiple
                     >
                       {volunteerSmallType.map((option) => (
-                        <option key={option} value={option}>
+                        <option key={option} value={option}
+                          style={{
+                            backgroundColor: volunteerSmallType11.includes(option) ? 'rgb(30, 144, 255)' : 'inherit',
+                            color: volunteerSmallType11.includes(option) ? 'white' : 'black'
+                          }}>
                           {option}
                         </option>
                       ))}
                     </select>
-
                     <select
                       onChange={handleSelectActivitySection}
-                      value={activitySection}
-                      style={{
-                        border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '110px',
-                      }}
+                      value={activitySection1}
+                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '110px' }}
                       multiple
                     >
                       {selectField3.map((item) => (
-                        <option value={item} key={item}>
+                        <option value={item} key={item}
+                          style={{
+                            backgroundColor: activitySection1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            color: activitySection1.includes(item) ? 'white' : 'black'
+                          }}>
                           {item}
                         </option>
                       ))}
                     </select>
-
                     <select
                       onChange={handleSelectVolunteerTarget}
-                      value={volunteerTarget}
-                      style={{
-                        border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '120px',
-                      }}
+                      value={volunteerTarget1}
+                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '120px' }}
                       multiple
                     >
                       {selectVolunteerTarget.map((item) => (
-                        <option value={item} key={item}>
-                          <div>{item}</div>
+                        <option value={item} key={item}
+                          style={{
+                            backgroundColor: volunteerTarget1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            color: volunteerTarget1.includes(item) ? 'white' : 'black'
+                          }}>
+                          {item}
                         </option>
                       ))}
                     </select>
-
                     <select
                       onChange={handleSelectVolunteerState}
                       value={volunteerState}
-                      style={{
-                        border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '110px',
-                      }}
+                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '110px' }}
                       multiple
                     >
                       {selectField5.map((item) => (
-                        <option value={item} key={item}>
+                        <option value={item} key={item}
+                          style={{
+                            backgroundColor: volunteerState.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            color: volunteerState.includes(item) ? 'white' : 'black'
+                          }}>
                           {item}
                         </option>
                       ))}
@@ -462,7 +316,11 @@ function S_Ganeral() {
                       multiple
                     >
                       {selectField6.map((item) => (
-                        <option value={item} key={item}>
+                        <option value={item} key={item}
+                          style={{
+                            backgroundColor: volunteerCategory.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            color: volunteerCategory.includes(item) ? 'white' : 'black'
+                          }}>
                           {item}
                         </option>
                       ))}
@@ -586,11 +444,7 @@ function S_Ganeral() {
                                   name="main-icon"
                                   alt="logo"
                                 />
-                                {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
                                 <br />
-                                {/* <Nav.Link type="button" href="/DBD_PostGeneral">
-                                  <StyledButtonDiv>참여하기</StyledButtonDiv>
-                                </Nav.Link> */}
                                 <button type="button">참여하기</button>
                               </Styledtd>
                             </Styledtr>
@@ -713,51 +567,20 @@ const StyledTitle = styled.div`
 const StyledTop = styled.div`
   display: flex;
 `;
-const StyledButton = styled.div`
-  margin-top: 3px;
+const StyledButton = styled.button`
   width: 125px;
-  height: 35px;
-  /* margin-left: 540px; */
-
-  background: #ff9f9f;
+  height: 35px;   
+  margin-top: 3px;
+  margin-left: 32em;
   border-radius: 9px;
-  margin-left: 33em;
-`;
-
-const StyledButtonDiv = styled.div`
+  background: #ff9f9f;
+  color: #ffffff;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 38px;
-  margin: auto;
-  text-align: center;
-
-  color: #ffffff;
-`;
-
-const StyledButton2 = styled.div`
-  margin-top: 10px;
-  width: 165px;
-  height: 35px;
-  margin-left: 10px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
-`;
-
-const StyledButtonDiv2 = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
+  border: none;
 `;
 
 // 옛날
