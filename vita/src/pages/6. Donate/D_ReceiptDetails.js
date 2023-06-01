@@ -63,7 +63,7 @@ function D_ReceiptDetails() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>기부란?</StyledTitle>
+          <StyledTitle>기부하기</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>

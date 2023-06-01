@@ -69,7 +69,7 @@ function D_Receipt() {
           <StyledTitle>기부 영수증</StyledTitle>
         </StyledTop>
         <StyledButton>
-          <Nav.Link href="/DBDPostGeneral">
+          <Nav.Link href="/D_SelectReceipt">
             <StyledButtonDiv>통계로 보기</StyledButtonDiv>
           </Nav.Link>
         </StyledButton>

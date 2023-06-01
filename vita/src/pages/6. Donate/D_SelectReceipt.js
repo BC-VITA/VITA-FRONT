@@ -63,13 +63,110 @@ function D_SelectReceipt() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>기부란?</StyledTitle>
-          <StyledButton>
+          <StyledTitle>기부 영수증</StyledTitle>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
+        <Styledcomment>
+          <StyledTable>
+            <thead style={{ background: '#FF9F9F' }}>
+              <tr>
+                <th
+                  style={{
+                    width: '200px',
+                    padding: '10px',
+                    color: '#ffffff',
+                    fontWeight: '500',
+                  }}
+                >
+                  신생아
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ width: '200px', padding: '10px' }}>1000</td>
+              </tr>
+            </tbody>
+          </StyledTable>
+        </Styledcomment>
+        <Styledcomment2>
+          <StyledDiv>
+            <StyledTitle2>신생아</StyledTitle2>
+            <StyledTable2>
+              <thead style={{ background: '#FF9F9F' }}>
+                <tr>
+                  <th
+                    style={{
+                      width: '100px',
+                      padding: '10px',
+                      color: '#ffffff',
+                      fontWeight: '500',
+                    }}
+                  >
+                    번호
+                  </th>
+                  <th
+                    style={{
+                      width: '200px',
+                      padding: '10px',
+                      color: '#ffffff',
+                      fontWeight: '500',
+                    }}
+                  >
+                    기부한 아이디
+                  </th>
+                  <th
+                    style={{
+                      width: '200px',
+                      padding: '10px',
+                      color: '#ffffff',
+                      fontWeight: '500',
+                    }}
+                  >
+                    일시
+                  </th>
+                  <th
+                    style={{
+                      width: '200px',
+                      padding: '10px',
+                      color: '#ffffff',
+                      fontWeight: '500',
+                    }}
+                  >
+                    포인트 액수
+                  </th>
+                </tr>
+              </thead>
+              <tbody style={{ background: '#ffffff' }}>
+                <tr>
+                  <td style={{ width: '200px', padding: '10px' }}>1</td>
+                  <td style={{ width: '200px', padding: '10px' }}>suim1234</td>
+                  <td style={{ width: '200px', padding: '10px' }}>
+                    2023.06.13
+                  </td>
+                  <td style={{ width: '200px', padding: '10px' }}>1000</td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td
+                    colspan="2"
+                    style={{
+                      textAlign: 'right',
+                      paddingRight: '30px',
+                      fontWeight: '700',
+                    }}
+                  >
+                    기부 총 합계 : 1000
+                  </td>
+                </tr>
+              </tbody>
+            </StyledTable2>
+          </StyledDiv>
+        </Styledcomment2>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -176,47 +273,73 @@ const StyledTop = styled.div`
   display: flex;
 `;
 
-const StyledButton = styled.div`
-  margin-top: 3px;
-  width: 125px;
-  height: 35px;
-  margin-left: 540px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
+const Styledcomment = styled.div`
+  display: flex;
+  margin-top: 10px;
 `;
-
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
-`;
-
-const StyledCommentTitle = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 48px;
-  /* margin-left: 375px; */
-  margin-bottom: 10px;
-
-  color: #333333;
-`;
-const StyledComment = styled.div`
-  /* width: 1100px; */
+const StyledTable = styled.div`
+  border-collapse: collapse;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  margin-bottom: 50px;
-  margin-right: 60px;
+  font-size: 28px;
+  line-height: 32px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  /* border-style: solid;
+  border-color: black;
+  border: 1px; */
 `;
+
+const Styledcomment2 = styled.div`
+  width: 880px;
+  /* height: 300px; */
+  margin-top: 20px;
+  background: #ffe9e9;
+  padding-bottom: 10px;
+`;
+const StyledTitle2 = styled.div`
+  width: 203px;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 48px;
+
+  margin-bottom: 5px;
+
+  color: #333333;
+`;
+const StyledDiv = styled.div`
+  padding: 10px;
+  padding-left: 20px;
+`;
+const StyledTable2 = styled.div`
+  /* border-collapse: collapse; */
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 32px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  border-style: solid;
+  border-color: black;
+  border: 1px;
+`;
+
 export default D_SelectReceipt;

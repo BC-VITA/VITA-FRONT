@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
-
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 import serviceimg from '../../img/serviceimg.png';
 
 function D_SelectDonation() {
@@ -64,12 +65,46 @@ function D_SelectDonation() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부란?</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
+          <StyledTitle2>한부모 가정 기부하기</StyledTitle2>
         </StyledTop>
+        <StyledDiv>
+          <StyledDiv2>
+            {/* <StyledDiv2_1>
+          </StyledDiv2_1> */}
+            <StyledBoxTitle>나의 포인트</StyledBoxTitle>
+            <FloatingLabel
+              label="ID"
+              name="id"
+              // value={id}
+              // onChange={handleChangeId}
+            >
+              <Form.Control type="id" placeholder="label" />
+            </FloatingLabel>
+            <StyledButton>기부하기</StyledButton>
+          </StyledDiv2>
+          <StyledDiv3>
+            <StyledBoxTitle>기부할 포인트 </StyledBoxTitle>
+            <FloatingLabel
+              label="ID"
+              name="id"
+              // value={id}
+              // onChange={handleChangeId}
+            >
+              <Form.Control type="id" placeholder="label" />
+            </FloatingLabel>
+          </StyledDiv3>
+          <StyledDiv3>
+            <StyledBoxTitle>기부하고 남을 포인트</StyledBoxTitle>
+            <FloatingLabel
+              label="ID"
+              name="id"
+              // value={id}
+              // onChange={handleChangeId}
+            >
+              <Form.Control type="id" placeholder="label" disabled />
+            </FloatingLabel>
+          </StyledDiv3>
+        </StyledDiv>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -162,6 +197,7 @@ const StyledSubcomment = styled.div`
   margin-top: 25px;
 `;
 
+const StyledTop = styled.div``;
 const StyledTitle = styled.div`
   width: 203px;
   font-family: 'Gmarket Sans TTF';
@@ -172,51 +208,68 @@ const StyledTitle = styled.div`
 
   color: #333333;
 `;
-const StyledTop = styled.div`
-  display: flex;
-`;
-
-const StyledButton = styled.div`
-  margin-top: 3px;
-  width: 125px;
-  height: 35px;
-  margin-left: 540px;
-
-  background: #ff9f9f;
-  border-radius: 9px;
-`;
-
-const StyledButtonDiv = styled.div`
+const StyledTitle2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
+  font-size: 28px;
+  line-height: 32px;
 
-  color: #ffffff;
-`;
-
-const StyledCommentTitle = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 48px;
-  /* margin-left: 375px; */
-  margin-bottom: 10px;
-
+  margin-top: 15px;
+  margin-left: 5px;
   color: #333333;
 `;
-const StyledComment = styled.div`
-  /* width: 1100px; */
+
+const StyledDiv = styled.div`
+  width: 880px;
+  height: 300px;
+  margin-top: 15px;
+  padding-left: 30px;
+  padding-top: 30px;
+
+  background: #ffe9e9;
+`;
+const StyledDiv2 = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+`;
+
+const StyledDiv3 = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+`;
+
+const StyledBoxTitle = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  margin-bottom: 50px;
-  margin-right: 60px;
+  font-size: 30px;
+  /* line-height: 30px; */
+  /* identical to box height, or 100% */
+
+  color: #333333;
+  margin-top: 10px;
+  margin-right: 10px;
+  /* margin-bottom: 10px; */
 `;
+const StyledButton = styled.div`
+  width: 155px;
+  height: 42px;
+
+  background: #ff9f9f;
+  border-radius: 9px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 42px;
+  /* identical to box height, or 100% */
+
+  color: #ffffff;
+  text-align: center;
+
+  margin-left: 300px;
+`;
+
 export default D_SelectDonation;

@@ -7,44 +7,49 @@ import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
-
 function BD_House() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const handleChangeId = (event) => {
     const newId = event.target.value;
-
     // inputData를 필터링하여 centerName과 비교하여 필터링된 데이터만 남기기
     const filteredData1 =
-      newId === '' ? inputData : inputData.filter((item) => item.centerName === newId);
-
+      newId === ''
+        ? inputData
+        : inputData.filter((item) => item.centerName === newId);
     setInputData(filteredData1);
   };
-
   // const filteredData =
   //   firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
-
   const [mapSize, setMapSize] = useState([400, 400]);
   const [markerPositions, setMarkerPositions] = useState([]);
-
   const handleMarkerClick = (marker) => {
     // 마커를 클릭했을 때 수행할 작업을 여기에 작성합니다.
     // 예를 들어, 간단한 정보를 생성하거나 팝업을 표시할 수 있습니다.
     console.log('Clicked marker:', marker);
     // 추가적인 작업을 수행하고 싶다면 여기에 작성합니다.
   };
-
-
-  const selectList1 = ['전체', '인천', '서울', '경기', '강원', '부산', '광주', '충북', '제주'];
-
+  const selectList1 = [
+    '전체',
+    '인천',
+    '서울',
+    '경기',
+    '강원',
+    '부산',
+    '광주',
+    '충북',
+    '제주',
+  ];
   const [firstListValue, setFirstListValue] = useState('전체');
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
   };
-
-  const [inputData, setInputData] = useState([{}, {},]);
-
+  function handleFirstListChange(event) {
+    const selectedValue = event.target.value;
+    setFirstListValue(selectedValue);
+  }
+  const [inputData, setInputData] = useState([{}, {}]);
   const handleReservation = (centerName) => {
     navigate('/BD_ReservationSecond', { state: { centerName } });
   };
@@ -55,21 +60,23 @@ function BD_House() {
       .then((res) => res.json())
       .then((res) => {
         setInputData(res);
-        const extractedData = res.map(item => [item.latitude, item.longitude]);
+        const extractedData = res.map((item) => [
+          item.latitude,
+          item.longitude,
+        ]);
         setMarkerPositions(extractedData);
       });
     setFirstListValue('전체');
   }, []);
-
   //필터
-  const filteredData = firstListValue === '전체'
-    ? inputData
-    : inputData.filter((item) => item.area === firstListValue);
+  const filteredData =
+    firstListValue === '전체'
+      ? inputData
+      : inputData.filter((item) => item.area === firstListValue);
 
-  const handleFilter = (value) => {
-    setFirstListValue(value);
-  }
-
+  // const handleFilter = (value) => {
+  //   setFirstListValue(value);
+  // }
   const thStyle = {
     width: '80px',
     fontFamily: 'Gmarket Sans TTF',
@@ -78,14 +85,14 @@ function BD_House() {
     fontSize: '22px',
     lineHeight: '35px',
     textAlign: 'center',
-    color: '#333333'
+    color: '#333333',
   };
   const tdStyle = {
     ...thStyle,
     fontWeight: '500',
     fontSize: '18px',
-    lineHeight: '30px'
-  }
+    lineHeight: '30px',
+  };
   const btStyle = {
     ...thStyle,
     height: '37px',
@@ -94,10 +101,9 @@ function BD_House() {
     border: 'none',
     fontWeight: '500',
     fontSize: '15px',
-    lineHeight: '37px'
-  }
+    lineHeight: '37px',
+  };
   delete btStyle.width;
-
   return (
     <StyledAll>
       <StyledSub>
@@ -127,7 +133,6 @@ function BD_House() {
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
-
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>헌혈의 집 찾기</StyledTitle>
@@ -145,26 +150,62 @@ function BD_House() {
         <StyledTab1>
           <StyledFilter>
             <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
-              <StyledFilterbutton onClick={() => handleFilter('전체')}>전체</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('서울')}>서울</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('부산')}>부산</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('대구')}>대구</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('인천')}>인천</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('울산')}>울산</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('세종')}>세종</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('경기')}>경기</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('강원')}>강원</StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('전체')}>
+                전체
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('서울')}>
+                서울
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('부산')}>
+                부산
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('대구')}>
+                대구
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('인천')}>
+                인천
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('울산')}>
+                울산
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('세종')}>
+                세종
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('경기')}>
+                경기
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('강원')}>
+                강원
+              </StyledFilterbutton>
             </StyledFilterDiv1>
             <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
-              <StyledFilterbutton onClick={() => handleFilter('충북')}>충북</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('대전')}>대전</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('충남')}>충남</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('전북')}>전북</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('광주')}>광주</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('전남')}>전남</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('경북')}>경북</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('경남')}>경남</StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('제주')}>제주</StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('충북')}>
+                충북
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('대전')}>
+                대전
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('충남')}>
+                충남
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('전북')}>
+                전북
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('광주')}>
+                광주
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('전남')}>
+                전남
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('경북')}>
+                경북
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('경남')}>
+                경남
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('제주')}>
+                제주
+              </StyledFilterbutton>
             </StyledFilterDiv1>
             {/* <Button variant="light">전체</Button>
               <Button variant="light">서울</Button>
@@ -223,7 +264,14 @@ function BD_House() {
             </StyledFilterDiv2>
           </StyledFilter>
           <section>
-            <KakaoMap markerPositions={inputData.map(data => [data.latitude, data.longitude])} size={[850, 400]} inputData={inputData} />
+            <KakaoMap
+              markerPositions={inputData.map((data) => [
+                data.latitude,
+                data.longitude,
+              ])}
+              size={[850, 400]}
+              inputData={inputData}
+            />
           </section>
           <section>
             <Styleddiv2>
@@ -233,13 +281,22 @@ function BD_House() {
                     <th id="area-header" style={thStyle}>
                       지역
                     </th>
-                    <th id="centerName-header" style={{ ...thStyle, width: '120px' }}>
+                    <th
+                      id="centerName-header"
+                      style={{ ...thStyle, width: '120px' }}
+                    >
                       헌혈의 집
                     </th>
-                    <th id="bloodHouseAddress-header" style={{ ...thStyle, width: '350px' }} >
+                    <th
+                      id="bloodHouseAddress-header"
+                      style={{ ...thStyle, width: '350px' }}
+                    >
                       주소
                     </th>
-                    <th id="bloodHousePhoneNumber-header" style={{ ...thStyle, width: '130px' }} >
+                    <th
+                      id="bloodHousePhoneNumber-header"
+                      style={{ ...thStyle, width: '130px' }}
+                    >
                       전화번호
                     </th>
                     <th>&nbsp;</th>
@@ -253,24 +310,58 @@ function BD_House() {
                     return (
                       <React.Fragment key={index}>
                         <tr onClick={() => handleRowClick(index)}>
-                          <td headers="area-header" style={{ ...tdStyle }} >
+                          <td headers="area-header" style={{ ...tdStyle }}>
                             {element.area}
                           </td>
-                          <td headers="centerName-header" style={{ ...tdStyle, width: '120px', }} >
+                          <td
+                            headers="centerName-header"
+                            style={{ ...tdStyle, width: '120px' }}
+                          >
                             {element.centerName}
                           </td>
-                          <td headers="bloodHouseAddress-header" style={{ ...tdStyle, width: '130px', fontSize: '15px' }}>
+                          <td
+                            headers="bloodHouseAddress-header"
+                            style={{
+                              ...tdStyle,
+                              width: '130px',
+                              fontSize: '15px',
+                            }}
+                          >
                             {element.bloodHouseAddress}
                           </td>
-                          <td headers="bloodHousePhoneNumber-header" style={{ ...tdStyle, width: '130px', fontSize: '15px' }}>
+                          <td
+                            headers="bloodHousePhoneNumber-header"
+                            style={{
+                              ...tdStyle,
+                              width: '130px',
+                              fontSize: '15px',
+                            }}
+                          >
                             {element.bloodHousePhoneNumber}
                           </td>
                           <td>
-                            <div style={{ display: 'flex', flexDirection: 'column' }} >
-                              <button onClick={() => handleReservation(element.centerName)} style={{ ...btStyle }}>
+                            <div
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                              }}
+                            >
+                              <button
+                                onClick={() =>
+                                  handleReservation(element.centerName)
+                                }
+                                style={{ ...btStyle }}
+                              >
                                 예약하기
                               </button>
-                              <button type="button" style={{ ...btStyle, marginTop: '10px', background: '#FF9F9F' }}>
+                              <button
+                                type="button"
+                                style={{
+                                  ...btStyle,
+                                  marginTop: '10px',
+                                  background: '#FF9F9F',
+                                }}
+                              >
                                 자세히보기
                               </button>
                             </div>
@@ -284,13 +375,13 @@ function BD_House() {
                                   markerPositions={markerPositions}
                                   onClick={handleMarkerClick}
                                   size={mapSize}
-                                  inputData={inputData}
                                 />
                               </Styledtd1>
                             </td>
                             <Styledtd2
                               colSpan={2}
-                              style={{ width: '240px', marginLeft: '-110px' }} >
+                              style={{ width: '240px', marginLeft: '-110px' }}
+                            >
                               <Styledtxt>
                                 헌혈종류 :
                                 <br /> 전혈, 혈장, 혈소판
@@ -321,7 +412,6 @@ function BD_House() {
     </StyledAll>
   );
 }
-
 const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
@@ -338,7 +428,6 @@ const StyledSubDiv1 = styled.div`
   height: 50px;
   /* left: 370px;
   top: 123px; */
-
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -346,12 +435,9 @@ const StyledSubDiv1 = styled.div`
   font-size: 23px;
   line-height: 55px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #ffffff;
 `;
-
 const StyledSubDiv2 = styled.div`
   width: 190px;
   height: 223px;
@@ -373,37 +459,28 @@ const StyledSubDiv21p = styled.div`
 `;
 const StyledSubDiv22 = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #333333;
 `;
 const StyledSubDiv22g = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #969696;
 `;
-
 // 콘텐즈 상단
 const StyledSubcomment = styled.div`
   display: block;
@@ -421,10 +498,8 @@ const StyledTitle = styled.div`
   font-weight: 700;
   font-size: 35px;
   line-height: 48px;
-
   color: #333333;
 `;
-
 // 필터
 const StyledTab1 = styled.div`
   width: 865px;
@@ -451,16 +526,13 @@ const StyledFilterbutton = styled.div`
   font-size: 24px;
   line-height: 40px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   width: 94px;
   font-size: 20px;
   text-align: center;
   /* margin-right: 5px; */
   display: block;
   margin: auto;
-
   background-color: #fcfcfc;
   border: 1px;
   border-color: #d7d7d7;
@@ -479,7 +551,6 @@ const StyledFilterDiv2 = styled.div`
   margin: auto;
   margin-top: 10px;
 `;
-
 // 집만의 콘텐츠
 const Styleddiv2 = styled.div`
   text-align: center;
@@ -506,9 +577,7 @@ const Styledtxt = styled.div`
   font-size: 19px;
   line-height: 30px;
   /* or 158% */
-
   letter-spacing: 0.05em;
-
   color: #333333;
 `;
 export default BD_House;
