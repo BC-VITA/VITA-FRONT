@@ -74,9 +74,9 @@ function BD_House() {
       ? inputData
       : inputData.filter((item) => item.area === firstListValue);
 
-  // const handleFilter = (value) => {
-  //   setFirstListValue(value);
-  // }
+  const handleFilter = (value) => {
+    setFirstListValue(value);
+  };
   const thStyle = {
     width: '80px',
     fontFamily: 'Gmarket Sans TTF',
