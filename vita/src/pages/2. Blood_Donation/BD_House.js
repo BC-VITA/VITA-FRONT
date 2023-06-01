@@ -73,6 +73,10 @@ function BD_House() {
     firstListValue === '전체'
       ? inputData
       : inputData.filter((item) => item.area === firstListValue);
+
+  // const handleFilter = (value) => {
+  //   setFirstListValue(value);
+  // }
   const thStyle = {
     width: '80px',
     fontFamily: 'Gmarket Sans TTF',
@@ -146,26 +150,62 @@ function BD_House() {
         <StyledTab1>
           <StyledFilter>
             <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
-              <StyledFilterbutton>전체</StyledFilterbutton>
-              <StyledFilterbutton>서울</StyledFilterbutton>
-              <StyledFilterbutton>부산</StyledFilterbutton>
-              <StyledFilterbutton>대구</StyledFilterbutton>
-              <StyledFilterbutton>인천</StyledFilterbutton>
-              <StyledFilterbutton>울산</StyledFilterbutton>
-              <StyledFilterbutton>세종</StyledFilterbutton>
-              <StyledFilterbutton>경기</StyledFilterbutton>
-              <StyledFilterbutton>강원</StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('전체')}>
+                전체
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('서울')}>
+                서울
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('부산')}>
+                부산
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('대구')}>
+                대구
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('인천')}>
+                인천
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('울산')}>
+                울산
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('세종')}>
+                세종
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('경기')}>
+                경기
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('강원')}>
+                강원
+              </StyledFilterbutton>
             </StyledFilterDiv1>
             <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
-              <StyledFilterbutton>충북</StyledFilterbutton>
-              <StyledFilterbutton>대전</StyledFilterbutton>
-              <StyledFilterbutton>충남</StyledFilterbutton>
-              <StyledFilterbutton>전북</StyledFilterbutton>
-              <StyledFilterbutton>광주</StyledFilterbutton>
-              <StyledFilterbutton>전남</StyledFilterbutton>
-              <StyledFilterbutton>경북</StyledFilterbutton>
-              <StyledFilterbutton>경남</StyledFilterbutton>
-              <StyledFilterbutton>제주</StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('충북')}>
+                충북
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('대전')}>
+                대전
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('충남')}>
+                충남
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('전북')}>
+                전북
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('광주')}>
+                광주
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('전남')}>
+                전남
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('경북')}>
+                경북
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('경남')}>
+                경남
+              </StyledFilterbutton>
+              <StyledFilterbutton onClick={() => handleFilter('제주')}>
+                제주
+              </StyledFilterbutton>
             </StyledFilterDiv1>
             {/* <Button variant="light">전체</Button>
               <Button variant="light">서울</Button>
