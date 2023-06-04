@@ -21,7 +21,7 @@ function DBD_Story() {
       .then((res) => {
         console.log(res);
         setInputData(res);
-      })
+      });
   }, []);
 
   return (
@@ -57,7 +57,10 @@ function DBD_Story() {
           {inputData.map((data, index) => (
             <StyledBox2 key={index}>
               <Card style={{ width: '17rem' }}>
-                <Card.Img variant="top" src='C:\\vita\\화면 캡처 2023-05-24 140930.png' />
+                <Card.Img
+                  variant="top"
+                  src="C:\\vita\\화면 캡처 2023-05-24 140930.png"
+                />
                 <Card.Body>
                   <Card.Title>{data.title}</Card.Title>
                   <Card.Text>{data.content}</Card.Text>
@@ -77,46 +80,41 @@ const StyledAll = styled.div`
   padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 170px;
+  width: 200px;
   /* height: 175px; */
   margin-top: 25px;
-  margin-left: 205px;
+  margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 190px;
-  height: 50px;
+  width: 220px;
+  height: 60px;
   /* left: 370px;
   top: 123px; */
-
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
-  line-height: 55px;
-  /* identical to box height, or 100% */
-
+  line-height: 60px;
   text-align: center;
-
   color: #ffffff;
 `;
-
 const StyledSubDiv2 = styled.div`
-  width: 190px;
-  height: 112px;
+  width: 220px;
+  height: 123px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
 const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;

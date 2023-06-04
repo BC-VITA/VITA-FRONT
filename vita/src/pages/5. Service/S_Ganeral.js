@@ -20,7 +20,26 @@ function S_Ganeral() {
   const [mapSize, setMapSize] = useState([300, 300]);
 
   //지역선택
-  const selectArea1 = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'];
+  const selectArea1 = [
+    '전체',
+    '서울',
+    '부산',
+    '대구',
+    '인천',
+    '광주',
+    '대전',
+    '울산',
+    '세종',
+    '경기',
+    '강원',
+    '충북',
+    '충남',
+    '전북',
+    '전남',
+    '경북',
+    '경남',
+    '제주',
+  ];
   const [volunteerArea1, setvolunteerArea] = useState('전체'); //지역선택에서 사용하는 값
   function handleAreaChange(event) {
     const selectedValue = event.target.value;
@@ -28,7 +47,14 @@ function S_Ganeral() {
   }
 
   //봉사분야
-  const selectType = ['전체', '생활편의시설', '주거환경', '교육', '보건의료', '환경보호'];
+  const selectType = [
+    '전체',
+    '생활편의시설',
+    '주거환경',
+    '교육',
+    '보건의료',
+    '환경보호',
+  ];
   const [volunteerBigType1, setvolunteerBigType] = useState('전체'); // 실제로 사용하는 분야의 첫번째 값
   const [volunteerSmallType, setvolunteerSmallType] = useState([
     '검색할 봉사분야를 골라주세요',
@@ -43,22 +69,56 @@ function S_Ganeral() {
       setvolunteerSmallType(['검색할 봉사분야를 골라주세요']);
       setvolunteerSmallType1(['검색할 봉사분야를 골라주세요']);
     } else if (selectedValue1 === '생활편의시설') {
-      setvolunteerSmallType(['전체', '활동보조', '아동보조', '청결지도', '급식지원', '식사반찬지원', '기타']);
+      setvolunteerSmallType([
+        '전체',
+        '활동보조',
+        '아동보조',
+        '청결지도',
+        '급식지원',
+        '식사반찬지원',
+        '기타',
+      ]);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '주거환경') {
       setvolunteerSmallType(['전체', '주거개선', '마을공동체활동', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '안전예방') {
-      setvolunteerSmallType(['전체', '지역안전', '교통안전', '어린이 안전', '청소년 안전', '취약계층 안전', '안신고활동', '기타']);
+      setvolunteerSmallType([
+        '전체',
+        '지역안전',
+        '교통안전',
+        '어린이 안전',
+        '청소년 안전',
+        '취약계층 안전',
+        '안신고활동',
+        '기타',
+      ]);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '교육') {
-      setvolunteerSmallType(['전체', '방과후 교육', '학습지도 교육', '특수교육', '평생교육', '전문교육', '진로체험교육', '기타']);
+      setvolunteerSmallType([
+        '전체',
+        '방과후 교육',
+        '학습지도 교육',
+        '특수교육',
+        '평생교육',
+        '전문교육',
+        '진로체험교육',
+        '기타',
+      ]);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '보건의료') {
       setvolunteerSmallType(['전체', '간호간병', '의료지원', '헌혈', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '문화행사') {
-      setvolunteerSmallType(['전체', '행사보조', '공연활동', '켐페인', '관광안내', '사진촬영', '기타']);
+      setvolunteerSmallType([
+        '전체',
+        '행사보조',
+        '공연활동',
+        '켐페인',
+        '관광안내',
+        '사진촬영',
+        '기타',
+      ]);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '환경보호') {
       setvolunteerSmallType(['전체', '환경정화', '환경감시', '기타']);
@@ -78,7 +138,19 @@ function S_Ganeral() {
   };
 
   //봉사대상
-  const selectVolunteerTarget = ['전체', '아동.청소년', '장애인', '노인', '쪽방촌', '다문화가정', '여성', '환경', '사회적기업', '고향봉사', '기타'];
+  const selectVolunteerTarget = [
+    '전체',
+    '아동.청소년',
+    '장애인',
+    '노인',
+    '쪽방촌',
+    '다문화가정',
+    '여성',
+    '환경',
+    '사회적기업',
+    '고향봉사',
+    '기타',
+  ];
   const [volunteerTarget1, setvolunteerTarget] = useState('전체'); //봉사대상에서 실제 사용하는 값
   const handleSelectVolunteerTarget = (e) => {
     setvolunteerTarget(e.target.value);
@@ -118,7 +190,7 @@ function S_Ganeral() {
     setOpenIndex(index === openIndex ? -1 : index);
   };
 
-  const [inputData, setInputData] = useState([{}, {},]);
+  const [inputData, setInputData] = useState([{}, {}]);
   const userId = 'time';
   useEffect(() => {
     const url = `http://localhost:8004/volunteer/board/list?volunteerType=${userId}`;
@@ -132,8 +204,24 @@ function S_Ganeral() {
       });
   }, []);
 
-  const handleReservation = (volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory) => {
-    navigate('/S_PostGT', { state: { volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory } });
+  const handleReservation = (
+    volunteerArea1,
+    volunteerBigType1,
+    volunteerSmallType11,
+    activitySection1,
+    volunteerTarget1,
+    volunteerCategory
+  ) => {
+    navigate('/S_PostGT', {
+      state: {
+        volunteerArea1,
+        volunteerBigType1,
+        volunteerSmallType11,
+        activitySection1,
+        volunteerTarget1,
+        volunteerCategory,
+      },
+    });
   };
 
   // const filteredData =           //전체 api 완성하면 필터 완성하겟음
@@ -178,7 +266,18 @@ function S_Ganeral() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>개인봉사</StyledTitle>
-          <StyledButton onClick={() => handleReservation(volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory)}>
+          <StyledButton
+            onClick={() =>
+              handleReservation(
+                volunteerArea1,
+                volunteerBigType1,
+                volunteerSmallType11,
+                activitySection1,
+                volunteerTarget1,
+                volunteerCategory
+              )
+            }
+          >
             작성하기
           </StyledButton>
         </StyledTop>
@@ -188,8 +287,7 @@ function S_Ganeral() {
               <Tab.Content>
                 <StyledFilter>
                   <StyledFilterDiv1 style={{ marginTop: '10px' }}>
-                    <StyledFilterDivTitle
-                      style={{ width: '100px' }}>
+                    <StyledFilterDivTitle style={{ width: '100px' }}>
                       지역선택
                     </StyledFilterDivTitle>
                     <StyledFilterDivTitle style={{ width: '260px' }}>
@@ -204,7 +302,7 @@ function S_Ganeral() {
                     <StyledFilterDivTitle style={{ width: '110px' }}>
                       모집상태
                     </StyledFilterDivTitle>
-                    <StyledFilterDivTitle style={{ width: '110px' }} >
+                    <StyledFilterDivTitle style={{ width: '110px' }}>
                       봉사자 유형
                     </StyledFilterDivTitle>
                   </StyledFilterDiv1>
@@ -212,15 +310,26 @@ function S_Ganeral() {
                     <select
                       onChange={handleAreaChange}
                       value={volunteerArea1}
-                      style={{ border: 'none', width: '100px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
+                      style={{
+                        border: 'none',
+                        width: '100px',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                      }}
                       multiple
                     >
                       {selectArea1.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item}
                           style={{
-                            backgroundColor: volunteerArea1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
-                            color: volunteerArea1.includes(item) ? 'white' : 'black'
-                          }}>
+                            backgroundColor: volunteerArea1.includes(item)
+                              ? 'rgb(30, 144, 255)'
+                              : 'inherit',
+                            color: volunteerArea1.includes(item)
+                              ? 'white'
+                              : 'black',
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
@@ -228,15 +337,26 @@ function S_Ganeral() {
                     <select
                       onChange={handleTypeChange}
                       value={volunteerBigType1}
-                      style={{ border: 'none', width: '130px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
+                      style={{
+                        border: 'none',
+                        width: '130px',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                      }}
                       multiple
                     >
                       {selectType.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item}
                           style={{
-                            backgroundColor: volunteerBigType1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
-                            color: volunteerBigType1.includes(item) ? 'white' : 'black'
-                          }}>
+                            backgroundColor: volunteerBigType1.includes(item)
+                              ? 'rgb(30, 144, 255)'
+                              : 'inherit',
+                            color: volunteerBigType1.includes(item)
+                              ? 'white'
+                              : 'black',
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
@@ -244,15 +364,28 @@ function S_Ganeral() {
                     <select
                       onChange={handleTypeChange1}
                       value={volunteerSmallType11}
-                      style={{ border: 'none', width: '130px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
+                      style={{
+                        border: 'none',
+                        width: '130px',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                      }}
                       multiple
                     >
                       {volunteerSmallType.map((option) => (
-                        <option key={option} value={option}
+                        <option
+                          key={option}
+                          value={option}
                           style={{
-                            backgroundColor: volunteerSmallType11.includes(option) ? 'rgb(30, 144, 255)' : 'inherit',
-                            color: volunteerSmallType11.includes(option) ? 'white' : 'black'
-                          }}>
+                            backgroundColor: volunteerSmallType11.includes(
+                              option
+                            )
+                              ? 'rgb(30, 144, 255)'
+                              : 'inherit',
+                            color: volunteerSmallType11.includes(option)
+                              ? 'white'
+                              : 'black',
+                          }}
+                        >
                           {option}
                         </option>
                       ))}
@@ -260,15 +393,26 @@ function S_Ganeral() {
                     <select
                       onChange={handleSelectActivitySection}
                       value={activitySection1}
-                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '110px' }}
+                      style={{
+                        border: 'none',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                        width: '110px',
+                      }}
                       multiple
                     >
                       {selectField3.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item}
                           style={{
-                            backgroundColor: activitySection1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
-                            color: activitySection1.includes(item) ? 'white' : 'black'
-                          }}>
+                            backgroundColor: activitySection1.includes(item)
+                              ? 'rgb(30, 144, 255)'
+                              : 'inherit',
+                            color: activitySection1.includes(item)
+                              ? 'white'
+                              : 'black',
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
@@ -276,15 +420,26 @@ function S_Ganeral() {
                     <select
                       onChange={handleSelectVolunteerTarget}
                       value={volunteerTarget1}
-                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '120px' }}
+                      style={{
+                        border: 'none',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                        width: '120px',
+                      }}
                       multiple
                     >
                       {selectVolunteerTarget.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item}
                           style={{
-                            backgroundColor: volunteerTarget1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
-                            color: volunteerTarget1.includes(item) ? 'white' : 'black'
-                          }}>
+                            backgroundColor: volunteerTarget1.includes(item)
+                              ? 'rgb(30, 144, 255)'
+                              : 'inherit',
+                            color: volunteerTarget1.includes(item)
+                              ? 'white'
+                              : 'black',
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
@@ -292,15 +447,26 @@ function S_Ganeral() {
                     <select
                       onChange={handleSelectVolunteerState}
                       value={volunteerState}
-                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '110px' }}
+                      style={{
+                        border: 'none',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                        width: '110px',
+                      }}
                       multiple
                     >
                       {selectField5.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item}
                           style={{
-                            backgroundColor: volunteerState.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
-                            color: volunteerState.includes(item) ? 'white' : 'black'
-                          }}>
+                            backgroundColor: volunteerState.includes(item)
+                              ? 'rgb(30, 144, 255)'
+                              : 'inherit',
+                            color: volunteerState.includes(item)
+                              ? 'white'
+                              : 'black',
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
@@ -316,11 +482,18 @@ function S_Ganeral() {
                       multiple
                     >
                       {selectField6.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item}
                           style={{
-                            backgroundColor: volunteerCategory.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
-                            color: volunteerCategory.includes(item) ? 'white' : 'black'
-                          }}>
+                            backgroundColor: volunteerCategory.includes(item)
+                              ? 'rgb(30, 144, 255)'
+                              : 'inherit',
+                            color: volunteerCategory.includes(item)
+                              ? 'white'
+                              : 'black',
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
@@ -471,46 +644,41 @@ const StyledAll = styled.div`
   padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 170px;
+  width: 200px;
   /* height: 175px; */
   margin-top: 25px;
-  margin-left: 205px;
+  margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 190px;
-  height: 50px;
+  width: 220px;
+  height: 60px;
   /* left: 370px;
   top: 123px; */
-
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
-  line-height: 55px;
-  /* identical to box height, or 100% */
-
+  line-height: 60px;
   text-align: center;
-
   color: #ffffff;
 `;
-
 const StyledSubDiv2 = styled.div`
-  width: 190px;
-  height: 278px;
+  width: 220px;
+  height: 302px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
 const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
@@ -569,7 +737,7 @@ const StyledTop = styled.div`
 `;
 const StyledButton = styled.button`
   width: 125px;
-  height: 35px;   
+  height: 35px;
   margin-top: 3px;
   margin-left: 32em;
   border-radius: 9px;
@@ -627,7 +795,7 @@ const StyledFilterDivTitle2 = styled.div`
   font-weight: 600;
   font-size: 18px;
   margin-right: 10px;
-  margin-left: 10px;
+  /* margin-left: 8px; */
   /* background-color: #fefefe;
   border: 1px;
   border-color: #d7d7d7;
