@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
-function S_Ganeral() {
+function MyPage_D() {
+  const userId = sessionStorage.getItem('userId');
   const [error, setError] = useState(null);
 
   const [inputData, setInputData] = useState([
@@ -39,45 +44,107 @@ function S_Ganeral() {
     <StyledAll>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>봉사하자</StyledSubDiv1>
+          <StyledSubDiv1>마이페이지</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1>
-              <Nav.Link href="/S_Main">
-                <StyledSubDiv2_2g>자원봉사란</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage_DBD">
+                <StyledSubDiv2_2g>지정헌혈</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/S_Ganeral">
-                <StyledSubDiv2_2g>개인봉사</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage_chat">
+                <StyledSubDiv2_2g>채팅</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/S_Group">
-                <StyledSubDiv2_2g>기업 단체 봉사</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage_BD">
+                <StyledSubDiv2_2g>헌혈</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/S_Other">
-                <StyledSubDiv2_2g>타기관 봉사정보</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage_S">
+                <StyledSubDiv2_2g>봉사</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/S_WatchList">
-                <StyledSubDiv2_2>관심목록</StyledSubDiv2_2>
+              <Nav.Link href="/MyPage_D">
+                <StyledSubDiv2_2>기부</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/MyPage">
+                <StyledSubDiv2_2g>개인정보</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>관심목록</StyledTitle>
+          <StyledTitle>기부</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
+              <StyledButtonDiv>기부</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
         </StyledTop>
+        <Styledcomment>
+          <StyledBox2>
+            <StyledBox3>
+              <StyledTxt>김수임 님의 기부 내역</StyledTxt>
+              <FloatingLabel
+                label={userId}
+                //value={roomnumber}
+                //onChange={handleReservation}
+                style={{ width: '300px' }}
+              >
+                <Form.Control
+                  placeholder="name"
+                  disabled
+                  style={{ background: '#ffffff', height: '50px' }}
+                />
+              </FloatingLabel>
+            </StyledBox3>
+            <StyledBox3 style={{ marginLeft: '60px' }}>
+              <StyledTxt>포인트 내역</StyledTxt>
+              <FloatingLabel
+                label={userId}
+                //value={roomnumber}
+                //onChange={handleReservation}
+                style={{ width: '300px' }}
+              >
+                <Form.Control
+                  placeholder="name"
+                  disabled
+                  style={{ background: '#ffffff', height: '50px' }}
+                />
+              </FloatingLabel>
+            </StyledBox3>
+          </StyledBox2>
+          <StyledTab1>
+            <Tabs style={{ marginTop: '20px' }}>
+              <Tab eventKey="history" title="기부 내역">
+                <Tab.Content>
+                  <StyledBox1>
+                    <StyledDiv>
+                      <StyledTxt2>기부 내역</StyledTxt2>
+                    </StyledDiv>
+                  </StyledBox1>
+                </Tab.Content>
+              </Tab>
+
+              <Tab eventKey="reservation" title="포인트 조회">
+                <Tab.Content>
+                  <StyledBox1>
+                    <StyledDiv>
+                      <StyledTxt2>포인트 조회</StyledTxt2>
+                    </StyledDiv>
+                  </StyledBox1>
+                </Tab.Content>
+              </Tab>
+            </Tabs>
+          </StyledTab1>
+        </Styledcomment>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -109,7 +176,7 @@ const StyledSubDiv1 = styled.div`
 `;
 const StyledSubDiv2 = styled.div`
   width: 220px;
-  height: 302px;
+  height: 362px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -201,6 +268,60 @@ const StyledButtonDiv = styled.div`
 
   color: #ffffff;
 `;
+const Styledcomment = styled.div``;
+const StyledTxt = styled.div`
+  margin-top: 10px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  /* identical to box height */
+  text-align: center;
+
+  color: #000000;
+`;
+
+const StyledTab1 = styled.div`
+  width: 865px;
+  margin-top: 5px;
+  padding-bottom: 500px;
+`;
+
+const StyledBox1 = styled.div`
+  margin-top: 20px;
+
+  /* margin-bottom: 30px;
+
+  padding-bottom: 10px; */
+
+  /* width: 1100px; */
+  height: 80px;
+
+  background: #ffe9e9;
+`;
+const StyledDiv = styled.div`
+  margin-left: 30px;
+`;
+const StyledTxt2 = styled.div`
+  /* margin-top: 10px; */
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 80px;
+  /* identical to box height */
+
+  color: #000000;
+`;
+const StyledBox2 = styled.div`
+  display: flex;
+`;
+const StyledBox3 = styled.div`
+  display: block;
+`;
 
 const StyledComment = styled.div`
   /* width: 1100px; */
@@ -213,4 +334,4 @@ const StyledComment = styled.div`
   margin-bottom: 50px;
   margin-right: 60px;
 `;
-export default S_Ganeral;
+export default MyPage_D;

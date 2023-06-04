@@ -12,8 +12,17 @@ import Hospital from './pages/SignUp/SignUpHospital';
 import Individual from './pages/SignUp/SignUpIndividual';
 
 import Home from './pages/Main';
-import MyPage from './pages/MyPage';
-import MyPageMaine from './pages/mypage/MyPageMaine';
+
+import MyPageDBD from './pages/mypage/MyPage_DBD';
+import MyPageChat from './pages/mypage/MyPage_Chat';
+import MyPageBD from './pages/mypage/MyPage_BD';
+import MyPageD from './pages/mypage/MyPage_D';
+import DDeed from './pages/mypage/D_Deed';
+import MyPageS from './pages/mypage/MyPage_S';
+import SDeed from './pages/mypage/S_Deed';
+import MyPage from './pages/mypage/MyPage';
+// import MyPage from './pages/MyPage';
+// import MyPageMaine from './pages/mypage/MyPageMaine';
 
 import Learn from './pages/1. Learn/Learn';
 
@@ -25,7 +34,6 @@ import BDReservation from './pages/2. Blood_Donation/BD_Reservation';
 import BDReservationFirst from './pages/2. Blood_Donation/BD_ReservationFirst';
 import BDReservationSecond from './pages/2. Blood_Donation/BD_ReservationSecond';
 import BDReservationThird from './pages/2. Blood_Donation/BD_ReservationThird';
-import BDHistory from './pages/2. Blood_Donation/BD_History';
 
 import DBDMain from './pages/3. Designated_Blood_Donation/DBD_Main';
 import DBDGeneral from './pages/3. Designated_Blood_Donation/DBD_General';
@@ -82,8 +90,14 @@ function App() {
           <Route path="/" element={<Home />}></Route>
 
           {/* 마이페이지 */}
+          <Route path="/MyPage_DBD" element={<MyPageDBD />}></Route>
+          <Route path="/MyPage_Chat" element={<MyPageChat />}></Route>
+          <Route path="/MyPage_BD" element={<MyPageBD />}></Route>
+          <Route path="/MyPage_D" element={<MyPageD />}></Route>
+          <Route path="/D_Deed" element={<DDeed />}></Route>
+          <Route path="/MyPage_S" element={<MyPageS />}></Route>
+          <Route path="/S_Deed" element={<SDeed />}></Route>
           <Route path="/MyPage" element={<MyPage />}></Route>
-          <Route path="/MyPageMaine" element={<MyPageMaine />}></Route>
 
           {/*로그인*/}
           <Route path="/Login" element={<Login />}></Route>
@@ -121,7 +135,6 @@ function App() {
             path="/BD_ReservationThird"
             element={<BDReservationThird />}
           ></Route>
-          <Route path="/BD_History" element={<BDHistory />}></Route>
 
           {/*지정헌혈하자*/}
           <Route path="/DBD_Main" element={<DBDMain />}></Route>
