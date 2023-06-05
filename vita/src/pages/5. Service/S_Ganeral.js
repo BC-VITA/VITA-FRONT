@@ -1,24 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Table from 'react-bootstrap/Table';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import { Form, FloatingLabel, Accordion, Table, Nav, Tab, Tabs } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
 
 function S_Ganeral() {
-  const [id, setId] = useState('');
-  const handleChangeId = ({ target: { value } }) => setId(value);
-
   const navigate = useNavigate();
 
-  const [mapSize, setMapSize] = useState([300, 300]);
-
+  const mapSize = [500, 300];
   //지역선택
   const selectArea1 = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'];
   const [volunteerArea1, setvolunteerArea] = useState('전체'); //지역선택에서 사용하는 값
@@ -29,11 +19,9 @@ function S_Ganeral() {
 
   //봉사분야
   const selectType = ['전체', '생활편의시설', '주거환경', '교육', '보건의료', '환경보호'];
-  const [volunteerBigType1, setvolunteerBigType] = useState('전체'); // 실제로 사용하는 분야의 첫번째 값
-  const [volunteerSmallType, setvolunteerSmallType] = useState([
-    '검색할 봉사분야를 골라주세요',
-  ]);
-  const [volunteerSmallType11, setvolunteerSmallType1] = useState(''); //실제로 사용하는 분야의 두번째 값
+  const [volunteerBigType1, setvolunteerBigType] = useState('생활편의시설'); // 실제로 사용하는 분야의 첫번째 값
+  const [volunteerSmallType, setvolunteerSmallType] = useState(['전체', '활동보조', '아동보조', '청결지도', '급식지원', '식사반찬지원', '기타']);
+  const [volunteerSmallType11, setvolunteerSmallType1] = useState('전체'); //실제로 사용하는 분야의 두번째 값
 
   function handleTypeChange(event) {
     const selectedValue1 = event.target.value;
@@ -113,11 +101,6 @@ function S_Ganeral() {
   const [demand, setDemand] = useState('');
   const handleChangeDemand = ({ target: { value } }) => setDemand(value);
 
-  const [openIndex, setOpenIndex] = useState(-1);
-  const handleRowClick = (index) => {
-    setOpenIndex(index === openIndex ? -1 : index);
-  };
-
   const [inputData, setInputData] = useState([{}, {},]);
   const userId = 'time';
   useEffect(() => {
@@ -129,17 +112,44 @@ function S_Ganeral() {
       .then((res) => res.json())
       .then((res) => {
         setInputData(res);
+        console.log(res);
       });
-  }, []);
+    console.log(inputData);
+  },[]);
 
   const handleReservation = (volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory) => {
     navigate('/S_PostGT', { state: { volunteerArea1, volunteerBigType1, volunteerSmallType11, activitySection1, volunteerTarget1, volunteerCategory } });
   };
 
-  // const filteredData =           //전체 api 완성하면 필터 완성하겟음
-  //   firstAreaValue === '전체'
-  //     ? inputData
-  //     : inputData.filter((item) => item.area === firstAreaValue);
+  //필터
+  const handleSearch = () => {
+    const filteredData = inputData.filter(item => {
+      if (
+        (volunteerArea1.length === 1 && volunteerArea1[0] === '전체') ||
+        (volunteerBigType1.length === 1 && volunteerBigType1[0] === '전체') ||
+        (activitySection1.length === 1 && activitySection1[0] === '전체') ||
+        (volunteerTarget1.length === 1 && volunteerTarget1[0] === '전체') ||
+        (volunteerCategory.length === 1 && volunteerCategory[0] === '전체')
+      ) {
+        return true;
+      }
+      return (
+        volunteerArea1.includes(item.volunteerArea) &&
+        volunteerBigType1.includes(item.volunteerField) &&
+        activitySection1.includes(item.activitySection) &&
+        volunteerTarget1.includes(item.volunteerTarget) &&
+        volunteerCategory.includes(item.volunteerPersonType)
+        // 봉사분야2, 모집상태
+      );
+    });
+    setInputData(filteredData);
+    console.log('검색 결과:', filteredData);
+  };
+
+  //초기화
+  const handlereturn = () => {
+    window.location.reload();
+  };
 
   return (
     <StyledAll>
@@ -147,31 +157,31 @@ function S_Ganeral() {
         <Nav defaultActiveKey="/" className="flex-column">
           <StyledSubDiv1>봉사하자</StyledSubDiv1>
           <StyledSubDiv2>
-            <StyledSubDiv2_1>
+            <StyledSubDiv21>
               <Nav.Link href="/S_Main">
-                <StyledSubDiv2_2g>자원봉사란</StyledSubDiv2_2g>
+                <StyledSubDiv22g>자원봉사란</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
+            </StyledSubDiv21>
+            <StyledSubDiv21p>
               <Nav.Link href="/S_Ganeral">
-                <StyledSubDiv2_2>개인봉사</StyledSubDiv2_2>
+                <StyledSubDiv22>개인봉사</StyledSubDiv22>
               </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
+            </StyledSubDiv21p>
+            <StyledSubDiv21>
               <Nav.Link href="/S_Group">
-                <StyledSubDiv2_2g>기업 단체 봉사</StyledSubDiv2_2g>
+                <StyledSubDiv22g>기업 단체 봉사</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
               <Nav.Link href="/S_Other">
-                <StyledSubDiv2_2g>타기관 봉사정보</StyledSubDiv2_2g>
+                <StyledSubDiv22g>타기관 봉사정보</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
               <Nav.Link href="/S_WatchList">
-                <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
+                <StyledSubDiv22g>관심목록</StyledSubDiv22g>
               </Nav.Link>
-            </StyledSubDiv2_1>
+            </StyledSubDiv21>
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
@@ -211,146 +221,157 @@ function S_Ganeral() {
                   <StyledFilterDiv1>
                     <select
                       onChange={handleAreaChange}
-                      value={volunteerArea1}
+                      value={Array.isArray(volunteerArea1) ? volunteerArea1 : [volunteerArea1]}
                       style={{ border: 'none', width: '100px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
                       multiple
                     >
                       {selectArea1.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item.area}
                           style={{
-                            backgroundColor: volunteerArea1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            backgroundColor: volunteerArea1.includes(item) ? 'rgb(128, 128, 128)' : 'inherit',
                             color: volunteerArea1.includes(item) ? 'white' : 'black'
-                          }}>
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
                     </select>
                     <select
                       onChange={handleTypeChange}
-                      value={volunteerBigType1}
+                      value={Array.isArray(volunteerBigType1) ? volunteerBigType1 : [volunteerBigType1]}
                       style={{ border: 'none', width: '130px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
                       multiple
                     >
                       {selectType.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item.bigType}
                           style={{
-                            backgroundColor: volunteerBigType1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            backgroundColor: volunteerBigType1.includes(item) ? 'rgb(128, 128, 128)' : 'inherit',
                             color: volunteerBigType1.includes(item) ? 'white' : 'black'
-                          }}>
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
                     </select>
                     <select
                       onChange={handleTypeChange1}
-                      value={volunteerSmallType11}
+                      value={Array.isArray(volunteerSmallType11) ? volunteerSmallType11 : [volunteerSmallType11]}
                       style={{ border: 'none', width: '130px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
                       multiple
                     >
                       {volunteerSmallType.map((option) => (
-                        <option key={option} value={option}
+                        <option
+                          key={option.smalltype}
+                          value={option}
                           style={{
-                            backgroundColor: volunteerSmallType11.includes(option) ? 'rgb(30, 144, 255)' : 'inherit',
+                            backgroundColor: volunteerSmallType11.includes(option) ? 'rgb(128, 128, 128)' : 'inherit',
                             color: volunteerSmallType11.includes(option) ? 'white' : 'black'
-                          }}>
+                          }}
+                        >
                           {option}
                         </option>
                       ))}
                     </select>
                     <select
                       onChange={handleSelectActivitySection}
-                      value={activitySection1}
+                      value={Array.isArray(activitySection1) ? activitySection1 : [activitySection1]}
                       style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '110px' }}
                       multiple
                     >
                       {selectField3.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item.section}
                           style={{
-                            backgroundColor: activitySection1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            backgroundColor: activitySection1.includes(item) ? 'rgb(128, 128, 128)' : 'inherit',
                             color: activitySection1.includes(item) ? 'white' : 'black'
-                          }}>
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
                     </select>
                     <select
                       onChange={handleSelectVolunteerTarget}
-                      value={volunteerTarget1}
+                      value={Array.isArray(volunteerTarget1) ? volunteerTarget1 : [volunteerTarget1]}
                       style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '120px' }}
                       multiple
                     >
                       {selectVolunteerTarget.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item.target}
                           style={{
-                            backgroundColor: volunteerTarget1.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            backgroundColor: volunteerTarget1.includes(item) ? 'rgb(128, 128, 128)' : 'inherit',
                             color: volunteerTarget1.includes(item) ? 'white' : 'black'
-                          }}>
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
                     </select>
                     <select
                       onChange={handleSelectVolunteerState}
-                      value={volunteerState}
+                      value={Array.isArray(volunteerState) ? volunteerState : [volunteerState]}
                       style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '110px' }}
                       multiple
                     >
                       {selectField5.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item.state}
                           style={{
-                            backgroundColor: volunteerState.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            backgroundColor: volunteerState.includes(item) ? 'rgb(128, 128, 128)' : 'inherit',
                             color: volunteerState.includes(item) ? 'white' : 'black'
-                          }}>
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
                     </select>
                     <select
                       onChange={handleSelectVolunteerCategory}
-                      value={volunteerCategory}
-                      style={{
-                        border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                        width: '110px',
-                      }}
+                      value={Array.isArray(volunteerCategory) ? volunteerCategory : [volunteerCategory]}
+                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', width: '110px' }}
                       multiple
                     >
                       {selectField6.map((item) => (
-                        <option value={item} key={item}
+                        <option
+                          value={item}
+                          key={item.category}
                           style={{
-                            backgroundColor: volunteerCategory.includes(item) ? 'rgb(30, 144, 255)' : 'inherit',
+                            backgroundColor: volunteerCategory.includes(item) ? 'rgb(128, 128, 128)' : 'inherit',
                             color: volunteerCategory.includes(item) ? 'white' : 'black'
-                          }}>
+                          }}
+                        >
                           {item}
                         </option>
                       ))}
                     </select>
                   </StyledFilterDiv1>
                   <StyledFilterDiv1
-                    style={{
-                      marginTop: '15px',
-                    }}
+                    style={{ marginTop: '15px' }}
                   >
                     <StyledFilterDivTitle2>봉사기간</StyledFilterDivTitle2>
                     <input
                       type="Date"
                       value={startDate}
-                      style={{
-                        border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                      }}
+                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', }}
                       onChange={handleStartDateChange}
                     />
                     <StyledFilterDivTitle2>&nbsp;-&nbsp;</StyledFilterDivTitle2>
                     <input
                       type="Date"
                       value={endDate}
-                      style={{
-                        border: 'none',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-                      }}
+                      style={{ border: 'none', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', }}
                       onChange={handleEndDateChange}
                     />
+                    <button onClick={handleSearch}>검색</button>
+                    <button onClick={handlereturn}>초기화</button>
                   </StyledFilterDiv1>
                   <StyledFilterDiv2>
                     <FloatingLabel
@@ -358,12 +379,7 @@ function S_Ganeral() {
                       name="volunteer"
                       value={volunteer}
                       onChange={handleChangeVolunteer}
-                      style={{
-                        marginTop: '10px',
-                        marginLeft: '10px',
-                        width: '400px',
-                        height: '50px',
-                      }}
+                      style={{ marginTop: '10px', marginLeft: '10px', width: '400px', height: '50px', }}
                     >
                       <Form.Control type="volunteer" />
                     </FloatingLabel>
@@ -372,12 +388,7 @@ function S_Ganeral() {
                       name="demand"
                       value={demand}
                       onChange={handleChangeDemand}
-                      style={{
-                        marginTop: '10px',
-                        marginLeft: '25px',
-                        width: '400px',
-                        height: '50px',
-                      }}
+                      style={{ marginTop: '10px', marginLeft: '25px', width: '400px', height: '50px', }}
                     >
                       <Form.Control type="demand" />
                     </FloatingLabel>
@@ -394,39 +405,37 @@ function S_Ganeral() {
                       </thead>
                       <Styledtbody1>
                         {inputData.map((element, index) => {
-                          const markerPositions = [
-                            [element.latitude, element.longitude],
-                          ];
+                          const markerPositions = [[element.latitude, element.longitude]];
                           return (
-                            <Styledtr>
+                            <Styledtr key={element.id}>
                               <Styledtd>
                                 <Accordion.Item eventKey={index}>
                                   <Accordion.Header>
                                     {element.title}
                                     <br />
-                                    글을 올린 날짜 : {element.startDate}
+                                    글을 올린 날짜: {element.startDate}
                                     <br />
-                                    모집기간 : {element.volunteerSeekStartDate}-
+                                    모집기간: {element.volunteerSeekStartDate}-
                                     {element.volunteerSeekEndDate}
                                     <br />
-                                    활동날짜 : {element.volunteerStartTime}-
+                                    활동날짜: {element.volunteerStartTime}-
                                     {element.volunteerEndTime}
                                     <br />
-                                    활동요일 : {element.volunteerActivityWeek}
+                                    활동요일: {element.volunteerActivityWeek}
                                     <br />
-                                    봉사시간 : {element.volunteerStartTime}-
+                                    봉사시간: {element.volunteerStartTime}-
                                     {element.volunteerEndTime}
                                     <br />
-                                    봉사장소 : {element.volunteerPlace}
+                                    봉사장소: {element.volunteerPlace}
                                   </Accordion.Header>
                                   <Accordion.Body colSpan={2}>
-                                    모집인원 : {element.needVolunteerNumber}
+                                    모집인원: {element.needVolunteerNumber}
                                     <br />
-                                    신청인원 : {element.bloodType}
+                                    신청인원: {element.bloodType}
                                     <br />
-                                    봉사자 유형 : {element.volunteerPersonType}
+                                    봉사자 유형: {element.volunteerPersonType}
                                     <br />
-                                    주소 : {element.volunteerAddress}
+                                    주소: {element.volunteerAddress}
                                     <br />
                                     <KakaoMap
                                       markerPositions={markerPositions}
@@ -438,12 +447,7 @@ function S_Ganeral() {
                               <Styledtd>
                                 모집중
                                 <br />
-                                <Styledimg
-                                  src={icon}
-                                  class
-                                  name="main-icon"
-                                  alt="logo"
-                                />
+                                <Styledimg src={icon} className="main-icon" alt="logo" />
                                 <br />
                                 <button type="button">참여하기</button>
                               </Styledtd>
@@ -481,7 +485,6 @@ const StyledSubDiv1 = styled.div`
   height: 50px;
   /* left: 370px;
   top: 123px; */
-
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -489,71 +492,58 @@ const StyledSubDiv1 = styled.div`
   font-size: 23px;
   line-height: 55px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #ffffff;
 `;
-
 const StyledSubDiv2 = styled.div`
   width: 190px;
   height: 278px;
   border: 3px solid #d7d7d7;
 `;
-const StyledSubDiv2_1 = styled.div`
+const StyledSubDiv21 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
   height: 55px;
   margin-left: 3px;
   margin-right: 3px;
 `;
-const StyledSubDiv2_1p = styled.div`
+const StyledSubDiv21p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
   height: 55px;
   margin-left: 3px;
   margin-right: 3px;
 `;
-const StyledSubDiv2_2 = styled.div`
+const StyledSubDiv22 = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #333333;
 `;
-const StyledSubDiv2_2g = styled.div`
+const StyledSubDiv22g = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #969696;
 `;
-
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
   margin-left: 65px;
   margin-top: 25px;
 `;
-
 const StyledTitle = styled.div`
   width: 203px;
   font-family: 'Gmarket Sans TTF';
@@ -561,7 +551,6 @@ const StyledTitle = styled.div`
   font-weight: 700;
   font-size: 35px;
   line-height: 48px;
-
   color: #333333;
 `;
 const StyledTop = styled.div`
@@ -582,17 +571,6 @@ const StyledButton = styled.button`
   line-height: 38px;
   border: none;
 `;
-
-// 옛날
-const StyledTable = styled(Table)`
-  border-collapse: collapse;
-  th,
-  tbody,
-  td td {
-    padding: 0;
-  }
-`;
-
 const StyledFilter = styled.div`
   /* width: 865px; */
   /* height: 250px; */
@@ -636,41 +614,16 @@ const StyledFilterDivTitle2 = styled.div`
   padding-top: 5px;
   height: 35px; */
 `;
-
 const StyledFilterDiv2 = styled.div`
   width: 850px;
   margin: auto;
   margin-top: 10px;
   display: flex;
 `;
-
 const StyledTab1 = styled.div`
   width: 865px;
   margin-top: 5px;
   padding-bottom: 500px;
-`;
-
-const Styleddiv2 = styled.div`
-  text-align: center;
-`;
-const Styledtd1 = styled.div`
-  width: 500px;
-`;
-const Styledtd2 = styled.div`
-  /* display: block; */
-  margin-top: 50px;
-`;
-const Styledtxt = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 19px;
-  line-height: 30px;
-  /* or 158% */
-
-  letter-spacing: 0.05em;
-
-  color: #333333;
 `;
 const Styledtr = styled.tr`
   border: none;
