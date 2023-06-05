@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
-function BD_History() {
+function MyPage_Chat() {
   const [error, setError] = useState(null);
 
   const [inputData, setInputData] = useState([
@@ -40,26 +39,36 @@ function BD_History() {
     <StyledAll>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>헌혈하자</StyledSubDiv1>
+          <StyledSubDiv1>마이페이지</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Main">
-                <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage_DBD">
+                <StyledSubDiv2_2g>지정헌혈</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1p>
+              <Nav.Link href="/MyPage_chat">
+                <StyledSubDiv2_2>채팅</StyledSubDiv2_2>
+              </Nav.Link>
+            </StyledSubDiv2_1p>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/MyPage_BD">
+                <StyledSubDiv2_2g>헌혈</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/BD_House">
-                <StyledSubDiv2_2g>헌혈의 집 찾기</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage_S">
+                <StyledSubDiv2_2g>봉사</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Bus">
-                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage_D">
+                <StyledSubDiv2_2g>기부</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Reservation">
-                <StyledSubDiv2_2g>헌혈 예약</StyledSubDiv2_2g>
+              <Nav.Link href="/MyPage">
+                <StyledSubDiv2_2g>개인정보</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
           </StyledSubDiv2>
@@ -67,7 +76,7 @@ function BD_History() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>헌혈내역조회</StyledTitle>
+          <StyledTitle>채팅</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
@@ -75,55 +84,50 @@ function BD_History() {
           </StyledButton>
         </StyledTop>
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
+
 const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 170px;
+  width: 200px;
   /* height: 175px; */
   margin-top: 25px;
-  margin-left: 205px;
+  margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 190px;
-  height: 50px;
+  width: 220px;
+  height: 60px;
   /* left: 370px;
   top: 123px; */
-
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
-  line-height: 55px;
-  /* identical to box height, or 100% */
-
+  line-height: 60px;
   text-align: center;
-
   color: #ffffff;
 `;
-
 const StyledSubDiv2 = styled.div`
-  width: 190px;
-  height: 223px;
+  width: 220px;
+  height: 362px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
 const StyledSubDiv2_1p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
@@ -180,12 +184,11 @@ const StyledTitle = styled.div`
 const StyledTop = styled.div`
   display: flex;
 `;
-
 const StyledButton = styled.div`
-  margin-top: 10px;
+  margin-top: 3px;
   width: 125px;
   height: 35px;
-  margin-left: 580px;
+  margin-left: 540px;
 
   background: #ff9f9f;
   border-radius: 9px;
@@ -204,4 +207,15 @@ const StyledButtonDiv = styled.div`
   color: #ffffff;
 `;
 
-export default BD_History;
+const StyledComment = styled.div`
+  /* width: 1100px; */
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-right: 60px;
+`;
+export default MyPage_Chat;
