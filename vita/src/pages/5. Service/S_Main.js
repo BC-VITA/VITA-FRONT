@@ -6,37 +6,6 @@ import Nav from 'react-bootstrap/Nav';
 import serviceimg from '../../img/serviceimg.png';
 
 function S_Main() {
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
-
-  useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
-  }, []);
   return (
     <StyledAll>
       <StyledSub>
@@ -156,7 +125,6 @@ function S_Main() {
 
         <Styledimg src={serviceimg} class name="serviceimg" alt="serviceimg" />
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }

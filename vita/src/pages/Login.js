@@ -48,8 +48,8 @@ function LogIn() {
       <section>
         <form onSubmit={handleSubmit}>
           <StyledGroup1>
-            <StyledGroup1_1>
-              <StyledFloating>
+            <StyledGroup11>
+              <div>
                 <FloatingLabel
                   controlId="floatingInput"
                   label="ID"
@@ -59,10 +59,10 @@ function LogIn() {
                 >
                   <Form.Control type="id" placeholder="id" />
                 </FloatingLabel>
-              </StyledFloating>
-            </StyledGroup1_1>
-            <StyledGroup1_1>
-              <StyledFloating>
+              </div>
+            </StyledGroup11>
+            <StyledGroup11>
+              <div>
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Password"
@@ -72,27 +72,27 @@ function LogIn() {
                 >
                   <Form.Control type="password" placeholder="password" />
                 </FloatingLabel>
-              </StyledFloating>
-            </StyledGroup1_1>
-            <StyledGroup1_1>
+              </div>
+            </StyledGroup11>
+            <StyledGroup11>
               <StyledButton1 type="button" onClick={handleSubmit}>
                 로그인
               </StyledButton1>
-            </StyledGroup1_1>
-            <StyledGroup1_1>
+            </StyledGroup11>
+            <StyledGroup11>
               <StyledButton2 type="button" onClick={handleSubmit1}>
                 {' '}
                 {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
                 회원가입
                 {/* </StyledButton2>
-            </StyledGroup1_1> */}
+            </StyledGroup11> */}
                 {/* <StyledButton2 type="submit" disabled={disabled}>
                 아이디/비밀번호찾기
               </StyledButton2> */}
                 {/* <div className="home">{error && <div>{error}</div>}</div> */}
-                {/* </StyledGroup1_1> */}
+                {/* </StyledGroup11> */}
               </StyledButton2>
-            </StyledGroup1_1>
+            </StyledGroup11>
           </StyledGroup1>
         </form>
       </section>
@@ -118,19 +118,6 @@ const StyledTitle = styled.div`
 
   color: #333333;
 `;
-const StyledTitleSub = styled.div`
-  margin-top: 10px;
-  margin-left: 10px;
-
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 24px;
-  text-align: center;
-
-  color: #787878;
-`;
 const StyledHr = styled.div`
   margin-top: 30px;
   /* width: 69em; */
@@ -142,14 +129,12 @@ const StyledGroup1 = styled.div`
   margin: auto;
   margin-top: 50px;
 `;
-const StyledGroup1_1 = styled.div`
+const StyledGroup11 = styled.div`
   /* width: 200px; */
   width: 500px;
   height: 72.18px;
   margin: auto;
 `;
-
-const StyledFloating = styled.div``;
 const StyledButton1 = styled.button`
   color: white;
   width: 500px;
