@@ -8,6 +8,11 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 function MyPage_D() {
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
+  const handleEndDateChange = ({ target: { value } }) => setendDate(value);
+
   const userId = sessionStorage.getItem('userId');
   const [error, setError] = useState(null);
 
@@ -82,16 +87,16 @@ function MyPage_D() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>기부</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
         <Styledcomment>
           <StyledBox2>
             <StyledBox3>
-              <StyledTxt>김수임 님의 기부 내역</StyledTxt>
+              <StyledTxt>기부 내역</StyledTxt>
               <FloatingLabel
                 label={userId}
                 //value={roomnumber}
@@ -128,6 +133,30 @@ function MyPage_D() {
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>기부 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
@@ -138,6 +167,30 @@ function MyPage_D() {
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>포인트 조회</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
@@ -303,6 +356,7 @@ const StyledBox1 = styled.div`
 `;
 const StyledDiv = styled.div`
   margin-left: 30px;
+  display: flex;
 `;
 const StyledTxt2 = styled.div`
   /* margin-top: 10px; */
@@ -323,15 +377,27 @@ const StyledBox3 = styled.div`
   display: block;
 `;
 
-const StyledComment = styled.div`
-  /* width: 1100px; */
+const StyledFilterDiv1 = styled.div`
+  display: flex;
+  margin-left: 20px;
+`;
+
+const StyledFilterDivTitle2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  margin-right: 60px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 10px;
+  line-height: 40px;
+`;
+const StyledFilterDivTitle3 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  /* margin-left: 10px; */
+  line-height: 40px;
 `;
 export default MyPage_D;

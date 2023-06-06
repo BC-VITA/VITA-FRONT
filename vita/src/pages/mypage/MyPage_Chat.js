@@ -77,11 +77,11 @@ function MyPage_Chat() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>채팅</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
       </StyledSubcomment>
     </StyledAll>

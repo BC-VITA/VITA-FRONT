@@ -72,7 +72,7 @@ const Nav = () => {
         <StyledDiv31m>
           {/* <div>|</div> */}
           <Link
-            to={userId ? `/MyPageMaine` : '/'}
+            to={userId ? `/MyPage_DBD` : '/'}
             style={{ textDecoration: 'none', color: 'white' }}
           >
             <StyledDiv31m>
