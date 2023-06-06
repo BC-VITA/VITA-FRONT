@@ -129,16 +129,11 @@ function MyPage() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>개인정보</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
         </StyledTop>
         <StyledBox id="myInformation">
           <StyledDiv>
             <StyledDiv1>
-              <div>{userId}</div>
+              {/* <div>{userId}</div> */}
               <div>{userName}</div>
               <div>{userPhoneNumber}</div>
               <div>{userEmail}</div>
@@ -165,7 +160,7 @@ function MyPage() {
               </StyledDiv3>
             </StyledDiv2>
             <StyledDiv2>
-              <StyledDiv3>
+              <StyledDiv3 style={{ marginRight: '80px' }}>
                 <StyledTxtR>비밀번호</StyledTxtR>
                 <FloatingLabel
                   label="비밀번호"
@@ -187,7 +182,7 @@ function MyPage() {
               </StyledDiv3>
             </StyledDiv2>
             <StyledDiv2>
-              <StyledDiv3>
+              <StyledDiv3 style={{ marginRight: '80px' }}>
                 <StyledTxtR>성명</StyledTxtR>
                 <FloatingLabel
                   label={userData && userData.userName ? userData.userName : ''}
@@ -211,7 +206,7 @@ function MyPage() {
               </StyledDiv3>
             </StyledDiv2>
             <StyledDiv2>
-              <StyledDiv3>
+              <StyledDiv3 style={{ marginRight: '80px' }}>
                 <StyledTxtR>이메일</StyledTxtR>
                 <FloatingLabel
                   label={
@@ -329,7 +324,7 @@ const StyledSubcomment = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 203px;
+  /* width: 203px; */
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -342,36 +337,26 @@ const StyledTop = styled.div`
   display: flex;
 `;
 const StyledButton = styled.div`
-  margin-top: 3px;
-  width: 125px;
-  height: 35px;
-  margin-left: 540px;
+  margin-top: 10px;
+  width: 150px;
+  height: 40px;
+  margin-left: 530px;
+  text-align: center;
+  line-height: 45px;
 
   background: #ff9f9f;
   border-radius: 9px;
 `;
 
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
-`;
 const StyledBox = styled.div`
   margin-top: 20px;
   padding-top: 15px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   margin-bottom: 30px;
 
   padding-bottom: 50px;
 
-  width: 1100px;
+  width: 880px;
   /* height: 130px; */
   /* left: 378px;
   top: 259px; */
@@ -388,7 +373,7 @@ const StyledDiv1 = styled.div`
 `;
 const StyledTxtB = styled.div`
   margin-bottom: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -405,10 +390,11 @@ const StyledButtonTxt = styled.div`
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  line-height: 38px;
+  line-height: 40px;
   margin: auto;
   /* margin-left: 25px; */
   /* identical to box height, or 100% */
+  /* width: 500px; */
 
   color: #ffffff;
 `;
@@ -432,11 +418,11 @@ const StyledBox2 = styled.div`
   /* border-radius: 10px; */
 `;
 const StyledDiv2 = styled.div`
-  margin-top: 30px;
+  margin-top: 35px;
   display: flex;
 `;
 const StyledDiv3 = styled.div`
-  width: 55ch;
+  width: 41ch;
   margin-right: 50px;
 `;
 const StyledTxtR = styled.div`

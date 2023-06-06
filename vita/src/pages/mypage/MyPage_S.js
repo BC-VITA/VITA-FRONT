@@ -8,6 +8,11 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 function MyPage_S() {
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
+  const handleEndDateChange = ({ target: { value } }) => setendDate(value);
+
   const userId = sessionStorage.getItem('userId');
   const [error, setError] = useState(null);
 
@@ -91,7 +96,7 @@ function MyPage_S() {
                 label={userId}
                 //value={roomnumber}
                 //onChange={handleReservation}
-                style={{ width: '300px' }}
+                style={{ width: '300px', lineHeight: '15px' }}
               >
                 <Form.Control
                   placeholder="name"
@@ -106,7 +111,10 @@ function MyPage_S() {
                 label={userId}
                 //value={roomnumber}
                 //onChange={handleReservation}
-                style={{ width: '300px' }}
+                style={{
+                  width: '300px',
+                  lineHeight: '15px',
+                }}
               >
                 <Form.Control
                   placeholder="name"
@@ -123,6 +131,30 @@ function MyPage_S() {
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>봉사 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
@@ -142,6 +174,30 @@ function MyPage_S() {
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>실적확인서 발행 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
@@ -307,6 +363,7 @@ const StyledBox1 = styled.div`
 `;
 const StyledDiv = styled.div`
   margin-left: 30px;
+  display: flex;
 `;
 const StyledTxt2 = styled.div`
   /* margin-top: 10px; */
@@ -337,5 +394,28 @@ const StyledComment = styled.div`
   margin-top: 10px;
   margin-bottom: 50px;
   margin-right: 60px;
+`;
+const StyledFilterDiv1 = styled.div`
+  display: flex;
+  margin-left: 20px;
+`;
+
+const StyledFilterDivTitle2 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 10px;
+  line-height: 40px;
+`;
+const StyledFilterDivTitle3 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  /* margin-left: 10px; */
+  line-height: 40px;
 `;
 export default MyPage_S;

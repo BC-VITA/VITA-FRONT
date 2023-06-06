@@ -8,6 +8,11 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 function MyPage_BD() {
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
+  const handleEndDateChange = ({ target: { value } }) => setendDate(value);
+
   const userId = sessionStorage.getItem('userId');
   const [error, setError] = useState(null);
 
@@ -82,19 +87,19 @@ function MyPage_BD() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>헌혈</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
         <Styledcomment>
-          <StyledTxt>김수임님의 헌혈 참여</StyledTxt>
+          <StyledTxt>헌혈 참여</StyledTxt>
           <FloatingLabel
             label={userId}
             //value={roomnumber}
             //onChange={handleReservation}
-            style={{ width: '230px' }}
+            style={{ width: '300px', lineHeight: '15px' }}
           >
             <Form.Control
               placeholder="name"
@@ -109,6 +114,30 @@ function MyPage_BD() {
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>헌혈 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
@@ -119,6 +148,30 @@ function MyPage_BD() {
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>예약 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
@@ -128,6 +181,30 @@ function MyPage_BD() {
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>내가 작성한 후기</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
@@ -248,6 +325,8 @@ const StyledTxt = styled.div`
   /* identical to box height */
 
   color: #000000;
+  width: 300px;
+  text-align: center;
 `;
 
 const StyledTab1 = styled.div`
@@ -292,6 +371,7 @@ const StyledBox1 = styled.div`
 `;
 const StyledDiv = styled.div`
   margin-left: 30px;
+  display: flex;
 `;
 const StyledTxt2 = styled.div`
   /* margin-top: 10px; */
@@ -305,15 +385,27 @@ const StyledTxt2 = styled.div`
 
   color: #000000;
 `;
-const StyledComment = styled.div`
-  /* width: 1100px; */
+const StyledFilterDiv1 = styled.div`
+  display: flex;
+  margin-left: 20px;
+`;
+
+const StyledFilterDivTitle2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  margin-right: 60px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 10px;
+  line-height: 40px;
+`;
+const StyledFilterDivTitle3 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  /* margin-left: 10px; */
+  line-height: 40px;
 `;
 export default MyPage_BD;

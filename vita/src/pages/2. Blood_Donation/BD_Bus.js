@@ -8,6 +8,11 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 function BD_Bus() {
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
+  const handleEndDateChange = ({ target: { value } }) => setendDate(value);
+
   const [id, setId] = useState('');
   const handleChangeId = ({ target: { value } }) => setId(value);
 
@@ -408,7 +413,7 @@ function BD_Bus() {
               <select
                 onChange={handleFirstListChange}
                 value={firstListValue}
-                style={{ border: 'none' }}
+                style={{ border: 'none', marginRight: '20px', height: '40px' }}
               >
                 {selectList1.map((item) => (
                   <option value={item} key={item}>
@@ -416,7 +421,11 @@ function BD_Bus() {
                   </option>
                 ))}
               </select>
-              <select value={secondListOptions} onChange={setSecondListOptions}>
+              <select
+                value={secondListOptions}
+                onChange={setSecondListOptions}
+                style={{ border: 'none', marginRight: '20px', height: '40px' }}
+              >
                 {secondListOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
@@ -424,26 +433,31 @@ function BD_Bus() {
                 ))}
               </select>
             </StyledFilterDiv1>
-            <StyledFilterDiv2>
-              <StyledFilterDivTitle>기간</StyledFilterDivTitle>
-              {/* <select
-                onChange={handleFirstListChange}
-                value={firstListValue}
-                style={{ border: 'none' }}
-              >
-                {selectList1.map((item) => (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-              <select value={secondListOptions} onChange={setSecondListOptions}>
-                {secondListOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select> */}
+            <StyledFilterDiv2 style={{ marginTop: '15px' }}>
+              <StyledFilterDivTitle2>
+                기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 간
+              </StyledFilterDivTitle2>
+              <input
+                type="Date"
+                value={startDate}
+                style={{
+                  border: 'none',
+                  marginRight: '20px',
+                  height: '40px',
+                }}
+                onChange={handleStartDateChange}
+              />
+              <StyledFilterDivTitle2>&nbsp;-&nbsp;</StyledFilterDivTitle2>
+              <input
+                type="Date"
+                value={endDate}
+                style={{
+                  border: 'none',
+                  marginRight: '20px',
+                  height: '40px',
+                }}
+                onChange={handleEndDateChange}
+              />
             </StyledFilterDiv2>
             {/* <StyledFilterDiv2>
               <FloatingLabel
@@ -815,13 +829,14 @@ const StyledTab1 = styled.div`
 `;
 const StyledFilter = styled.div`
   width: 865px;
-  height: 145px;
+  /* height: 145px; */
   background: #ffe9e9;
   margin-bottom: 20px;
 `;
 const StyledFilterDiv1 = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-left: 20px;
+  padding-top: 15px;
 `;
 const StyledFilterDivTitle = styled.div`
   font-family: 'Gmarket Sans TTF';
@@ -829,12 +844,12 @@ const StyledFilterDivTitle = styled.div`
   font-weight: 600;
   font-size: 18px;
   margin-right: 20px;
-  margin-left: 30px;
+  line-height: 40px;
 `;
 const StyledFilterDiv2 = styled.div`
-  width: 850px;
-  margin: auto;
-  margin-top: 10px;
+  display: flex;
+  margin-left: 20px;
+  padding-bottom: 20px;
 `;
 
 // 집만의 콘텐츠
@@ -867,5 +882,13 @@ const Styledtxt = styled.div`
   letter-spacing: 0.05em;
 
   color: #333333;
+`;
+const StyledFilterDivTitle2 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  line-height: 40px;
 `;
 export default BD_Bus;

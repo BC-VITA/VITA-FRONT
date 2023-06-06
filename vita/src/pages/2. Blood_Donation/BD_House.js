@@ -7,6 +7,7 @@ import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
+import { BorderLeft } from '@mui/icons-material';
 function BD_House() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
@@ -269,7 +270,7 @@ function BD_House() {
                 data.latitude,
                 data.longitude,
               ])}
-              size={[850, 400]}
+              size={[865, 400]}
               inputData={inputData}
             />
           </section>
@@ -555,7 +556,9 @@ const Styleddiv2 = styled.div`
   text-align: center;
 `;
 const StyledTable = styled(Table)`
+  margin-top: 30px;
   border-collapse: collapse;
+  border: 1px;
   th,
   tbody,
   td td {
