@@ -15,6 +15,7 @@ import Home from './pages/Main';
 
 import MyPageDBD from './pages/mypage/MyPage_DBD';
 import MyPageChat from './pages/mypage/MyPage_Chat';
+import ChatDetails from './pages/mypage/Chat_Details';
 import MyPageBD from './pages/mypage/MyPage_BD';
 import MyPageD from './pages/mypage/MyPage_D';
 import DDeed from './pages/mypage/D_Deed';
@@ -92,6 +93,7 @@ function App() {
           {/* 마이페이지 */}
           <Route path="/MyPage_DBD" element={<MyPageDBD />}></Route>
           <Route path="/MyPage_Chat" element={<MyPageChat />}></Route>
+          <Route path="/Chat_Details" element={<ChatDetails />}></Route>
           <Route path="/MyPage_BD" element={<MyPageBD />}></Route>
           <Route path="/MyPage_D" element={<MyPageD />}></Route>
           <Route path="/D_Deed" element={<DDeed />}></Route>
