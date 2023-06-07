@@ -1,11 +1,7 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Form from 'react-bootstrap/Form';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-
-import Nav from 'react-bootstrap/Nav';
+import { Form, Tab, Tabs, Nav } from 'react-bootstrap';
 
 function MyPage_DBD() {
   const [startDate, setstartDate] = useState('');
@@ -14,21 +10,8 @@ function MyPage_DBD() {
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
 
   const userId = sessionStorage.getItem('userId');
-  const [error, setError] = useState(null);
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [inputData, setInputData] = useState([{}, {},]);
 
   useEffect(() => {
     fetch('http://localhost:8004/blood/house/filter', {
@@ -36,14 +19,8 @@ function MyPage_DBD() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setInputData(res);
-        console.log(inputData);
       })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
   }, []);
   return (
     <StyledAll>
