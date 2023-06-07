@@ -3,6 +3,10 @@ import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
 
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import { pink } from '@mui/material/colors';
+
 function MyPage_Chat() {
   const [error, setError] = useState(null);
 
@@ -19,7 +23,6 @@ function MyPage_Chat() {
     },
     {},
   ]);
-
   useEffect(() => {
     fetch('http://localhost:8004/blood/house/filter', {
       method: 'get',
@@ -83,6 +86,44 @@ function MyPage_Chat() {
             </Nav.Link>
           </StyledButton> */}
         </StyledTop>
+        <Styledcomment>
+          <StyledTable>
+            <thead style={{ fontWeight: '700', fontSize: '24px' }}>
+              <tr>
+                <th
+                  style={{
+                    width: '400px',
+                  }}
+                >
+                  제목
+                </th>
+                <th
+                  style={{
+                    width: '200px',
+                  }}
+                >
+                  일시
+                </th>
+                <th
+                  style={{
+                    width: '100px',
+                  }}
+                ></th>
+              </tr>
+            </thead>
+            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+              <tr>
+                <td>A형의 혈액형이 급하게 필요합니다. 도와...</td>
+                <td>2023.06.07</td>
+                <td>
+                  <Button style={{ background: '#8FAADC' }}>
+                    <Nav.Link href="/Chat_Details">채팅방이동</Nav.Link>
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </StyledTable>
+        </Styledcomment>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -184,38 +225,29 @@ const StyledTitle = styled.div`
 const StyledTop = styled.div`
   display: flex;
 `;
-const StyledButton = styled.div`
-  margin-top: 3px;
-  width: 125px;
-  height: 35px;
-  margin-left: 540px;
+const Styledcomment = styled.div`
+  border: 1px solid #666666;
 
-  background: #ff9f9f;
-  border-radius: 9px;
-`;
-
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
-`;
-
-const StyledComment = styled.div`
-  /* width: 1100px; */
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
   margin-top: 10px;
-  margin-bottom: 50px;
-  margin-right: 60px;
+  margin-right: 50px;
+`;
+const StyledTable = styled(Table)`
+  margin-top: 30px;
+  /* margin: 10px; */
+  border-collapse: collapse;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+
+  line-height: 50px;
+
+  color: #333333;
+
+  text-align: center;
 `;
 export default MyPage_Chat;
