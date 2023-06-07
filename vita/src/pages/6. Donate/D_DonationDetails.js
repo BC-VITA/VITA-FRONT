@@ -1,42 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import Nav from 'react-bootstrap/Nav';
-
-import serviceimg from '../../img/serviceimg.png';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function D_DonationDetails() {
-  const [error, setError] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { board, imageUrl } = location.state;
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const handleDetailClick = (board) => {
+    navigate('/D_SelectDonation', { state: board });
+  };
 
-  useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
-  }, []);
   return (
     <StyledAll>
       <StyledSub>
@@ -70,6 +45,13 @@ function D_DonationDetails() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
+        <div>
+          <h3>{board.title}</h3>
+          <p>{board.content}</p>
+          <img src={imageUrl} alt="Board Image" />
+          <h3>{board.boardId},asdasd</h3>
+          <button onClick={() => handleDetailClick(board)}>기부하기</button>
+        </div>
       </StyledSubcomment>
     </StyledAll>
   );
