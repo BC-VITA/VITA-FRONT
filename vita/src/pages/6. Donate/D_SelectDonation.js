@@ -18,9 +18,16 @@ function D_SelectDonation() {
   const handleDonationPointChange = (event) => {
     const inputPoint = event.target.value;
     const newRemainingPoint = point - inputPoint;
-    setDonationPoint(inputPoint);
-    setRemainingPoint(newRemainingPoint);
+  
+    if (newRemainingPoint >= 0) {
+      setDonationPoint(inputPoint);
+      setRemainingPoint(newRemainingPoint);
+    } else {
+      setDonationPoint('');
+      setRemainingPoint('');
+    }
   };
+  
 
   useEffect(() => {
     const url = `http://localhost:8004/donate/user-point?userId=${userId}`;
@@ -98,7 +105,7 @@ function D_SelectDonation() {
             <StyledBoxTitle>기부할 포인트 </StyledBoxTitle>
             <FloatingLabel label="포인트를 입력해주세요" name="id">
               <Form.Control
-                type="id"
+                type="number"
                 placeholder="label"
                 value={donationPoint}
                 onChange={handleDonationPointChange}
