@@ -1,87 +1,161 @@
 import React, { useEffect, useState } from 'react';
+import { Stomp } from '@stomp/stompjs';
 import styled from 'styled-components';
-
-import { useNavigate } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Form, Button, Modal, Nav, FloatingLabel } from 'react-bootstrap';
 import information from '../../img/image 67.png';
 
 function Chat_Details() {
   const navigate = useNavigate();
-  const img = () => {
-    navigate('/information');
-  };
+  const location = useLocation();
+  const { hospitalName } = location.state;
+  const img = () => { navigate('/information'); };
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const [accept, setAccept] = useState(false);
-  // const acceptClose = () => setAccept(false);
-  // const acceptShow = () => setAccept(true);
-
   const [cancel, setCancel] = useState(false);
-  // const cancelClose = () => setCancel(false);
-  // const cancelShow = () => setCancel(true);
 
-  const [error, setError] = useState(null);
+  //채팅
+  const [stompClient, setStompClient] = useState(null);
+  const [roomId, setRoomId] = useState(1);
+  const [message, setMessage] = useState('');
+  const [receivedMessage, setReceivedMessage] = useState('');
+  const [chatList, setChatList] = useState([]);
+  const [data123, setData123] = useState([]);
+  const userId = sessionStorage.getItem('userId');
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  //임시 보더 ID,receiverId을 숫자로 변환하게 함
+  let boardId;
+  let receiverId;
+  if (hospitalName === '서울병원') {
+    boardId = 1;
+  }
+  //임시로 senderName을 숫자로 변환하게 함
+  let senderId;
+  if (userId === 'admin') {
+    senderId = 2;
+    receiverId = 1;
+  } else {
+    senderId = userId;
+  }
+
+  //STOMP 연결
+  useEffect(() => {
+    // STOMP 클라이언트 설정
+    const client = Stomp.client('ws://localhost:8004/vita');
+    setStompClient(client);
+
+    // 연결이 열린 경우의 이벤트 핸들러
+    const onConnect = (frame) => {
+      console.log('STOMP 연결 성공');
+      client.subscribe('/sub/chat', onMessageReceived);
+    };
+
+    // 연결이 닫힌 경우의 이벤트 핸들러
+    const onDisconnect = (frame) => {
+      console.log('STOMP 연결 종료');
+    };
+
+    // STOMP 클라이언트 연결
+    client.connect({}, onConnect, onDisconnect);
+
+    // 컴포넌트가 언마운트될 때 STOMP 클라이언트 연결 종료
+    return () => {
+      client.disconnect();
+    };
+  }, []);
+
+  //채팅 보내기
+  useEffect(() => {
+    fetchChatList();
+  }, []);
+
+  const fetchChatList = async () => {
+    try {
+      // 세션 정보 가져오기
+      const sessionId = sessionStorage.getItem('sessionId');
+      // 또는 쿠키에서 직접 가져올 수도 있습니다. (예: document.cookie)
+
+      // 요청 헤더에 세션 정보 추가
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionId}`,
+      };
+
+      // fetch 요청 보내기
+      const url = `http://localhost:8004/chat/list?userId=${userId}`;
+      const response = await fetch(url, {
+        credentials: 'include',
+        headers: headers,
+      });
+      const data = await response.json();
+      setChatList(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleInputChange = (event) => {
+    setMessage(event.target.value);
+  };
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
+    fetch(`http://localhost:8004/chat/${roomId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Room detail:', data);
+        setData123(data);
       })
-      .catch((err) => {
-        setError(err.message);
+      .catch((error) => {
+        console.error('Error fetching room detail:', error);
       });
-    console.log(inputData);
   }, []);
+
+  //메시지 보내기
+  const sendMessage = () => {
+    const chatMessage = {
+      'roomId': 1,
+      'message': message,
+      'boardId': boardId,
+      'senderId': senderId,
+      'receiverId': receiverId,
+    };
+    //로그인할때 number저장하기
+
+    // STOMP 클라이언트를 통해 메시지 전송
+    if (stompClient) {
+      stompClient.send('/pub/send', {}, JSON.stringify(chatMessage));
+    }
+
+    setMessage('');
+    window.location.reload();
+  };
+
+  const onMessageReceived = (message) => {
+    const receivedData = JSON.parse(message.body);
+    setReceivedMessage(receivedData.message);
+  };
+
   return (
     <StyledAll>
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>채팅</StyledTitle>
           <StyledTitle2>
-            {' '}
             <Nav.Link href="/MyPage_DBD">마이페이지로 가기</Nav.Link>{' '}
           </StyledTitle2>
         </StyledTop>
       </StyledSubcomment>
       <Styledcomment>
         <StyledBox>
-          <StyledText>A형의 혈액형이 급하게 필요합니다. 도와...</StyledText>
+          <StyledText>{data123.roomTitle}</StyledText>
           <StyledButton>
             <StyledButtonB onClick={() => setAccept(true)}>
               수락하기
             </StyledButtonB>
-
-            <Modal
-              size="md"
-              show={accept}
-              onHide={() => setAccept(false)}
-              // aria-labelledby="example-modal-sizes-title-sm"
+            <Modal size="md" show={accept} onHide={() => setAccept(false)}
+            // aria-labelledby="example-modal-sizes-title-sm"
             >
               <Modal.Header closeButton>
                 <Modal.Title>수락하기</Modal.Title>
@@ -95,11 +169,8 @@ function Chat_Details() {
             <StyledButtonP onClick={() => setCancel(true)}>
               취소하기
             </StyledButtonP>
-            <Modal
-              size="md"
-              show={cancel}
-              onHide={() => setCancel(false)}
-              // aria-labelledby="example-modal-sizes-title-sm"
+            <Modal size="md" show={cancel} onHide={() => setCancel(false)}
+            // aria-labelledby="example-modal-sizes-title-sm"
             >
               <Modal.Header closeButton>
                 <Modal.Title>취소하기</Modal.Title>
@@ -229,38 +300,44 @@ function Chat_Details() {
           </StyledText2>
         </StyledBox2>
         <StyledBox3>
-          <StyledBox3R>
-            <StyledBox3RTextBox>
-              <StyledBox3RTime>11:00</StyledBox3RTime>
-              <StyledBox3RText>안녕하세요</StyledBox3RText>
-              <StyledDiv></StyledDiv>
-            </StyledBox3RTextBox>
-          </StyledBox3R>
-          <StyledBox3LName>작성자</StyledBox3LName>
-          <StyledBox3L>
-            <StyledDiv></StyledDiv>
-
-            <StyledBox3LTextBox>
-              <StyledBox3LText>안녕하세요</StyledBox3LText>
-              <StyledBox3LTime>11:00</StyledBox3LTime>
-            </StyledBox3LTextBox>
-          </StyledBox3L>
+          {data123.chatMessageList &&
+            data123.chatMessageList.map((messageItem) => (
+              <div key={messageItem.messageId}>
+                {messageItem.senderId === senderId ? (
+                  <>
+                    <StyledBox3RName>{messageItem.senderName}</StyledBox3RName>
+                    <StyledBox3R>
+                      <StyledBox3RTextBox>
+                        <StyledBox3RTime>{messageItem.sendTime}</StyledBox3RTime>
+                        <StyledBox3RText>{messageItem.message}</StyledBox3RText>
+                        <div></div>
+                      </StyledBox3RTextBox>
+                    </StyledBox3R>
+                  </>
+                ) : (
+                  <>
+                    <StyledBox3LName>{messageItem.senderName}</StyledBox3LName>
+                    <StyledBox3L>
+                      <div></div>
+                      <StyledBox3LTextBox>
+                        <StyledBox3LText>{messageItem.message}</StyledBox3LText>
+                        <StyledBox3LTime>{messageItem.sendTime}</StyledBox3LTime>
+                      </StyledBox3LTextBox>
+                    </StyledBox3L>
+                  </>
+                )}
+              </div>
+            ))}
         </StyledBox3>
         <StyledBox4>
-          {/* <StyledInput></StyledInput> */}
           <FloatingLabel
             label="메세지 작성"
-            name="passwordCheck"
-            // value={passwordCheck}
-            // onChange={handleChangePasswordCheck}
+            name="message"
             style={{ width: '60em' }}
           >
-            <Form.Control type="password" placeholder="label" />
+            <Form.Control type="text" placeholder="label" value={message} onChange={handleInputChange} />
           </FloatingLabel>
-          <StyledButton4
-            type="submit"
-            // disabled={disabled}
-          >
+          <StyledButton4 onClick={sendMessage}>
             전송
           </StyledButton4>
         </StyledBox4>
@@ -399,7 +476,7 @@ const StyledBox3 = styled.div`
   background: #ffe9e9;
   display: block;
 `;
-const StyledDiv = styled.div``;
+
 const StyledBox3LName = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -408,6 +485,16 @@ const StyledBox3LName = styled.div`
   line-height: 32px;
   color: #333333;
   padding-left: 10px;
+`;
+const StyledBox3RName = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 32px;
+  color: #333333;
+  padding-left: 10px;
+  text-align: right;
 `;
 const StyledBox3L = styled.div`
   display: flex;
@@ -424,10 +511,8 @@ const StyledBox3LText = styled.div`
   font-size: 25px;
   line-height: 32px;
   color: #333333;
-
   padding-right: 30px;
   padding-left: 10px;
-
   background: #ffffff;
   border-radius: 0px 10px 10px 0px;
   line-height: 55px;
@@ -453,10 +538,8 @@ const StyledBox3RText = styled.div`
   font-size: 25px;
   line-height: 32px;
   color: #333333;
-
   padding-left: 30px;
   padding-right: 10px;
-
   background: #ffffff;
   border-radius: 10px 0px 0px 10px;
   line-height: 55px;

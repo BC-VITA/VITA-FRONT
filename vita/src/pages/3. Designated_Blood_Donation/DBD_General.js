@@ -10,6 +10,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
 
 function DBD_General() {
+  const navigate = useNavigate();
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const selectList2 = ['최신순', '마감순'];
   const [firstListValue, setFirstListValue] = useState('전체');
@@ -42,19 +43,7 @@ function DBD_General() {
     setFirstList2Value(selected2Value);
   }
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [inputData, setInputData] = useState([{}, {}]);
 
   useEffect(() => {
     fetch('http://localhost:8004/user/board/filter', {
@@ -62,12 +51,14 @@ function DBD_General() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setInputData(res);
-        console.log(inputData);
       });
-    console.log(inputData);
   }, []);
+
+  const handleJoin = (hospitalName) => {
+    navigate('/Chat_Details', { state: { hospitalName } });
+  };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -242,7 +233,9 @@ function DBD_General() {
                                 {/* <Nav.Link type="button" href="/DBD_PostGeneral">
                                   <StyledButtonDiv>참여하기</StyledButtonDiv>
                                 </Nav.Link> */}
-                                <button type="button">참여하기</button>
+                                <button type="button" onClick={() => handleJoin(element.hospitalName)}>
+                                  참여하기
+                                </button>
                               </Styledtd>
                             </Styledtr>
                           );

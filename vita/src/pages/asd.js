@@ -9,6 +9,13 @@ function Chat() {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [stompClient, setStompClient] = useState(null);
   const userId = sessionStorage.getItem('userId');
+  //임시로 숫자로 변환하게 함
+  let userIdValue;
+  if (userId === 'admin') {
+    userIdValue = 1;
+  } else {
+    userIdValue = userId;
+  }
 
   useEffect(() => {
     // STOMP 클라이언트 설정
@@ -41,9 +48,7 @@ function Chat() {
 
   const fetchChatList = async () => {
     try {
-      // 세션 정보 가져오기
       const sessionId = sessionStorage.getItem('sessionId');
-      // 또는 쿠키에서 직접 가져올 수도 있습니다. (예: document.cookie)
 
       // 요청 헤더에 세션 정보 추가
       const headers = {
@@ -60,6 +65,7 @@ function Chat() {
       const data = await response.json();
       setChatList(data);
       console.log({ chatList });
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -70,6 +76,7 @@ function Chat() {
     setMessage(event.target.value);
   };
 
+  //메세지 내용 가져오기
   const selectRoom = (roomId) => {
     setSelectedRoom(roomId);
 
@@ -84,35 +91,15 @@ function Chat() {
         console.error('Error fetching room detail:', error);
       });
   };
-
-  // const deleteRoom = (roomId) => {
-  //   // 채팅방 삭제
-  //   fetch(`/chat/${roomId}`, {
-  //     method: 'DELETE',
-  //   })
-  //     .then((response) => response.text())
-  //     .then((data) => {
-  //       console.log('Room deleted:', data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error deleting room:', error);
-  //     });
-  // };
-
-  const deleteRoom = (roomId) => {
-    console.log(document.cookie);
-    console.log(sessionStorage);
-    console.log(localStorage);
-  }
-
+  //메시지 보내기
   const sendMessage = () => {
     const chatMessage = {
       'roomId': 1,
       'message': message,
       'boardId': 1,
-      'senderId': 1,
+      'senderId': userIdValue,
       'receiverId': 2,
-    }; 
+    };
     //로그인할때 number저장하기
 
     // STOMP 클라이언트를 통해 메시지 전송
@@ -138,13 +125,10 @@ function Chat() {
           </div>
         ))}
       </div>
-      <div>
-        Selected Room: {selectedRoom}
-        <button onClick={() => deleteRoom(selectedRoom)}>Delete Room</button>
-      </div>
       <div>Received Message: {receivedMessage}</div>
       <input type="text" value={message} onChange={handleInputChange} />
       <button onClick={sendMessage}>Send</button>
+      <div>{selectedRoom}</div>
     </div>
   );
 }
