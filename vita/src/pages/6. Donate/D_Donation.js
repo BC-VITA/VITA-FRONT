@@ -20,8 +20,8 @@ function D_Donation() {
       .catch((error) => console.error('Error fetching board list:', error));
   };
 
-  const handleDetailClick = (board,imageUrl) => {
-    navigate('/D_DonationDetails', { state: { board,imageUrl } });
+  const handleDetailClick = (board, imageUrl) => {
+    navigate('/D_DonationDetails', { state: { board, imageUrl } });
   };
 
   return (
@@ -53,13 +53,14 @@ function D_Donation() {
           <StyledTitle>기부하기</StyledTitle>
         </StyledTop>
         <div>
-          <h2>Board List</h2>
           {boardList.map((board) => {
             // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
-            const imageUrl = board.imageUrl ? board.imageUrl.replace(
-              'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
-              '\\'
-            ) : null;
+            const imageUrl = board.imageUrl
+              ? board.imageUrl.replace(
+                  'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                  '\\'
+                )
+              : null;
 
             return (
               <div key={board.boardId}>
@@ -70,7 +71,10 @@ function D_Donation() {
                       <Card.Body>
                         <Card.Title>{board.title}</Card.Title>
                         <Card.Text>{board.content}</Card.Text>
-                        <Button variant="primary" onClick={() => handleDetailClick(board,imageUrl)}>
+                        <Button
+                          variant="primary"
+                          onClick={() => handleDetailClick(board, imageUrl)}
+                        >
                           자세히 보기
                         </Button>
                       </Card.Body>

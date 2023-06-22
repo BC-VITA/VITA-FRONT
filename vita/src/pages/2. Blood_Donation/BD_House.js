@@ -7,7 +7,6 @@ import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
-import { BorderLeft } from '@mui/icons-material';
 function BD_House() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
@@ -20,8 +19,6 @@ function BD_House() {
         : inputData.filter((item) => item.centerName === newId);
     setInputData(filteredData1);
   };
-  // const filteredData =
-  //   firstListValue === '전체' ? inputData : inputData.filter((item) => item.area === firstListValue);
   const [mapSize, setMapSize] = useState([400, 400]);
   const [markerPositions, setMarkerPositions] = useState([]);
   const handleMarkerClick = (marker) => {
@@ -151,103 +148,225 @@ function BD_House() {
         <StyledTab1>
           <StyledFilter>
             <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
-              <StyledFilterbutton onClick={() => handleFilter('전체')}>
+              <Button
+                variant="light"
+                onClick={() => handleFilter('전체')}
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 전체
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('서울')}>
+              </Button>
+              <Button
+                variant="light"
+                onClick={() => handleFilter('서울')}
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 서울
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('부산')}>
+              </Button>
+              <Button
+                onClick={() => handleFilter('부산')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 부산
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('대구')}>
+              </Button>
+              <Button
+                onClick={() => handleFilter('대구')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 대구
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('인천')}>
+              </Button>
+              <Button
+                onClick={() => handleFilter('인천')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 인천
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('울산')}>
+              </Button>
+              <Button
+                onClick={() => handleFilter('울산')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 울산
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('세종')}>
+              </Button>
+              <Button
+                onClick={() => handleFilter('세종')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 세종
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('경기')}>
+              </Button>
+              <Button
+                onClick={() => handleFilter('경기')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 경기
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('강원')}>
+              </Button>
+              <Button
+                onClick={() => handleFilter('강원')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
                 강원
-              </StyledFilterbutton>
+              </Button>
             </StyledFilterDiv1>
             <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
-              <StyledFilterbutton onClick={() => handleFilter('충북')}>
-                충북
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('대전')}>
-                대전
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('충남')}>
-                충남
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('전북')}>
-                전북
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('광주')}>
-                광주
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('전남')}>
-                전남
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('경북')}>
-                경북
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('경남')}>
-                경남
-              </StyledFilterbutton>
-              <StyledFilterbutton onClick={() => handleFilter('제주')}>
-                제주
-              </StyledFilterbutton>
-            </StyledFilterDiv1>
-            {/* <Button variant="light">전체</Button>
-              <Button variant="light">서울</Button>
-              <Button variant="light">부산</Button>
-              <Button variant="light">대구</Button>
-              <Button variant="light">인천</Button>
-              <Button variant="light">울산</Button>
-              <Button variant="light">세종</Button>
-              <Button variant="light">경기</Button>
-              <Button variant="light">강원</Button>
-              <Button variant="light">충북</Button>
-              <Button variant="light">대전</Button>
-              <Button variant="light">충남</Button>
-              <Button variant="light">전북</Button>
-              <Button variant="light">광주</Button>
-              <Button variant="light">전남</Button>
-              <Button variant="light">경북</Button>
-              <Button variant="light">경남</Button>
-              <Button variant="light">제주</Button> */}
-            {/* <StyledFilterDivTitle style={{ paddingTop: '8px' }}>
-                지역선택
-              </StyledFilterDivTitle> */}
-            {/* <select
-                onChange={handleFirstListChange}
-                value={firstListValue}
-                style={{ height: '40px' }}
+              <Button
+                onClick={() => handleFilter('충북')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
               >
-                {selectList1.map((item) => (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                ))}
-              </select> */}
-            {/* <select value={secondListOptions} onChange={setSecondListOptions}>
-                {secondListOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select> */}
-            {/* </StyledFilterDiv1> */}
+                충북
+              </Button>
+              <Button
+                onClick={() => handleFilter('대전')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                대전
+              </Button>
+              <Button
+                onClick={() => handleFilter('충남')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                충남
+              </Button>
+              <Button
+                onClick={() => handleFilter('전북')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                전북
+              </Button>
+              <Button
+                onClick={() => handleFilter('광주')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                광주
+              </Button>
+              <Button
+                onClick={() => handleFilter('전남')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                전남
+              </Button>
+              <Button
+                onClick={() => handleFilter('경북')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                경북
+              </Button>
+              <Button
+                onClick={() => handleFilter('경남')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                경남
+              </Button>
+              <Button
+                onClick={() => handleFilter('제주')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                제주
+              </Button>
+            </StyledFilterDiv1>
             <StyledFilterDiv2>
               <FloatingLabel
                 label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
@@ -274,7 +393,7 @@ function BD_House() {
               inputData={inputData}
             />
           </section>
-          <section>
+          <section id="list">
             <Styleddiv2>
               <StyledTable>
                 <thead>
@@ -518,6 +637,13 @@ const StyledFilterDiv1 = styled.div`
   /* margin-top: 20px; */
   margin-left: 2px;
   margin-right: 2px;
+
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  /* font-size: 30px; */
+  line-height: 40px;
+  text-align: center;
 `;
 const StyledFilterbutton = styled.div`
   font-family: 'Gmarket Sans TTF';
@@ -525,11 +651,10 @@ const StyledFilterbutton = styled.div`
   font-weight: 500;
   font-size: 24px;
   line-height: 40px;
-  /* identical to box height, or 100% */
   text-align: center;
+
   width: 94px;
   font-size: 20px;
-  text-align: center;
   /* margin-right: 5px; */
   display: block;
   margin: auto;

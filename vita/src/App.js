@@ -23,7 +23,7 @@ import MyPageS from './pages/mypage/MyPage_S';
 import SDeed from './pages/mypage/S_Deed';
 import MyPage from './pages/mypage/MyPage';
 // import MyPage from './pages/MyPage';
-// import MyPageMaine from './pages/mypage/MyPageMaine';
+import MyPageMaine from './pages/mypage/MyPageMain';
 
 import Learn from './pages/1. Learn/Learn';
 
@@ -74,9 +74,11 @@ import DSelectReceipt from './pages/6. Donate/D_SelectReceipt';
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
+import Test from './pages/test';
+import PrintButton from './pages/PrintButton';
 
 //채팅
-import Asd from './pages/asd'
+import Asd from './pages/asd';
 
 const startDate = '2022-01-01';
 const endDate = '2022-01-10';
@@ -103,6 +105,7 @@ function App() {
           <Route path="/MyPage_S" element={<MyPageS />}></Route>
           <Route path="/S_Deed" element={<SDeed />}></Route>
           <Route path="/MyPage" element={<MyPage />}></Route>
+          <Route path="/MyPageMaine" element={<MyPageMaine />}></Route>
 
           {/*로그인*/}
           <Route path="/Login" element={<Login />}></Route>
@@ -201,9 +204,13 @@ function App() {
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
 
           {/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>
+          <Route
+            path="/M_Blood_Reservation"
+            element={<MBloodReservation />}
+          ></Route>
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
-
+          <Route path="/test" element={<Test />}></Route>
+          <Route path="/PrintButton" element={<PrintButton />}></Route>
           <Route path="/asd" element={<Asd />}></Route>
         </Routes>
         <Foot />
