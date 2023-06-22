@@ -77,6 +77,9 @@ import MPostDonation from './pages/0. Master/M_PostDonation';
 import Test from './pages/test';
 import PrintButton from './pages/PrintButton';
 
+//채팅
+import Asd from './pages/asd';
+
 const startDate = '2022-01-01';
 const endDate = '2022-01-10';
 const onReservation = () => {
@@ -208,6 +211,7 @@ function App() {
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
           <Route path="/test" element={<Test />}></Route>
           <Route path="/PrintButton" element={<PrintButton />}></Route>
+          <Route path="/asd" element={<Asd />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>
