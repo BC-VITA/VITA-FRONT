@@ -9,79 +9,23 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function DBD_News() {
-  const [hostipalcall, sethostipalcall] = useState('');
-  const [bloodtype, setbloodtype] = useState('');
-  const [rhtype, setbrhtype] = useState('');
-  const [donationtype, setdonationtype] = useState('');
-  const [bloodproduct, setbloodproduct] = useState('');
-
-  const [disabled, setDisabled] = useState(false);
-
+  const [boardList, setBoardList] = useState([]);
   const navigate = useNavigate();
 
-  const handleSelect1 = (e) => {
-    setdonationtype(e.target.value);
-  };
-  const handleSelect2 = (e) => {
-    setbloodproduct(e.target.value);
-  };
-  // const handleSelect1 = (e) => {
-  //   setdonationtype(e.target.value);
-  // };
-  // const handleSelect2 = (e) => {
-  //   setbloodtype(e.target.value);
-  // };
-
-  const handleRHMChange = () => {
-    setbrhtype('RH-');
-  };
-  const handleRHPChange = () => {
-    setbrhtype('RH+');
-  };
-  const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
-  const selectList2 = ['최신순', '마감순'];
-  const handleChangehostipalcall = ({ target: { value } }) =>
-    sethostipalcall(value);
-  const RadioButton = ({ label, value, onChange }) => {
-    return (
-      <label>
-        <input type="radio" checked={value} onChange={onChange} />
-        {label}
-      </label>
-    );
-  };
-
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
-
   useEffect(() => {
-    fetch('http://localhost:8004/user/board/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
+    fetchBoardList();
   }, []);
+
+  const fetchBoardList = () => {
+    fetch('http://localhost:8004/donate/board')
+      .then((response) => response.json())
+      .then((data) => setBoardList(data.content))
+      .catch((error) => console.error('Error fetching board list:', error));
+  };
+
+  const handleDetailClick = (board, imageUrl) => {
+    navigate('/DBD_NewsDetails', { state: { board, imageUrl } });
+  };
   return (
     <StyledAll>
       <StyledSub>
@@ -114,55 +58,41 @@ function DBD_News() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>따뜻한 사례</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>작성하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
         </StyledTop>
-        <StyledBox>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-        </StyledBox>
+        <div>
+          {boardList.map((board) => {
+            // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
+            const imageUrl = board.imageUrl
+              ? board.imageUrl.replace(
+                  'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                  '\\'
+                )
+              : null;
+
+            return (
+              <div key={board.boardId}>
+                <StyledBox>
+                  <StyledBox2>
+                    <Card style={{ width: '17rem' }}>
+                      <Card.Img variant="top" src={imageUrl} />
+                      <Card.Body>
+                        <Card.Title>{board.title}</Card.Title>
+                        <Card.Text>{board.content}</Card.Text>
+                        <Button
+                          variant="primary"
+                          onClick={() => handleDetailClick(board, imageUrl)}
+                        >
+                          자세히 보기
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </StyledBox2>
+                </StyledBox>
+              </div>
+            );
+          })}
+        </div>
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
@@ -265,12 +195,12 @@ const StyledTop = styled.div`
 `;
 
 const StyledButton = styled.div`
-  margin-top: 10px;
-  width: 125px;
+  margin-top: 3px;
+  width: 148px;
   height: 35px;
-  margin-left: 535px;
+  /* margin-left: 540px; */
 
-  background: #ff9f9f;
+  background: #757575;
   border-radius: 9px;
 `;
 

@@ -30,7 +30,7 @@ function D_SelectDonation() {
       .then((res) => res.json())
       .then((res) => {
         setPoint(res);
-      })
+      });
   }, []);
 
   const handleSubmit = async (event) => {
@@ -46,15 +46,14 @@ function D_SelectDonation() {
         donateId: board.boardId,
         isAnonymous: false,
         usePoint: donationPoint,
-        finalPoint: remainingPoint
+        finalPoint: remainingPoint,
       }),
-    })
-      .then((res) => {
-        res.json();
-        if (res.ok) {
-          navigate('/');
-        }
-      })
+    }).then((res) => {
+      res.json();
+      if (res.ok) {
+        navigate('/');
+      }
+    });
   };
 
   return (
@@ -92,7 +91,9 @@ function D_SelectDonation() {
             <FloatingLabel label={point} name="id">
               <Form.Control type="id" placeholder="label" disabled />
             </FloatingLabel>
-            <StyledButton type="button" onClick={handleSubmit}>기부하기,asd</StyledButton>
+            <StyledButton type="button" onClick={handleSubmit}>
+              기부하기
+            </StyledButton>
           </StyledDiv2>
           <StyledDiv3>
             <StyledBoxTitle>기부할 포인트 </StyledBoxTitle>
@@ -126,38 +127,38 @@ const StyledAll = styled.div`
   padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 170px;
+  width: 200px;
   margin-top: 25px;
-  margin-left: 205px;
+  margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 190px;
-  height: 50px;
+  width: 220px;
+  height: 60px;
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
-  line-height: 55px;
+  line-height: 60px;
   text-align: center;
   color: #ffffff;
 `;
 const StyledSubDiv2 = styled.div`
-  width: 190px;
-  height: 167px;
+  width: 220px;
+  height: 182px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv21 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
 const StyledSubDiv21p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;

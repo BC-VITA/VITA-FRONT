@@ -85,7 +85,7 @@ function Main() {
                 </Nav.Link>
               </StyledBtn>
               <StyledBtn>
-                <Nav.Link href="/D_Select">
+                <Nav.Link href="/D_Donation">
                   <StyledBtnTxt>기부하러 가기</StyledBtnTxt>
                 </Nav.Link>
               </StyledBtn>
@@ -140,7 +140,7 @@ function Main() {
               </Nav.Link>
             </StyledBtn43>
             <StyledBtn44>
-              <Nav.Link href="/S_GaneralTime">
+              <Nav.Link href="/S_Ganeral">
                 <StyledBtnTxt4>봉사하기</StyledBtnTxt4>
                 <Styledimg4
                   src={Service}

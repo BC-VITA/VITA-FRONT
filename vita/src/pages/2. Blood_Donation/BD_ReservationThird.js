@@ -2,14 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function BD_ReservationThird() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { state: { selectedOptions, formattedDate, centerName } = {} } =
     useLocation();
   const [times, setTimes] = useState('');
-  const [isBloodType, setIsBloodType] = useState('');
+
+  const handleReservation = (centerName) => {
+    navigate('/', { state: { centerName } });
+  };
+  const handleReservation2 = (centerName) => {
+    navigate('/MyPage_BD', { state: { centerName } });
+  };
 
   useEffect(() => {
     const times = Object.keys(selectedOptions);
@@ -17,9 +24,8 @@ function BD_ReservationThird() {
     const bloodTypeString = Object.values(selectedOptions)
       .map((times) => Object.values(times).join(''))
       .join('');
-    setIsBloodType(bloodTypeString);
+    // setIsBloodType(bloodTypeString);
     const bloodTypesString = bloodTypeString.toString();
-    setIsBloodType(bloodTypesString);
 
     const timeString = times.join(',');
     setTimes(timeString);
@@ -46,6 +52,10 @@ function BD_ReservationThird() {
       })
       .then(() => navigate('/'));
   };
+
+  const [main, setMain] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
 
   return (
     <StyledAll>
@@ -125,9 +135,62 @@ function BD_ReservationThird() {
             </div>
           ))}
         </StyledBox>
-        <Styledbutton type="button" onClick={handleSubmit}>
+        <Styledbutton type="button" onClick={() => setMain(true)}>
           예약완료하기
         </Styledbutton>
+
+        <Modal
+          size="md"
+          show={main}
+          onHide={() => setMain(false)}
+          onClick={handleSubmit}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>안 내</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            ※ 헌혈 시 신분증
+            <br />
+            꼭 지참해주세요
+            <br />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              onClick={handleReservation}
+            >
+              다음에 보기
+            </Button>
+            <Button
+              variant="primary"
+              onClick={handleClose}
+              onClick={handleReservation2}
+            >
+              예약내역 보기
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* <Modal
+          size="md"
+          show={main}
+          onHide={() => setAccept(false)}
+          onClick={handleSubmit}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              확인
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              마이페이지로 가기
+            </Button>
+          </Modal.Footer>
+        </Modal> */}
       </StyledSubcomment>
     </StyledAll>
   );
