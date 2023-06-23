@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 
 function D_SelectDonation() {
   const location = useLocation();
@@ -18,7 +19,7 @@ function D_SelectDonation() {
   const handleDonationPointChange = (event) => {
     const inputPoint = event.target.value;
     const newRemainingPoint = point - inputPoint;
-  
+
     if (newRemainingPoint >= 0) {
       setDonationPoint(inputPoint);
       setRemainingPoint(newRemainingPoint);
@@ -27,7 +28,6 @@ function D_SelectDonation() {
       setRemainingPoint('');
     }
   };
-  
 
   useEffect(() => {
     const url = `http://localhost:8004/donate/user-point?userId=${userId}`;
@@ -62,6 +62,8 @@ function D_SelectDonation() {
       }
     });
   };
+
+  const [accept, setAccept] = useState(false);
 
   return (
     <StyledAll>
@@ -101,6 +103,18 @@ function D_SelectDonation() {
             <StyledButton type="button" onClick={handleSubmit}>
               기부하기
             </StyledButton>
+
+            <Modal
+              size="md"
+              show={accept}
+              onHide={() => setAccept(false)}
+              // aria-labelledby="example-modal-sizes-title-sm"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>기부가 완료되었습니다.</Modal.Title>
+              </Modal.Header>
+              {/* <Modal.Body>회원가입을 해주셔서 감사합니다.</Modal.Body> */}
+            </Modal>
           </StyledDiv2>
           <StyledDiv3>
             <StyledBoxTitle>기부할 포인트 </StyledBoxTitle>

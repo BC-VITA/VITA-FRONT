@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Select from 'react-select';
+import { Modal, FloatingLabel } from 'react-bootstrap';
 
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
+// import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
 function SignUpGroup() {
+  const [accept, setAccept] = useState(false);
+
   const navigate = useNavigate();
 
   const [id, setId] = useState('');
@@ -314,9 +317,25 @@ function SignUpGroup() {
               </StyledBox2>
             </StyledFlax>
             <br />
-            <StyledButton type="submit" disabled={disabled}>
+            <StyledButton
+              type="submit"
+              disabled={disabled}
+              onClick={() => setAccept(true)}
+            >
               회원가입
             </StyledButton>
+            <Modal
+              size="md"
+              show={accept}
+              onHide={() => setAccept(false)}
+              // aria-labelledby="example-modal-sizes-title-sm"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>회원가입 완료되었습니다.</Modal.Title>
+              </Modal.Header>
+              {/* <Modal.Body>회원가입을 해주셔서 감사합니다.</Modal.Body> */}
+            </Modal>
+
             <div className="home">{error && <div>{error}</div>}</div>
           </StyledDiv>
         </form>

@@ -183,6 +183,15 @@ function BD_ReservationSecond() {
         </StyledCurrent>
 
         <StyledDiv>헌혈 예약 - {centerName}</StyledDiv>
+        <Styledtext>
+          <div>
+            <ui>
+              <li>전혈: 혈액 전체를 기증하는 것.</li>
+              <li>혈장: 혈액의 액체 부분.</li>
+              <li>혈소판: 혈액 응고에 중요한 역할을 하는 혈구.</li>
+            </ui>
+          </div>
+        </Styledtext>
         <StyledDiv1>
           03. 예약 시간 및 예약가능 헌혈 종류를 선택해주세요.
         </StyledDiv1>
@@ -508,6 +517,15 @@ const StyledDiv = styled.div`
   font-size: 20px;
 
   color: #333333;
+`;
+const Styledtext = styled.div`
+  text-align: left;
+  color: #0957c3;
+  font-size: 14px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 `;
 
 const StyledDiv2 = styled.div`
