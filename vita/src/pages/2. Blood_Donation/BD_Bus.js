@@ -19,7 +19,7 @@ function BD_Bus() {
 
   const navigate = useNavigate();
 
-  const [mapSize, setMapSize] = useState([300, 300]);
+  const [mapSize, setMapSize] = useState([850, 300]);
   const selectList1 = [
     '전체',
     '인천',
@@ -350,7 +350,7 @@ function BD_Bus() {
     navigate('/BD_ReservationSecond', { state: { centerName } });
   };
   useEffect(() => {
-    fetch('http://localhost:8004/blood/board/list ', {
+    fetch('http://localhost:8004/blood/bus/list ', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -770,13 +770,27 @@ function BD_Bus() {
 
           <section>
             <Styleddiv2>
+              <Styledtext>
+                <div>
+                  <ui>
+                    <li>
+                      헌혈버스 관련 정보(날짜, 시간, 장소 등)는 혈액원 사정에
+                      의해 변경될 수 있습니다.
+                    </li>
+                    <li>
+                      단체 사정에 의해 점심시간에는 헌혈버스 운영을 하지 않을 수
+                      있습니다 담당자에게 사전에 운영시간을 확인하시기 바랍니다.
+                    </li>
+                  </ui>
+                </div>
+              </Styledtext>
               <StyledTable>
                 <thead>
                   <tr>
                     <th
                       id="area-header"
                       style={{
-                        width: '80px',
+                        width: '120px',
                         fontFamily: 'Gmarket Sans TTF',
                         fontStyle: 'normal',
                         fontWeight: '700',
@@ -788,7 +802,24 @@ function BD_Bus() {
                         color: '#333333',
                       }}
                     >
-                      지역
+                      날짜
+                    </th>
+                    <th
+                      id="time-header"
+                      style={{
+                        width: '120px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      시간
                     </th>
                     <th
                       id="centerName-header"
@@ -805,12 +836,12 @@ function BD_Bus() {
                         color: '#333333',
                       }}
                     >
-                      헌혈 버스
+                      장소
                     </th>
                     <th
                       id="bloodHouseAddress-header"
                       style={{
-                        width: '350px',
+                        width: '200px',
                         fontFamily: 'Gmarket Sans TTF',
                         fontStyle: 'normal',
                         fontWeight: '700',
@@ -827,7 +858,7 @@ function BD_Bus() {
                     <th
                       id="bloodHousePhoneNumber-header"
                       style={{
-                        width: '130px',
+                        width: '150px',
                         fontFamily: 'Gmarket Sans TTF',
                         fontStyle: 'normal',
                         fontWeight: '700',
@@ -855,11 +886,11 @@ function BD_Bus() {
                           <td
                             headers="area-header"
                             style={{
-                              width: '80px',
+                              width: '120px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
                               fontWeight: '500',
-                              fontSize: '18px',
+                              fontSize: '15px',
                               lineHeight: '30px',
 
                               textAlign: 'center',
@@ -867,7 +898,24 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.area}
+                            {element.date}
+                          </td>
+                          <td
+                            headers="time-header"
+                            style={{
+                              width: '120px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
+                            {element.busTime}
                           </td>
                           <td
                             headers="centerName-header"
@@ -875,7 +923,7 @@ function BD_Bus() {
                               width: '120px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
-                              fontWeight: '500',
+                              fontWeight: '600',
                               fontSize: '18px',
                               lineHeight: '30px',
 
@@ -884,16 +932,16 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.centerName}
+                            {element.locationAddress}
                           </td>
                           <td
                             headers="bloodHouseAddress-header"
                             style={{
-                              width: '130px',
+                              width: '200px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
-                              fontWeight: '500',
-                              fontSize: '15px',
+                              fontWeight: '600',
+                              fontSize: '20px',
                               lineHeight: '30px',
 
                               textAlign: 'center',
@@ -901,12 +949,12 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.bloodHouseAddress}
+                            {element.busAddress}
                           </td>
                           <td
                             headers="bloodHousePhoneNumber-header"
                             style={{
-                              width: '130px',
+                              width: '150px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
                               fontWeight: '500',
@@ -918,7 +966,7 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.bloodHousePhoneNumber}
+                            {element.busPhoneNumber}
                           </td>
                           <td>
                             <div
@@ -975,7 +1023,7 @@ function BD_Bus() {
                         </tr>
                         {openIndex === index && (
                           <tr>
-                            <td colSpan={3}>
+                            <td colSpan={6}>
                               <Styledtd1 id="wrap">
                                 <KakaoMap
                                   markerPositions={markerPositions}
@@ -983,24 +1031,6 @@ function BD_Bus() {
                                 />
                               </Styledtd1>
                             </td>
-                            <Styledtd2 colSpan={2}>
-                              <Styledtxt>
-                                헌혈종류 :
-                                <br /> 전혈, 혈장, 혈소판
-                              </Styledtxt>
-                              <br />
-                              <Styledtxt>
-                                평 일 : {element.weekdayTime}
-                              </Styledtxt>
-                              <Styledtxt>
-                                토요일 : {element.saturdayTime}
-                              </Styledtxt>
-                              <Styledtxt>
-                                일요일 : {element.sundayRestTime}
-                              </Styledtxt>
-                              아니{' '}
-                              <Styledtxt>공휴일 : {element.restTime}</Styledtxt>
-                            </Styledtd2>
                           </tr>
                         )}
                       </React.Fragment>
@@ -1145,6 +1175,15 @@ const StyledFilterDiv2 = styled.div`
 // 집만의 콘텐츠
 const Styleddiv2 = styled.div`
   text-align: center;
+`;
+const Styledtext = styled.div`
+  text-align: left;
+  color: #a3a3a3;
+  font-size: 14px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 `;
 const StyledTable = styled(Table)`
   border-collapse: collapse;

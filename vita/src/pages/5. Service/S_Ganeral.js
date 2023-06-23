@@ -262,6 +262,10 @@ function S_Ganeral() {
     window.location.reload();
   };
 
+  const handleDetailClick = (board, imageUrl) => {
+    navigate('/S_ReservationFirst', { state: { board, imageUrl } });
+  };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -676,7 +680,13 @@ function S_Ganeral() {
                                   alt="logo"
                                 />
                                 <br />
-                                <button type="button">참여하기</button>
+                                <button
+                                  // type="button"
+                                  variant="primary"
+                                  onClick={() => handleDetailClick()}
+                                >
+                                  참여하기
+                                </button>
                               </Styledtd>
                             </Styledtr>
                           );
@@ -1015,7 +1025,12 @@ function S_Ganeral() {
                                   alt="logo"
                                 />
                                 <br />
-                                <button type="button">참여하기</button>
+                                <button
+                                  type="button"
+                                  href="/S_ReservationFirst"
+                                >
+                                  참여하기
+                                </button>
                               </Styledtd>
                             </Styledtr>
                           );

@@ -6,6 +6,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 
 function MyPage_S() {
   const [startDate, setstartDate] = useState('');
@@ -204,6 +206,42 @@ function MyPage_S() {
               </Tab>
             </Tabs>
           </StyledTab1>
+          <StyledTable>
+            <thead style={{ fontWeight: '700', fontSize: '24px' }}>
+              <tr>
+                <th
+                  style={{
+                    width: '400px',
+                  }}
+                >
+                  제목
+                </th>
+                <th
+                  style={{
+                    width: '200px',
+                  }}
+                >
+                  일시
+                </th>
+                <th
+                  style={{
+                    width: '100px',
+                  }}
+                ></th>
+              </tr>
+            </thead>
+            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+              <tr>
+                <td>A형의 혈액형이 급하게 필요합니다. 도와...</td>
+                <td>2023.06.07</td>
+                <td>
+                  <Button style={{ background: '#8FAADC' }}>
+                    <Nav.Link href="/Chat_Details">채팅방이동</Nav.Link>
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </StyledTable>
         </Styledcomment>
       </StyledSubcomment>
     </StyledAll>
@@ -417,5 +455,24 @@ const StyledFilterDivTitle3 = styled.div`
   margin-right: 20px;
   /* margin-left: 10px; */
   line-height: 40px;
+`;
+const StyledTable = styled(Table)`
+  margin-top: 30px;
+  /* margin: 10px; */
+  border-collapse: collapse;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+
+  line-height: 50px;
+
+  color: #333333;
+
+  text-align: center;
 `;
 export default MyPage_S;
