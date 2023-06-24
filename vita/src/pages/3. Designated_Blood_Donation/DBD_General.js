@@ -52,6 +52,7 @@ function DBD_General() {
       .then((res) => res.json())
       .then((res) => {
         setInputData(res);
+        console.log(res);
       });
   }, []);
 
