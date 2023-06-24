@@ -101,16 +101,30 @@ function Chat_Details() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8004/chat/${roomId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Room detail:', data);
-        setData123(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching room detail:', error);
-      });
+    const fetchData = () => {
+      fetch(`http://localhost:8004/chat/${roomId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Room detail:', data);
+          setData123(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching room detail:', error);
+        });
+    };
+  
+    // 최초 실행
+    fetchData();
+  
+    // 1초마다 fetchData 함수 호출
+    const intervalId = setInterval(fetchData, 1000);
+  
+    // 컴포넌트 언마운트 시 타이머 정리
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
+  
 
   //메시지 보내기
   const sendMessage = () => {
