@@ -76,7 +76,6 @@ import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
 import Suimtest from './pages/suimtest.js';
 
-//채팅
 import Asd from './pages/asd';
 import { ImportExportOutlined } from '@mui/icons-material';
 
@@ -204,7 +203,10 @@ function App() {
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
 
           {/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>
+          <Route
+            path="/M_Blood_Reservation"
+            element={<MBloodReservation />}
+          ></Route>
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
           <Route path="/suimtest" element={<Suimtest />}></Route>
           <Route path="/asd" element={<Asd />}></Route>
