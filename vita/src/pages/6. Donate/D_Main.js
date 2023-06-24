@@ -64,11 +64,11 @@ function D_Main() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부란?</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
         <StyledComment>
           <ul>
