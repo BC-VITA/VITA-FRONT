@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
 import DatePicker from 'react-datepicker';
+import { useNavigate } from 'react-router-dom';
+
 function S_ReservationFirst() {
   const [error, setError] = useState(null);
 
@@ -35,6 +37,7 @@ function S_ReservationFirst() {
       });
     console.log(inputData);
   }, []);
+
   return (
     <StyledAll>
       <StyledSubcomment>
@@ -50,7 +53,7 @@ function S_ReservationFirst() {
         <StyledDiv4>
           <StyledDiv4Title>신청자 정보</StyledDiv4Title>
           <StyledDiv4Content>
-            연락처 번호변경은 오른쪽 연락처 수정 버튼을 클릭한 후 ‘마이페이지 >
+            연락처 번호변경은 오른쪽 연락처 수정 버튼을 클릭한 후 ‘마이페이지
             나의 정보’에서 수정하시기 바랍니다.
           </StyledDiv4Content>
           <StyledBox>
@@ -73,6 +76,7 @@ function S_ReservationFirst() {
         <StyledButtonBox>
           <StyledButton>이전</StyledButton>
           <StyledButton>다음</StyledButton>
+          {/* <Nav.Link href="/S_ReservationSecond">다음</Nav.Link>{' '} */}
         </StyledButtonBox>
       </StyledSubcomment>
     </StyledAll>

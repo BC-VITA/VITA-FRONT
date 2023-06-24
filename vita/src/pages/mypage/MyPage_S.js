@@ -6,6 +6,10 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+
+import Post3 from '../../img/image 70.png';
 
 function MyPage_S() {
   const [startDate, setstartDate] = useState('');
@@ -31,7 +35,7 @@ function MyPage_S() {
   ]);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
+    fetch('http://localhost:8004/donate/pdf', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -124,13 +128,18 @@ function MyPage_S() {
               </FloatingLabel>
             </StyledBox3>
           </StyledBox2>
+          <img
+            style={{ marginTop: '10px', width: '870px', height: '300px' }}
+            src={Post3}
+            alt="Third slide"
+          />
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="history" title="봉사 내역">
+              <Tab eventKey="history" title="봉사 신청 내역">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>봉사 내역</StyledTxt2>
+                      <StyledTxt2>봉사 신청 내역</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
                         <input
@@ -160,20 +169,20 @@ function MyPage_S() {
                 </Tab.Content>
               </Tab>
 
-              <Tab eventKey="reservation" title="관심있는 봉사">
+              <Tab eventKey="reservation" title="봉사참여 실적">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>관심있는 봉사</StyledTxt2>
+                      <StyledTxt2>봉사참여 실적</StyledTxt2>
                     </StyledDiv>
                   </StyledBox1>
                 </Tab.Content>
               </Tab>
-              <Tab eventKey="watchlist" title="실적확인서 발행 내역">
+              <Tab eventKey="watchlist" title="관심있는 게시물">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>실적확인서 발행 내역</StyledTxt2>
+                      <StyledTxt2>관심있는 게시물</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
                         <input
@@ -204,6 +213,42 @@ function MyPage_S() {
               </Tab>
             </Tabs>
           </StyledTab1>
+          <StyledTable>
+            <thead style={{ fontWeight: '700', fontSize: '24px' }}>
+              <tr>
+                <th
+                  style={{
+                    width: '400px',
+                  }}
+                >
+                  제목
+                </th>
+                <th
+                  style={{
+                    width: '200px',
+                  }}
+                >
+                  일시
+                </th>
+                <th
+                  style={{
+                    width: '100px',
+                  }}
+                ></th>
+              </tr>
+            </thead>
+            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+              <tr>
+                <td>A형의 혈액형이 급하게 필요합니다. 도와...</td>
+                <td>2023.06.07</td>
+                <td>
+                  <Button style={{ background: '#8FAADC' }}>
+                    <Nav.Link href="/Chat_Details">채팅방이동</Nav.Link>
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </StyledTable>
         </Styledcomment>
       </StyledSubcomment>
     </StyledAll>
@@ -417,5 +462,24 @@ const StyledFilterDivTitle3 = styled.div`
   margin-right: 20px;
   /* margin-left: 10px; */
   line-height: 40px;
+`;
+const StyledTable = styled(Table)`
+  margin-top: 30px;
+  /* margin: 10px; */
+  border-collapse: collapse;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+
+  line-height: 50px;
+
+  color: #333333;
+
+  text-align: center;
 `;
 export default MyPage_S;

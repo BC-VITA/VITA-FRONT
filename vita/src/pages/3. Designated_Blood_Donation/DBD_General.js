@@ -109,7 +109,7 @@ function DBD_General() {
                     <select
                       onChange={handleFirstListChange}
                       value={firstListValue}
-                      style={{ border: 'none' }}
+                      style={{ border: 'none', marginTop: '20px' }}
                     >
                       {selectList1.map((item) => (
                         <option value={item} key={item}>
@@ -133,11 +133,16 @@ function DBD_General() {
                     <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
                     <Form>
                       {['checkbox'].map((type) => (
-                        <div key={`default-${type}`} className="mb-3">
+                        <div
+                          key={`default-${type}`}
+                          className="mb-3"
+                          style={{ marginTop: '20px', display: 'flex' }}
+                        >
                           <Form.Check
                             type={type}
                             id={`default-${type}`}
                             label="RH-"
+                            style={{ marginRight: '20px' }}
                           />
                           <Form.Check
                             type={type}
@@ -148,7 +153,7 @@ function DBD_General() {
                       ))}
                     </Form>
                   </StyledFilterDiv1One>
-                  <StyledFilterDiv1One>
+                  {/* <StyledFilterDiv1One>
                     <select
                       onChange={handleSecondListChange}
                       value={firstList2Value}
@@ -160,7 +165,7 @@ function DBD_General() {
                         </option>
                       ))}
                     </select>
-                  </StyledFilterDiv1One>
+                  </StyledFilterDiv1One> */}
                   {/* <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>
                       &nbsp;기&nbsp;간&nbsp;
@@ -234,7 +239,12 @@ function DBD_General() {
                                 {/* <Nav.Link type="button" href="/DBD_PostGeneral">
                                   <StyledButtonDiv>참여하기</StyledButtonDiv>
                                 </Nav.Link> */}
-                                <button type="button" onClick={() => handleJoin(element.hospitalName)}>
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    handleJoin(element.hospitalName)
+                                  }
+                                >
                                   참여하기
                                 </button>
                               </Styledtd>
@@ -579,6 +589,7 @@ const StyledFilterDiv1Two = styled.div`
   font-size: 18px;
   margin-right: 20px;
   margin-left: 30px;
+  margin-top: 20px;
 `;
 
 // const Styleddiv2 = styled.div`

@@ -11,7 +11,7 @@ function MyPage_DBD() {
 
   const userId = sessionStorage.getItem('userId');
 
-  const [inputData, setInputData] = useState([{}, {},]);
+  const [inputData, setInputData] = useState([{}, {}]);
 
   useEffect(() => {
     fetch('http://localhost:8004/blood/house/filter', {
@@ -20,7 +20,7 @@ function MyPage_DBD() {
       .then((res) => res.json())
       .then((res) => {
         setInputData(res);
-      })
+      });
   }, []);
   return (
     <StyledAll>
@@ -90,11 +90,11 @@ function MyPage_DBD() {
           </FloatingLabel>
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="history" title="지정헌혈 내역">
+              <Tab eventKey="history" title="지정헌혈 승인 내역">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>지정헌혈 내역</StyledTxt2>
+                      <StyledTxt2>지정헌혈 승인 내역</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
                         <input

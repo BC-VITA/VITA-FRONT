@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import Nav from 'react-bootstrap/Nav';
-
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function D_ReceiptDetails() {
+function DBD_NewsDetails() {
   const location = useLocation();
   const navigate = useNavigate();
   const { board, imageUrl } = location.state;
@@ -18,21 +16,26 @@ function D_ReceiptDetails() {
     <StyledAll>
       <StyledSub>
         <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>기부하기</StyledSubDiv1>
+          <StyledSubDiv1>지정헌혈하자</StyledSubDiv1>
           <StyledSubDiv2>
             <StyledSubDiv2_1>
-              <Nav.Link href="/D_Main">
-                <StyledSubDiv2_2g>기부란</StyledSubDiv2_2g>
+              <Nav.Link href="/DBD_Main">
+                <StyledSubDiv2_2g>지정헌혈이란</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
-              <Nav.Link href="/D_Donation">
-                <StyledSubDiv2_2g>기부하기</StyledSubDiv2_2g>
+              <Nav.Link href="/DBD_General">
+                <StyledSubDiv2_2g>지정헌혈하기</StyledSubDiv2_2g>
+              </Nav.Link>
+            </StyledSubDiv2_1>
+            <StyledSubDiv2_1>
+              <Nav.Link href="/DBD_WatchList">
+                <StyledSubDiv2_2g>관심목록</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
-              <Nav.Link href="/D_Receipt">
-                <StyledSubDiv2_2>기부 영수증</StyledSubDiv2_2>
+              <Nav.Link href="/DBD_News">
+                <StyledSubDiv2_2>따뜻한 사례</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
           </StyledSubDiv2>
@@ -40,7 +43,7 @@ function D_ReceiptDetails() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>기부하기</StyledTitle>
+          <StyledTitle>따뜻한 사례</StyledTitle>
         </StyledTop>
         <StyledDiv>
           <img
@@ -64,12 +67,15 @@ const StyledAll = styled.div`
 `;
 const StyledSub = styled.div`
   width: 200px;
+  /* height: 175px; */
   margin-top: 25px;
   margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
   width: 220px;
   height: 60px;
+  /* left: 370px;
+  top: 123px; */
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -81,7 +87,7 @@ const StyledSubDiv1 = styled.div`
 `;
 const StyledSubDiv2 = styled.div`
   width: 220px;
-  height: 182px;
+  height: 242px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv2_1 = styled.div`
@@ -100,39 +106,37 @@ const StyledSubDiv2_1p = styled.div`
 `;
 const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
+
   height: 24px;
+
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
+  /* identical to box height, or 100% */
+
   text-align: center;
+
   color: #333333;
 `;
 const StyledSubDiv2_2g = styled.div`
   border: solid white 3px;
+
   height: 24px;
+
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
+  /* identical to box height, or 100% */
+
   text-align: center;
+
   color: #969696;
 `;
 
-const StyledButtonDiv = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
-  /* identical to box height, or 100% */
-
-  color: #ffffff;
-`;
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
@@ -202,5 +206,4 @@ const StyledButton = styled.div`
   float: right;
   margin-top: 20px;
 `;
-
-export default D_ReceiptDetails;
+export default DBD_NewsDetails;

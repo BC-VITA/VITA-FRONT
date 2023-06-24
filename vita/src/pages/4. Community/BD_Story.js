@@ -8,37 +8,24 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function BD_Story() {
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [boardList, setBoardList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
+    fetchBoardList();
   }, []);
+
+  const fetchBoardList = () => {
+    fetch('http://localhost:8004/donate/board')
+      .then((response) => response.json())
+      .then((data) => setBoardList(data.content))
+      .catch((error) => console.error('Error fetching board list:', error));
+  };
+
+  const handleDetailClick = (board, imageUrl) => {
+    navigate('/BD_Details', { state: { board, imageUrl } });
+  };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -63,54 +50,158 @@ function BD_Story() {
           <StyledTitle>헌혈후기</StyledTitle>
           <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
+              <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
         </StyledTop>
+        <StyledBox3>
+          <div>
+            {boardList
+              .filter((board) => board.boardId % 3 === 0) // id가 1인 항목만 필터링
+              .map((board, index) => {
+                const imageUrl = board.imageUrl
+                  ? board.imageUrl.replace(
+                      'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                      '\\'
+                    )
+                  : null;
 
-        <StyledBox>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-        </StyledBox>
+                // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치
+                const isOdd = index % 2 === 0; // 홀수 번째인지 확인
+
+                return (
+                  <div key={board.boardId}>
+                    <StyledBox>
+                      <StyledBox2 isOdd={isOdd}>
+                        <Card style={{ width: '17rem' }}>
+                          <Card.Img variant="top" src={imageUrl} />
+                          <Card.Body>
+                            <Card.Title>{board.title}</Card.Title>
+                            <Card.Text>{board.content}</Card.Text>
+                            <Button
+                              variant="primary"
+                              onClick={() => handleDetailClick(board, imageUrl)}
+                            >
+                              자세히 보기
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </StyledBox2>
+                    </StyledBox>
+                  </div>
+                );
+              })}
+          </div>
+          <div>
+            {boardList
+              .filter((board) => board.boardId % 3 === 1) // id가 1인 항목만 필터링
+              .map((board, index) => {
+                const imageUrl = board.imageUrl
+                  ? board.imageUrl.replace(
+                      'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                      '\\'
+                    )
+                  : null;
+
+                // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치
+                const isOdd = index % 2 === 0; // 홀수 번째인지 확인
+
+                return (
+                  <div key={board.boardId}>
+                    <StyledBox>
+                      <StyledBox2 isOdd={isOdd}>
+                        <Card style={{ width: '17rem' }}>
+                          <Card.Img variant="top" src={imageUrl} />
+                          <Card.Body>
+                            <Card.Title>{board.title}</Card.Title>
+                            <Card.Text>{board.content}</Card.Text>
+                            <Button
+                              variant="primary"
+                              onClick={() => handleDetailClick(board, imageUrl)}
+                            >
+                              자세히 보기
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </StyledBox2>
+                    </StyledBox>
+                  </div>
+                );
+              })}
+          </div>
+          <div>
+            {boardList
+              .filter((board) => board.boardId % 3 === 2) // id가 1인 항목만 필터링
+              .map((board, index) => {
+                const imageUrl = board.imageUrl
+                  ? board.imageUrl.replace(
+                      'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                      '\\'
+                    )
+                  : null;
+
+                // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치
+                const isOdd = index % 2 === 0; // 홀수 번째인지 확인
+
+                return (
+                  <div key={board.boardId}>
+                    <StyledBox>
+                      <StyledBox2 isOdd={isOdd}>
+                        <Card style={{ width: '17rem' }}>
+                          <Card.Img variant="top" src={imageUrl} />
+                          <Card.Body>
+                            <Card.Title>{board.title}</Card.Title>
+                            <Card.Text>{board.content}</Card.Text>
+                            <Button
+                              variant="primary"
+                              onClick={() => handleDetailClick(board, imageUrl)}
+                            >
+                              자세히 보기
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </StyledBox2>
+                    </StyledBox>
+                  </div>
+                );
+              })}
+          </div>
+        </StyledBox3>
+
+        {/* <div>
+          {boardList.map((board) => {
+            // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
+            const imageUrl = board.imageUrl
+              ? board.imageUrl.replace(
+                  'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                  '\\'
+                )
+              : null;
+
+            return (
+              <div key={board.boardId}>
+                <StyledBox>
+                  <StyledBox2>
+                    <Card style={{ width: '17rem' }}>
+                      <Card.Img variant="top" src={imageUrl} />
+                      <Card.Body>
+                        <Card.Title>{board.title}</Card.Title>
+                        <Card.Text>{board.content}</Card.Text>
+                        <Button
+                          variant="primary"
+                          onClick={() => handleDetailClick(board, imageUrl)}
+                        >
+                          자세히 보기
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </StyledBox2>
+                </StyledBox>
+              </div>
+            );
+          })}
+        </div> */}
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
@@ -241,6 +332,9 @@ const StyledBox = styled.div`
 const StyledBox2 = styled.div`
   margin-left: 5px;
   margin-right: 5px;
+`;
+const StyledBox3 = styled.div`
+  display: flex;
 `;
 
 export default BD_Story;

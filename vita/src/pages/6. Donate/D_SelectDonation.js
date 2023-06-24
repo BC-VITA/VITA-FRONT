@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 
 function D_SelectDonation() {
   const location = useLocation();
@@ -18,7 +19,7 @@ function D_SelectDonation() {
   const handleDonationPointChange = (event) => {
     const inputPoint = event.target.value;
     const newRemainingPoint = point - inputPoint;
-  
+
     if (newRemainingPoint >= 0) {
       setDonationPoint(inputPoint);
       setRemainingPoint(newRemainingPoint);
@@ -27,7 +28,6 @@ function D_SelectDonation() {
       setRemainingPoint('');
     }
   };
-  
 
   useEffect(() => {
     const url = `http://localhost:8004/donate/user-point?userId=${userId}`;
@@ -37,7 +37,7 @@ function D_SelectDonation() {
       .then((res) => res.json())
       .then((res) => {
         setPoint(res);
-      })
+      });
   }, []);
 
   const handleSubmit = async (event) => {
@@ -53,16 +53,17 @@ function D_SelectDonation() {
         donateId: board.boardId,
         isAnonymous: false,
         usePoint: donationPoint,
-        finalPoint: remainingPoint
+        finalPoint: remainingPoint,
       }),
-    })
-      .then((res) => {
-        res.json();
-        if (res.ok) {
-          navigate('/');
-        }
-      })
+    }).then((res) => {
+      res.json();
+      if (res.ok) {
+        navigate('/');
+      }
+    });
   };
+
+  const [accept, setAccept] = useState(false);
 
   return (
     <StyledAll>
@@ -99,7 +100,21 @@ function D_SelectDonation() {
             <FloatingLabel label={point} name="id">
               <Form.Control type="id" placeholder="label" disabled />
             </FloatingLabel>
-            <StyledButton type="button" onClick={handleSubmit}>기부하기,asd</StyledButton>
+            <StyledButton type="button" onClick={handleSubmit}>
+              기부하기
+            </StyledButton>
+
+            <Modal
+              size="md"
+              show={accept}
+              onHide={() => setAccept(false)}
+              // aria-labelledby="example-modal-sizes-title-sm"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>기부가 완료되었습니다.</Modal.Title>
+              </Modal.Header>
+              {/* <Modal.Body>회원가입을 해주셔서 감사합니다.</Modal.Body> */}
+            </Modal>
           </StyledDiv2>
           <StyledDiv3>
             <StyledBoxTitle>기부할 포인트 </StyledBoxTitle>
@@ -133,38 +148,38 @@ const StyledAll = styled.div`
   padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 170px;
+  width: 200px;
   margin-top: 25px;
-  margin-left: 205px;
+  margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 190px;
-  height: 50px;
+  width: 220px;
+  height: 60px;
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
-  line-height: 55px;
+  line-height: 60px;
   text-align: center;
   color: #ffffff;
 `;
 const StyledSubDiv2 = styled.div`
-  width: 190px;
-  height: 167px;
+  width: 220px;
+  height: 182px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv21 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
 const StyledSubDiv21p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;

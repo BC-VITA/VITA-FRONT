@@ -109,6 +109,40 @@ function MyPage_BD() {
           </FloatingLabel>
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
+              <Tab eventKey="reservation" title="예약 내역">
+                <Tab.Content>
+                  <StyledBox1>
+                    <StyledDiv>
+                      <StyledTxt2>예약 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
+                    </StyledDiv>
+                  </StyledBox1>
+                </Tab.Content>
+              </Tab>
+
               <Tab eventKey="history" title="헌혈 내역">
                 <Tab.Content>
                   <StyledBox1>
@@ -143,39 +177,6 @@ function MyPage_BD() {
                 </Tab.Content>
               </Tab>
 
-              <Tab eventKey="reservation" title="예약 내역">
-                <Tab.Content>
-                  <StyledBox1>
-                    <StyledDiv>
-                      <StyledTxt2>예약 내역</StyledTxt2>
-                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
-                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleStartDateChange}
-                        />
-                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleEndDateChange}
-                        />
-                      </StyledFilterDiv1>
-                    </StyledDiv>
-                  </StyledBox1>
-                </Tab.Content>
-              </Tab>
               <Tab eventKey="watchlist" title="내가 작성한 후기">
                 <Tab.Content>
                   <StyledBox1>

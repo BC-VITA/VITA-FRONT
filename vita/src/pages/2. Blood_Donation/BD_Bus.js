@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
 import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
+import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
@@ -18,7 +19,7 @@ function BD_Bus() {
 
   const navigate = useNavigate();
 
-  const [mapSize, setMapSize] = useState([300, 300]);
+  const [mapSize, setMapSize] = useState([850, 300]);
   const selectList1 = [
     '전체',
     '인천',
@@ -349,7 +350,7 @@ function BD_Bus() {
     navigate('/BD_ReservationSecond', { state: { centerName } });
   };
   useEffect(() => {
-    fetch('http://localhost:8004/blood/board/list ', {
+    fetch('http://localhost:8004/blood/bus/list ', {
       method: 'get',
     })
       .then((res) => res.json())
@@ -367,6 +368,36 @@ function BD_Bus() {
       ? inputData
       : inputData.filter((item) => item.area === firstListValue);
 
+  const handleFilter = (value) => {
+    setFirstListValue(value);
+  };
+  const thStyle = {
+    width: '80px',
+    fontFamily: 'Gmarket Sans TTF',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: '22px',
+    lineHeight: '35px',
+    textAlign: 'center',
+    color: '#333333',
+  };
+  const tdStyle = {
+    ...thStyle,
+    fontWeight: '500',
+    fontSize: '18px',
+    lineHeight: '30px',
+  };
+  const btStyle = {
+    ...thStyle,
+    height: '37px',
+    background: '#D9D9D9',
+    borderRadius: '10px',
+    border: 'none',
+    fontWeight: '500',
+    fontSize: '15px',
+    lineHeight: '37px',
+  };
+  delete btStyle.width;
   return (
     <StyledAll>
       <StyledSub>
@@ -407,7 +438,7 @@ function BD_Bus() {
           </StyledButton> */}
         </StyledTop>
         <StyledTab1>
-          <StyledFilter>
+          {/* <StyledFilter>
             <StyledFilterDiv1>
               <StyledFilterDivTitle>지역선택</StyledFilterDivTitle>
               <select
@@ -469,16 +500,297 @@ function BD_Bus() {
                 <Form.Control type="id" placeholder="label" />
               </FloatingLabel>
             </StyledFilterDiv2> */}
+          {/* </StyledFilter> */}
+
+          <StyledFilter>
+            <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
+              <Button
+                variant="light"
+                onClick={() => handleFilter('전체')}
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                전체
+              </Button>
+              <Button
+                variant="light"
+                onClick={() => handleFilter('서울')}
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                서울
+              </Button>
+              <Button
+                onClick={() => handleFilter('부산')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                부산
+              </Button>
+              <Button
+                onClick={() => handleFilter('대구')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                대구
+              </Button>
+              <Button
+                onClick={() => handleFilter('인천')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                인천
+              </Button>
+              <Button
+                onClick={() => handleFilter('울산')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                울산
+              </Button>
+              <Button
+                onClick={() => handleFilter('세종')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                세종
+              </Button>
+              <Button
+                onClick={() => handleFilter('경기')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                경기
+              </Button>
+              <Button
+                onClick={() => handleFilter('강원')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                강원
+              </Button>
+            </StyledFilterDiv1>
+            <StyledFilterDiv1 style={{ paddingTop: '2px' }}>
+              <Button
+                onClick={() => handleFilter('충북')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                충북
+              </Button>
+              <Button
+                onClick={() => handleFilter('대전')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                대전
+              </Button>
+              <Button
+                onClick={() => handleFilter('충남')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                충남
+              </Button>
+              <Button
+                onClick={() => handleFilter('전북')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                전북
+              </Button>
+              <Button
+                onClick={() => handleFilter('광주')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                광주
+              </Button>
+              <Button
+                onClick={() => handleFilter('전남')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                전남
+              </Button>
+              <Button
+                onClick={() => handleFilter('경북')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                경북
+              </Button>
+              <Button
+                onClick={() => handleFilter('경남')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                경남
+              </Button>
+              <Button
+                onClick={() => handleFilter('제주')}
+                variant="light"
+                style={{
+                  width: '92px',
+                  fontSize: '20px',
+                  margin: '2px',
+                }}
+                href="#list"
+              >
+                제주
+              </Button>
+            </StyledFilterDiv1>
+            <StyledDiv>
+              {/* <StyledTxt2>예약 내역</StyledTxt2> */}
+              <StyledFilterDiv1 style={{ marginTop: '10px' }}>
+                <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                <input
+                  type="Date"
+                  value={startDate}
+                  style={{
+                    border: 'none',
+                    marginRight: '20px',
+                    height: '40px',
+                  }}
+                  onChange={handleStartDateChange}
+                />
+                <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                <input
+                  type="Date"
+                  value={endDate}
+                  style={{
+                    border: 'none',
+                    marginRight: '20px',
+                    height: '40px',
+                  }}
+                  onChange={handleEndDateChange}
+                />
+              </StyledFilterDiv1>
+            </StyledDiv>
+            <StyledFilterDiv2>
+              <FloatingLabel
+                label="헌혈의 집 명 또는 헌혈의 집 주소를 입력해주세요."
+                name="id"
+                value={id}
+                onChange={handleChangeId}
+                style={{
+                  marginTop: '10px',
+                  // marginLeft: '20px',
+                  // marginRight: '20px',
+                  width: '97%',
+                }}
+              >
+                <Form.Control type="id" placeholder="label" />
+              </FloatingLabel>
+            </StyledFilterDiv2>
           </StyledFilter>
+
           <section>
             <Styleddiv2>
+              <Styledtext>
+                <div>
+                  <ui>
+                    <li>
+                      헌혈버스 관련 정보(날짜, 시간, 장소 등)는 혈액원 사정에
+                      의해 변경될 수 있습니다.
+                    </li>
+                    <li>
+                      단체 사정에 의해 점심시간에는 헌혈버스 운영을 하지 않을 수
+                      있습니다 담당자에게 사전에 운영시간을 확인하시기 바랍니다.
+                    </li>
+                  </ui>
+                </div>
+              </Styledtext>
               <StyledTable>
                 <thead>
                   <tr>
                     <th
                       id="area-header"
                       style={{
-                        width: '80px',
+                        width: '120px',
                         fontFamily: 'Gmarket Sans TTF',
                         fontStyle: 'normal',
                         fontWeight: '700',
@@ -490,7 +802,24 @@ function BD_Bus() {
                         color: '#333333',
                       }}
                     >
-                      지역
+                      날짜
+                    </th>
+                    <th
+                      id="time-header"
+                      style={{
+                        width: '120px',
+                        fontFamily: 'Gmarket Sans TTF',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '35px',
+
+                        textAlign: 'center',
+
+                        color: '#333333',
+                      }}
+                    >
+                      시간
                     </th>
                     <th
                       id="centerName-header"
@@ -507,12 +836,12 @@ function BD_Bus() {
                         color: '#333333',
                       }}
                     >
-                      헌혈 버스
+                      장소
                     </th>
                     <th
                       id="bloodHouseAddress-header"
                       style={{
-                        width: '350px',
+                        width: '200px',
                         fontFamily: 'Gmarket Sans TTF',
                         fontStyle: 'normal',
                         fontWeight: '700',
@@ -529,7 +858,7 @@ function BD_Bus() {
                     <th
                       id="bloodHousePhoneNumber-header"
                       style={{
-                        width: '130px',
+                        width: '150px',
                         fontFamily: 'Gmarket Sans TTF',
                         fontStyle: 'normal',
                         fontWeight: '700',
@@ -557,11 +886,11 @@ function BD_Bus() {
                           <td
                             headers="area-header"
                             style={{
-                              width: '80px',
+                              width: '120px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
                               fontWeight: '500',
-                              fontSize: '18px',
+                              fontSize: '15px',
                               lineHeight: '30px',
 
                               textAlign: 'center',
@@ -569,7 +898,24 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.area}
+                            {element.date}
+                          </td>
+                          <td
+                            headers="time-header"
+                            style={{
+                              width: '120px',
+                              fontFamily: 'Gmarket Sans TTF',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              fontSize: '15px',
+                              lineHeight: '30px',
+
+                              textAlign: 'center',
+
+                              color: '#333333',
+                            }}
+                          >
+                            {element.busTime}
                           </td>
                           <td
                             headers="centerName-header"
@@ -577,7 +923,7 @@ function BD_Bus() {
                               width: '120px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
-                              fontWeight: '500',
+                              fontWeight: '600',
                               fontSize: '18px',
                               lineHeight: '30px',
 
@@ -586,16 +932,16 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.centerName}
+                            {element.locationAddress}
                           </td>
                           <td
                             headers="bloodHouseAddress-header"
                             style={{
-                              width: '130px',
+                              width: '200px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
-                              fontWeight: '500',
-                              fontSize: '15px',
+                              fontWeight: '600',
+                              fontSize: '20px',
                               lineHeight: '30px',
 
                               textAlign: 'center',
@@ -603,12 +949,12 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.bloodHouseAddress}
+                            {element.busAddress}
                           </td>
                           <td
                             headers="bloodHousePhoneNumber-header"
                             style={{
-                              width: '130px',
+                              width: '150px',
                               fontFamily: 'Gmarket Sans TTF',
                               fontStyle: 'normal',
                               fontWeight: '500',
@@ -620,7 +966,7 @@ function BD_Bus() {
                               color: '#333333',
                             }}
                           >
-                            {element.bloodHousePhoneNumber}
+                            {element.busPhoneNumber}
                           </td>
                           <td>
                             <div
@@ -677,7 +1023,7 @@ function BD_Bus() {
                         </tr>
                         {openIndex === index && (
                           <tr>
-                            <td colSpan={3}>
+                            <td colSpan={6}>
                               <Styledtd1 id="wrap">
                                 <KakaoMap
                                   markerPositions={markerPositions}
@@ -685,24 +1031,6 @@ function BD_Bus() {
                                 />
                               </Styledtd1>
                             </td>
-                            <Styledtd2 colSpan={2}>
-                              <Styledtxt>
-                                헌혈종류 :
-                                <br /> 전혈, 혈장, 혈소판
-                              </Styledtxt>
-                              <br />
-                              <Styledtxt>
-                                평 일 : {element.weekdayTime}
-                              </Styledtxt>
-                              <Styledtxt>
-                                토요일 : {element.saturdayTime}
-                              </Styledtxt>
-                              <Styledtxt>
-                                일요일 : {element.sundayRestTime}
-                              </Styledtxt>
-                              아니{' '}
-                              <Styledtxt>공휴일 : {element.restTime}</Styledtxt>
-                            </Styledtd2>
                           </tr>
                         )}
                       </React.Fragment>
@@ -835,16 +1163,8 @@ const StyledFilter = styled.div`
 `;
 const StyledFilterDiv1 = styled.div`
   display: flex;
-  margin-left: 20px;
-  padding-top: 15px;
-`;
-const StyledFilterDivTitle = styled.div`
-  font-family: 'Gmarket Sans TTF';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  margin-right: 20px;
-  line-height: 40px;
+  /* margin-left: 20px;
+  padding-top: 15px; */
 `;
 const StyledFilterDiv2 = styled.div`
   display: flex;
@@ -855,6 +1175,15 @@ const StyledFilterDiv2 = styled.div`
 // 집만의 콘텐츠
 const Styleddiv2 = styled.div`
   text-align: center;
+`;
+const Styledtext = styled.div`
+  text-align: left;
+  color: #a3a3a3;
+  font-size: 14px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 `;
 const StyledTable = styled(Table)`
   border-collapse: collapse;
@@ -883,12 +1212,26 @@ const Styledtxt = styled.div`
 
   color: #333333;
 `;
+const StyledDiv = styled.div`
+  margin-left: 20px;
+  display: flex;
+`;
+
 const StyledFilterDivTitle2 = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   margin-right: 20px;
+  line-height: 40px;
+`;
+const StyledFilterDivTitle3 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+  /* margin-left: 10px; */
   line-height: 40px;
 `;
 export default BD_Bus;
