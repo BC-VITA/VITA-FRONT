@@ -1,42 +1,72 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-import Nav from 'react-bootstrap/Nav';
+import { useLocation, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import { useNavigate } from 'react-router-dom';
 
 function S_ReservationFirst() {
-  const [error, setError] = useState(null);
+  const userId = sessionStorage.getItem('userId');
+  //전페이지에서 유저가 선텍한 봉사목록 가져오기
+  const location = useLocation();
+  const { element } = location.state;
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  //유저가 날짜 선택하는 것
+  const [date, setDate] = useState('');
+  const [maxSelectableDate, setMaxSelectableDate] = useState(null);
+  const handleDateChange = (selectedDate) => {
+    setDate(selectedDate);
+  };
+  const SelectableDate = new Date(); // 현재 날짜
 
+  // 유저가 선택 가능한 최대 날짜
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
+    // element.volunteerSeekEndDate 값을 가져와 maxSelectableDate 설정
+    if (element) {
+      const endDate = new Date(element.volunteerSeekEndDate);
+      setMaxSelectableDate(endDate);
+    }
+  }, [element]);
+
+  //핸폰이랑 이름 
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8004/volunteer/reservation?userId=${userId}`);
+        if (!response.ok) {
+          throw new Error('API 요청이 실패했습니다.');
+        }
+        const data = await response.json();
+
+        // 응답 데이터 처리
+        const { userName, email } = data;
+        setUserName(userName);
+        setEmail(email);
+
+      } catch (error) {
+        console.error('API 요청 오류:', error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  //다음 페이지 
+  const navigate = useNavigate();
+  const handleNextClick = () => {
+    navigate('/S_ReservationSecond', {
+      state: {
+        element: element,
+        date: date,
+        userName: userName,
+        email: email,
+      }
+    });
+  };
+
+  const handlebeforeClick = () => {
+    navigate('/S_Ganeral');
+  };
 
   return (
     <StyledAll>
@@ -44,12 +74,20 @@ function S_ReservationFirst() {
         <StyledTop>
           <StyledTitle>봉사 신청하기</StyledTitle>
         </StyledTop>
-        <StyledDiv>헌혈 예약</StyledDiv>
+        <StyledDiv>{element.title}</StyledDiv>
         <StyledDiv2>
           <StyledLabel htmlFor="date">예약날짜 : </StyledLabel>
-          {/* <DatePicker id="date" selected={date} onChange={handleDateChange} /> */}
+          <DatePicker
+            id="date"
+            selected={date}
+            onChange={handleDateChange}
+            minDate={SelectableDate}
+            maxDate={maxSelectableDate}
+          />
         </StyledDiv2>
-        <StyledDiv3>선택일자 : 2023년 05월 24일</StyledDiv3>
+        <StyledDiv3>
+          선택일자: {date && new Date(date.getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
+        </StyledDiv3>
         <StyledDiv4>
           <StyledDiv4Title>신청자 정보</StyledDiv4Title>
           <StyledDiv4Content>
@@ -57,8 +95,8 @@ function S_ReservationFirst() {
             나의 정보’에서 수정하시기 바랍니다.
           </StyledDiv4Content>
           <StyledBox>
-            <StyledBox2>휴대폰 번호 :</StyledBox2>
-            <StyledBox2>e-Mail : </StyledBox2>
+            <StyledBox2>휴대폰 번호: {userName}</StyledBox2>
+            <StyledBox2>e-Mail: {email}</StyledBox2>
           </StyledBox>
           <StyledBox1>
             <StyledBox3>
@@ -74,9 +112,8 @@ function S_ReservationFirst() {
           </StyledBox1>
         </StyledDiv4>
         <StyledButtonBox>
-          <StyledButton>이전</StyledButton>
-          <StyledButton>다음</StyledButton>
-          {/* <Nav.Link href="/S_ReservationSecond">다음</Nav.Link>{' '} */}
+          <StyledButton onClick={handlebeforeClick}>이전</StyledButton>
+          <StyledButton onClick={handleNextClick}>다음</StyledButton>
         </StyledButtonBox>
       </StyledSubcomment>
     </StyledAll>
