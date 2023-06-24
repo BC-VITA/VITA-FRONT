@@ -226,92 +226,105 @@ function DBD_General() {
 
                       <tbody>
                         {' '}
-                        {inputData.map((element, index) => {
-                          const markerPositions = [
-                            [element.latitude, element.longitude],
-                          ];
-                          return (
-                            <React.Fragment key={element.id}>
-                              <tr onClick={() => handleRowClick(index)}>
-                                <td
-                                  headers="area-header"
-                                  style={{
-                                    width: '350px',
-                                    fontWeight: '500',
-                                    fontSize: '18px',
-                                    textAlign: 'left',
-                                  }}
-                                >
-                                  {element.title}
-                                  <br />
-                                  {element.startDate}
-                                  <br />
-                                  필요한 혈액형 : {element.patientBlood}
-                                  <br />
-                                  혈액 종류 : {element.bloodType}
-                                  <br />
-                                  장소 : {element.hospitalName}
-                                </td>
-                                <td></td>
-                                <td
-                                  headers="centerName-header"
-                                  style={{
-                                    width: '200px',
-                                    fontWeight: '500',
-                                    fontSize: '18px',
-                                  }}
-                                >
-                                  <br />
-                                  모집중
-                                  <br />
-                                  <Styledimg
-                                    src={icon}
-                                    className="main-icon"
-                                    alt="logo"
-                                  />
-                                  <br />
-                                  <button
-                                    // type="button"
-                                    variant="primary"
-                                    onClick={() => handleDetailClick()}
+                        {inputData
+                          .slice(0)
+                          .reverse()
+                          .map((element, index) => {
+                            const markerPositions = [
+                              [element.latitude, element.longitude],
+                            ];
+                            return (
+                              <React.Fragment key={element.id}>
+                                <tr onClick={() => handleRowClick(index)}>
+                                  <td
+                                    headers="area-header"
+                                    style={{
+                                      width: '350px',
+                                      fontWeight: '500',
+                                      fontSize: '18px',
+                                      textAlign: 'left',
+                                    }}
                                   >
-                                    참여하기
-                                  </button>
-                                </td>
-                              </tr>
+                                    {element.title}
+                                    <br />
+                                    {element.startDate}
+                                    <br />
+                                    필요한 혈액형 : {element.patientBlood}
+                                    <br />
+                                    혈액 종류 : {element.bloodType}
+                                    <br />
+                                    장소 : {element.hospitalName}
+                                  </td>
+                                  <td></td>
+                                  <td
+                                    headers="centerName-header"
+                                    style={{
+                                      width: '200px',
+                                      fontWeight: '500',
+                                      fontSize: '18px',
+                                    }}
+                                  >
+                                    <br />
+                                    모집중
+                                    <br />
+                                    <Styledimg
+                                      src={icon}
+                                      className="main-icon"
+                                      alt="logo"
+                                    />
+                                    <br />
+                                    <button
+                                      // type="button"
+                                      variant="primary"
+                                      onClick={() =>
+                                        handleDetailClick(element.hospitalName)
+                                      }
+                                      style={{
+                                        width: '100px',
+                                        height: '35px',
+                                        borderRadius: '9px',
+                                        background: '#d9d9d9',
+                                        color: '#333333',
+                                        border: 'none',
+                                      }}
+                                    >
+                                      참여하기
+                                    </button>
+                                  </td>
+                                </tr>
 
-                              {openIndex === index && (
-                                <tr>
-                                  <td colSpan={2}>
-                                    {/* <Styledtd1 id="wrap">
+                                {openIndex === index && (
+                                  <tr>
+                                    <td colSpan={2}>
+                                      {/* <Styledtd1 id="wrap">
                                       <KakaoMap
                                         markerPositions={markerPositions}
                                         size={mapSize}
                                       />
                                     </Styledtd1> */}
-                                    <Styledtxt
-                                      style={{
-                                        width: '450px',
-                                      }}
-                                    >
-                                      {element.content}
-                                    </Styledtxt>
-                                  </td>
-                                  <td>
-                                    <Styledtd2
-                                      colSpan={1}
-                                      style={{
-                                        width: '100px',
-                                      }}
-                                    >
-                                      {/* <Styledtxt>{element.content}</Styledtxt> */}
-                                    </Styledtd2>
-                                  </td>
-                                </tr>
-                              )}
-                            </React.Fragment>
-                          );
-                        })}
+                                      <Styledtxt
+                                        style={{
+                                          width: '450px',
+                                        }}
+                                      >
+                                        {element.content}
+                                      </Styledtxt>
+                                    </td>
+                                    <td>
+                                      <Styledtd2
+                                        colSpan={1}
+                                        style={{
+                                          width: '100px',
+                                        }}
+                                      >
+                                        {/* <Styledtxt>{element.content}</Styledtxt> */}
+                                      </Styledtd2>
+                                    </td>
+                                  </tr>
+                                )}
+                              </React.Fragment>
+                            );
+                          })}
                       </tbody>
                     </StyledTable>
                   </Styleddiv2>
@@ -440,7 +453,20 @@ function DBD_General() {
                                 {/* <Nav.Link type="button" href="/DBD_PostGeneral">
                                   <StyledButtonDiv>참여하기</StyledButtonDiv>
                                 </Nav.Link> */}
-                                <button type="button">참여하기</button>
+                                <button
+                                  type="button"
+                                  style={{
+                                    width: '100px',
+                                    height: '35px',
+                                    marginTop: '5px',
+                                    borderRadius: '9px',
+                                    background: '#d9d9d9',
+                                    color: '#333333',
+                                    border: 'none',
+                                  }}
+                                >
+                                  참여하기
+                                </button>
                               </Styledtd>
                             </Styledtr>
                           );

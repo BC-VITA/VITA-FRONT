@@ -244,8 +244,8 @@ function S_Ganeral() {
   const handlereturn = () => {
     window.location.reload();
   };
-  const handleDetailClick = (board, imageUrl) => {
-    navigate('/S_ReservationFirst', { state: { board, imageUrl } });
+  const handleJoin = (element) => {
+    navigate('/S_ReservationFirst', { state: { element } });
   };
 
   //수정
@@ -793,9 +793,17 @@ function S_Ganeral() {
                                   />
                                   <br />
                                   <button
-                                    // type="button"
-                                    variant="primary"
-                                    onClick={() => handleDetailClick()}
+                                    type="button"
+                                    onClick={() => handleJoin(element)}
+                                    style={{
+                                      width: '100px',
+                                      height: '35px',
+                                      marginTop: '5px',
+                                      borderRadius: '9px',
+                                      background: '#d9d9d9',
+                                      color: '#333333',
+                                      border: 'none',
+                                    }}
                                   >
                                     참여하기
                                   </button>
@@ -1197,9 +1205,17 @@ function S_Ganeral() {
                                   />
                                   <br />
                                   <button
-                                    // type="button"
-                                    variant="primary"
-                                    onClick={() => handleDetailClick()}
+                                    type="button"
+                                    onClick={() => handleJoin(element)}
+                                    style={{
+                                      width: '100px',
+                                      height: '35px',
+                                      marginTop: '5px',
+                                      borderRadius: '9px',
+                                      background: '#d9d9d9',
+                                      color: '#333333',
+                                      border: 'none',
+                                    }}
                                   >
                                     참여하기
                                   </button>
