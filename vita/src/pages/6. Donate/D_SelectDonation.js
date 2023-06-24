@@ -5,6 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 
 function D_SelectDonation() {
   const location = useLocation();
@@ -40,6 +41,9 @@ function D_SelectDonation() {
       });
   }, []);
 
+  const [main, setMain] = useState(false);
+  const [show, setShow] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
@@ -55,15 +59,34 @@ function D_SelectDonation() {
         usePoint: donationPoint,
         finalPoint: remainingPoint,
       }),
-    }).then((res) => {
-      res.json();
-      if (res.ok) {
-        navigate('/');
-      }
-    });
+    })
+      .then((res) => {
+        res.json();
+        if (res.ok) {
+          setMain(true);
+        }
+      })
+
+      // .then((res) => res.json())
+      // .then((data) => {
+      //   if (data.ok) {
+      //     setMain(true);
+      //   }
+      // })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
-  const [accept, setAccept] = useState(false);
+  const handleClose = () => setShow(false);
+
+  const handleReservation = (centerName) => {
+    navigate('/', { state: { centerName } });
+  };
+
+  const handleReservation2 = (centerName) => {
+    navigate('/MyPage_D', { state: { centerName } });
+  };
 
   return (
     <StyledAll>
@@ -100,20 +123,24 @@ function D_SelectDonation() {
             <FloatingLabel label={point} name="id">
               <Form.Control type="id" placeholder="label" disabled />
             </FloatingLabel>
+
             <StyledButton type="button" onClick={handleSubmit}>
               기부하기
             </StyledButton>
 
-            <Modal
-              size="md"
-              show={accept}
-              onHide={() => setAccept(false)}
-              // aria-labelledby="example-modal-sizes-title-sm"
-            >
+            <Modal size="md" show={main} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>기부가 완료되었습니다.</Modal.Title>
+                <Modal.Title>안 내</Modal.Title>
               </Modal.Header>
-              {/* <Modal.Body>회원가입을 해주셔서 감사합니다.</Modal.Body> */}
+              <Modal.Body>기부가 되었습니다.</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleReservation}>
+                  다음에 보기
+                </Button>
+                <Button variant="primary" onClick={handleReservation2}>
+                  예약내역 보기
+                </Button>
+              </Modal.Footer>
             </Modal>
           </StyledDiv2>
           <StyledDiv3>

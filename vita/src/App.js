@@ -73,7 +73,6 @@ import DSelectReceipt from './pages/6. Donate/D_SelectReceipt';
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
-import Suimtest from './pages/suimtest.js';
 
 import Asd from './pages/asd';
 import { ImportExportOutlined } from '@mui/icons-material';
@@ -206,7 +205,6 @@ function App() {
             element={<MBloodReservation />}
           ></Route>
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
-          <Route path="/suimtest" element={<Suimtest />}></Route>
           <Route path="/asd" element={<Asd />}></Route>
         </Routes>
         <Foot />

@@ -46,11 +46,12 @@ function BD_ReservationThird() {
         date: formattedDate,
         time: times,
       }),
-    })
-      .then((res) => {
-        res.json();
-      })
-      .then(() => navigate('/'));
+    }).then((res) => {
+      res.json();
+      if (res.ok) {
+        setMain(true);
+      }
+    });
   };
 
   const [main, setMain] = useState(false);
@@ -135,15 +136,19 @@ function BD_ReservationThird() {
             </div>
           ))}
         </StyledBox>
-        <Styledbutton type="button" onClick={() => setMain(true)}>
+        <Styledbutton type="button" onClick={handleSubmit}>
           예약완료하기
         </Styledbutton>
+
+        {/* <Styledbutton type="button" onClick={() => setMain(true)}>
+          확&nbsp;&nbsp;&nbsp;&nbsp;인
+        </Styledbutton> */}
 
         <Modal
           size="md"
           show={main}
           onHide={() => setMain(false)}
-          onClick={handleSubmit}
+          onClick={handleClose}
         >
           <Modal.Header closeButton>
             <Modal.Title>안 내</Modal.Title>
@@ -157,14 +162,14 @@ function BD_ReservationThird() {
           <Modal.Footer>
             <Button
               variant="secondary"
-              onClick={handleClose}
+              // onClick={handleClose}
               onClick={handleReservation}
             >
               다음에 보기
             </Button>
             <Button
               variant="primary"
-              onClick={handleClose}
+              // onClick={handleClose}
               onClick={handleReservation2}
             >
               예약내역 보기
@@ -440,25 +445,24 @@ const StyledDiv3 = styled.div`
 `;
 
 const Styledbutton = styled.div`
-  margin-top: 10px;
-  width: 140px;
-  height: 40px;
-  margin-left: 57ch;
+  margin-top: 50px;
+  margin-left: 51ch;
+  width: 148px;
+  height: 50px;
 
-  background: #ff9f9f;
-  border-radius: 9px;
+  background: #ffd7d7;
+  border-radius: 5px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 20px;
+  line-height: 50px;
+  /* identical to box height, or 125% */
 
   text-align: center;
-  // margin-left: 28px;
-  /* identical to box height, or 100% */
 
-  color: #ffffff;
+  color: #333333;
   border: none;
 `;
 export default BD_ReservationThird;
