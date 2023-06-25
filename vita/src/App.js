@@ -74,7 +74,9 @@ import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
 
-import Asd from './pages/asd';
+//실험
+import Asd from './pages/asd'
+import Asd1 from './pages/asd1'
 import { ImportExportOutlined } from '@mui/icons-material';
 
 const startDate = '2022-01-01';
@@ -206,6 +208,7 @@ function App() {
           ></Route>
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
           <Route path="/asd" element={<Asd />}></Route>
+          <Route path="/asd1" element={<Asd1 />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>

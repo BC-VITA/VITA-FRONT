@@ -11,17 +11,24 @@ function MyPage_DBD() {
 
   const userId = sessionStorage.getItem('userId');
 
-  const [inputData, setInputData] = useState([{}, {}]);
+  const [inputData, setInputData1] = useState(null);
+  const [inputData1, setInputData2] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
+    const url1 = `http://localhost:8004/user/mypage/designaged-reservation-history?userId=${userId}`;
+    fetch(url1, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
-        setInputData(res);
+        setInputData1(res);
       });
   }, []);
+
+  if (inputData === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <StyledAll>
       <StyledSub>
@@ -73,7 +80,7 @@ function MyPage_DBD() {
         <Styledcomment>
           <StyledTxt>지정헌혈 참여</StyledTxt>
           <FloatingLabel
-            label={userId}
+            label={inputData.length + '번'}
             //value={roomnumber}
             //onChange={handleReservation}
             style={{ width: '300px', lineHeight: '15px' }}
@@ -131,29 +138,26 @@ function MyPage_DBD() {
                       <StyledTxt2>예약 내역</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                        <input type="Date" value={startDate}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                        <input type="Date" value={endDate}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
+                    <div>
+                      {inputData.map((review, index) => (
+                        <div key={index}>
+                          <div>제목: {review.title}</div>
+                          <div>시간: {review.createdAt}</div>
+                          <div><br /></div>
+                        </div>
+                      ))}
+                    </div>
                   </StyledBox1>
                 </Tab.Content>
               </Tab>
