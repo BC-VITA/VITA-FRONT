@@ -15,10 +15,13 @@ function BD_Story() {
     fetchBoardList();
   }, []);
 
+  const Blood = 'Blood';
+
   const fetchBoardList = () => {
-    fetch('http://localhost:8004/donate/board')
+    const url1 = `http://localhost:8004/review/board/list?reviewType=${Blood}`;
+    fetch(url1)
       .then((response) => response.json())
-      .then((data) => setBoardList(data.content))
+      .then((data) => setBoardList(data))
       .catch((error) => console.error('Error fetching board list:', error));
   };
 
@@ -57,8 +60,8 @@ function BD_Story() {
         <div>
           {boardList.map((board) => {
             // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
-            const imageUrl = board.imageUrl
-              ? board.imageUrl.replace(
+            const imageUrl = board.img
+              ? board.img.replace(
                 'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
                 '\\'
               )
@@ -74,9 +77,7 @@ function BD_Story() {
                         <Card.Title>{board.title}</Card.Title>
                         <Card.Text>{board.content}</Card.Text>
                         <Button
-                          variant="primary"
-                          onClick={() => handleDetailClick(board, imageUrl)}
-                        >
+                          variant="primary" onClick={() => handleDetailClick(board, imageUrl)}>
                           자세히 보기
                         </Button>
                       </Card.Body>
