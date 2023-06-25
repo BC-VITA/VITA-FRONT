@@ -8,10 +8,57 @@ function BD_Details() {
   const location = useLocation();
   const navigate = useNavigate();
   const { board, imageUrl } = location.state;
+  const userId = sessionStorage.getItem('userId');
 
-  const handleDetailClick = (board) => {
-    navigate('/D_SelectDonation', { state: board });
+  //댓글 서버 저장 api
+  const [comment, setComment] = useState('');
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
   };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await new Promise((r) => setTimeout(r, 1000));
+
+    fetch(`http://localhost:8004/review/comment/${board.registerId}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        userId: userId,
+        comment: comment,
+        isReport: "false"
+      }),
+    })
+      .then((res) => {
+        res.json();
+      })
+      .then(() => {
+        fetchData();
+      });
+  };
+
+
+  const [userData, setUserData] = useState(null);
+  const fetchData = () => {
+    const url1 = `http://localhost:8004/review/comment/${board.registerId}`;
+    fetch(url1, {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setComment('');
+        setUserData(res);
+      });
+  };
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (userData === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <StyledAll>
@@ -35,13 +82,7 @@ function BD_Details() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>헌혈후기</StyledTitle>
-          {/* <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton> */}
         </StyledTop>
-
         <StyledDiv>
           <img
             style={{ width: '870px', height: '500px' }}
@@ -50,42 +91,35 @@ function BD_Details() {
           />
           <StyledText>{board.title}</StyledText>
           <StyledText2>{board.content}</StyledText2>
-          {/* <StyledButton onClick={() => handleDetailClick(board)}>
-            기부하러가기
-          </StyledButton> */}
         </StyledDiv>
-        <Styledtext>
-          <Styledbox>
-            <StyledName>{}이름</StyledName>
-            <StyledDay>{}날짜</StyledDay>
-          </Styledbox>
-          <Styledbox>
-            <Styledcontent>{}대박 대단해</Styledcontent>
-            <Styledbox>
-              <StyledButton1>신고하기</StyledButton1>
-              <StyledButton1> | </StyledButton1>
-              <StyledButton1>삭제</StyledButton1>
-            </Styledbox>
-          </Styledbox>
-        </Styledtext>
+        <div>
+          {userData.reviewComments.map((review, index) => (
+            <Styledtext>
+              <Styledbox>
+                <StyledName>{review.userName}</StyledName>
+                <StyledDay>{review.createdAt}</StyledDay>
+              </Styledbox>
+              <Styledbox>
+                <Styledcontent>{review.comment}</Styledcontent>
+                <Styledbox>
+                  <StyledButton1>신고하기</StyledButton1>
+                  <StyledButton1> | </StyledButton1>
+                  <StyledButton1>삭제</StyledButton1>
+                </Styledbox>
+              </Styledbox>
+            </Styledtext>
+          ))}
+        </div>
         <StyledBox4>
-          <FloatingLabel
-            label="댓글 작성"
-            name="message"
-            style={{ width: '45em' }}
-          >
+          <FloatingLabel label="댓글 작성" name="message" style={{ width: '45em' }}>
             <Form.Control
               type="text"
               placeholder="label"
-              // value={message}
-              // onChange={handleInputChange}
+              value={comment} // 댓글 텍스트 입력값
+              onChange={handleCommentChange} // 댓글 텍스트 변경 핸들러
             />
           </FloatingLabel>
-          <StyledButton4
-          // onClick={sendMessage}
-          >
-            등록
-          </StyledButton4>
+          <StyledButton4 onClick={handleSubmit}>등록</StyledButton4>
         </StyledBox4>
       </StyledSubcomment>
     </StyledAll>

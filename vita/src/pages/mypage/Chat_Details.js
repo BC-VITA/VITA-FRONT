@@ -52,7 +52,7 @@ function Chat_Details() {
       console.log('STOMP 연결 성공');
       client.subscribe('/sub/chat', onMessageReceived);
     };
-
+    
     // 연결이 닫힌 경우의 이벤트 핸들러
     const onDisconnect = (frame) => {
       console.log('STOMP 연결 종료');
