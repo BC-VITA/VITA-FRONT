@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
+import { Form, FloatingLabel } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function BD_Details() {
@@ -53,6 +54,39 @@ function BD_Details() {
             기부하러가기
           </StyledButton> */}
         </StyledDiv>
+        <Styledtext>
+          <Styledbox>
+            <StyledName>{}이름</StyledName>
+            <StyledDay>{}날짜</StyledDay>
+          </Styledbox>
+          <Styledbox>
+            <Styledcontent>{}대박 대단해</Styledcontent>
+            <Styledbox>
+              <StyledButton1>신고하기</StyledButton1>
+              <StyledButton1> | </StyledButton1>
+              <StyledButton1>삭제</StyledButton1>
+            </Styledbox>
+          </Styledbox>
+        </Styledtext>
+        <StyledBox4>
+          <FloatingLabel
+            label="댓글 작성"
+            name="message"
+            style={{ width: '45em' }}
+          >
+            <Form.Control
+              type="text"
+              placeholder="label"
+              // value={message}
+              // onChange={handleInputChange}
+            />
+          </FloatingLabel>
+          <StyledButton4
+          // onClick={sendMessage}
+          >
+            등록
+          </StyledButton4>
+        </StyledBox4>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -183,23 +217,68 @@ const StyledText2 = styled.div`
 
   color: #333333;
 `;
-const StyledButton = styled.div`
+const Styledtext = styled.div`
+  width: 875px;
+  height: 110px;
+  border: 2px solid #656464;
+  background: #fff4f4;
+  padding: 20px;
+`;
+
+const Styledbox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledName = styled.div`
+  color: #333;
+  font-size: 24px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 700;
+`;
+
+const StyledDay = styled.div`
+  color: #5b5b5b;
+  font-size: 20px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 500;
+`;
+
+const Styledcontent = styled.div`
+  color: #333;
+  font-size: 22px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 500;
+`;
+
+const StyledButton1 = styled.div`
+  color: #5b5b5b;
+  font-size: 20px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 500;
+`;
+
+const StyledBox4 = styled.div`
+  width: 875px;
+  display: flex;
+  background: #ff9f9f;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+`;
+const StyledButton4 = styled.div`
+  width: 130px;
+  height: 57px;
+  background: #fff2f2;
+  border-radius: 10px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 22px;
-  padding: 10px;
-
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 57px;
   text-align: center;
-  width: 170px;
-
-  color: #ffffff;
-
-  background: #ff9f9f;
-  border-radius: 9px;
-
-  float: right;
-  margin-top: 20px;
+  color: #333333;
 `;
 export default BD_Details;
