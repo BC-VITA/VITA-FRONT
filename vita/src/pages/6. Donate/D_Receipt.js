@@ -3,43 +3,30 @@ import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
 
-import serviceimg from '../../img/serviceimg.png';
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function D_Receipt() {
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [boardList, setBoardList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
+    fetchBoardList();
   }, []);
+
+  const fetchBoardList = () => {
+    fetch('http://localhost:8004/donate/board')
+      .then((response) => response.json())
+      .then((data) => setBoardList(data.content))
+      .catch((error) => console.error('Error fetching board list:', error));
+  };
+
+  const handleDetailClick = (board, imageUrl) => {
+    navigate('/D_ReceiptDetails', { state: { board, imageUrl } });
+  };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -73,49 +60,41 @@ function D_Receipt() {
             <StyledButtonDiv>통계로 보기</StyledButtonDiv>
           </Nav.Link>
         </StyledButton>
-        <StyledBox>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-          <StyledBox2>
-            <Card style={{ width: '17rem' }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </StyledBox2>
-        </StyledBox>
+
+        <div>
+          {boardList.map((board) => {
+            // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
+            const imageUrl = board.imageUrl
+              ? board.imageUrl.replace(
+                  'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                  '\\'
+                )
+              : null;
+
+            return (
+              <div key={board.boardId}>
+                <StyledBox>
+                  <StyledBox2>
+                    <Card style={{ width: '17rem' }}>
+                      <Card.Img variant="top" src={imageUrl} />
+                      <Card.Body>
+                        <Card.Title>{board.title}</Card.Title>
+                        <Card.Text>{board.content}</Card.Text>
+                        <Button
+                          variant="primary"
+                          onClick={() => handleDetailClick(board, imageUrl)}
+                        >
+                          자세히 보기
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </StyledBox2>
+                </StyledBox>
+              </div>
+            );
+          })}
+        </div>
       </StyledSubcomment>
-      <div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
@@ -125,15 +104,12 @@ const StyledAll = styled.div`
 `;
 const StyledSub = styled.div`
   width: 200px;
-  /* height: 175px; */
   margin-top: 25px;
   margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
   width: 220px;
   height: 60px;
-  /* left: 370px;
-  top: 123px; */
   background: #ff9f9f;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -164,34 +140,24 @@ const StyledSubDiv2_1p = styled.div`
 `;
 const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
-  /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #333333;
 `;
 const StyledSubDiv2_2g = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
-  /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #969696;
 `;
 

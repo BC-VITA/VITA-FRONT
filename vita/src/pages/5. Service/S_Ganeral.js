@@ -12,11 +12,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
 import icon from './heart.png';
-
 function S_Ganeral() {
   const navigate = useNavigate();
 
-  const mapSize = [500, 300];
+  const mapSize = [450, 300];
   //지역선택
   const selectArea1 = [
     '전체',
@@ -43,7 +42,6 @@ function S_Ganeral() {
     const selectedValue = event.target.value;
     setvolunteerArea(selectedValue);
   }
-
   //봉사분야
   const selectType = [
     '전체',
@@ -64,11 +62,9 @@ function S_Ganeral() {
     '기타',
   ]);
   const [volunteerSmallType11, setvolunteerSmallType1] = useState('전체'); //실제로 사용하는 분야의 두번째 값
-
   function handleTypeChange(event) {
     const selectedValue1 = event.target.value;
     setvolunteerBigType(selectedValue1);
-
     if (selectedValue1 === '전체') {
       setvolunteerSmallType(['검색할 봉사분야를 골라주세요']);
       setvolunteerSmallType1(['검색할 봉사분야를 골라주세요']);
@@ -133,14 +129,12 @@ function S_Ganeral() {
     const selectedValue = event.target.value;
     setvolunteerSmallType1(selectedValue);
   }
-
   //활동구분
   const selectField3 = ['전체', '온라인', '오프라인'];
   const [activitySection1, setactivitySection] = useState('전체'); //활동구분에서 실제 사용하는 값
   const handleSelectActivitySection = (e) => {
     setactivitySection(e.target.value);
   };
-
   //봉사대상
   const selectVolunteerTarget = [
     '전체',
@@ -159,48 +153,40 @@ function S_Ganeral() {
   const handleSelectVolunteerTarget = (e) => {
     setvolunteerTarget(e.target.value);
   };
-
   //자격요건
   const selectField4 = ['전체', '있음', '없음'];
   const [volunteercondition, setvolunteercondition] = useState('전체'); //모집상태에서 실제 사용하는 값
   const handleSelectVolunteercondition = (e) => {
     setvolunteercondition(e.target.value);
   };
-
   //모집상태
   const selectField5 = ['전체', '모집중', '모집완료'];
   const [volunteerState, setvolunteerState] = useState('전체'); //모집상태에서 실제 사용하는 값
   const handleSelectVolunteerState = (e) => {
     setvolunteerState(e.target.value);
   };
-
   //봉사자 유형
   const selectField6 = ['전체', '성인', '청소년'];
   const [volunteerCategory, setvolunteerCategory] = useState('전체'); //봉사자유형에서 실제 사용하는 값
   const handleSelectVolunteerCategory = (e) => {
     setvolunteerCategory(e.target.value);
   };
-
   //봉사기간
   // const selectField7 = ['봉사기간'];
   const [startDate, setstartDate] = useState('');
   const [endDate, setendDate] = useState('');
   const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
-
   //봉사명
   const [volunteer, setVolunteer] = useState('');
   const handleChangeVolunteer = ({ target: { value } }) => setVolunteer(value);
-
   //수요처명
   const [demand, setDemand] = useState('');
   const handleChangeDemand = ({ target: { value } }) => setDemand(value);
-
   const [inputData, setInputData] = useState([{}, {}]);
   const userId = 'time';
   useEffect(() => {
     const url = `http://localhost:8004/volunteer/board/list?volunteerType=${userId}`;
-
     fetch(url, {
       method: 'get',
     })
@@ -211,7 +197,6 @@ function S_Ganeral() {
       });
     console.log(inputData);
   }, []);
-
   const handleReservation = (
     volunteerArea1,
     volunteerBigType1,
@@ -231,7 +216,6 @@ function S_Ganeral() {
       },
     });
   };
-
   //필터
   const handleSearch = () => {
     const filteredData = inputData.filter((item) => {
@@ -256,12 +240,35 @@ function S_Ganeral() {
     setInputData(filteredData);
     console.log('검색 결과:', filteredData);
   };
-
   //초기화
   const handlereturn = () => {
     window.location.reload();
   };
+  const handleJoin = (element) => {
+    navigate('/S_ReservationFirst', { state: { element } });
+  };
 
+  //수정
+  const [openIndex, setOpenIndex] = useState(-1);
+  const handleRowClick = (index) => {
+    setOpenIndex(index === openIndex ? -1 : index);
+  };
+  // const thStyle = {
+  //   // width: '80px',
+  //   fontFamily: 'Gmarket Sans TTF',
+  //   fontStyle: 'normal',
+  //   fontWeight: '700',
+  //   fontSize: '22px',
+  //   // lineHeight: '35px',
+  //   // textAlign: 'center',
+  //   color: '#333333',
+  // };
+  // const tdStyle = {
+  //   ...thStyle,
+  //   fontWeight: '500',
+  //   fontSize: '18px',
+  //   // lineHeight: '30px',
+  // };
   return (
     <StyledAll>
       <StyledSub>
@@ -615,7 +622,8 @@ function S_Ganeral() {
                     </FloatingLabel>
                   </StyledFilterDiv2>
                 </StyledFilter>
-                <section>
+
+                {/* <section>
                   <Accordion defaultActiveKey="0">
                     <Table striped bordered hover size="sm">
                       <thead>
@@ -667,7 +675,12 @@ function S_Ganeral() {
                                   </Accordion.Body>
                                 </Accordion.Item>
                               </Styledtd>
-                              <Styledtd>
+                              <Styledtd
+                                style={{
+                                  padding: '30px',
+                                  margin: 'auto',
+                                }}
+                              >
                                 모집중
                                 <br />
                                 <Styledimg
@@ -676,7 +689,13 @@ function S_Ganeral() {
                                   alt="logo"
                                 />
                                 <br />
-                                <button type="button">참여하기</button>
+                                <button
+                                  // type="button"
+                                  variant="primary"
+                                  onClick={() => handleDetailClick()}
+                                >
+                                  참여하기
+                                </button>
                               </Styledtd>
                             </Styledtr>
                           );
@@ -684,6 +703,151 @@ function S_Ganeral() {
                       </Styledtbody1>
                     </Table>
                   </Accordion>
+                </section> */}
+
+                <section id="list">
+                  <Styleddiv2>
+                    <StyledTable>
+                      <thead>
+                        <tr>
+                          <th
+                            id="area-header"
+                            style={{
+                              width: '350px',
+                              fontWeight: '700',
+                              fontSize: '22px',
+                            }}
+                          >
+                            제목 / 내용
+                          </th>
+                          <th
+                            style={{
+                              width: '100px',
+                            }}
+                          >
+                            &nbsp;
+                          </th>
+                          <th
+                            id="centerName-header"
+                            style={{
+                              width: '200px',
+                              fontWeight: '700',
+                              fontSize: '22px',
+                            }}
+                          >
+                            모집인원 및 현황
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {' '}
+                        {inputData.map((element, index) => {
+                          const markerPositions = [
+                            [element.latitude, element.longitude],
+                          ];
+                          return (
+                            <React.Fragment key={element.id}>
+                              <tr onClick={() => handleRowClick(index)}>
+                                <td
+                                  headers="area-header"
+                                  style={{
+                                    width: '350px',
+                                    fontWeight: '500',
+                                    fontSize: '18px',
+                                    textAlign: 'left',
+                                  }}
+                                >
+                                  {element.title}
+                                  <br />
+                                  글을 올린 날짜: {element.startDate}
+                                  <br />
+                                  모집기간: {element.volunteerSeekStartDate}-
+                                  {element.volunteerSeekEndDate}
+                                  <br />
+                                  활동날짜: {element.volunteerStartTime}-
+                                  {element.volunteerEndTime}
+                                  <br />
+                                  활동요일: {element.volunteerActivityWeek}
+                                  <br />
+                                  봉사시간: {element.volunteerStartTime}-
+                                  {element.volunteerEndTime}
+                                  <br />
+                                  봉사장소: {element.volunteerPlace}
+                                </td>
+                                <td></td>
+                                <td
+                                  headers="centerName-header"
+                                  style={{
+                                    width: '200px',
+                                    fontWeight: '500',
+                                    fontSize: '18px',
+                                  }}
+                                >
+                                  <br />
+                                  모집중
+                                  <br />
+                                  <Styledimg
+                                    src={icon}
+                                    className="main-icon"
+                                    alt="logo"
+                                  />
+                                  <br />
+                                  <button
+                                    type="button"
+                                    onClick={() => handleJoin(element)}
+                                    style={{
+                                      width: '100px',
+                                      height: '35px',
+                                      marginTop: '5px',
+                                      borderRadius: '9px',
+                                      background: '#d9d9d9',
+                                      color: '#333333',
+                                      border: 'none',
+                                    }}
+                                  >
+                                    참여하기
+                                  </button>
+                                </td>
+                              </tr>
+
+                              {openIndex === index && (
+                                <tr>
+                                  <td colSpan={2}>
+                                    <Styledtd1 id="wrap">
+                                      <KakaoMap
+                                        markerPositions={markerPositions}
+                                        size={mapSize}
+                                      />
+                                    </Styledtd1>
+                                  </td>
+                                  <td>
+                                    <Styledtd2
+                                      colSpan={1}
+                                      style={{
+                                        width: '200px',
+                                      }}
+                                    >
+                                      <Styledtxt>
+                                        모집인원: {element.needVolunteerNumber}
+                                        <br />
+                                        신청인원: {element.bloodType}
+                                        <br />
+                                        봉사자 유형:{' '}
+                                        {element.volunteerPersonType}
+                                        <br />
+                                        주소: {element.volunteerAddress}
+                                        <br />
+                                      </Styledtxt>
+                                    </Styledtd2>
+                                  </td>
+                                </tr>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                      </tbody>
+                    </StyledTable>
+                  </Styleddiv2>
                 </section>
               </Tab.Content>
             </Tab>
@@ -804,7 +968,6 @@ function S_Ganeral() {
                         </option>
                       ))}
                     </select>
-
                     <select
                       onChange={handleSelectVolunteercondition}
                       value={
@@ -954,75 +1117,149 @@ function S_Ganeral() {
                     </FloatingLabel>
                   </StyledFilterDiv2>
                 </StyledFilter>
-                <section>
-                  <Accordion defaultActiveKey="0">
-                    <Table striped bordered hover size="sm">
+                <section id="list">
+                  <Styleddiv2>
+                    <StyledTable>
                       <thead>
-                        <tr style={{ textAlign: 'center' }}>
-                          <th style={{ width: '600px' }}>제목 / 내용</th>
-                          <th>모집인원 및 현황</th>
+                        <tr>
+                          <th
+                            id="area-header"
+                            style={{
+                              width: '350px',
+                              fontWeight: '700',
+                              fontSize: '22px',
+                            }}
+                          >
+                            제목 / 내용
+                          </th>
+                          <th
+                            style={{
+                              width: '100px',
+                            }}
+                          >
+                            &nbsp;
+                          </th>
+                          <th
+                            id="centerName-header"
+                            style={{
+                              width: '200px',
+                              fontWeight: '700',
+                              fontSize: '22px',
+                            }}
+                          >
+                            모집인원 및 현황
+                          </th>
                         </tr>
                       </thead>
-                      <Styledtbody1>
+                      <tbody>
+                        {' '}
                         {inputData.map((element, index) => {
                           const markerPositions = [
                             [element.latitude, element.longitude],
                           ];
                           return (
-                            <Styledtr key={element.id}>
-                              <Styledtd>
-                                <Accordion.Item eventKey={index}>
-                                  <Accordion.Header>
-                                    {element.title}
-                                    <br />
-                                    글을 올린 날짜: {element.startDate}
-                                    <br />
-                                    모집기간: {element.volunteerSeekStartDate}-
-                                    {element.volunteerSeekEndDate}
-                                    <br />
-                                    활동날짜: {element.volunteerStartTime}-
-                                    {element.volunteerEndTime}
-                                    <br />
-                                    활동요일: {element.volunteerActivityWeek}
-                                    <br />
-                                    봉사시간: {element.volunteerStartTime}-
-                                    {element.volunteerEndTime}
-                                    <br />
-                                    봉사장소: {element.volunteerPlace}
-                                  </Accordion.Header>
-                                  <Accordion.Body colSpan={2}>
-                                    모집인원: {element.needVolunteerNumber}
-                                    <br />
-                                    신청인원: {element.bloodType}
-                                    <br />
-                                    봉사자 유형: {element.volunteerPersonType}
-                                    <br />
-                                    주소: {element.volunteerAddress}
-                                    <br />
-                                    <KakaoMap
-                                      markerPositions={markerPositions}
-                                      size={mapSize}
-                                    />
-                                  </Accordion.Body>
-                                </Accordion.Item>
-                              </Styledtd>
-                              <Styledtd>
-                                모집중
-                                <br />
-                                <Styledimg
-                                  src={icon}
-                                  className="main-icon"
-                                  alt="logo"
-                                />
-                                <br />
-                                <button type="button">참여하기</button>
-                              </Styledtd>
-                            </Styledtr>
+                            <React.Fragment key={element.id}>
+                              <tr onClick={() => handleRowClick(index)}>
+                                <td
+                                  headers="area-header"
+                                  style={{
+                                    width: '350px',
+                                    fontWeight: '500',
+                                    fontSize: '18px',
+                                    textAlign: 'left',
+                                  }}
+                                >
+                                  {element.title}
+                                  <br />
+                                  글을 올린 날짜: {element.startDate}
+                                  <br />
+                                  모집기간: {element.volunteerSeekStartDate}-
+                                  {element.volunteerSeekEndDate}
+                                  <br />
+                                  활동날짜: {element.volunteerStartTime}-
+                                  {element.volunteerEndTime}
+                                  <br />
+                                  활동요일: {element.volunteerActivityWeek}
+                                  <br />
+                                  봉사시간: {element.volunteerStartTime}-
+                                  {element.volunteerEndTime}
+                                  <br />
+                                  봉사장소: {element.volunteerPlace}
+                                </td>
+                                <td></td>
+                                <td
+                                  headers="centerName-header"
+                                  style={{
+                                    width: '200px',
+                                    fontWeight: '500',
+                                    fontSize: '18px',
+                                  }}
+                                >
+                                  <br />
+                                  모집중
+                                  <br />
+                                  <Styledimg
+                                    src={icon}
+                                    className="main-icon"
+                                    alt="logo"
+                                  />
+                                  <br />
+                                  <button
+                                    type="button"
+                                    onClick={() => handleJoin(element)}
+                                    style={{
+                                      width: '100px',
+                                      height: '35px',
+                                      marginTop: '5px',
+                                      borderRadius: '9px',
+                                      background: '#d9d9d9',
+                                      color: '#333333',
+                                      border: 'none',
+                                    }}
+                                  >
+                                    참여하기
+                                  </button>
+                                </td>
+                              </tr>
+
+                              {openIndex === index && (
+                                <tr>
+                                  <td colSpan={2}>
+                                    <Styledtd1 id="wrap">
+                                      <KakaoMap
+                                        markerPositions={markerPositions}
+                                        size={mapSize}
+                                      />
+                                    </Styledtd1>
+                                  </td>
+                                  <td>
+                                    <Styledtd2
+                                      colSpan={1}
+                                      style={{
+                                        width: '200px',
+                                      }}
+                                    >
+                                      <Styledtxt>
+                                        모집인원: {element.needVolunteerNumber}
+                                        <br />
+                                        신청인원: {element.bloodType}
+                                        <br />
+                                        봉사자 유형:{' '}
+                                        {element.volunteerPersonType}
+                                        <br />
+                                        주소: {element.volunteerAddress}
+                                        <br />
+                                      </Styledtxt>
+                                    </Styledtd2>
+                                  </td>
+                                </tr>
+                              )}
+                            </React.Fragment>
                           );
                         })}
-                      </Styledtbody1>
-                    </Table>
-                  </Accordion>
+                      </tbody>
+                    </StyledTable>
+                  </Styleddiv2>
                 </section>
               </Tab.Content>
             </Tab>
@@ -1033,19 +1270,87 @@ function S_Ganeral() {
   );
 }
 
+// const StyledAll = styled.div`
+//   display: flex;
+//   padding-bottom: 300px;
+// `;
+// const StyledSub = styled.div`
+//   width: 170px;
+//   /* height: 175px; */
+//   margin-top: 25px;
+//   margin-left: 205px;
+// `;
+// const StyledSubDiv1 = styled.div`
+//   width: 190px;
+//   height: 50px;
+//   /* left: 370px;
+//   top: 123px; */
+//   background: #ff9f9f;
+//   font-family: 'Gmarket Sans TTF';
+//   font-style: normal;
+//   font-weight: 700;
+//   font-size: 23px;
+//   line-height: 55px;
+//   /* identical to box height, or 100% */
+//   text-align: center;
+//   color: #ffffff;
+// `;
+// const StyledSubDiv2 = styled.div`
+//   width: 190px;
+//   height: 278px;
+//   border: 3px solid #d7d7d7;
+// `;
+// const StyledSubDiv21 = styled.div`
+//   border-bottom: 3px solid #d7d7d7;
+//   background-color: white;
+//   height: 55px;
+//   margin-left: 3px;
+//   margin-right: 3px;
+// `;
+// const StyledSubDiv21p = styled.div`
+//   border-bottom: 3px solid #ff9f9f;
+//   background-color: white;
+//   height: 55px;
+//   margin-left: 3px;
+//   margin-right: 3px;
+// `;
+// const StyledSubDiv22 = styled.div`
+//   border: solid white 3px;
+//   height: 24px;
+//   font-family: 'Gmarket Sans TTF';
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 19px;
+//   line-height: 38px;
+//   /* identical to box height, or 100% */
+//   text-align: center;
+//   color: #333333;
+// `;
+// const StyledSubDiv22g = styled.div`
+//   border: solid white 3px;
+//   height: 24px;
+//   font-family: 'Gmarket Sans TTF';
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 19px;
+//   line-height: 38px;
+//   /* identical to box height, or 100% */
+//   text-align: center;
+//   color: #969696;
+// `;
 const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
 `;
 const StyledSub = styled.div`
-  width: 170px;
+  width: 200px;
   /* height: 175px; */
   margin-top: 25px;
-  margin-left: 205px;
+  margin-left: 180px;
 `;
 const StyledSubDiv1 = styled.div`
-  width: 190px;
-  height: 50px;
+  width: 220px;
+  height: 60px;
   /* left: 370px;
   top: 123px; */
   background: #ff9f9f;
@@ -1053,27 +1358,26 @@ const StyledSubDiv1 = styled.div`
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
-  line-height: 55px;
-  /* identical to box height, or 100% */
+  line-height: 60px;
   text-align: center;
   color: #ffffff;
 `;
 const StyledSubDiv2 = styled.div`
-  width: 190px;
-  height: 278px;
+  width: 220px;
+  height: 302px;
   border: 3px solid #d7d7d7;
 `;
 const StyledSubDiv21 = styled.div`
   border-bottom: 3px solid #d7d7d7;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
 const StyledSubDiv21p = styled.div`
   border-bottom: 3px solid #ff9f9f;
   background-color: white;
-  height: 55px;
+  height: 60px;
   margin-left: 3px;
   margin-right: 3px;
 `;
@@ -1123,7 +1427,7 @@ const StyledButton = styled.button`
   width: 125px;
   height: 35px;
   margin-top: 3px;
-  margin-left: 32em;
+  margin-left: 30em;
   border-radius: 9px;
   background: #ff9f9f;
   color: #ffffff;
@@ -1224,5 +1528,41 @@ const Styledimg = styled.img`
 `;
 const Styledtbody1 = styled.tbody`
   border: none;
+`;
+
+// 수정
+const Styleddiv2 = styled.div`
+  text-align: center;
+`;
+const StyledTable = styled(Table)`
+  /* margin-top: 30px; */
+  border-collapse: collapse;
+  font-family: Gmarket Sans TTF;
+  font-style: normal;
+  text-align: center;
+  color: #333333;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+`;
+const Styledtd1 = styled.div`
+  /* width: 500px; */
+`;
+const Styledtd2 = styled.div`
+  /* display: block; */
+  margin-top: 50px;
+`;
+const Styledtxt = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  /* line-height: 30px; */
+  /* or 158% */
+  letter-spacing: 0.05em;
+  color: #333333;
 `;
 export default S_Ganeral;

@@ -1,50 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Nav, FloatingLabel, Form, Tab, Tabs, Button, Table } from 'react-bootstrap';
 
-import Nav from 'react-bootstrap/Nav';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import Post3 from '../../img/image 70.png';
 
 function MyPage_S() {
+  const userId = sessionStorage.getItem('userId');
   const [startDate, setstartDate] = useState('');
   const [endDate, setendDate] = useState('');
   const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
-
-  const userId = sessionStorage.getItem('userId');
   const [error, setError] = useState(null);
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [userData, setUserData1] = useState(null);
+  const [userData1, setUserData2] = useState(null);
 
+  //봉사신청내역
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
+    const url1 = `http://localhost:8004/user/mypage/volunteer-history?userId=${userId}`;
+    const url2 = `http://localhost:8004/user/mypage-volunteer-active-history?userId=${userId}`;
+
+    const fetchData = async () => {
+      try {
+        const response1 = await fetch(url1);
+        const data1 = await response1.json();
+        setUserData1(data1);
+
+        const response2 = await fetch(url2);
+        const data2 = await response2.json();
+        setUserData2(data2);
+      } catch (err) {
         setError(err.message);
-      });
-    console.log(inputData);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  if (userData === null) {
+    return <div>Loading...</div>;
+  }
+
+  if (userData1 === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <StyledAll>
       <StyledSub>
@@ -93,7 +93,7 @@ function MyPage_S() {
             <StyledBox3>
               <StyledTxt>시간인증형 봉사시간</StyledTxt>
               <FloatingLabel
-                label={userId}
+                label={userData.timeTypeVolunteerHistoryNumber + ' 시간'}
                 //value={roomnumber}
                 //onChange={handleReservation}
                 style={{ width: '300px', lineHeight: '15px' }}
@@ -108,13 +108,11 @@ function MyPage_S() {
             <StyledBox3 style={{ marginLeft: '60px' }}>
               <StyledTxt>시간인증형 자원봉사 참여</StyledTxt>
               <FloatingLabel
-                label={userId}
+                label={userData.myPageVolunteerReservationList.length + '번'}
+
                 //value={roomnumber}
                 //onChange={handleReservation}
-                style={{
-                  width: '300px',
-                  lineHeight: '15px',
-                }}
+                style={{ width: '300px', lineHeight: '15px' }}
               >
                 <Form.Control
                   placeholder="name"
@@ -124,77 +122,90 @@ function MyPage_S() {
               </FloatingLabel>
             </StyledBox3>
           </StyledBox2>
+          <img
+            style={{ marginTop: '10px', width: '870px', height: '300px' }}
+            src={Post3}
+            alt="Third slide"
+          />
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="history" title="봉사 내역">
+              <Tab eventKey="history" title="봉사 신청 내역">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>봉사 내역</StyledTxt2>
+                      <StyledTxt2>봉사 신청 내역</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
                         <input
                           type="Date"
                           value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
                         <input
                           type="Date"
                           value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
+                    <div>
+                      {userData.myPageVolunteerReservationList.map((review, index) => (
+                        <div key={index}>
+                          <div>신청자: {review.userName}</div>
+                          <div>봉사시간: {review.volunteerTime}</div>
+                          <div>제목: {review.volunteerTitle}</div>
+                          <div>
+                            봉사유형: {review.volunteerType === 'time' ? '시간' : review.volunteerType}
+                          </div>
+                          <div>예약시간: {review.localDateTime ? review.localDateTime.split('T')[0] : ''}</div>
+                          <div><br /></div>
+                        </div>
+                      ))}
+                    </div>
                   </StyledBox1>
                 </Tab.Content>
               </Tab>
 
-              <Tab eventKey="reservation" title="관심있는 봉사">
+              <Tab eventKey="reservation" title="봉사참여 실적">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>관심있는 봉사</StyledTxt2>
+                      <StyledTxt2>봉사참여 실적</StyledTxt2>
                     </StyledDiv>
+                    <div>
+                      {userData1.map((review, index) => (
+                        <div key={index}>
+                          <div>봉사ID: {review.reservationId}</div>
+                          <div>봉사제목: {review.title}</div>
+                          <div>시간: {review.boardCreateTime ? review.boardCreateTime.split('T')[0] : ''}</div>
+                          <div><br /></div>
+                        </div>
+                      ))}
+                    </div>
                   </StyledBox1>
                 </Tab.Content>
               </Tab>
-              <Tab eventKey="watchlist" title="실적확인서 발행 내역">
+              <Tab eventKey="watchlist" title="관심있는 게시물">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>실적확인서 발행 내역</StyledTxt2>
+                      <StyledTxt2>관심있는 게시물</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
                         <input
                           type="Date"
                           value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
                         <input
                           type="Date"
                           value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
@@ -204,6 +215,32 @@ function MyPage_S() {
               </Tab>
             </Tabs>
           </StyledTab1>
+          <StyledTable>
+            <thead style={{ fontWeight: '700', fontSize: '24px' }}>
+              <tr>
+                <th style={{ width: '400px' }}>
+                  제목
+                </th>
+                <th style={{ width: '200px' }}>
+                  일시
+                </th>
+                <th style={{ width: '100px' }}>
+
+                </th>
+              </tr>
+            </thead>
+            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+              <tr>
+                <td>A형의 혈액형이 급하게 필요합니다. 도와...</td>
+                <td>2023.06.07</td>
+                <td>
+                  <Button style={{ background: '#8FAADC' }}>
+                    <Nav.Link href="/Chat_Details">채팅방이동</Nav.Link>
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </StyledTable>
         </Styledcomment>
       </StyledSubcomment>
     </StyledAll>
@@ -417,5 +454,24 @@ const StyledFilterDivTitle3 = styled.div`
   margin-right: 20px;
   /* margin-left: 10px; */
   line-height: 40px;
+`;
+const StyledTable = styled(Table)`
+  margin-top: 30px;
+  /* margin: 10px; */
+  border-collapse: collapse;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+
+  line-height: 50px;
+
+  color: #333333;
+
+  text-align: center;
 `;
 export default MyPage_S;

@@ -9,8 +9,6 @@ function MyPage() {
   const [userData, setUserData] = useState(null);
   const userId = sessionStorage.getItem('userId');
 
-  const [userPw, setUserPw] = useState('');
-  const [userPw1, setUserPw1] = useState('');
   const [userBirth, setUserBirth] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPhoneNumber, setUserPhone] = useState('');
@@ -21,45 +19,32 @@ function MyPage() {
   const [isRH, setisRH] = useState('');
   const [bloodHistory, setBloodHistory] = useState('');
 
-  const handleChangePw = ({ target: { value } }) => setUserPw(value);
-  const handleChangePw1 = ({ target: { value } }) => setUserPw1(value);
   const handleChangeBirth = ({ target: { value } }) => setUserBirth(value);
   const handleChangeEmail = ({ target: { value } }) => setUserEmail(value);
   const handleChangePhone = ({ target: { value } }) => setUserPhone(value);
 
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
-
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
+    const url = `http://localhost:8004/user/mypage?userId=${userId}`;
+
+    fetch(url, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
+        setUserData(res);
+        setUserBirth(res.myPageUserInfo.userBirth || '');
+        setUserEmail(res.myPageUserInfo.userEmail || '');
+        setUserPhone(res.myPageUserInfo.userPhoneNumber || '');
+        setuserName(res.myPageUserInfo.userName || '');
+        setuserBlood(res.myPageUserInfo.userBlood || '');
+        setUserSex(res.myPageUserInfo.sex || '');
+        setisRH(res.myPageUserInfo.isRH || '');
+        setBloodHistory(res.myPageUserInfo.bloodHistory || '');
       });
-    console.log(inputData);
   }, []);
+
   function writeDonateBoard() {
-    const donateBoardRequest = {
+    const requestData = {
       userId: userId,
       userName: userName,
       userPhoneNumber: userPhoneNumber,
@@ -71,22 +56,23 @@ function MyPage() {
       bloodHistory: bloodHistory,
     };
 
-    fetch('http://localhost:8004/user/mypage', {
+    fetch(`http://localhost:8004/user/mypage?userId=${userId}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(donateBoardRequest),
+      body: JSON.stringify(requestData),
     })
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => {
-        // 응답 처리
+        console.log(data);
       })
       .catch((error) => {
-        console.log('오류났음');
+        console.error(error);
       });
-    console.log('전송완료');
+    window.location.reload();
   }
+
   return (
     <StyledAll>
       <StyledSub>
@@ -133,15 +119,6 @@ function MyPage() {
         <StyledBox id="myInformation">
           <StyledDiv>
             <StyledDiv1>
-              {/* <div>{userId}</div> */}
-              <div>{userName}</div>
-              <div>{userPhoneNumber}</div>
-              <div>{userEmail}</div>
-              <div>{userBirth}</div>
-              <div>{userBlood}</div>
-              <div>{sex}</div>
-              <div>{isRH}</div>
-              <div>{bloodHistory}</div>
               <StyledTxtB>나의 정보</StyledTxtB>
               <StyledButton type="button" onClick={writeDonateBoard}>
                 <StyledButtonTxt>정보 수정하기</StyledButtonTxt>
@@ -152,8 +129,8 @@ function MyPage() {
                 <StyledTxtR>아이디</StyledTxtR>
                 <FloatingLabel
                   label={userId}
-                  //value={roomnumber}
-                  //onChange={handleReservation}
+                //value={roomnumber}
+                //onChange={handleReservation}
                 >
                   <Form.Control placeholder="name" disabled />
                 </FloatingLabel>
@@ -164,8 +141,8 @@ function MyPage() {
                 <StyledTxtR>비밀번호</StyledTxtR>
                 <FloatingLabel
                   label="비밀번호"
-                  value={userPw}
-                  onChange={handleChangePw}
+                  value={''}
+                // onChange={}
                 >
                   <Form.Control placeholder="name" />
                 </FloatingLabel>
@@ -174,8 +151,8 @@ function MyPage() {
                 <StyledTxtR>비밀번호 확인</StyledTxtR>
                 <FloatingLabel
                   label="비밀번호"
-                  value={userPw1}
-                  onChange={handleChangePw1}
+                  value={''}
+                // onChange={}
                 >
                   <Form.Control placeholder="name" />
                 </FloatingLabel>
@@ -185,9 +162,9 @@ function MyPage() {
               <StyledDiv3 style={{ marginRight: '80px' }}>
                 <StyledTxtR>성명</StyledTxtR>
                 <FloatingLabel
-                  label={userData && userData.userName ? userData.userName : ''}
-                  // value={roomnumber}
-                  // onChange={handleChangeroomnumber}
+                  label={userName}
+                // value={roomnumber}
+                // onChange={handleChangeroomnumber}
                 >
                   <Form.Control placeholder="name" disabled />
                 </FloatingLabel>
@@ -195,9 +172,7 @@ function MyPage() {
               <StyledDiv3>
                 <StyledTxtR>생년월일</StyledTxtR>
                 <FloatingLabel
-                  label={
-                    userData && userData.userBirth ? userData.userBirth : ''
-                  }
+                  label={userBirth}
                   value={userBirth}
                   onChange={handleChangeBirth}
                 >
@@ -209,9 +184,7 @@ function MyPage() {
               <StyledDiv3 style={{ marginRight: '80px' }}>
                 <StyledTxtR>이메일</StyledTxtR>
                 <FloatingLabel
-                  label={
-                    userData && userData.userEmail ? userData.userEmail : ''
-                  }
+                  label={userEmail}
                   value={userEmail}
                   onChange={handleChangeEmail}
                 >
@@ -221,11 +194,7 @@ function MyPage() {
               <StyledDiv3>
                 <StyledTxtR>전화번호</StyledTxtR>
                 <FloatingLabel
-                  label={
-                    userData && userData.userPhoneNumber
-                      ? userData.userPhoneNumber
-                      : ''
-                  }
+                  label={userPhoneNumber}
                   value={userPhoneNumber}
                   onChange={handleChangePhone}
                 >

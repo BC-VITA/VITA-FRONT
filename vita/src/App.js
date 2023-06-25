@@ -15,13 +15,13 @@ import Home from './pages/Main';
 
 import MyPageDBD from './pages/mypage/MyPage_DBD';
 import MyPageChat from './pages/mypage/MyPage_Chat';
+import ChatDetails from './pages/mypage/Chat_Details';
 import MyPageBD from './pages/mypage/MyPage_BD';
 import MyPageD from './pages/mypage/MyPage_D';
 import DDeed from './pages/mypage/D_Deed';
 import MyPageS from './pages/mypage/MyPage_S';
 import SDeed from './pages/mypage/S_Deed';
 import MyPage from './pages/mypage/MyPage';
-// import MyPage from './pages/MyPage';
 // import MyPageMaine from './pages/mypage/MyPageMaine';
 
 import Learn from './pages/1. Learn/Learn';
@@ -74,6 +74,11 @@ import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
 
+//실험
+import Asd from './pages/asd'
+import Asd1 from './pages/asd1'
+import { ImportExportOutlined } from '@mui/icons-material';
+
 const startDate = '2022-01-01';
 const endDate = '2022-01-10';
 const onReservation = () => {
@@ -92,6 +97,7 @@ function App() {
           {/* 마이페이지 */}
           <Route path="/MyPage_DBD" element={<MyPageDBD />}></Route>
           <Route path="/MyPage_Chat" element={<MyPageChat />}></Route>
+          <Route path="/Chat_Details" element={<ChatDetails />}></Route>
           <Route path="/MyPage_BD" element={<MyPageBD />}></Route>
           <Route path="/MyPage_D" element={<MyPageD />}></Route>
           <Route path="/D_Deed" element={<DDeed />}></Route>
@@ -201,6 +207,8 @@ function App() {
             element={<MBloodReservation />}
           ></Route>
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
+          <Route path="/asd" element={<Asd />}></Route>
+          <Route path="/asd1" element={<Asd1 />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>
