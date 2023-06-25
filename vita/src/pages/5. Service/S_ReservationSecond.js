@@ -10,7 +10,7 @@ function S_ReservationSecond() {
   const navigate = useNavigate();
   const location = useLocation();
   const { date, userName, phone, element } = location.state;
-
+  
   function formatDate(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -114,9 +114,7 @@ function S_ReservationSecond() {
           </StyledDiv1>
           <StyledDiv1>
             <StyledDiv2>봉사시간</StyledDiv2>
-            <StyledDiv3>
-              {element.volunteerStartTime}~{element.volunteerEndTime}
-            </StyledDiv3>
+            <StyledDiv3>{element.volunteerStartTime}~{element.volunteerEndTime}</StyledDiv3>
           </StyledDiv1>
           <StyledDiv1>
             <StyledDiv2>주소</StyledDiv2>
@@ -129,9 +127,7 @@ function S_ReservationSecond() {
           <StyledDiv1>
             <StyledDiv2>봉사유형</StyledDiv2>
             <StyledDiv3>
-              {element.volunteerType === 'time'
-                ? '시간'
-                : element.volunteerType}
+              {element.volunteerType === "time" ? "시간" : element.volunteerType}
             </StyledDiv3>
           </StyledDiv1>
           <StyledDiv1>

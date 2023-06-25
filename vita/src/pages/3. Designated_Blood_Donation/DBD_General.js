@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
-
 function DBD_General() {
+  const navigate = useNavigate();
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const selectList2 = ['최신순', '마감순'];
   const [firstListValue, setFirstListValue] = useState('전체');
@@ -24,7 +24,6 @@ function DBD_General() {
   function handleFirstListChange(event) {
     const selectedValue = event.target.value;
     setFirstListValue(selectedValue);
-
     if (selectedValue === '전체') {
       setSecondListOptions(['검색할 지역을 골라주세요']);
     } else if (selectedValue === '서울') {
@@ -41,33 +40,23 @@ function DBD_General() {
     const selected2Value = event.target.value;
     setFirstList2Value(selected2Value);
   }
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
-
+  const [inputData, setInputData] = useState([{}, {}]);
   useEffect(() => {
     fetch('http://localhost:8004/user/board/filter', {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setInputData(res);
-        console.log(inputData);
       });
-    console.log(inputData);
   }, []);
+  const handleJoin = (hospitalName) => {
+    navigate('/Chat_Details', { state: { hospitalName } });
+  };
+
+  const handleDetailClick = (hospitalName) => {
+    navigate('/Chat_Details', { state: { hospitalName } });
+  };
   return (
     <StyledAll>
       <StyledSub>
@@ -106,7 +95,6 @@ function DBD_General() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
-
         <StyledTab1>
           <Tabs>
             <Tab eventKey="profile" title="일반 사용자">
@@ -117,7 +105,7 @@ function DBD_General() {
                     <select
                       onChange={handleFirstListChange}
                       value={firstListValue}
-                      style={{ border: 'none' }}
+                      style={{ border: 'none', marginTop: '20px' }}
                     >
                       {selectList1.map((item) => (
                         <option value={item} key={item}>
@@ -136,16 +124,20 @@ function DBD_General() {
                       ))}
                     </select> */}
                   </StyledFilterDiv1One>
-
                   <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
                     <Form>
                       {['checkbox'].map((type) => (
-                        <div key={`default-${type}`} className="mb-3">
+                        <div
+                          key={`default-${type}`}
+                          className="mb-3"
+                          style={{ marginTop: '20px', display: 'flex' }}
+                        >
                           <Form.Check
                             type={type}
                             id={`default-${type}`}
                             label="RH-"
+                            style={{ marginRight: '20px' }}
                           />
                           <Form.Check
                             type={type}
@@ -156,7 +148,7 @@ function DBD_General() {
                       ))}
                     </Form>
                   </StyledFilterDiv1One>
-                  <StyledFilterDiv1One>
+                  {/* <StyledFilterDiv1One>
                     <select
                       onChange={handleSecondListChange}
                       value={firstList2Value}
@@ -168,7 +160,7 @@ function DBD_General() {
                         </option>
                       ))}
                     </select>
-                  </StyledFilterDiv1One>
+                  </StyledFilterDiv1One> */}
                   {/* <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>
                       &nbsp;기&nbsp;간&nbsp;
@@ -196,22 +188,63 @@ function DBD_General() {
                     </select>
                   </StyledFilterDiv1One> */}
                 </StyledFilter>
-                <Styleddiv2>
-                  <Accordion defaultActiveKey="0">
-                    <Table striped bordered hover size="sm">
+
+                <section id="list">
+                  <Styleddiv2>
+                    <StyledTable>
                       <thead>
                         <tr>
-                          <th>제목 / 내용</th>
-                          <th>모집인원 및 현황</th>
+                          <th
+                            id="area-header"
+                            style={{
+                              width: '350px',
+                              fontWeight: '700',
+                              fontSize: '22px',
+                            }}
+                          >
+                            제목 / 내용
+                          </th>
+                          <th
+                            style={{
+                              width: '100px',
+                            }}
+                          >
+                            &nbsp;
+                          </th>
+                          <th
+                            id="centerName-header"
+                            style={{
+                              width: '200px',
+                              fontWeight: '700',
+                              fontSize: '22px',
+                            }}
+                          >
+                            모집인원 및 현황
+                          </th>
                         </tr>
                       </thead>
-                      <Styledtbody1>
-                        {inputData.map((element, index) => {
-                          return (
-                            <Styledtr>
-                              <Styledtd>
-                                <Accordion.Item eventKey={index}>
-                                  <Accordion.Header>
+
+                      <tbody>
+                        {' '}
+                        {inputData
+                          .slice(0)
+                          .reverse()
+                          .map((element, index) => {
+                            const markerPositions = [
+                              [element.latitude, element.longitude],
+                            ];
+                            return (
+                              <React.Fragment key={element.id}>
+                                <tr onClick={() => handleRowClick(index)}>
+                                  <td
+                                    headers="area-header"
+                                    style={{
+                                      width: '350px',
+                                      fontWeight: '500',
+                                      fontSize: '18px',
+                                      textAlign: 'left',
+                                    }}
+                                  >
                                     {element.title}
                                     <br />
                                     {element.startDate}
@@ -221,36 +254,81 @@ function DBD_General() {
                                     혈액 종류 : {element.bloodType}
                                     <br />
                                     장소 : {element.hospitalName}
-                                  </Accordion.Header>
-                                  <Accordion.Body colSpan={2}>
-                                    {element.content}
-                                  </Accordion.Body>
-                                </Accordion.Item>
-                              </Styledtd>
-                              <Styledtd>
-                                {element.bloodNumber}
-                                {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
-                                <br />
-                                <Styledimg
-                                  src={icon}
-                                  class
-                                  name="main-icon"
-                                  alt="logo"
-                                />
-                                {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
-                                <br />
-                                {/* <Nav.Link type="button" href="/DBD_PostGeneral">
-                                  <StyledButtonDiv>참여하기</StyledButtonDiv>
-                                </Nav.Link> */}
-                                <button type="button">참여하기</button>
-                              </Styledtd>
-                            </Styledtr>
-                          );
-                        })}
-                      </Styledtbody1>
-                    </Table>
-                  </Accordion>
-                </Styleddiv2>
+                                  </td>
+                                  <td></td>
+                                  <td
+                                    headers="centerName-header"
+                                    style={{
+                                      width: '200px',
+                                      fontWeight: '500',
+                                      fontSize: '18px',
+                                    }}
+                                  >
+                                    <br />
+                                    모집중
+                                    <br />
+                                    <Styledimg
+                                      src={icon}
+                                      className="main-icon"
+                                      alt="logo"
+                                    />
+                                    <br />
+                                    <button
+                                      // type="button"
+                                      variant="primary"
+                                      onClick={() =>
+                                        handleDetailClick(element.hospitalName)
+                                      }
+                                      style={{
+                                        width: '100px',
+                                        height: '35px',
+                                        borderRadius: '9px',
+                                        background: '#d9d9d9',
+                                        color: '#333333',
+                                        border: 'none',
+                                      }}
+                                    >
+                                      참여하기
+                                    </button>
+                                  </td>
+                                </tr>
+
+                                {openIndex === index && (
+                                  <tr>
+                                    <td colSpan={2}>
+                                      {/* <Styledtd1 id="wrap">
+                                      <KakaoMap
+                                        markerPositions={markerPositions}
+                                        size={mapSize}
+                                      />
+                                    </Styledtd1> */}
+                                      <Styledtxt
+                                        style={{
+                                          width: '450px',
+                                        }}
+                                      >
+                                        {element.content}
+                                      </Styledtxt>
+                                    </td>
+                                    <td>
+                                      <Styledtd2
+                                        colSpan={1}
+                                        style={{
+                                          width: '100px',
+                                        }}
+                                      >
+                                        {/* <Styledtxt>{element.content}</Styledtxt> */}
+                                      </Styledtd2>
+                                    </td>
+                                  </tr>
+                                )}
+                              </React.Fragment>
+                            );
+                          })}
+                      </tbody>
+                    </StyledTable>
+                  </Styleddiv2>
+                </section>
               </Tab.Content>
             </Tab>
 
@@ -329,7 +407,6 @@ function DBD_General() {
                   </StyledFilterDiv1One> */}
                   </StyledFilterDiv1>
                 </StyledFilter>
-
                 <Styleddiv2>
                   <Accordion defaultActiveKey="0">
                     <Table striped bordered hover size="sm">
@@ -339,7 +416,6 @@ function DBD_General() {
                           <th>모집인원 및 현황</th>
                         </tr>
                       </thead>
-
                       <Styledtbody1>
                         {inputData.map((element, index) => {
                           return (
@@ -377,7 +453,20 @@ function DBD_General() {
                                 {/* <Nav.Link type="button" href="/DBD_PostGeneral">
                                   <StyledButtonDiv>참여하기</StyledButtonDiv>
                                 </Nav.Link> */}
-                                <button type="button">참여하기</button>
+                                <button
+                                  type="button"
+                                  style={{
+                                    width: '100px',
+                                    height: '35px',
+                                    marginTop: '5px',
+                                    borderRadius: '9px',
+                                    background: '#d9d9d9',
+                                    color: '#333333',
+                                    border: 'none',
+                                  }}
+                                >
+                                  참여하기
+                                </button>
                               </Styledtd>
                             </Styledtr>
                           );
@@ -397,13 +486,11 @@ function DBD_General() {
 // const Styledtd = styled.div`
 //   display: block;
 // `;
-
 const StyledTab1 = styled.div`
   width: 865px;
   margin-top: 5px;
   padding-bottom: 500px;
 `;
-
 const Styledtxt = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
@@ -411,9 +498,7 @@ const Styledtxt = styled.div`
   font-size: 19px;
   line-height: 30px;
   /* or 158% */
-
   letter-spacing: 0.05em;
-
   color: #333333;
 `;
 const StyledAll = styled.div`
@@ -461,44 +546,34 @@ const StyledSubDiv2_1p = styled.div`
 `;
 const StyledSubDiv2_2 = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #333333;
 `;
 const StyledSubDiv2_2g = styled.div`
   border: solid white 3px;
-
   height: 24px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 38px;
   /* identical to box height, or 100% */
-
   text-align: center;
-
   color: #969696;
 `;
-
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
   margin-left: 65px;
   margin-top: 25px;
 `;
-
 const StyledTitle = styled.div`
   width: 230px;
   font-family: 'Gmarket Sans TTF';
@@ -506,37 +581,30 @@ const StyledTitle = styled.div`
   font-weight: 700;
   font-size: 35px;
   line-height: 48px;
-
   color: #333333;
 `;
 const StyledTop = styled.div`
   display: flex;
 `;
-
 const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
   margin-left: 510px;
-
   background: #ff9f9f;
   border-radius: 9px;
 `;
-
 const StyledButtonDiv = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 38px;
-
   margin: auto;
   margin-left: 28px;
   /* identical to box height, or 100% */
-
   color: #ffffff;
 `;
-
 const Styleddiv2 = styled.div`
   text-align: center;
 `;
@@ -554,17 +622,20 @@ const Styledimg = styled.img`
   height: 25px;
   object-fit: cover;
 `;
-
 // 옛날
 const StyledTable = styled(Table)`
   border-collapse: collapse;
+  font-family: Gmarket Sans TTF;
+  font-style: normal;
+  text-align: center;
+  color: #333333;
+  border: 1px;
   th,
   tbody,
   td td {
     padding: 0;
   }
 `;
-
 const StyledFilter = styled.div`
   width: 865px;
   height: 145px;
@@ -585,6 +656,7 @@ const StyledFilterDiv1Two = styled.div`
   font-size: 18px;
   margin-right: 20px;
   margin-left: 30px;
+  margin-top: 20px;
 `;
 
 // const Styleddiv2 = styled.div`
@@ -592,4 +664,8 @@ const StyledFilterDiv1Two = styled.div`
 //   margin-left: 100px;
 //   text-align: center;
 // `;
+const Styledtd2 = styled.div`
+  /* display: block; */
+  margin-top: 50px;
+`;
 export default DBD_General;

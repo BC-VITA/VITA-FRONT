@@ -81,7 +81,6 @@ function LogIn() {
             </StyledGroup11>
             <StyledGroup11>
               <StyledButton2 type="button" onClick={handleSubmit1}>
-                {' '}
                 {/*인풋타입 버튼으로 바꿈 onclick으로 회원가입 페이지 넘어가게 만들어야 됨*/}
                 회원가입
                 {/* </StyledButton2>
@@ -157,8 +156,10 @@ const StyledButton1 = styled.button`
 const StyledButton2 = styled.button`
   color: #333333;
   border: none;
-  width: 210.02px;
-  height: 57.47px;
+  /* width: 210.02px; */
+  width: 500px;
+  height: 50px;
+  /* margin-left: 290px; */
 
   filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.2));
   background: #ffd7d7;
@@ -172,6 +173,6 @@ const StyledButton2 = styled.button`
 
   text-align: center;
   /* margin: auto; */
-  margin-top: 25px;
+  margin-top: 18px;
 `;
 export default LogIn;

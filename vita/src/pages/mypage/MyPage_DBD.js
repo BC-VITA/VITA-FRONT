@@ -1,11 +1,7 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Form from 'react-bootstrap/Form';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-
-import Nav from 'react-bootstrap/Nav';
+import { Form, Tab, Tabs, Nav } from 'react-bootstrap';
 
 function MyPage_DBD() {
   const [startDate, setstartDate] = useState('');
@@ -14,37 +10,25 @@ function MyPage_DBD() {
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
 
   const userId = sessionStorage.getItem('userId');
-  const [error, setError] = useState(null);
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [inputData, setInputData1] = useState(null);
+  const [inputData1, setInputData2] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
+    const url1 = `http://localhost:8004/user/mypage/designaged-reservation-history?userId=${userId}`;
+    fetch(url1, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
+        setInputData1(res);
       });
-    console.log(inputData);
   }, []);
+
+  if (inputData === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <StyledAll>
       <StyledSub>
@@ -96,7 +80,7 @@ function MyPage_DBD() {
         <Styledcomment>
           <StyledTxt>지정헌혈 참여</StyledTxt>
           <FloatingLabel
-            label={userId}
+            label={inputData.length + '번'}
             //value={roomnumber}
             //onChange={handleReservation}
             style={{ width: '300px', lineHeight: '15px' }}
@@ -113,11 +97,11 @@ function MyPage_DBD() {
           </FloatingLabel>
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="history" title="지정헌혈 내역">
+              <Tab eventKey="history" title="지정헌혈 승인 내역">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
-                      <StyledTxt2>지정헌혈 내역</StyledTxt2>
+                      <StyledTxt2>지정헌혈 승인 내역</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
                         <input
@@ -154,29 +138,26 @@ function MyPage_DBD() {
                       <StyledTxt2>예약 내역</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                        <input type="Date" value={startDate}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
+                        <input type="Date" value={endDate}
+                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
+                    <div>
+                      {inputData.map((review, index) => (
+                        <div key={index}>
+                          <div>제목: {review.title}</div>
+                          <div>시간: {review.createdAt}</div>
+                          <div><br /></div>
+                        </div>
+                      ))}
+                    </div>
                   </StyledBox1>
                 </Tab.Content>
               </Tab>

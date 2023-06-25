@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
+
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function DBD_Story() {
-  const reviewType = 'designatedBlood';
-  const [inputData, setInputData] = useState([]);
+  const [boardList, setBoardList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const url = `http://localhost:8004/review/board/list?reviewType=${reviewType}`;
-
-    fetch(url, {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-      });
+    fetchBoardList();
   }, []);
+
+  const fetchBoardList = () => {
+    fetch('http://localhost:8004/donate/board')
+      .then((response) => response.json())
+      .then((data) => setBoardList(data.content))
+      .catch((error) => console.error('Error fetching board list:', error));
+  };
+
+  const handleDetailClick = (board, imageUrl) => {
+    navigate('/DBD_Details', { state: { board, imageUrl } });
+  };
 
   return (
     <StyledAll>
@@ -53,24 +56,39 @@ function DBD_Story() {
           </StyledButton>
         </StyledTop>
 
-        <StyledBox>
-          {inputData.map((data, index) => (
-            <StyledBox2 key={index}>
-              <Card style={{ width: '17rem' }}>
-                <Card.Img
-                  variant="top"
-                  src="C:\\vita\\화면 캡처 2023-05-24 140930.png"
-                />
-                <Card.Body>
-                  <Card.Title>{data.title}</Card.Title>
-                  <Card.Text>{data.content}</Card.Text>
-                  <Button variant="primary">자세히 보기</Button>
-                </Card.Body>
-              </Card>
-              <div>{data.imageUrl},asd</div>
-            </StyledBox2>
-          ))}
-        </StyledBox>
+        <div>
+          {boardList.map((board) => {
+            // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
+            const imageUrl = board.imageUrl
+              ? board.imageUrl.replace(
+                  'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                  '\\'
+                )
+              : null;
+
+            return (
+              <div key={board.boardId}>
+                <StyledBox>
+                  <StyledBox2>
+                    <Card style={{ width: '17rem' }}>
+                      <Card.Img variant="top" src={imageUrl} />
+                      <Card.Body>
+                        <Card.Title>{board.title}</Card.Title>
+                        <Card.Text>{board.content}</Card.Text>
+                        <Button
+                          variant="primary"
+                          onClick={() => handleDetailClick(board, imageUrl)}
+                        >
+                          자세히 보기
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </StyledBox2>
+                </StyledBox>
+              </div>
+            );
+          })}
+        </div>
       </StyledSubcomment>
     </StyledAll>
   );

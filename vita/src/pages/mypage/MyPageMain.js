@@ -9,9 +9,10 @@ function MyPageMaine() {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const userId = sessionStorage.getItem('userId');
-  
+
   const [userPw, setUserPw] = useState('');
   const [userPw1, setUserPw1] = useState('');
+  // const [roomnumber, setroomnumber] = useState('');
   const [userBirth, setUserBirth] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPhoneNumber, setUserPhone] = useState('');
@@ -24,6 +25,7 @@ function MyPageMaine() {
 
   const handleChangePw = ({ target: { value } }) => setUserPw(value);
   const handleChangePw1 = ({ target: { value } }) => setUserPw1(value);
+  // const handleChangeroomnumber = ({ target: { value } }) =>  setroomnumber(value);
   const handleChangeBirth = ({ target: { value } }) => setUserBirth(value);
   const handleChangeEmail = ({ target: { value } }) => setUserEmail(value);
   const handleChangePhone = ({ target: { value } }) => setUserPhone(value);
@@ -62,7 +64,7 @@ function MyPageMaine() {
       isRH: isRH,
       bloodHistory: bloodHistory,
     };
-  
+
     fetch('http://localhost:8004/user/mypage', {
       method: 'PUT',
       headers: {
@@ -75,11 +77,10 @@ function MyPageMaine() {
         // 응답 처리
       })
       .catch((error) => {
-        console.log("오류났음")
+        console.log('오류났음');
       });
-    console.log("전송완료");
+    console.log('전송완료');
   }
-  
 
   return (
     <StyledAll>
@@ -113,7 +114,7 @@ function MyPageMaine() {
             <div>{bloodHistory}</div>
             <StyledTxtB>나의 정보</StyledTxtB>
             <StyledButton type="button" onClick={writeDonateBoard}>
-                <StyledButtonTxt>정보 수정하기</StyledButtonTxt>
+              <StyledButtonTxt>정보 수정하기</StyledButtonTxt>
             </StyledButton>
           </StyledDiv1>
           <StyledDiv2>
@@ -124,7 +125,7 @@ function MyPageMaine() {
                 //value={roomnumber}
                 //onChange={handleReservation}
               >
-                <Form.Control placeholder="name" disabled/>
+                <Form.Control placeholder="name" disabled />
               </FloatingLabel>
             </StyledDiv3>
           </StyledDiv2>
@@ -155,10 +156,11 @@ function MyPageMaine() {
               <StyledTxtR>성명</StyledTxtR>
               <FloatingLabel
                 label={userData && userData.userName ? userData.userName : ''}
+                // label={userName}
                 // value={roomnumber}
                 // onChange={handleChangeroomnumber}
               >
-                <Form.Control placeholder="name" disabled/>
+                <Form.Control placeholder="name" disabled />
               </FloatingLabel>
             </StyledDiv3>
             <StyledDiv3>
@@ -176,7 +178,7 @@ function MyPageMaine() {
             <StyledDiv3>
               <StyledTxtR>이메일</StyledTxtR>
               <FloatingLabel
-                label={userData && userData.userEmail ? userData.userEmail : ''}                
+                label={userData && userData.userEmail ? userData.userEmail : ''}
                 value={userEmail}
                 onChange={handleChangeEmail}
               >
@@ -185,8 +187,12 @@ function MyPageMaine() {
             </StyledDiv3>
             <StyledDiv3>
               <StyledTxtR>전화번호</StyledTxtR>
-              <FloatingLabel  
-                label={userData && userData.userPhoneNumber ? userData.userPhoneNumber : ''}
+              <FloatingLabel
+                label={
+                  userData && userData.userPhoneNumber
+                    ? userData.userPhoneNumber
+                    : ''
+                }
                 value={userPhoneNumber}
                 onChange={handleChangePhone}
               >
