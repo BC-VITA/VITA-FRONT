@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Nav, FloatingLabel, Form, Tab, Tabs, Button, Table } from 'react-bootstrap';
+import {
+  Nav,
+  FloatingLabel,
+  Form,
+  Tab,
+  Tabs,
+  Button,
+  Table,
+} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 import Post3 from '../../img/image 70.png';
@@ -48,13 +56,16 @@ function MyPage_S() {
   }
 
   //PDF하기
+  const handleJoin = (review) => {
+    navigate('/S_Deed1', { state: { review } });
+  };
   const handlePDF = (id) => {
     fetch(`http://localhost:8004/volunteer/pdf?registerId=${id}`, {
       method: 'POST',
     })
       .then((res) => res.blob())
       .then((blob) => {
-        alert('다운이 완료되었습니다.')
+        alert('다운이 완료되었습니다.');
       })
       .catch((err) => {
         console.error(err);
@@ -105,7 +116,7 @@ function MyPage_S() {
           <StyledTitle>봉사</StyledTitle>
         </StyledTop>
         <Styledcomment>
-          <StyledBox2>
+          {/* <StyledBox2>
             <StyledBox3>
               <StyledTxt>시간인증형 봉사시간</StyledTxt>
               <FloatingLabel
@@ -125,7 +136,6 @@ function MyPage_S() {
               <StyledTxt>시간인증형 자원봉사 참여</StyledTxt>
               <FloatingLabel
                 label={userData.myPageVolunteerReservationList.length + '번'}
-
                 //value={roomnumber}
                 //onChange={handleReservation}
                 style={{ width: '300px', lineHeight: '15px' }}
@@ -137,7 +147,7 @@ function MyPage_S() {
                 />
               </FloatingLabel>
             </StyledBox3>
-          </StyledBox2>
+          </StyledBox2> */}
           <img
             style={{ marginTop: '10px', width: '870px', height: '300px' }}
             src={Post3}
@@ -145,7 +155,7 @@ function MyPage_S() {
           />
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="history" title="봉사 신청 내역">
+              {/* <Tab eventKey="history" title="봉사 신청 내역">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
@@ -155,36 +165,56 @@ function MyPage_S() {
                         <input
                           type="Date"
                           value={startDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
                         <input
                           type="Date"
                           value={endDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
                     <div>
-                      {userData.myPageVolunteerReservationList.map((review, index) => (
-                        <div key={index}>
-                          <div>신청자: {review.userName}</div>
-                          <div>봉사시간: {review.volunteerTime}</div>
-                          <div>제목: {review.volunteerTitle}</div>
-                          <div>
-                            봉사유형: {review.volunteerType === 'time' ? '시간' : review.volunteerType}
+                      {userData.myPageVolunteerReservationList.map(
+                        (review, index) => (
+                          <div key={index}>
+                            <div>신청자: {review.userName}</div>
+                            <div>봉사시간: {review.volunteerTime}</div>
+                            <div>제목: {review.volunteerTitle}</div>
+                            <div>
+                              봉사유형:{' '}
+                              {review.volunteerType === 'time'
+                                ? '시간'
+                                : review.volunteerType}
+                            </div>
+                            <div>
+                              예약시간:{' '}
+                              {review.localDateTime
+                                ? review.localDateTime.split('T')[0]
+                                : ''}
+                            </div>
+                            <div>
+                              <br />
+                            </div>
                           </div>
-                          <div>예약시간: {review.localDateTime ? review.localDateTime.split('T')[0] : ''}</div>
-                          <div><br /></div>
-                        </div>
-                      ))}
+                        )
+                      )}
                     </div>
                   </StyledBox1>
                 </Tab.Content>
-              </Tab>
-
+              </Tab> */}
+              {/* 
               <Tab eventKey="reservation" title="봉사참여 실적">
                 <Tab.Content>
                   <StyledBox1>
@@ -196,6 +226,22 @@ function MyPage_S() {
                         <div key={index}>
                           <div>봉사ID: {review.reservationId}</div>
                           <div>봉사제목: {review.title}</div>
+                          // <div>
+                          //   시간:{' '}
+                          //   {review.boardCreateTime
+                          //     ? review.boardCreateTime.split('T')[0]
+                          //     : ''}
+                          // </div>
+                          // <button
+                          //   type="button"
+                          //   onClick={() => handleJoin(review)}
+                          // >
+                          //   PDF하기
+                          // </button>
+
+                          // <div>
+                          //   <br />
+                          // </div>
                           <div>시간: {review.boardCreateTime ? review.boardCreateTime.split('T')[0] : ''}</div>
                           <button type="button" onClick={() => handlePDF(review.reservationId)}>
                             PDF하기
@@ -206,7 +252,7 @@ function MyPage_S() {
                     </div>
                   </StyledBox1>
                 </Tab.Content>
-              </Tab>
+              </Tab> */}
               <Tab eventKey="watchlist" title="관심있는 게시물">
                 <Tab.Content>
                   <StyledBox1>
@@ -217,14 +263,22 @@ function MyPage_S() {
                         <input
                           type="Date"
                           value={startDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
                         <input
                           type="Date"
                           value={endDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
@@ -237,15 +291,9 @@ function MyPage_S() {
           <StyledTable>
             <thead style={{ fontWeight: '700', fontSize: '24px' }}>
               <tr>
-                <th style={{ width: '400px' }}>
-                  제목
-                </th>
-                <th style={{ width: '200px' }}>
-                  일시
-                </th>
-                <th style={{ width: '100px' }}>
-
-                </th>
+                <th style={{ width: '400px' }}>제목</th>
+                <th style={{ width: '200px' }}>일시</th>
+                <th style={{ width: '100px' }}></th>
               </tr>
             </thead>
             <tbody style={{ fontWeight: '500', fontSize: '20px' }}>

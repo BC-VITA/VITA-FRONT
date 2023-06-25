@@ -11,26 +11,27 @@ function MyPage_D() {
   const [error, setError] = useState(null);
 
   const [inputData, setInputData1] = useState(null);
-  const totalUsePoint = inputData ? inputData.reduce((sum, review) => sum + review.usePoint, 0) : 0;
+  const totalUsePoint = inputData
+    ? inputData.reduce((sum, review) => sum + review.usePoint, 0)
+    : 0;
 
+  // useEffect(() => {
+  //   const url1 = `http://localhost:8004/donate/mypage/history?userId=${userId}`;
+  //   fetch(url1, {
+  //     method: 'get',
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       setInputData1(res);
+  //     })
+  //     .catch((err) => {
+  //       setError(err.message);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    const url1 = `http://localhost:8004/donate/mypage/history?userId=${userId}`;
-    fetch(url1, {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setInputData1(res);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  }, []);
-
-  if (inputData === null) {
-    return <div>Loading...</div>;
-  }
+  // if (inputData === null) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <StyledAll>
@@ -71,14 +72,9 @@ function MyPage_D() {
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
-      <StyledSubcomment>
+      {/* <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부</StyledTitle>
-          {/* <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>기부</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton> */}
         </StyledTop>
         <Styledcomment>
           <StyledBox2>
@@ -86,8 +82,6 @@ function MyPage_D() {
               <StyledTxt>기부 내역</StyledTxt>
               <FloatingLabel
                 label={inputData.length + '번'}
-                //value={roomnumber}
-                //onChange={handleReservation}
                 style={{ width: '300px' }}
               >
                 <Form.Control
@@ -149,7 +143,9 @@ function MyPage_D() {
                           <div>제목: {review.donateName}</div>
                           <div>포인트: {review.usePoint}</div>
                           <div>시간: {review.donateTime}</div>
-                          <div><br /></div>
+                          <div>
+                            <br />
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -193,7 +189,7 @@ function MyPage_D() {
             </Tabs>
           </StyledTab1>
         </Styledcomment>
-      </StyledSubcomment>
+      </StyledSubcomment> */}
     </StyledAll>
   );
 }
