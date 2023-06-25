@@ -93,6 +93,7 @@ function S_ReservationSecond() {
         <Styledbutton type="button" onClick={handleClick}>
           예약완료하기
         </Styledbutton>
+        
       </StyledSubcomment>
     </StyledAll>
   );

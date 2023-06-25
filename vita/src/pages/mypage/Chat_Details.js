@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import { Stomp } from '@stomp/stompjs';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -112,19 +112,19 @@ function Chat_Details() {
           console.error('Error fetching room detail:', error);
         });
     };
-  
+
     // 최초 실행
     fetchData();
-  
-    // 1초마다 fetchData 함수 호출
-    const intervalId = setInterval(fetchData, 1000);
-  
-    // 컴포넌트 언마운트 시 타이머 정리
-    return () => {
-      clearInterval(intervalId);
-    };
+
+    // // 1초마다 fetchData 함수 호출
+    // const intervalId = setInterval(fetchData, 1000);
+
+    // // 컴포넌트 언마운트 시 타이머 정리
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
   }, []);
-  
+
 
   //메시지 보내기
   const sendMessage = () => {
@@ -151,6 +151,28 @@ function Chat_Details() {
     setReceivedMessage(receivedData.message);
   };
 
+  //채팅부분에서 수락하기 버튼
+  const handleAccept = (roomId1) => {
+    fetch(`http://localhost:8004/chat/agree`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        userId :useId,
+        roomId: roomId1,
+        isAgree: true
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <StyledAll>
       <StyledSubcomment>
@@ -168,9 +190,7 @@ function Chat_Details() {
             <StyledButtonB onClick={() => setAccept(true)}>
               수락하기
             </StyledButtonB>
-            <Modal size="md" show={accept} onHide={() => setAccept(false)}
-            // aria-labelledby="example-modal-sizes-title-sm"
-            >
+            <Modal size="md" show={accept} onHide={() => setAccept(false)}>
               <Modal.Header closeButton>
                 <Modal.Title>수락하기</Modal.Title>
               </Modal.Header>
@@ -178,7 +198,16 @@ function Chat_Details() {
                 신청자를 수락하였습니다. <br />
                 신청자에게 환자 정보가 보여지게 됩니다. <br />
               </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setAccept(false)}>
+                  닫기
+                </Button>
+                <Button variant="primary" onClick={() => handleAccept(data123.roomId)}>
+                  수락
+                </Button>
+              </Modal.Footer>
             </Modal>
+
 
             <StyledButtonP onClick={() => setCancel(true)}>
               취소하기

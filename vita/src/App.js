@@ -74,8 +74,9 @@ import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
 
-//채팅
+//실험
 import Asd from './pages/asd'
+import Asd1 from './pages/asd1'
 
 const startDate = '2022-01-01';
 const endDate = '2022-01-10';
@@ -204,6 +205,7 @@ function App() {
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
 
           <Route path="/asd" element={<Asd />}></Route>
+          <Route path="/asd1" element={<Asd1 />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>
