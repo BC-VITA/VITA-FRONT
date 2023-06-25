@@ -21,6 +21,7 @@ import MyPageD from './pages/mypage/MyPage_D';
 import DDeed from './pages/mypage/D_Deed';
 import MyPageS from './pages/mypage/MyPage_S';
 import SDeed from './pages/mypage/S_Deed';
+import SDeed1 from './pages/mypage/S_Deed1';
 import MyPage from './pages/mypage/MyPage';
 // import MyPageMaine from './pages/mypage/MyPageMaine';
 
@@ -103,6 +104,7 @@ function App() {
           <Route path="/D_Deed" element={<DDeed />}></Route>
           <Route path="/MyPage_S" element={<MyPageS />}></Route>
           <Route path="/S_Deed" element={<SDeed />}></Route>
+          <Route path="/S_Deed1" element={<SDeed1 />}></Route>
           <Route path="/MyPage" element={<MyPage />}></Route>
 
           {/*로그인*/}

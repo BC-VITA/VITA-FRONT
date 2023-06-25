@@ -59,6 +59,19 @@ function MyPage_S() {
   const handleJoin = (review) => {
     navigate('/S_Deed1', { state: { review } });
   };
+  const handlePDF = (id) => {
+    fetch(`http://localhost:8004/volunteer/pdf?registerId=${id}`, {
+      method: 'POST',
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        alert('다운이 완료되었습니다.');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -213,22 +226,27 @@ function MyPage_S() {
                         <div key={index}>
                           <div>봉사ID: {review.reservationId}</div>
                           <div>봉사제목: {review.title}</div>
-                          <div>
-                            시간:{' '}
-                            {review.boardCreateTime
-                              ? review.boardCreateTime.split('T')[0]
-                              : ''}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => handleJoin(review)}
-                          >
+                          // <div>
+                          //   시간:{' '}
+                          //   {review.boardCreateTime
+                          //     ? review.boardCreateTime.split('T')[0]
+                          //     : ''}
+                          // </div>
+                          // <button
+                          //   type="button"
+                          //   onClick={() => handleJoin(review)}
+                          // >
+                          //   PDF하기
+                          // </button>
+
+                          // <div>
+                          //   <br />
+                          // </div>
+                          <div>시간: {review.boardCreateTime ? review.boardCreateTime.split('T')[0] : ''}</div>
+                          <button type="button" onClick={() => handlePDF(review.reservationId)}>
                             PDF하기
                           </button>
-
-                          <div>
-                            <br />
-                          </div>
+                          <div><br /></div>
                         </div>
                       ))}
                     </div>
