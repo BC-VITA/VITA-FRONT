@@ -71,18 +71,11 @@ function MyPage_DBD() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>지정헌혈</StyledTitle>
-          {/* <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton> */}
         </StyledTop>
         <Styledcomment>
           <StyledTxt>지정헌혈 참여</StyledTxt>
           <FloatingLabel
             label={inputData.length + '번'}
-            //value={roomnumber}
-            //onChange={handleReservation}
             style={{ width: '300px', lineHeight: '15px' }}
           >
             <Form.Control
@@ -91,7 +84,6 @@ function MyPage_DBD() {
               style={{
                 background: '#ffffff',
                 height: '50px',
-                // lineHeight: '10px',
               }}
             />
           </FloatingLabel>
@@ -131,20 +123,32 @@ function MyPage_DBD() {
                 </Tab.Content>
               </Tab>
 
-              <Tab eventKey="reservation" title="예약 내역">
+              {/* <Tab eventKey="reservation" title="예약 내역">
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
                       <StyledTxt2>예약 내역</StyledTxt2>
                       <StyledFilterDiv1 style={{ marginTop: '20px' }}>
                         <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input type="Date" value={startDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input type="Date" value={endDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
@@ -154,13 +158,15 @@ function MyPage_DBD() {
                         <div key={index}>
                           <div>제목: {review.title}</div>
                           <div>시간: {review.createdAt}</div>
-                          <div><br /></div>
+                          <div>
+                            <br />
+                          </div>
                         </div>
                       ))}
                     </div>
                   </StyledBox1>
                 </Tab.Content>
-              </Tab>
+              </Tab> */}
               <Tab eventKey="watchlist" title="관심있는 게시물">
                 <Tab.Content>
                   <StyledBox1>
