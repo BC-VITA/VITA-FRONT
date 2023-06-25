@@ -1,51 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Nav } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function S_ReservationSecond() {
+  const userId = sessionStorage.getItem('userId');
   const navigate = useNavigate();
   const location = useLocation();
-  const { state: { selectedOptions, formattedDate, centerName } = {} } =
-    useLocation();
-  const [times, setTimes] = useState('');
-  const [isBloodType, setIsBloodType] = useState('');
+  const { date, userName, phone, element } = location.state;
 
-  useEffect(() => {
-    const times = Object.keys(selectedOptions);
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+  const handleClick = async () => {
+    const formattedDate = formatDate(new Date(date));
 
-    const bloodTypeString = Object.values(selectedOptions)
-      .map((times) => Object.values(times).join(''))
-      .join('');
-    setIsBloodType(bloodTypeString);
-    const bloodTypesString = bloodTypeString.toString();
-    setIsBloodType(bloodTypesString);
-
-    const timeString = times.join(',');
-    setTimes(timeString);
-  }, [selectedOptions]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await new Promise((r) => setTimeout(r, 1000));
-
-    fetch('http://localhost:8004/blood/reservation', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        // isBloodType: isBloodType,
-        bloodHouseName: centerName,
-        date: formattedDate,
-        time: times,
-      }),
-    })
-      .then((res) => {
+    try {
+      const response = await fetch(
+        'http://localhost:8004/volunteer/reservation',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            volunteerDate: formattedDate,
+            userId: userId,
+            infomationAgree: 'true',
+            volunteerStatus: '대기중',
+            volunteerPlace: element.volunteerPlace,
+            volunteerKind: element.volunteerType,
+            volunteerBoardId: element.volunteerId,
+          }),
+        }
+      ).then((res) => {
         res.json();
-      })
-      .then(() => navigate('/'));
-  };
+        if (res.ok) {
+          setMain(true);
+        }
+      });
 
+      if (response.ok) {
+        console.log('요청이 성공했습니다.');
+      } else {
+        console.log('요청이 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('요청 중 오류가 발생했습니다.', error);
+    }
+  };
+  const handleReservation = (centerName) => {
+    navigate('/', { state: { centerName } });
+  };
+  const handleReservation2 = (centerName) => {
+    navigate('/MyPage_S', { state: { centerName } });
+  };
+  const [main, setMain] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   return (
     <StyledAll>
       <StyledSubcomment>
@@ -56,46 +73,80 @@ function S_ReservationSecond() {
         <StyledDiv>봉사 예약이 완료되었습니다.</StyledDiv>
 
         <StyledBox>
-          {Object.keys(selectedOptions).map((time) => (
-            <div key={time}>
-              <StyledDiv1>
-                <StyledDiv2>상태</StyledDiv2>
-                <StyledDiv3>{formattedDate}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>봉사일자</StyledDiv2>
-                <StyledDiv3>{time}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>봉사시간</StyledDiv2>
-                <StyledDiv3>{centerName}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>주소</StyledDiv2>
-                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>봉사장소</StyledDiv2>
-                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>봉사유형</StyledDiv2>
-                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>담당자 명</StyledDiv2>
-                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>전화번호</StyledDiv2>
-                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
-              </StyledDiv1>
-            </div>
-          ))}
+          <StyledDiv1>
+            <StyledDiv2>상태</StyledDiv2>
+            <StyledDiv3>대기중</StyledDiv3>
+          </StyledDiv1>
+          <StyledDiv1>
+            <StyledDiv2>봉사일자</StyledDiv2>
+            <StyledDiv3>{date && formatDate(new Date(date))}</StyledDiv3>
+          </StyledDiv1>
+          <StyledDiv1>
+            <StyledDiv2>봉사시간</StyledDiv2>
+            <StyledDiv3>
+              {element.volunteerStartTime}~{element.volunteerEndTime}
+            </StyledDiv3>
+          </StyledDiv1>
+          <StyledDiv1>
+            <StyledDiv2>주소</StyledDiv2>
+            <StyledDiv3>{element.volunteerAddress}</StyledDiv3>
+          </StyledDiv1>
+          <StyledDiv1>
+            <StyledDiv2>봉사장소</StyledDiv2>
+            <StyledDiv3>{element.volunteerPlace}</StyledDiv3>
+          </StyledDiv1>
+          <StyledDiv1>
+            <StyledDiv2>봉사유형</StyledDiv2>
+            <StyledDiv3>
+              {element.volunteerType === 'time'
+                ? '시간'
+                : element.volunteerType}
+            </StyledDiv3>
+          </StyledDiv1>
+          <StyledDiv1>
+            <StyledDiv2>담당자 명</StyledDiv2>
+            <StyledDiv3>{element.managerName}</StyledDiv3>
+          </StyledDiv1>
+          <StyledDiv1>
+            <StyledDiv2>담당자 이메일</StyledDiv2>
+            <StyledDiv3>{element.managerEmail}</StyledDiv3>
+          </StyledDiv1>
         </StyledBox>
-        <Styledbutton type="button" onClick={handleSubmit}>
-          예약완료하기
+        <Styledbutton type="button" onClick={handleClick}>
+          확&nbsp;&nbsp;&nbsp;&nbsp;인
         </Styledbutton>
+        <Modal
+          size="md"
+          show={main}
+          onHide={() => setMain(false)}
+          onClick={handleClose}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>안 내</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            ※ 헌혈 시 신분증
+            <br />
+            꼭 지참해주세요
+            <br />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              // onClick={handleClose}
+              onClick={handleReservation}
+            >
+              다음에 보기
+            </Button>
+            <Button
+              variant="primary"
+              // onClick={handleClose}
+              onClick={handleReservation2}
+            >
+              예약내역 보기
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </StyledSubcomment>
     </StyledAll>
   );
