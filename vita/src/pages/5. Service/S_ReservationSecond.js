@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Nav } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function S_ReservationSecond() {
   const userId = sessionStorage.getItem('userId');
@@ -8,32 +11,38 @@ function S_ReservationSecond() {
   const location = useLocation();
   const { date, userName, phone, element } = location.state;
 
-
   function formatDate(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
-
   const handleClick = async () => {
     const formattedDate = formatDate(new Date(date));
 
     try {
-      const response = await fetch('http://localhost:8004/volunteer/reservation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          volunteerDate: formattedDate,
-          userId: userId,
-          infomationAgree: "true",
-          volunteerStatus: "대기중",
-          volunteerPlace: element.volunteerPlace,
-          volunteerKind: element.volunteerType,
-          volunteerBoardId: element.volunteerId
-        })
+      const response = await fetch(
+        'http://localhost:8004/volunteer/reservation',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            volunteerDate: formattedDate,
+            userId: userId,
+            infomationAgree: 'true',
+            volunteerStatus: '대기중',
+            volunteerPlace: element.volunteerPlace,
+            volunteerKind: element.volunteerType,
+            volunteerBoardId: element.volunteerId,
+          }),
+        }
+      ).then((res) => {
+        res.json();
+        if (res.ok) {
+          setMain(true);
+        }
       });
 
       if (response.ok) {
@@ -45,15 +54,24 @@ function S_ReservationSecond() {
       console.error('요청 중 오류가 발생했습니다.', error);
     }
   };
-
-
+  const handleReservation = (centerName) => {
+    navigate('/', { state: { centerName } });
+  };
+  const handleReservation2 = (centerName) => {
+    navigate('/MyPage_S', { state: { centerName } });
+  };
+  const [main, setMain] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   return (
     <StyledAll>
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>봉사 신청하기</StyledTitle>
         </StyledTop>
+
         <StyledDiv>봉사 예약이 완료되었습니다.</StyledDiv>
+
         <StyledBox>
           <StyledDiv1>
             <StyledDiv2>상태</StyledDiv2>
@@ -65,7 +83,9 @@ function S_ReservationSecond() {
           </StyledDiv1>
           <StyledDiv1>
             <StyledDiv2>봉사시간</StyledDiv2>
-            <StyledDiv3>{element.volunteerStartTime}~{element.volunteerEndTime}</StyledDiv3>
+            <StyledDiv3>
+              {element.volunteerStartTime}~{element.volunteerEndTime}
+            </StyledDiv3>
           </StyledDiv1>
           <StyledDiv1>
             <StyledDiv2>주소</StyledDiv2>
@@ -78,7 +98,9 @@ function S_ReservationSecond() {
           <StyledDiv1>
             <StyledDiv2>봉사유형</StyledDiv2>
             <StyledDiv3>
-              {element.volunteerType === "time" ? "시간" : element.volunteerType}
+              {element.volunteerType === 'time'
+                ? '시간'
+                : element.volunteerType}
             </StyledDiv3>
           </StyledDiv1>
           <StyledDiv1>
@@ -91,9 +113,40 @@ function S_ReservationSecond() {
           </StyledDiv1>
         </StyledBox>
         <Styledbutton type="button" onClick={handleClick}>
-          예약완료하기
+          확&nbsp;&nbsp;&nbsp;&nbsp;인
         </Styledbutton>
-        
+        <Modal
+          size="md"
+          show={main}
+          onHide={() => setMain(false)}
+          onClick={handleClose}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>안 내</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            ※ 헌혈 시 신분증
+            <br />
+            꼭 지참해주세요
+            <br />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              // onClick={handleClose}
+              onClick={handleReservation}
+            >
+              다음에 보기
+            </Button>
+            <Button
+              variant="primary"
+              // onClick={handleClose}
+              onClick={handleReservation2}
+            >
+              예약내역 보기
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </StyledSubcomment>
     </StyledAll>
   );
