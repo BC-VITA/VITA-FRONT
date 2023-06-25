@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Nav } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function S_ReservationSecond() {
   const userId = sessionStorage.getItem('userId');
   const navigate = useNavigate();
   const location = useLocation();
   const { date, userName, phone, element } = location.state;
-
-
+  
   function formatDate(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -20,20 +22,28 @@ function S_ReservationSecond() {
     const formattedDate = formatDate(new Date(date));
 
     try {
-      const response = await fetch('http://localhost:8004/volunteer/reservation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          volunteerDate: formattedDate,
-          userId: userId,
-          infomationAgree: "true",
-          volunteerStatus: "대기중",
-          volunteerPlace: element.volunteerPlace,
-          volunteerKind: element.volunteerType,
-          volunteerBoardId: element.volunteerId
-        })
+      const response = await fetch(
+        'http://localhost:8004/volunteer/reservation',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            volunteerDate: formattedDate,
+            userId: userId,
+            infomationAgree: 'true',
+            volunteerStatus: '대기중',
+            volunteerPlace: element.volunteerPlace,
+            volunteerKind: element.volunteerType,
+            volunteerBoardId: element.volunteerId,
+          }),
+        }
+      ).then((res) => {
+        res.json();
+        if (res.ok) {
+          setMain(true);
+        }
       });
 
       if (response.ok) {
@@ -45,10 +55,49 @@ function S_ReservationSecond() {
       console.error('요청 중 오류가 발생했습니다.', error);
     }
   };
-
-
+  const handleReservation = (centerName) => {
+    navigate('/', { state: { centerName } });
+  };
+  const handleReservation2 = (centerName) => {
+    navigate('/MyPage_S', { state: { centerName } });
+  };
+  const [main, setMain] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   return (
     <StyledAll>
+      <StyledSub>
+        <Nav defaultActiveKey="/" className="flex-column">
+          <StyledSubDiv1>봉사하자</StyledSubDiv1>
+          <StyledSubDiv2>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Main">
+                <StyledSubDiv22g>자원봉사란</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Ganeral">
+                <StyledSubDiv22g>개인봉사</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Group">
+                <StyledSubDiv22g>기업 단체 봉사</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Other">
+                <StyledSubDiv22g>타기관 봉사정보</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_WatchList">
+                <StyledSubDiv22g>관심목록</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+          </StyledSubDiv2>
+        </Nav>
+      </StyledSub>
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>봉사 신청하기</StyledTitle>
@@ -91,9 +140,40 @@ function S_ReservationSecond() {
           </StyledDiv1>
         </StyledBox>
         <Styledbutton type="button" onClick={handleClick}>
-          예약완료하기
+          확&nbsp;&nbsp;&nbsp;&nbsp;인
         </Styledbutton>
-        
+        <Modal
+          size="md"
+          show={main}
+          onHide={() => setMain(false)}
+          onClick={handleClose}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>안 내</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            ※ 헌혈 시 신분증
+            <br />
+            꼭 지참해주세요
+            <br />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              // onClick={handleClose}
+              onClick={handleReservation}
+            >
+              다음에 보기
+            </Button>
+            <Button
+              variant="primary"
+              // onClick={handleClose}
+              onClick={handleReservation2}
+            >
+              예약내역 보기
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -102,7 +182,69 @@ const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
 `;
-
+const StyledSub = styled.div`
+  width: 200px;
+  /* height: 175px; */
+  margin-top: 25px;
+  margin-left: 180px;
+`;
+const StyledSubDiv1 = styled.div`
+  width: 220px;
+  height: 60px;
+  /* left: 370px;
+  top: 123px; */
+  background: #ff9f9f;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 60px;
+  text-align: center;
+  color: #ffffff;
+`;
+const StyledSubDiv2 = styled.div`
+  width: 220px;
+  height: 302px;
+  border: 3px solid #d7d7d7;
+`;
+const StyledSubDiv21 = styled.div`
+  border-bottom: 3px solid #d7d7d7;
+  background-color: white;
+  height: 60px;
+  margin-left: 3px;
+  margin-right: 3px;
+`;
+const StyledSubDiv21p = styled.div`
+  border-bottom: 3px solid #ff9f9f;
+  background-color: white;
+  height: 60px;
+  margin-left: 3px;
+  margin-right: 3px;
+`;
+const StyledSubDiv22 = styled.div`
+  border: solid white 3px;
+  height: 24px;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 38px;
+  /* identical to box height, or 100% */
+  text-align: center;
+  color: #333333;
+`;
+const StyledSubDiv22g = styled.div`
+  border: solid white 3px;
+  height: 24px;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 38px;
+  /* identical to box height, or 100% */
+  text-align: center;
+  color: #969696;
+`;
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
