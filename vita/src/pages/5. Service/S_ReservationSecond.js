@@ -265,25 +265,25 @@ const StyledDiv3 = styled.div`
 `;
 
 const Styledbutton = styled.div`
-  margin-top: 10px;
-  width: 140px;
-  height: 40px;
-  margin-left: 57ch;
+  margin-top: 50px;
+  margin-left: 51ch;
+  width: 148px;
+  height: 50px;
 
-  background: #ff9f9f;
-  border-radius: 9px;
+  background: #ffd7d7;
+  border-radius: 5px;
 
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 20px;
+  line-height: 50px;
 
   text-align: center;
   // margin-left: 28px;
   /* identical to box height, or 100% */
 
-  color: #ffffff;
+  color: #333333;
   border: none;
 `;
 export default S_ReservationSecond;

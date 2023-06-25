@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  Font,
-  PDFViewer,
-  PDFDownloadLink,
-  StyleSheet,
-} from '@react-pdf/renderer';
+import { Page, Text, View, Document, Font, PDFViewer, PDFDownloadLink, StyleSheet } from '@react-pdf/renderer';
 import styled from 'styled-components';
 import Post from '../../img/image 66.png';
 import NotoSans from '../../fonts/NanumGothic-Bold.ttf';

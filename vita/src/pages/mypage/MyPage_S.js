@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Nav, FloatingLabel, Form, Tab, Tabs, Button, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 import Post3 from '../../img/image 70.png';
 
@@ -11,6 +12,7 @@ function MyPage_S() {
   const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const [userData, setUserData1] = useState(null);
   const [userData1, setUserData2] = useState(null);
@@ -44,6 +46,20 @@ function MyPage_S() {
   if (userData1 === null) {
     return <div>Loading...</div>;
   }
+
+  //PDF하기
+  const handlePDF = (id) => {
+    fetch(`http://localhost:8004/volunteer/pdf?registerId=${id}`, {
+      method: 'POST',
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        alert('다운이 완료되었습니다.')
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <StyledAll>
@@ -181,6 +197,9 @@ function MyPage_S() {
                           <div>봉사ID: {review.reservationId}</div>
                           <div>봉사제목: {review.title}</div>
                           <div>시간: {review.boardCreateTime ? review.boardCreateTime.split('T')[0] : ''}</div>
+                          <button type="button" onClick={() => handlePDF(review.reservationId)}>
+                            PDF하기
+                          </button>
                           <div><br /></div>
                         </div>
                       ))}
