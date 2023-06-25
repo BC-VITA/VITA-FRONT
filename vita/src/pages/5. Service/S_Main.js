@@ -43,11 +43,11 @@ function S_Main() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>자원봉사란</StyledTitle>
-          <StyledButton>
+          {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
             </Nav.Link>
-          </StyledButton>
+          </StyledButton> */}
         </StyledTop>
         <StyledComment>
           <ul>

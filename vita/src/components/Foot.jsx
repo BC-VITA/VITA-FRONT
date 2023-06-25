@@ -7,7 +7,7 @@ const Footer = () => {
     <Styledfoot>
       <div style={{ fontSize: '28px', marginbottom: '200px' }}>
         <Styledimg src={icon} class name="main-icon" alt="logo" />
-        <Sp0>헌혈하러 갈래?</Sp0>
+        <Sp0>VITA</Sp0>
       </div>
       <div style={{ marginLeft: '5%' }}>
         <div>부천대학교 | 컴퓨터소프트웨어과 | 6조 졸업작품 | GITHUBE</div>
@@ -24,6 +24,7 @@ const Sp0 = styled.span`
   font-weight: bold;
 `;
 const Styledfoot = styled.footer`
+  font-family: Gmarket Sans TTF;
   position: static;
   bottom: 0;
   width: 100%;
