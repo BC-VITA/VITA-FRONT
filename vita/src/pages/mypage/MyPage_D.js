@@ -1,50 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-import Nav from 'react-bootstrap/Nav';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import { Form, Tab, Tabs, Nav, FloatingLabel } from 'react-bootstrap';
 
 function MyPage_D() {
+  const userId = sessionStorage.getItem('userId');
   const [startDate, setstartDate] = useState('');
   const [endDate, setendDate] = useState('');
   const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
-
-  const userId = sessionStorage.getItem('userId');
   const [error, setError] = useState(null);
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [inputData, setInputData1] = useState(null);
+  const totalUsePoint = inputData ? inputData.reduce((sum, review) => sum + review.usePoint, 0) : 0;
+
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
+    const url1 = `http://localhost:8004/donate/mypage/history?userId=${userId}`;
+    fetch(url1, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
+        setInputData1(res);
       })
       .catch((err) => {
         setError(err.message);
       });
-    console.log(inputData);
   }, []);
+
+  if (inputData === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <StyledAll>
       <StyledSub>
@@ -98,7 +85,7 @@ function MyPage_D() {
             <StyledBox3>
               <StyledTxt>기부 내역</StyledTxt>
               <FloatingLabel
-                label={userId}
+                label={inputData.length + '번'}
                 //value={roomnumber}
                 //onChange={handleReservation}
                 style={{ width: '300px' }}
@@ -113,9 +100,7 @@ function MyPage_D() {
             <StyledBox3 style={{ marginLeft: '60px' }}>
               <StyledTxt>포인트 내역</StyledTxt>
               <FloatingLabel
-                label={userId}
-                //value={roomnumber}
-                //onChange={handleReservation}
+                label={totalUsePoint + '포인트'}
                 style={{ width: '300px' }}
               >
                 <Form.Control
@@ -158,6 +143,16 @@ function MyPage_D() {
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
+                    <div>
+                      {inputData.map((review, index) => (
+                        <div key={index}>
+                          <div>제목: {review.donateName}</div>
+                          <div>포인트: {review.usePoint}</div>
+                          <div>시간: {review.donateTime}</div>
+                          <div><br /></div>
+                        </div>
+                      ))}
+                    </div>
                   </StyledBox1>
                 </Tab.Content>
               </Tab>
