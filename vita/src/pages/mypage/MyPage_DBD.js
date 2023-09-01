@@ -10,6 +10,11 @@ function MyPage_DBD() {
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
 
   const userId = sessionStorage.getItem('userId');
+  //지정헌혈 채팅리스트
+  const [roomIds, setRoomIds] = useState([]);
+  //좋아요한 게시글리스트
+  const [wishListData, setWishListData] = useState([]);
+
 
   const [inputData, setInputData1] = useState(null);
   const [inputData1, setInputData2] = useState(null);
@@ -24,6 +29,37 @@ function MyPage_DBD() {
         setInputData1(res);
       });
   }, []);
+
+  //지정헌혈 채팅 리스트 
+  useEffect(() => {
+    fetch(`http://localhost:8004/chat/roomId?userId=${userId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setRoomIds(data);
+      })
+      .catch(error => {
+        console.error('오류 발생:', error);
+      });
+  }, [userId]);
+
+  //좋아요한 게시글 목록
+  useEffect(() => {
+    fetch(`http://localhost:8004/user/wishListTable`, {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setWishListData(res);
+      });
+  }, []);
+  
+  const volunteerWishList = wishListData.filter(item => item.type === 'volunteer');
+  const bloodWishList = wishListData.filter(item => item.type === 'designatedBlood');
 
   if (inputData === null) {
     return <div>Loading...</div>;
@@ -127,6 +163,12 @@ function MyPage_DBD() {
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
+                    {roomIds.map(room => (
+                      <li key={room.id}>
+                        채팅방 번호: {room.roomId} ,지정헌혈게시글번호: {room.boardId} , 보낸이: {room.senderName} , 받는이: {room.receiverName} <button>채팅방으로 이동</button>
+                      </li>
+
+                    ))}
                   </StyledBox1>
                 </Tab.Content>
               </Tab>
@@ -167,6 +209,12 @@ function MyPage_DBD() {
                     <StyledDiv>
                       <StyledTxt2>관심있는 게시물</StyledTxt2>
                     </StyledDiv>
+                    <div>asd</div>
+                    {volunteerWishList.map(item => (
+                      <li key={item.id}>
+                        게시글 ID: {item.volunteerBoardId}, 사용자: {item.userId}
+                      </li>
+                    ))}
                   </StyledBox1>
                 </Tab.Content>
               </Tab>

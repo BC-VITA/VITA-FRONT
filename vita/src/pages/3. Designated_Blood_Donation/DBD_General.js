@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Table from 'react-bootstrap/Table';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import { Table, Nav, Tab, Tabs, Accordion, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Accordion from 'react-bootstrap/Accordion';
 import icon from './heart.png';
+
 function DBD_General() {
   const navigate = useNavigate();
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
@@ -41,22 +37,44 @@ function DBD_General() {
     setFirstList2Value(selected2Value);
   }
   const [inputData, setInputData] = useState([{}, {}]);
+  const userId = sessionStorage.getItem('userId');
   useEffect(() => {
-    fetch('http://localhost:8004/user/board/filter', {
+    fetch(`http://localhost:8004/user/board/filter`, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
         setInputData(res);
+        console.log(res);
       });
   }, []);
   const handleJoin = (hospitalName) => {
     navigate('/Chat_Details', { state: { hospitalName } });
   };
 
-  const handleDetailClick = (hospitalName) => {
-    navigate('/Chat_Details', { state: { hospitalName } });
+  const handleDetailClick = (element) => {
+    navigate('/Chat_Details', { state: { element } });
   };
+
+  const handleClick = async (designatedBloodWriteNumber) => {
+    // back으로 정보 post함
+    fetch('http://localhost:8004/user/wishList/wishListUpdate', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        loginId: userId,
+        boardId: designatedBloodWriteNumber,
+        boardType: "designatedBlood"
+      }),
+    })
+    .then((res) => {
+      res.json();
+    });
+  };
+  
+
   return (
     <StyledAll>
       <StyledSub>
@@ -113,117 +131,37 @@ function DBD_General() {
                         </option>
                       ))}
                     </select>
-                    {/* <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select> */}
                   </StyledFilterDiv1One>
                   <StyledFilterDiv1One>
                     <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
                     <Form>
                       {['checkbox'].map((type) => (
-                        <div
-                          key={`default-${type}`}
-                          className="mb-3"
-                          style={{ marginTop: '20px', display: 'flex' }}
-                        >
-                          <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label="RH-"
-                            style={{ marginRight: '20px' }}
-                          />
-                          <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label="RH+"
-                          />
+                        <div key={`default-${type}`} className="mb-3" style={{ marginTop: '20px', display: 'flex' }}>
+                          <Form.Check type={type} id={`default-${type}`} label="RH-" style={{ marginRight: '20px' }} />
+                          <Form.Check type={type} id={`default-${type}`} label="RH+" />
                         </div>
                       ))}
                     </Form>
                   </StyledFilterDiv1One>
-                  {/* <StyledFilterDiv1One>
-                    <select
-                      onChange={handleSecondListChange}
-                      value={firstList2Value}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList2.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </StyledFilterDiv1One> */}
-                  {/* <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>
-                      &nbsp;기&nbsp;간&nbsp;
-                    </StyledFilterDiv1Two>
-                    <select
-                      onChange={handleFirstListChange}
-                      value={firstListValue}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList1.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </StyledFilterDiv1One> */}
                 </StyledFilter>
-
                 <section id="list">
                   <Styleddiv2>
                     <StyledTable>
                       <thead>
                         <tr>
-                          <th
-                            id="area-header"
-                            style={{
-                              width: '350px',
-                              fontWeight: '700',
-                              fontSize: '22px',
-                            }}
-                          >
+                          <th id="area-header" style={{ width: '350px', fontWeight: '700', fontSize: '22px' }}>
                             제목 / 내용
                           </th>
-                          <th
-                            style={{
-                              width: '100px',
-                            }}
-                          >
+                          <th style={{ width: '100px' }}>
                             &nbsp;
                           </th>
                           <th
                             id="centerName-header"
-                            style={{
-                              width: '200px',
-                              fontWeight: '700',
-                              fontSize: '22px',
-                            }}
-                          >
+                            style={{ width: '200px', fontWeight: '700', fontSize: '22px', }}>
                             모집인원 및 현황
                           </th>
                         </tr>
                       </thead>
-
                       <tbody>
                         {' '}
                         {inputData
@@ -235,16 +173,10 @@ function DBD_General() {
                             ];
                             return (
                               <React.Fragment key={element.id}>
-                                <tr onClick={() => handleRowClick(index)}>
-                                  <td
+                                <tr >
+                                  <td onClick={() => handleRowClick(index)}
                                     headers="area-header"
-                                    style={{
-                                      width: '350px',
-                                      fontWeight: '500',
-                                      fontSize: '18px',
-                                      textAlign: 'left',
-                                    }}
-                                  >
+                                    style={{ width: '350px', fontWeight: '500', fontSize: '18px', textAlign: 'left' }}                                  >
                                     {element.title}
                                     <br />
                                     {element.startDate}
@@ -258,36 +190,16 @@ function DBD_General() {
                                   <td></td>
                                   <td
                                     headers="centerName-header"
-                                    style={{
-                                      width: '200px',
-                                      fontWeight: '500',
-                                      fontSize: '18px',
-                                    }}
-                                  >
+                                    style={{ width: '200px', fontWeight: '500', fontSize: '18px' }}>
                                     <br />
                                     모집중
                                     <br />
-                                    <Styledimg
-                                      src={icon}
-                                      className="main-icon"
-                                      alt="logo"
-                                    />
+                                    <Styledimg src={icon} className="main-icon" alt="logo" onClick={() => handleClick(element.designatedBloodWriteNumber)} style={{ cursor: 'pointer' }} />
                                     <br />
                                     <button
-                                      // type="button"
                                       variant="primary"
-                                      onClick={() =>
-                                        handleDetailClick(element.hospitalName)
-                                      }
-                                      style={{
-                                        width: '100px',
-                                        height: '35px',
-                                        borderRadius: '9px',
-                                        background: '#d9d9d9',
-                                        color: '#333333',
-                                        border: 'none',
-                                      }}
-                                    >
+                                      onClick={() => handleDetailClick(element)}
+                                      style={{ width: '100px', height: '35px', borderRadius: '9px', background: '#d9d9d9', color: '#333333', border: 'none' }}>
                                       참여하기
                                     </button>
                                   </td>
@@ -296,28 +208,15 @@ function DBD_General() {
                                 {openIndex === index && (
                                   <tr>
                                     <td colSpan={2}>
-                                      {/* <Styledtd1 id="wrap">
-                                      <KakaoMap
-                                        markerPositions={markerPositions}
-                                        size={mapSize}
-                                      />
-                                    </Styledtd1> */}
                                       <Styledtxt
-                                        style={{
-                                          width: '450px',
-                                        }}
-                                      >
+                                        style={{ width: '450px' }}>
                                         {element.content}
                                       </Styledtxt>
                                     </td>
                                     <td>
                                       <Styledtd2
                                         colSpan={1}
-                                        style={{
-                                          width: '100px',
-                                        }}
-                                      >
-                                        {/* <Styledtxt>{element.content}</Styledtxt> */}
+                                        style={{ width: '100px' }}>
                                       </Styledtd2>
                                     </td>
                                   </tr>
@@ -331,7 +230,6 @@ function DBD_General() {
                 </section>
               </Tab.Content>
             </Tab>
-
             <Tab eventKey="home" title="병원">
               <Tab.Content>
                 <StyledFilter>
@@ -349,62 +247,18 @@ function DBD_General() {
                           </option>
                         ))}
                       </select>
-                      {/* <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select> */}
                     </StyledFilterDiv1One>
                     <StyledFilterDiv1One>
                       <StyledFilterDiv1Two>RH 여부</StyledFilterDiv1Two>
                       <Form>
                         {['checkbox'].map((type) => (
                           <div key={`default-${type}`} className="mb-3">
-                            <Form.Check
-                              type={type}
-                              id={`default-${type}`}
-                              label="RH-"
-                            />
-                            <Form.Check
-                              type={type}
-                              id={`default-${type}`}
-                              label="RH+"
-                            />
+                            <Form.Check type={type} id={`default-${type}`} label="RH-" />
+                            <Form.Check type={type} id={`default-${type}`} label="RH+" />
                           </div>
                         ))}
                       </Form>
                     </StyledFilterDiv1One>
-                    {/* <StyledFilterDiv1One>
-                    <StyledFilterDiv1Two>
-                      &nbsp;기&nbsp;간&nbsp;
-                    </StyledFilterDiv1Two>
-                    <select
-                      onChange={handleFirstListChange}
-                      value={firstListValue}
-                      style={{ border: 'none' }}
-                    >
-                      {selectList1.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={secondListOptions}
-                      onChange={setSecondListOptions}
-                    >
-                      {secondListOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </StyledFilterDiv1One> */}
                   </StyledFilterDiv1>
                 </StyledFilter>
                 <Styleddiv2>
@@ -440,31 +294,12 @@ function DBD_General() {
                               </Styledtd>
                               <Styledtd>
                                 {element.bloodNumber}
-                                {/* 텍스트 컬러랑 현재 모집인원 /로 표현하기 */}
                                 <br />
-                                <Styledimg
-                                  src={icon}
-                                  class
-                                  name="main-icon"
-                                  alt="logo"
-                                />
-                                {/* 빈 하트 이미지 추가 후 좋아요 여부로 이미지 다르게 보이기 */}
+                                <Styledimg src={icon} class name="main-icon" alt="logo" />
                                 <br />
-                                {/* <Nav.Link type="button" href="/DBD_PostGeneral">
-                                  <StyledButtonDiv>참여하기</StyledButtonDiv>
-                                </Nav.Link> */}
                                 <button
                                   type="button"
-                                  style={{
-                                    width: '100px',
-                                    height: '35px',
-                                    marginTop: '5px',
-                                    borderRadius: '9px',
-                                    background: '#d9d9d9',
-                                    color: '#333333',
-                                    border: 'none',
-                                  }}
-                                >
+                                  style={{ width: '100px', height: '35px', marginTop: '5px', borderRadius: '9px', background: '#d9d9d9', color: '#333333', border: 'none', }}>
                                   참여하기
                                 </button>
                               </Styledtd>
@@ -483,9 +318,6 @@ function DBD_General() {
     </StyledAll>
   );
 }
-// const Styledtd = styled.div`
-//   display: block;
-// `;
 const StyledTab1 = styled.div`
   width: 865px;
   margin-top: 5px;
@@ -658,12 +490,6 @@ const StyledFilterDiv1Two = styled.div`
   margin-left: 30px;
   margin-top: 20px;
 `;
-
-// const Styleddiv2 = styled.div`
-//   margin-right: 100px;
-//   margin-left: 100px;
-//   text-align: center;
-// `;
 const Styledtd2 = styled.div`
   /* display: block; */
   margin-top: 50px;

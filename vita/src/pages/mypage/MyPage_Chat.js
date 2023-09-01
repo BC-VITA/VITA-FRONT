@@ -88,6 +88,7 @@ function MyPage_Chat() {
         </StyledTop>
         <Styledcomment>
           <StyledTable>
+            
             <thead style={{ fontWeight: '700', fontSize: '24px' }}>
               <tr>
                 <th
