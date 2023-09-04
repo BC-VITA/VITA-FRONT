@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Form, Tab, Tabs, Nav, FloatingLabel } from 'react-bootstrap';
+import { Form, Tab, Tabs, Nav, FloatingLabel, Table } from 'react-bootstrap';
 
 function MyPage_D() {
   const userId = sessionStorage.getItem('userId');
@@ -15,23 +15,73 @@ function MyPage_D() {
     ? inputData.reduce((sum, review) => sum + review.usePoint, 0)
     : 0;
 
-  // useEffect(() => {
-  //   const url1 = `http://localhost:8004/donate/mypage/history?userId=${userId}`;
-  //   fetch(url1, {
-  //     method: 'get',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       setInputData1(res);
-  //     })
-  //     .catch((err) => {
-  //       setError(err.message);
-  //     });
-  // }, []);
+  const [openIndex, setOpenIndex] = useState(-1);
+  const handleRowClick = (index) => {
+    setOpenIndex(index === openIndex ? -1 : index);
+  };
 
-  // if (inputData === null) {
-  //   return <div>Loading...</div>;
-  // }
+  useEffect(() => {
+    const url1 = `http://localhost:8004/donate/mypage/history?userId=${userId}`;
+    fetch(url1, {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setInputData1(res);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }, []);
+
+  if (inputData === null) {
+    return <div>Loading...</div>;
+  }
+
+  const handlePDF = (id) => {
+    fetch(`http://localhost:8004/volunteer/pdf?registerId=${id}`, {
+      method: 'POST',
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        alert('다운이 완료되었습니다.');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const thStyle = {
+    // width: '80px',
+    fontFamily: 'Gmarket Sans TTF',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: '22px',
+    lineHeight: '35px',
+    textAlign: 'center',
+    color: '#333333',
+  };
+  const tdStyle = {
+    ...thStyle,
+    fontWeight: '500',
+    fontSize: '18px',
+    lineHeight: '30px',
+  };
+  const btStyle = {
+    ...thStyle,
+    height: '37px',
+    background: '#D9D9D9',
+    borderRadius: '10px',
+    border: 'none',
+    fontWeight: '500',
+    fontSize: '15px',
+    lineHeight: '37px',
+  };
+
+  // const [openIndex, setOpenIndex] = useState(-1);
+  // const handleRowClick = (index) => {
+  //   setOpenIndex(index === openIndex ? -1 : index);
+  // };
 
   return (
     <StyledAll>
@@ -72,7 +122,7 @@ function MyPage_D() {
           </StyledSubDiv2>
         </Nav>
       </StyledSub>
-      {/* <StyledSubcomment>
+      <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부</StyledTitle>
         </StyledTop>
@@ -137,6 +187,111 @@ function MyPage_D() {
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
+                    {/*  */}
+                    <section id="list">
+                      <Styleddiv2>
+                        <StyledTable>
+                          <thead>
+                            <tr>
+                              <th
+                                id="area-header"
+                                style={{ ...thStyle, width: '230px' }}
+                              >
+                                제목
+                              </th>
+                              <th
+                                id="centerName-header"
+                                style={{ ...thStyle, width: '80px' }}
+                              >
+                                포인트 액수
+                              </th>
+                              <th
+                                id="bloodHouseAddress-header"
+                                style={{ ...thStyle, width: '80px' }}
+                              >
+                                일 시
+                              </th>
+                              <th>&nbsp;</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {inputData.map((review, index) => {
+                              return (
+                                <React.Fragment key={index}>
+                                  <tr onClick={() => handleRowClick(index)}>
+                                    {/* <div key={index}> */}
+                                    <td
+                                      headers="area-header"
+                                      style={{
+                                        ...tdStyle,
+                                        fontWeight: '500',
+                                      }}
+                                    >
+                                      {review.donateName}
+                                    </td>
+                                    <td
+                                      headers="centerName-header"
+                                      style={{ ...tdStyle, width: '120px' }}
+                                    >
+                                      {review.usePoint}
+                                    </td>
+                                    <td
+                                      headers="bloodHouseAddress-header"
+                                      style={{
+                                        ...tdStyle,
+                                        width: '130px',
+
+                                        fontSize: '15px',
+                                      }}
+                                    >
+                                      {review.donateTime}
+                                    </td>
+                                    <td
+                                      style={{
+                                        ...tdStyle,
+                                        width: '130px',
+                                        fontSize: '15px',
+                                      }}
+                                    >
+                                      {/* <button
+                                        style={{
+                                          ...btStyle,
+                                          // border: '1px solid #FF9C9C',
+                                          color: 'white',
+                                          paddingLeft: '10px',
+                                          paddingRight: '10px',
+                                          background: '#F55757',
+                                        }}
+                                      >
+                                        취소하기
+                                      </button> */}
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handlePDF(review.reservationId)
+                                        }
+                                        style={{
+                                          ...btStyle,
+                                          background: '#8FAADC',
+                                          color: 'white',
+                                          paddingLeft: '10px',
+                                          paddingRight: '10px',
+                                        }}
+                                      >
+                                        기부증서 출력
+                                      </button>
+                                    </td>
+                                    {/* </div> */}
+                                  </tr>
+                                </React.Fragment>
+                              );
+                            })}
+                            );
+                          </tbody>
+                        </StyledTable>
+                      </Styleddiv2>
+                    </section>
+
                     <div>
                       {inputData.map((review, index) => (
                         <div key={index}>
@@ -189,7 +344,7 @@ function MyPage_D() {
             </Tabs>
           </StyledTab1>
         </Styledcomment>
-      </StyledSubcomment> */}
+      </StyledSubcomment>
     </StyledAll>
   );
 }
@@ -390,5 +545,35 @@ const StyledFilterDivTitle3 = styled.div`
   margin-right: 20px;
   /* margin-left: 10px; */
   line-height: 40px;
+`;
+const Styleddiv2 = styled.div`
+  text-align: center;
+`;
+const StyledTable = styled(Table)`
+  margin-top: 30px;
+  border-collapse: collapse;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+`;
+const Styledtd1 = styled.div`
+  width: 500px;
+`;
+const Styledtd2 = styled.div`
+  /* display: block; */
+  margin-top: 50px;
+`;
+const Styledtxt = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 30px;
+  /* or 158% */
+  letter-spacing: 0.05em;
+  color: #333333;
 `;
 export default MyPage_D;

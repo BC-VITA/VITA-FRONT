@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Nav, FloatingLabel, Form, Tab, Tabs } from 'react-bootstrap';
+import { Nav, FloatingLabel, Form, Tab, Table, Tabs } from 'react-bootstrap';
 
 function MyPage_BD() {
   const userId = sessionStorage.getItem('userId');
@@ -10,25 +10,72 @@ function MyPage_BD() {
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
   const [error, setError] = useState(null);
 
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
 
+  // useEffect(() => {
+  //   const url = `http://localhost:8004/user/mypage/mypage-designated-write?userId=${userId}`;
+  //   fetch(url, {
+  //     method: 'get',
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       setUserData(res);
+  //     })
+  //     .catch((err) => {
+  //       setError(err.message);
+  //     });
+  // }, []);
+
+  const [openIndex, setOpenIndex] = useState(-1);
+  const handleRowClick = (index) => {
+    setOpenIndex(index === openIndex ? -1 : index);
+  };
+  const [userData, setUserData1] = useState(null);
   useEffect(() => {
-    const url = `http://localhost:8004/user/mypage?userId=${userId}`;
-    fetch(url, {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setUserData(res);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  }, []);
+    const url1 = `http://localhost:8004/user/mypage/volunteer-history?userId=${userId}`;
 
+    const fetchData = async () => {
+      try {
+        const response1 = await fetch(url1);
+        const data1 = await response1.json();
+        setUserData1(data1);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   if (userData === null) {
     return <div>Loading...</div>;
   }
+
+  const thStyle = {
+    // width: '80px',
+    fontFamily: 'Gmarket Sans TTF',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: '22px',
+    lineHeight: '35px',
+    textAlign: 'center',
+    color: '#333333',
+  };
+  const tdStyle = {
+    ...thStyle,
+    fontWeight: '500',
+    fontSize: '18px',
+    lineHeight: '30px',
+  };
+  const btStyle = {
+    ...thStyle,
+    height: '37px',
+    background: '#D9D9D9',
+    borderRadius: '10px',
+    border: 'none',
+    fontWeight: '500',
+    fontSize: '15px',
+    lineHeight: '37px',
+  };
 
   return (
     <StyledAll>
@@ -81,7 +128,7 @@ function MyPage_BD() {
         <Styledcomment>
           <StyledTxt>헌혈 참여</StyledTxt>
           <FloatingLabel
-            label={userData.myPageDesignatedBloodReviewList.length + '번'}            
+            label={userData.myPageDesignatedBloodReviewList.length + '번'}
             //value={roomnumber}
             //onChange={handleReservation}
             style={{ width: '300px', lineHeight: '15px' }}
@@ -92,7 +139,7 @@ function MyPage_BD() {
               style={{ background: '#ffffff', height: '50px' }}
             />
           </FloatingLabel>
-          <StyledTab1>
+          {/* <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
               <Tab eventKey="reservation" title="예약 내역">
                 <Tab.Content>
@@ -104,28 +151,171 @@ function MyPage_BD() {
                         <input
                           type="Date"
                           value={startDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
                         <input
                           type="Date"
                           value={endDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
+                    </StyledDiv> */}
+          <StyledTab1>
+            <Tabs style={{ marginTop: '20px' }}>
+              <Tab eventKey="history" title="봉사 신청 내역">
+                <Tab.Content>
+                  <StyledBox1>
+                    <StyledDiv>
+                      <StyledTxt2>봉사 신청 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
-                    <div>
-                      {userData.myPageDesignatedBloodReviewList.map((review, index) => (
-                        <div key={index}>
-                          <div>예약자: {review.userName}</div>
-                          <div>DesignatedBloodNumber: {review.designatedBloodNumber}</div>
-                          <div>ReviewTitle: {review.reviewTitle}</div>
-                          <div>예약시간: {review.localDateTime ? review.localDateTime.split('T')[0] : ''}</div>
-                        </div>
-                      ))}
-                    </div>
+                    <section id="list">
+                      <Styleddiv2>
+                        <StyledTable>
+                          <thead>
+                            <tr>
+                              <th
+                                id="area-header"
+                                style={{ ...thStyle, width: '250px' }}
+                              >
+                                제목
+                              </th>
+                              <th
+                                id="centerName-header"
+                                style={{ ...thStyle, width: '100px' }}
+                              >
+                                봉사유형
+                              </th>
+                              <th
+                                id="bloodHouseAddress-header"
+                                style={{ ...thStyle, width: '100px' }}
+                              >
+                                일 시
+                              </th>
+                              <th>&nbsp;</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {userData.myPageVolunteerReservationList.map(
+                              (review, index) => {
+                                return (
+                                  <React.Fragment key={index}>
+                                    <tr onClick={() => handleRowClick(index)}>
+                                      {/* <div key={index}> */}
+                                      <td
+                                        headers="area-header"
+                                        style={{
+                                          ...tdStyle,
+                                          fontWeight: '500',
+                                        }}
+                                      >
+                                        {review.volunteerTitle}
+                                      </td>
+                                      <td
+                                        headers="centerName-header"
+                                        style={{ ...tdStyle, width: '120px' }}
+                                      >
+                                        {review.volunteerType === 'time'
+                                          ? '시간'
+                                          : review.volunteerType}
+                                      </td>
+                                      <td
+                                        headers="bloodHouseAddress-header"
+                                        style={{
+                                          ...tdStyle,
+                                          width: '130px',
+
+                                          fontSize: '15px',
+                                        }}
+                                      >
+                                        {review.localDateTime
+                                          ? review.localDateTime.split('T')[0]
+                                          : ''}
+                                      </td>
+                                      <td
+                                        style={{
+                                          ...tdStyle,
+                                          width: '130px',
+                                          fontSize: '15px',
+                                        }}
+                                      >
+                                        <button
+                                          style={{
+                                            ...btStyle,
+                                            // border: '1px solid #FF9C9C',
+                                            color: 'white',
+                                            paddingLeft: '10px',
+                                            paddingRight: '10px',
+                                            background: '#F55757',
+                                          }}
+                                        >
+                                          취소하기
+                                        </button>
+                                      </td>
+                                      {/* </div> */}
+                                    </tr>
+                                  </React.Fragment>
+                                );
+                              }
+                            )}
+                          </tbody>
+                        </StyledTable>
+                      </Styleddiv2>
+                    </section>
+                    {/* <div>
+                      {userData.myPageDesignatedBloodReviewList.map(
+                        (review, index) => (
+                          <div key={index}>
+                            <div>예약자: {review.userName}</div>
+                            <div>
+                              DesignatedBloodNumber:{' '}
+                              {review.designatedBloodNumber}
+                            </div>
+                            <div>ReviewTitle: {review.reviewTitle}</div>
+                            <div>
+                              예약시간:{' '}
+                              {review.localDateTime
+                                ? review.localDateTime.split('T')[0]
+                                : ''}
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div> */}
                   </StyledBox1>
                 </Tab.Content>
               </Tab>
@@ -140,14 +330,22 @@ function MyPage_BD() {
                         <input
                           type="Date"
                           value={startDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
                         <input
                           type="Date"
                           value={endDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
@@ -166,14 +364,22 @@ function MyPage_BD() {
                         <input
                           type="Date"
                           value={startDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleStartDateChange}
                         />
                         <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
                         <input
                           type="Date"
                           value={endDate}
-                          style={{ border: 'none', marginRight: '20px', height: '40px' }}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
                           onChange={handleEndDateChange}
                         />
                       </StyledFilterDiv1>
@@ -379,5 +585,19 @@ const StyledFilterDivTitle3 = styled.div`
   margin-right: 20px;
   /* margin-left: 10px; */
   line-height: 40px;
+`;
+
+const Styleddiv2 = styled.div`
+  text-align: center;
+`;
+const StyledTable = styled(Table)`
+  margin-top: 30px;
+  border-collapse: collapse;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
 `;
 export default MyPage_BD;

@@ -1,7 +1,7 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Form, Tab, Tabs, Nav } from 'react-bootstrap';
+import { Form, Tab, Tabs, Nav, Table } from 'react-bootstrap';
 
 function MyPage_DBD() {
   const [startDate, setstartDate] = useState('');
@@ -13,6 +13,11 @@ function MyPage_DBD() {
 
   const [inputData, setInputData1] = useState(null);
   const [inputData1, setInputData2] = useState(null);
+
+  const [openIndex, setOpenIndex] = useState(-1);
+  const handleRowClick = (index) => {
+    setOpenIndex(index === openIndex ? -1 : index);
+  };
 
   useEffect(() => {
     const url1 = `http://localhost:8004/user/mypage/designaged-reservation-history?userId=${userId}`;
@@ -28,6 +33,33 @@ function MyPage_DBD() {
   if (inputData === null) {
     return <div>Loading...</div>;
   }
+
+  const thStyle = {
+    // width: '80px',
+    fontFamily: 'Gmarket Sans TTF',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: '22px',
+    lineHeight: '35px',
+    textAlign: 'center',
+    color: '#333333',
+  };
+  const tdStyle = {
+    ...thStyle,
+    fontWeight: '500',
+    fontSize: '18px',
+    lineHeight: '30px',
+  };
+  const btStyle = {
+    ...thStyle,
+    height: '37px',
+    background: '#D9D9D9',
+    borderRadius: '10px',
+    border: 'none',
+    fontWeight: '500',
+    fontSize: '15px',
+    lineHeight: '37px',
+  };
 
   return (
     <StyledAll>
@@ -89,6 +121,124 @@ function MyPage_DBD() {
           </FloatingLabel>
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
+              <Tab eventKey="reservation" title="예약 내역">
+                <Tab.Content>
+                  <StyledBox1>
+                    <StyledDiv>
+                      <StyledTxt2>예약 내역</StyledTxt2>
+                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                        <input
+                          type="Date"
+                          value={startDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                        <input
+                          type="Date"
+                          value={endDate}
+                          style={{
+                            border: 'none',
+                            marginRight: '20px',
+                            height: '40px',
+                          }}
+                          onChange={handleEndDateChange}
+                        />
+                      </StyledFilterDiv1>
+                    </StyledDiv>
+
+                    <section id="list">
+                      <Styleddiv2>
+                        <StyledTable>
+                          <thead>
+                            <tr>
+                              <th
+                                id="area-header"
+                                style={{ ...thStyle, width: '200px' }}
+                              >
+                                제목
+                              </th>
+                              <th
+                                id="centerName-header"
+                                style={{ ...thStyle, width: '100px' }}
+                              >
+                                일 시
+                              </th>
+                              <th style={{ ...thStyle, width: '100px' }}>
+                                &nbsp;
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {inputData.map((review, index) => {
+                              return (
+                                <React.Fragment key={index}>
+                                  <tr onClick={() => handleRowClick(index)}>
+                                    <td
+                                      headers="area-header"
+                                      style={{
+                                        ...tdStyle,
+                                        fontWeight: '500',
+                                      }}
+                                    >
+                                      {review.title}
+                                    </td>
+                                    <td
+                                      headers="centerName-header"
+                                      style={{ ...tdStyle, width: '120px' }}
+                                    >
+                                      {review.createdAt}
+                                    </td>
+                                    <td
+                                      style={{
+                                        ...tdStyle,
+                                        width: '130px',
+                                        fontSize: '15px',
+                                      }}
+                                    >
+                                      <button
+                                        type="button"
+                                        style={{
+                                          ...btStyle,
+                                          background: '#8FAADC',
+                                          color: 'white',
+                                          paddingLeft: '10px',
+                                          paddingRight: '10px',
+                                        }}
+                                      >
+                                        환자 정보보기
+                                      </button>
+                                    </td>
+                                    {/* </div> */}
+                                  </tr>
+                                </React.Fragment>
+                              );
+                            })}
+                          </tbody>
+                        </StyledTable>
+                      </Styleddiv2>
+                    </section>
+
+                    {/* //여기만 디자인 해주세요  */}
+                    <div>
+                      {inputData.map((review, index) => (
+                        <div key={index}>
+                          <div>제목: {review.title}</div>
+                          <div>시간: {review.createdAt}</div>
+                          <div>
+                            <br />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </StyledBox1>
+                </Tab.Content>
+              </Tab>
               <Tab eventKey="history" title="지정헌혈 승인 내역">
                 <Tab.Content>
                   <StyledBox1>
@@ -123,50 +273,6 @@ function MyPage_DBD() {
                 </Tab.Content>
               </Tab>
 
-              {/* <Tab eventKey="reservation" title="예약 내역">
-                <Tab.Content>
-                  <StyledBox1>
-                    <StyledDiv>
-                      <StyledTxt2>예약 내역</StyledTxt2>
-                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
-                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleStartDateChange}
-                        />
-                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleEndDateChange}
-                        />
-                      </StyledFilterDiv1>
-                    </StyledDiv>
-                    <div>
-                      {inputData.map((review, index) => (
-                        <div key={index}>
-                          <div>제목: {review.title}</div>
-                          <div>시간: {review.createdAt}</div>
-                          <div>
-                            <br />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </StyledBox1>
-                </Tab.Content>
-              </Tab> */}
               <Tab eventKey="watchlist" title="관심있는 게시물">
                 <Tab.Content>
                   <StyledBox1>
@@ -418,5 +524,35 @@ const StyledFilterDivTitle3 = styled.div`
   margin-right: 20px;
   /* margin-left: 10px; */
   line-height: 40px;
+`;
+const Styleddiv2 = styled.div`
+  text-align: center;
+`;
+const StyledTable = styled(Table)`
+  margin-top: 30px;
+  border-collapse: collapse;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
+`;
+const Styledtd1 = styled.div`
+  width: 500px;
+`;
+const Styledtd2 = styled.div`
+  /* display: block; */
+  margin-top: 50px;
+`;
+const Styledtxt = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 30px;
+  /* or 158% */
+  letter-spacing: 0.05em;
+  color: #333333;
 `;
 export default MyPage_DBD;

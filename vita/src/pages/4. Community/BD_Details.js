@@ -27,7 +27,7 @@ function BD_Details() {
       body: JSON.stringify({
         userId: userId,
         comment: comment,
-        isReport: "false"
+        isReport: 'false',
       }),
     })
       .then((res) => {
@@ -37,7 +37,6 @@ function BD_Details() {
         fetchData();
       });
   };
-
 
   const [userData, setUserData] = useState(null);
   const fetchData = () => {
@@ -51,7 +50,7 @@ function BD_Details() {
         setUserData(res);
       });
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -111,7 +110,11 @@ function BD_Details() {
           ))}
         </div>
         <StyledBox4>
-          <FloatingLabel label="댓글 작성" name="message" style={{ width: '45em' }}>
+          <FloatingLabel
+            label="댓글 작성"
+            name="message"
+            style={{ width: '45em' }}
+          >
             <Form.Control
               type="text"
               placeholder="label"
