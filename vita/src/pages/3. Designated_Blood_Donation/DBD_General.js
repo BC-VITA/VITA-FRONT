@@ -37,6 +37,7 @@ function DBD_General() {
     setFirstList2Value(selected2Value);
   }
   const [inputData, setInputData] = useState([{}, {}]);
+  const [wishList123, setWishList123] = useState([]);
   const userId = sessionStorage.getItem('userId');
   useEffect(() => {
     fetch(`http://localhost:8004/user/board/filter`, {
@@ -47,7 +48,16 @@ function DBD_General() {
         setInputData(res);
         console.log(res);
       });
+
+    fetch('http://localhost:8004/user/wishListTable', {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setWishList123(res);
+      });
   }, []);
+
   const handleJoin = (hospitalName) => {
     navigate('/Chat_Details', { state: { hospitalName } });
   };
@@ -64,16 +74,16 @@ function DBD_General() {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
-        loginId: userId,
+        userId: userId,
         boardId: designatedBloodWriteNumber,
         boardType: "designatedBlood"
       }),
     })
-    .then((res) => {
-      res.json();
-    });
+      .then((res) => {
+        res.json();
+      });
   };
-  
+
 
   return (
     <StyledAll>
@@ -171,30 +181,59 @@ function DBD_General() {
                             const markerPositions = [
                               [element.latitude, element.longitude],
                             ];
+                            let iconFilterValue = '100%'; // 기본적으로 100%로 설정
+
+                            wishList123.forEach((item) => {
+                              if (item.designatedBoardId === element.designatedBloodWriteNumber) {
+                                iconFilterValue = '0%'; // 조건에 따라 필터 값을 변경
+                              }
+                            });
+
                             return (
                               <React.Fragment key={element.id}>
-                                <tr >
-                                  <td onClick={() => handleRowClick(index)}
+                                <tr>
+                                  <td
+                                    onClick={() => handleRowClick(index)}
                                     headers="area-header"
-                                    style={{ width: '350px', fontWeight: '500', fontSize: '18px', textAlign: 'left' }}                                  >
+                                    style={{
+                                      width: '350px',
+                                      fontWeight: '500',
+                                      fontSize: '18px',
+                                      textAlign: 'left',
+                                    }}
+                                  >
                                     {element.title}
                                     <br />
                                     {element.startDate}
                                     <br />
-                                    필요한 혈액형 : {element.patientBlood}
+                                    필요한 혈액형: {element.patientBlood}
                                     <br />
-                                    혈액 종류 : {element.bloodType}
+                                    혈액 종류: {element.bloodType}
                                     <br />
-                                    장소 : {element.hospitalName}
+                                    장소: {element.hospitalName}
                                   </td>
                                   <td></td>
                                   <td
                                     headers="centerName-header"
-                                    style={{ width: '200px', fontWeight: '500', fontSize: '18px' }}>
+                                    style={{
+                                      width: '200px',
+                                      fontWeight: '500',
+                                      fontSize: '18px',
+                                    }}
+                                  >
                                     <br />
                                     모집중
                                     <br />
-                                    <Styledimg src={icon} className="main-icon" alt="logo" onClick={() => handleClick(element.designatedBloodWriteNumber)} style={{ cursor: 'pointer' }} />
+                                    <Styledimg
+                                      src={icon}
+                                      className="main-icon"
+                                      alt="logo"
+                                      onClick={() => handleClick(element.designatedBloodWriteNumber)}
+                                      style={{
+                                        cursor: 'pointer',
+                                        filter: `grayscale(${iconFilterValue})`,
+                                      }}
+                                    />
                                     <br />
                                     <button
                                       variant="primary"
@@ -204,7 +243,6 @@ function DBD_General() {
                                     </button>
                                   </td>
                                 </tr>
-
                                 {openIndex === index && (
                                   <tr>
                                     <td colSpan={2}>
@@ -224,6 +262,7 @@ function DBD_General() {
                               </React.Fragment>
                             );
                           })}
+
                       </tbody>
                     </StyledTable>
                   </Styleddiv2>
