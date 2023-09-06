@@ -7,6 +7,7 @@ import KakaoMap from '../KakaoMap';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
+
 function BD_House() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
@@ -27,17 +28,7 @@ function BD_House() {
     console.log('Clicked marker:', marker);
     // 추가적인 작업을 수행하고 싶다면 여기에 작성합니다.
   };
-  const selectList1 = [
-    '전체',
-    '인천',
-    '서울',
-    '경기',
-    '강원',
-    '부산',
-    '광주',
-    '충북',
-    '제주',
-  ];
+  const selectList1 = ['전체', '인천', '서울', '경기', '강원', '부산', '광주', '충북', '제주'];
   const [firstListValue, setFirstListValue] = useState('전체');
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
@@ -102,6 +93,7 @@ function BD_House() {
     lineHeight: '37px',
   };
   delete btStyle.width;
+
   return (
     <StyledAll>
       <StyledSub>
@@ -151,11 +143,7 @@ function BD_House() {
               <Button
                 variant="light"
                 onClick={() => handleFilter('전체')}
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 전체
@@ -163,11 +151,7 @@ function BD_House() {
               <Button
                 variant="light"
                 onClick={() => handleFilter('서울')}
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 서울
@@ -175,11 +159,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('부산')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 부산
@@ -187,11 +167,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('대구')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 대구
@@ -199,11 +175,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('인천')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 인천
@@ -211,11 +183,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('울산')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 울산
@@ -223,11 +191,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('세종')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 세종
@@ -235,11 +199,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('경기')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 경기
@@ -247,11 +207,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('강원')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 강원
@@ -261,11 +217,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('충북')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 충북
@@ -273,11 +225,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('대전')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 대전
@@ -285,11 +233,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('충남')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 충남
@@ -297,11 +241,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('전북')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 전북
@@ -309,11 +249,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('광주')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 광주
@@ -321,11 +257,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('전남')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 전남
@@ -333,11 +265,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('경북')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 경북
@@ -345,11 +273,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('경남')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 경남
@@ -357,11 +281,7 @@ function BD_House() {
               <Button
                 onClick={() => handleFilter('제주')}
                 variant="light"
-                style={{
-                  width: '92px',
-                  fontSize: '20px',
-                  margin: '2px',
-                }}
+                style={{ width: '92px', fontSize: '20px', margin: '2px' }}
                 href="#list"
               >
                 제주

@@ -8,7 +8,7 @@ import information from '../../img/image 67.png';
 function Chat_Details() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { hospitalName } = location.state;
+  const { element } = location.state;
   const img = () => { navigate('/information'); };
 
   const [show, setShow] = useState(false);
@@ -26,21 +26,6 @@ function Chat_Details() {
   const [data123, setData123] = useState([]);
   const userId = sessionStorage.getItem('userId');
 
-  //임시 보더 ID,receiverId을 숫자로 변환하게 함
-  let boardId;
-  let receiverId;
-  if (hospitalName === '서울병원') {
-    boardId = 1;
-  }
-  //임시로 senderName을 숫자로 변환하게 함
-  let senderId;
-  if (userId === 'admin') {
-    senderId = 2;
-    receiverId = 1;
-  } else {
-    senderId = userId;
-  }
-
   //STOMP 연결
   useEffect(() => {
     // STOMP 클라이언트 설정
@@ -50,9 +35,9 @@ function Chat_Details() {
     // 연결이 열린 경우의 이벤트 핸들러
     const onConnect = (frame) => {
       console.log('STOMP 연결 성공');
-      client.subscribe('/sub/chat', onMessageReceived);
+      client.subscribe('/sub/chat/1', onMessageReceived);
     };
-    
+
     // 연결이 닫힌 경우의 이벤트 핸들러
     const onDisconnect = (frame) => {
       console.log('STOMP 연결 종료');
@@ -76,7 +61,6 @@ function Chat_Details() {
     try {
       // 세션 정보 가져오기
       const sessionId = sessionStorage.getItem('sessionId');
-      // 또는 쿠키에서 직접 가져올 수도 있습니다. (예: document.cookie)
 
       // 요청 헤더에 세션 정보 추가
       const headers = {
@@ -100,6 +84,7 @@ function Chat_Details() {
     setMessage(event.target.value);
   };
 
+  //채팅 목록 가져오기
   useEffect(() => {
     const fetchData = () => {
       fetch(`http://localhost:8004/chat/${roomId}`)
@@ -116,13 +101,13 @@ function Chat_Details() {
     // 최초 실행
     fetchData();
 
-    // // 1초마다 fetchData 함수 호출
-    // const intervalId = setInterval(fetchData, 1000);
+    // 1초마다 fetchData 함수 호출
+    const intervalId = setInterval(fetchData, 1000);
 
-    // // 컴포넌트 언마운트 시 타이머 정리
-    // return () => {
-    //   clearInterval(intervalId);
-    // };
+    // 컴포넌트 언마운트 시 타이머 정리
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
 
@@ -130,10 +115,10 @@ function Chat_Details() {
   const sendMessage = () => {
     const chatMessage = {
       'roomId': 1,
+      'boardId': 1,
+      'senderId': userId,
+      'receiverId': element.registerName,
       'message': message,
-      'boardId': boardId,
-      'senderId': senderId,
-      'receiverId': receiverId,
     };
     //로그인할때 number저장하기
 
@@ -143,7 +128,6 @@ function Chat_Details() {
     }
 
     setMessage('');
-    window.location.reload();
   };
 
   const onMessageReceived = (message) => {
@@ -159,7 +143,7 @@ function Chat_Details() {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
-        userId :useId,
+        userId: userId,
         roomId: roomId1,
         isAgree: true
       }),
@@ -202,13 +186,12 @@ function Chat_Details() {
                 <Button variant="secondary" onClick={() => setAccept(false)}>
                   닫기
                 </Button>
-                <Button variant="primary" onClick={() => handleAccept(data123.roomId)}>
+                <Button variant="primary" onClick={() => handleAccept(element.designatedBloodWriteNumber)}>
                   수락
                 </Button>
+                <div>{element.designatedBloodWriteNumber}</div>
               </Modal.Footer>
             </Modal>
-
-
             <StyledButtonP onClick={() => setCancel(true)}>
               취소하기
             </StyledButtonP>
@@ -343,10 +326,11 @@ function Chat_Details() {
           </StyledText2>
         </StyledBox2>
         <StyledBox3>
+          <div>{element.designatedBloodWriteNumber}</div>
           {data123.chatMessageList &&
             data123.chatMessageList.map((messageItem) => (
               <div key={messageItem.messageId}>
-                {messageItem.senderId === senderId ? (
+                {messageItem.senderId === userId ? (
                   <>
                     <StyledBox3RName>{messageItem.senderName}</StyledBox3RName>
                     <StyledBox3R>

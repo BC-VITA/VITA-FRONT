@@ -13,6 +13,7 @@ function BD_Story() {
 
   useEffect(() => {
     fetchBoardList();
+    console.log(boardList);
   }, []);
 
   const Blood = 'Blood';
