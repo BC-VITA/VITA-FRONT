@@ -61,7 +61,7 @@ const BD_Post = () => {
             <div><input type="text" value={title} onChange={handleChangeTitle} placeholder="제목" /></div>
             <div><input type="text" value={content} onChange={handleChangeContent} placeholder="내용" /></div>
             <div><input type="file" accept="image/*" onChange={handleImageChange} /></div>
-            <div><button onClick={handleImageUpload}>저장</button></div>            
+            <div><button onClick={handleImageUpload}>저장</button></div>
         </div>
     );
 };

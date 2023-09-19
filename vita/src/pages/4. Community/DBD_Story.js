@@ -18,9 +18,9 @@ function DBD_Story() {
 
   const fetchBoardList = () => {
     fetch('http://localhost:8004/donate/board')
-      .then((response) => response.json())
-      .then((data) => setBoardList(data.content))
-      .catch((error) => console.error('Error fetching board list:', error));
+        .then((response) => response.json())
+        .then((data) => setBoardList(data.content))
+        .catch((error) => console.error('Error fetching board list:', error));
   };
 
   const handleDetailClick = (board, imageUrl) => {
@@ -28,69 +28,69 @@ function DBD_Story() {
   };
 
   return (
-    <StyledAll>
-      <StyledSub>
-        <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>이야기하자</StyledSubDiv1>
-          <StyledSubDiv2>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Story">
-                <StyledSubDiv2_2g>헌혈후기</StyledSubDiv2_2g>
+      <StyledAll>
+        <StyledSub>
+          <Nav defaultActiveKey="/" className="flex-column">
+            <StyledSubDiv1>이야기하자</StyledSubDiv1>
+            <StyledSubDiv2>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/BD_Story">
+                  <StyledSubDiv2_2g>헌혈후기</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1p>
+                <Nav.Link href="/DBD_Story">
+                  <StyledSubDiv2_2>지정헌혈후기</StyledSubDiv2_2>
+                </Nav.Link>
+              </StyledSubDiv2_1p>
+            </StyledSubDiv2>
+          </Nav>
+        </StyledSub>
+        <StyledSubcomment>
+          <StyledTop>
+            <StyledTitle>지정헌혈후기</StyledTitle>
+            <StyledButton>
+              <Nav.Link href="/DBDPostGeneral">
+                <StyledButtonDiv>수정하기</StyledButtonDiv>
               </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
-              <Nav.Link href="/DBD_Story">
-                <StyledSubDiv2_2>지정헌혈후기</StyledSubDiv2_2>
-              </Nav.Link>
-            </StyledSubDiv2_1p>
-          </StyledSubDiv2>
-        </Nav>
-      </StyledSub>
-      <StyledSubcomment>
-        <StyledTop>
-          <StyledTitle>지정헌혈후기</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
-        </StyledTop>
+            </StyledButton>
+          </StyledTop>
 
-        <div>
-          {boardList.map((board) => {
-            // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
-            const imageUrl = board.imageUrl
-              ? board.imageUrl.replace(
-                'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
-                  '\\'
-                )
-              : null;
+          <div>
+            {boardList.map((board) => {
+              // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거'
+              const imageUrl = board.imageUrl
+                  ? board.imageUrl.replace(
+                      'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                      '\\'
+                  )
+                  : null;
 
-            return (
-              <div key={board.boardId}>
-                <StyledBox>
-                  <StyledBox2>
-                    <Card style={{ width: '17rem' }}>
-                      <Card.Img variant="top" src={imageUrl} />
-                      <Card.Body>
-                        <Card.Title>{board.title}</Card.Title>
-                        <Card.Text>{board.content}</Card.Text>
-                        <Button
-                          variant="primary"
-                          onClick={() => handleDetailClick(board, imageUrl)}
-                        >
-                          자세히 보기
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  </StyledBox2>
-                </StyledBox>
-              </div>
-            );
-          })}
-        </div>
-      </StyledSubcomment>
-    </StyledAll>
+              return (
+                  <div key={board.boardId}>
+                    <StyledBox>
+                      <StyledBox2>
+                        <Card style={{ width: '17rem' }}>
+                          <Card.Img variant="top" src={imageUrl} />
+                          <Card.Body>
+                            <Card.Title>{board.title}</Card.Title>
+                            <Card.Text>{board.content}</Card.Text>
+                            <Button
+                                variant="primary"
+                                onClick={() => handleDetailClick(board, imageUrl)}
+                            >
+                              자세히 보기
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </StyledBox2>
+                    </StyledBox>
+                  </div>
+              );
+            })}
+          </div>
+        </StyledSubcomment>
+      </StyledAll>
   );
 }
 const StyledAll = styled.div`

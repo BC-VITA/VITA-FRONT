@@ -62,9 +62,10 @@ function D_Donation() {
               .map((board, index) => {
                 const imageUrl = board.imageUrl
                   ? board.imageUrl.replace(
-                    'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
+                      // 'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
+                      'C:Userssuim7OneDrive문서GitHubVITA-FRONT\vitapublic',
                       '\\'
-                  )
+                    )
                   : null;
 
                 // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치
@@ -99,7 +100,7 @@ function D_Donation() {
               .map((board, index) => {
                 const imageUrl = board.imageUrl
                   ? board.imageUrl.replace(
-                    'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
+                      'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
                       '\\'
                     )
                   : null;
@@ -136,7 +137,7 @@ function D_Donation() {
               .map((board, index) => {
                 const imageUrl = board.imageUrl
                   ? board.imageUrl.replace(
-                    'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
+                      'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
                       '\\'
                     )
                   : null;

@@ -27,17 +27,16 @@ function BD_Details() {
       body: JSON.stringify({
         userId: userId,
         comment: comment,
-        isReport: "false"
+        isReport: 'false',
       }),
     })
-      .then((res) => {
-        res.json();
-      })
-      .then(() => {
-        fetchData();
-      });
+        .then((res) => {
+          res.json();
+        })
+        .then(() => {
+          fetchData();
+        });
   };
-
 
   const [userData, setUserData] = useState(null);
   const fetchData = () => {
@@ -45,13 +44,13 @@ function BD_Details() {
     fetch(url1, {
       method: 'get',
     })
-      .then((res) => res.json())
-      .then((res) => {
-        setComment('');
-        setUserData(res);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          setComment('');
+          setUserData(res);
+        });
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -61,68 +60,72 @@ function BD_Details() {
   }
 
   return (
-    <StyledAll>
-      <StyledSub>
-        <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>이야기하자</StyledSubDiv1>
-          <StyledSubDiv2>
-            <StyledSubDiv2_1p>
-              <Nav.Link href="/BD_Story">
-                <StyledSubDiv2_2>헌혈후기</StyledSubDiv2_2>
-              </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/DBD_Story">
-                <StyledSubDiv2_2g>지정헌혈후기</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-          </StyledSubDiv2>
-        </Nav>
-      </StyledSub>
-      <StyledSubcomment>
-        <StyledTop>
-          <StyledTitle>헌혈후기</StyledTitle>
-        </StyledTop>
-        <StyledDiv>
-          <img
-            style={{ width: '870px', height: '500px' }}
-            src={imageUrl}
-            alt="Board Image"
-          />
-          <StyledText>{board.title}</StyledText>
-          <StyledText2>{board.content}</StyledText2>
-        </StyledDiv>
-        <div>
-          {userData.reviewComments.map((review, index) => (
-            <Styledtext>
-              <Styledbox>
-                <StyledName>{review.userName}</StyledName>
-                <StyledDay>{review.createdAt}</StyledDay>
-              </Styledbox>
-              <Styledbox>
-                <Styledcontent>{review.comment}</Styledcontent>
-                <Styledbox>
-                  <StyledButton1>신고하기</StyledButton1>
-                  <StyledButton1> | </StyledButton1>
-                  <StyledButton1>삭제</StyledButton1>
-                </Styledbox>
-              </Styledbox>
-            </Styledtext>
-          ))}
-        </div>
-        <StyledBox4>
-          <FloatingLabel label="댓글 작성" name="message" style={{ width: '45em' }}>
-            <Form.Control
-              type="text"
-              placeholder="label"
-              value={comment} // 댓글 텍스트 입력값
-              onChange={handleCommentChange} // 댓글 텍스트 변경 핸들러
+      <StyledAll>
+        <StyledSub>
+          <Nav defaultActiveKey="/" className="flex-column">
+            <StyledSubDiv1>이야기하자</StyledSubDiv1>
+            <StyledSubDiv2>
+              <StyledSubDiv2_1p>
+                <Nav.Link href="/BD_Story">
+                  <StyledSubDiv2_2>헌혈후기</StyledSubDiv2_2>
+                </Nav.Link>
+              </StyledSubDiv2_1p>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/DBD_Story">
+                  <StyledSubDiv2_2g>지정헌혈후기</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+            </StyledSubDiv2>
+          </Nav>
+        </StyledSub>
+        <StyledSubcomment>
+          <StyledTop>
+            <StyledTitle>헌혈후기</StyledTitle>
+          </StyledTop>
+          <StyledDiv>
+            <img
+                style={{ width: '870px', height: '500px' }}
+                src={imageUrl}
+                alt="Board Image"
             />
-          </FloatingLabel>
-          <StyledButton4 onClick={handleSubmit}>등록</StyledButton4>
-        </StyledBox4>
-      </StyledSubcomment>
-    </StyledAll>
+            <StyledText>{board.title}</StyledText>
+            <StyledText2>{board.content}</StyledText2>
+          </StyledDiv>
+          <div>
+            {userData.reviewComments.map((review, index) => (
+                <Styledtext>
+                  <Styledbox>
+                    <StyledName>{review.userName}</StyledName>
+                    <StyledDay>{review.createdAt}</StyledDay>
+                  </Styledbox>
+                  <Styledbox>
+                    <Styledcontent>{review.comment}</Styledcontent>
+                    <Styledbox>
+                      <StyledButton1>신고하기</StyledButton1>
+                      <StyledButton1> | </StyledButton1>
+                      <StyledButton1>삭제</StyledButton1>
+                    </Styledbox>
+                  </Styledbox>
+                </Styledtext>
+            ))}
+          </div>
+          <StyledBox4>
+            <FloatingLabel
+                label="댓글 작성"
+                name="message"
+                style={{ width: '45em' }}
+            >
+              <Form.Control
+                  type="text"
+                  placeholder="label"
+                  value={comment} // 댓글 텍스트 입력값
+                  onChange={handleCommentChange} // 댓글 텍스트 변경 핸들러
+              />
+            </FloatingLabel>
+            <StyledButton4 onClick={handleSubmit}>등록</StyledButton4>
+          </StyledBox4>
+        </StyledSubcomment>
+      </StyledAll>
   );
 }
 const StyledAll = styled.div`

@@ -86,7 +86,7 @@ function MyPage() {
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
               <Nav.Link href="/MyPage_chat">
-                <StyledSubDiv2_2g>채팅</StyledSubDiv2_2g>
+                <StyledSubDiv2_2g>지정헌혈 채팅</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>

@@ -97,7 +97,7 @@ function MyPageMaine() {
           <StyledTitle2>&nbsp;|&nbsp;</StyledTitle2>
           <StyledTitle2 href="#interest">관심목록</StyledTitle2>
           <StyledTitle2>&nbsp;|&nbsp;</StyledTitle2>
-          <StyledTitle2 href="#chat">채팅</StyledTitle2>
+          <StyledTitle2 href="#chat">지정헌혈 채팅</StyledTitle2>
         </StyledTitle2Box>
       </section>
       <StyledBox id="myInformation">
@@ -256,7 +256,7 @@ function MyPageMaine() {
       </StyledBox5>
       <StyledBox3 id="write">
         <StyledDiv31>
-          <StyledTxtB>채팅</StyledTxtB>
+          <StyledTxtB>지정헌혈 채팅</StyledTxtB>
         </StyledDiv31>
       </StyledBox3>
       <StyledBox6 id="chat">

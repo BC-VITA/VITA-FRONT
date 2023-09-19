@@ -53,7 +53,7 @@ function BD_Story() {
         <StyledTop>
           <StyledTitle>헌혈후기</StyledTitle>
           <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
+            <Nav.Link href="/BD_Post">
               <StyledButtonDiv>작성하기</StyledButtonDiv>
             </Nav.Link>
           </StyledButton>
@@ -63,22 +63,34 @@ function BD_Story() {
             // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
             const imageUrl = board.img
               ? board.img.replace(
-                'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
-                '\\'
-              )
+                  'C:\\Users\\suim7\\mymain\\VITA-FRONT\\vita\\public\\images\\',
+                  '\\'
+                )
               : null;
-
+            // {boardList.map((board) => {
+            //   const imageUrl = board.img
+            //     ? `http://localhost:8004/images${board.img.replace(
+            //         'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\images',
+            //         ''
+            //       )}`
+            //     : null;
             return (
               <div key={board.boardId}>
                 <StyledBox>
                   <StyledBox2>
                     <Card style={{ width: '17rem' }}>
                       <Card.Img variant="top" src={imageUrl} />
+                      {/* {imageUrl ? (
+                        <Card.Img variant="top" src={imageUrl} />
+                      ) : null} */}
                       <Card.Body>
                         <Card.Title>{board.title}</Card.Title>
                         <Card.Text>{board.content}</Card.Text>
+                        <Card.Text>{imageUrl}</Card.Text>
                         <Button
-                          variant="primary" onClick={() => handleDetailClick(board, imageUrl)}>
+                          variant="primary"
+                          onClick={() => handleDetailClick(board, imageUrl)}
+                        >
                           자세히 보기
                         </Button>
                       </Card.Body>
