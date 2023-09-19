@@ -16,6 +16,11 @@ function MyPage_DBD() {
   };
 
   const userId = sessionStorage.getItem('userId');
+  //지정헌혈 채팅리스트
+  const [roomIds, setRoomIds] = useState([]);
+  //좋아요한 게시글리스트
+  const [wishListData, setWishListData] = useState([]);
+
 
   const [inputData, setInputData] = useState([]);
   const [inputData2, setInputData2] = useState([]);

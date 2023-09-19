@@ -79,6 +79,7 @@ import MPostDonation from './pages/0. Master/M_PostDonation';
 //실험
 import Asd from './pages/asd'
 import Asd1 from './pages/asd1'
+import Asd2 from './pages/mypage/asd123'
 import { ImportExportOutlined } from '@mui/icons-material';
 
 const startDate = '2022-01-01';
@@ -214,6 +215,7 @@ function App() {
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
           <Route path="/asd" element={<Asd />}></Route>
           <Route path="/asd1" element={<Asd1 />}></Route>
+          <Route path="/Asd2" element={<Asd2 />}></Route>
         </Routes>
         <Foot />
       </BrowserRouter>
