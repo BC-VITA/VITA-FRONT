@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 import Foot from './components/Foot';
 
 import Login from './pages/Login';
+import Test from './pages/test';
 import SignUp from './pages/SignUp/SignUp';
 import Group from './pages/SignUp/SignUpGroup';
 import Hospital from './pages/SignUp/SignUpHospital';
@@ -109,6 +110,7 @@ function App() {
 
           {/*로그인*/}
           <Route path="/Login" element={<Login />}></Route>
+          <Route path="/Test" element={<Test />}></Route>
 
           {/*회원가입*/}
           <Route path="/SignUp" element={<SignUp />}></Route>
@@ -199,6 +201,7 @@ function App() {
           <Route path="/D_Receipt" element={<DReceipt />}></Route>
           <Route path="/D_ReceiptDetails" element={<DReceiptDetails />}></Route>
           <Route path="/D_SelectReceipt" element={<DSelectReceipt />}></Route>
+          <Route path="/test" element={<test/>}></Route>
 
           {/*관리자 페이지 모음*/}
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
@@ -219,7 +222,7 @@ function App() {
 }
 const FooterContainer = styled.div`
   display: flex;
-  min-height: 100vh;
+  //min-height: 700vh;
   flex-direction: column;
 `;
 export default App;

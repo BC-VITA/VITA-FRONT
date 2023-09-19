@@ -25,6 +25,7 @@ function MyPage_S() {
 
   const [userData, setUserData1] = useState(null);
   const [userData1, setUserData2] = useState(null);
+  const [userData3, setUserData3] = useState(null);
 
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
@@ -35,6 +36,7 @@ function MyPage_S() {
   useEffect(() => {
     const url1 = `http://localhost:8004/user/mypage/volunteer-history?userId=${userId}`;
     const url2 = `http://localhost:8004/user/mypage-volunteer-active-history?userId=${userId}`;
+    const url3 = `http://localhost:8004/user/mypage-wishList-volunteer?userId=${userId}`;
 
     const fetchData = async () => {
       try {
@@ -45,6 +47,10 @@ function MyPage_S() {
         const response2 = await fetch(url2);
         const data2 = await response2.json();
         setUserData2(data2);
+
+        const response3 = await fetch(url3);
+        const data3 = await response3.json();
+        setUserData3(data3);
       } catch (err) {
         setError(err.message);
       }
@@ -58,6 +64,10 @@ function MyPage_S() {
   }
 
   if (userData1 === null) {
+    return <div>Loading...</div>;
+  }
+
+  if (userData3 === null) {
     return <div>Loading...</div>;
   }
 
@@ -91,18 +101,21 @@ function MyPage_S() {
     ...thStyle,
     fontWeight: '500',
     fontSize: '18px',
-    lineHeight: '30px',
+    lineHeight: '40px',
   };
   const btStyle = {
-    ...thStyle,
-    height: '37px',
     background: '#D9D9D9',
     borderRadius: '10px',
     border: 'none',
+    fontFamily: 'Gmarket Sans TTF',
+    fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: '15px',
+    fontSize: '18px',
     lineHeight: '37px',
+    textAlign: 'center',
+    color: '#333333',
   };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -116,7 +129,7 @@ function MyPage_S() {
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
               <Nav.Link href="/MyPage_chat">
-                <StyledSubDiv2_2g>채팅</StyledSubDiv2_2g>
+                <StyledSubDiv2_2g>지정헌혈 채팅</StyledSubDiv2_2g>
               </Nav.Link>
             </StyledSubDiv2_1>
             <StyledSubDiv2_1>
@@ -246,7 +259,7 @@ function MyPage_S() {
           </StyledBox3>
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="history" title="봉사 신청 내역">
+              <Tab eventKey="history" title="봉사 신청 내역" style={{minHeight:'100vh'}}>
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
@@ -302,7 +315,7 @@ function MyPage_S() {
                               <th>&nbsp;</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody style={{ fontWeight: '500', fontSize: '20px'}}>
                             {userData.myPageVolunteerReservationList.map(
                               (review, index) => {
                                 return (
@@ -332,7 +345,7 @@ function MyPage_S() {
                                           ...tdStyle,
                                           width: '130px',
 
-                                          fontSize: '15px',
+                                          fontSize: '18px',
                                         }}
                                       >
                                         {review.localDateTime
@@ -351,8 +364,8 @@ function MyPage_S() {
                                             ...btStyle,
                                             // border: '1px solid #FF9C9C',
                                             color: 'white',
-                                            paddingLeft: '10px',
-                                            paddingRight: '10px',
+                                            paddingLeft: '15px',
+                                            paddingRight: '15px',
                                             background: '#F55757',
                                           }}
                                         >
@@ -429,7 +442,7 @@ function MyPage_S() {
                               </th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
                             {userData1.map((review, index) => {
                               return (
                                 <React.Fragment key={index}>
@@ -467,8 +480,8 @@ function MyPage_S() {
                                           ...btStyle,
                                           background: '#8FAADC',
                                           color: 'white',
-                                          paddingLeft: '10px',
-                                          paddingRight: '10px',
+                                          paddingLeft: '15px',
+                                          paddingRight: '15px',
                                         }}
                                       >
                                         봉사 확인서 출력
@@ -556,6 +569,143 @@ function MyPage_S() {
                         />
                       </StyledFilterDiv1>
                     </StyledDiv>
+                    <section id="list">
+                      <Styleddiv2>
+                        <StyledTable>
+                          <thead>
+                          <tr>
+                            <th
+                                id="area-header"
+                                style={{ ...thStyle, width: '250px' }}
+                            >
+                              제목 / 내용
+                            </th>
+                            <th
+                                id="centerName-header"
+                                style={{ ...thStyle, width: '100px' }}
+                            >
+                              모집인원 및 현황
+                            </th>
+                          </tr>
+                          </thead>
+                          <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+                          {userData3.map((review, index) => (
+                                <tr
+                                    key={index}
+                                    onClick={() => handleRowClick(index)}
+                                >
+                                  <td headers="area-header" style={{display:"block", 	textAlign: 'left', paddingLeft : '20px',}}>
+                                    <div style={{display:"flex",fontWeight: '600',}}>
+                                      <div style={{color:'#0057FF', marginRight:"10px"}}>
+                                        {review.volunteerType}
+                                      </div>
+                                      {review.title}
+                                    </div>
+                                    <div style={{display:"flex"}}>
+                                      <div>봉사시간 :&nbsp;</div>
+                                    {review.volunteerStartDate}-{review.volunteerEndDate}
+                                    </div>
+                                    <div style={{display:"flex"}}>
+                                      <div>주소 :&nbsp;</div>
+                                    {review.volunteerAddress}
+                                    </div>
+                                  </td>
+
+
+                                  <td>
+                                    <button
+                                        style={{
+                                          ...btStyle,
+                                          // border: '1px solid #FF9C9C',
+                                          paddingLeft: '15px',
+                                          paddingRight: '15px',
+                                          background: '#AEAEAE',
+                                          marginTop : '0px',
+                                          marginBottom:'10px',
+                                          color: '#ffffff'
+                                        }}
+                                    >
+                                      상세보기
+                                    </button>
+                                    <br/>
+                                    <button
+                                        style={{
+                                          ...btStyle,
+                                          // border: '1px solid #FF9C9C',
+                                          color: '#ffffff',
+                                          paddingLeft: '15px',
+                                          paddingRight: '15px',
+                                          background: '#FF9F9F',
+                                        }}
+                                    >
+                                      참여하기
+                                    </button>
+                                  </td>
+                                </tr>
+                                // return (
+                                //     <React.Fragment key={index}>
+                                //       <tr onClick={() => handleRowClick(index)}>
+                                //         {/* <div key={index}> */}
+                                //         <td
+                                //             headers="area-header"
+                                //             style={{
+                                //               ...tdStyle,
+                                //               fontWeight: '500',
+                                //             }}
+                                //         >
+                                //           {review.title}
+                                //         </td>
+                                //         <td
+                                //             headers="centerName-header"
+                                //             style={{ ...tdStyle, width: '120px' }}
+                                //         >
+                                //           {review.volunteerType === 'time'
+                                //               ? '시간'
+                                //               : review.volunteerType}
+                                //         </td>
+                                //         <td
+                                //             headers="bloodHouseAddress-header"
+                                //             style={{
+                                //               ...tdStyle,
+                                //               width: '130px',
+                                //
+                                //               fontSize: '15px',
+                                //             }}
+                                //         >
+                                //           {review.localDateTime
+                                //               ? review.localDateTime.split('T')[0]
+                                //               : ''}
+                                //         </td>
+                                //         <td
+                                //             style={{
+                                //               ...tdStyle,
+                                //               width: '130px',
+                                //               fontSize: '15px',
+                                //             }}
+                                //         >
+                                //           <button
+                                //               style={{
+                                //                 ...btStyle,
+                                //                 // border: '1px solid #FF9C9C',
+                                //                 color: 'white',
+                                //                 paddingLeft: '10px',
+                                //                 paddingRight: '10px',
+                                //                 background: '#F55757',
+                                //               }}
+                                //           >
+                                //             취소하기
+                                //           </button>
+                                //         </td>
+                                //         {/* </div> */}
+                                //       </tr>
+                                //     </React.Fragment>
+                                // );
+                              )
+                          )}
+                          </tbody>
+                        </StyledTable>
+                      </Styleddiv2>
+                    </section>
                   </StyledBox1>
                 </Tab.Content>
               </Tab>

@@ -6,36 +6,90 @@ import { Form, Tab, Tabs, Nav, Table } from 'react-bootstrap';
 function MyPage_DBD() {
   const [startDate, setstartDate] = useState('');
   const [endDate, setendDate] = useState('');
-  const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
-  const handleEndDateChange = ({ target: { value } }) => setendDate(value);
+  const handleStartDateChange = (e) => {
+    const { value } = e.target;
+    setstartDate(value);
+  };
+  const handleEndDateChange = (e) => {
+    const { value } = e.target;
+    setendDate(value);
+  };
 
   const userId = sessionStorage.getItem('userId');
 
-  const [inputData, setInputData1] = useState(null);
-  const [inputData1, setInputData2] = useState(null);
+  const [inputData, setInputData] = useState([]);
+  const [inputData2, setInputData2] = useState([]);
+  const [inputData3, setInputData3] = useState([]);
+  const [inputData4, setInputData4] = useState([]);
 
   const [openIndex, setOpenIndex] = useState(-1);
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
   };
+  const type = "designatedBlood";
 
   useEffect(() => {
-    const url1 = `http://localhost:8004/user/mypage/designaged-reservation-history?userId=${userId}`;
-    fetch(url1, {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setInputData1(res);
-      });
-  }, []);
-
-  if (inputData === null) {
-    return <div>Loading...</div>;
-  }
+    if (userId) {
+      const url1 = `http://localhost:8004/user/mypage/designaged-reservation-history?userId=${userId}`;
+      fetch(url1)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('네트워크 응답이 정상이 아닙니다.');
+            }
+            return res.json();
+          })
+          .then((res) => {
+            setInputData(res);
+          })
+          .catch((error) => {
+            console.error('데이터를 가져오는 중 오류 발생:', error);
+          });
+      const url2 = `http://localhost:8004/user/mypage-designated-write?userId=${userId}`;
+      fetch(url2)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('네트워크 응답이 정상이 아닙니다.');
+            }
+            return res.json();
+          })
+          .then((res) => {
+            setInputData2(res);
+          })
+          .catch((error) => {
+            console.error('데이터를 가져오는 중 오류 발생:', error);
+          });
+      const url3 = `http://localhost:8004/user/mypage-designated-review?userId=${userId}&reviewType=${type}`;
+      fetch(url3)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('네트워크 응답이 정상이 아닙니다.');
+            }
+            return res.json();
+          })
+          .then((res) => {
+            setInputData3(res);
+          })
+          .catch((error) => {
+            console.error('데이터를 가져오는 중 오류 발생:', error);
+          });
+      const url4 = `http://localhost:8004/user/mypage-wishList?userId=${userId}`;
+      fetch(url4)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('네트워크 응답이 정상이 아닙니다.');
+            }
+            return res.json();
+          })
+          .then((res) => {
+            setInputData4(res);
+          })
+          .catch((error) => {
+            console.error('데이터를 가져오는 중 오류 발생:', error);
+          });
+    }
+  }, [userId]);
 
   const thStyle = {
-    // width: '80px',
     fontFamily: 'Gmarket Sans TTF',
     fontStyle: 'normal',
     fontWeight: '700',
@@ -48,311 +102,433 @@ function MyPage_DBD() {
     ...thStyle,
     fontWeight: '500',
     fontSize: '18px',
-    lineHeight: '30px',
+    lineHeight: '45px',
   };
   const btStyle = {
-    ...thStyle,
-    height: '37px',
     background: '#D9D9D9',
     borderRadius: '10px',
     border: 'none',
+    fontFamily: 'Gmarket Sans TTF',
+    fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: '15px',
+    fontSize: '18px',
     lineHeight: '37px',
+    textAlign: 'center',
+    color: '#333333',
   };
 
   return (
-    <StyledAll>
-      <StyledSub>
-        <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>마이페이지</StyledSubDiv1>
-          <StyledSubDiv2>
-            <StyledSubDiv2_1p>
-              <Nav.Link href="/MyPage_DBD">
-                <StyledSubDiv2_2>지정헌혈</StyledSubDiv2_2>
-              </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/MyPage_chat">
-                <StyledSubDiv2_2g>채팅</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/MyPage_BD">
-                <StyledSubDiv2_2g>헌혈</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/MyPage_S">
-                <StyledSubDiv2_2g>봉사</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/MyPage_D">
-                <StyledSubDiv2_2g>기부</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/MyPage">
-                <StyledSubDiv2_2g>개인정보</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-          </StyledSubDiv2>
-        </Nav>
-      </StyledSub>
-      <StyledSubcomment>
-        <StyledTop>
-          <StyledTitle>지정헌혈</StyledTitle>
-        </StyledTop>
-        <Styledcomment>
-          <StyledTxt>지정헌혈 참여</StyledTxt>
-          <FloatingLabel
-            label={inputData.length + '번'}
-            style={{ width: '300px', lineHeight: '15px' }}
-          >
-            <Form.Control
-              placeholder="name"
-              disabled
-              style={{
-                background: '#ffffff',
-                height: '50px',
-              }}
-            />
-          </FloatingLabel>
-          <StyledTab1>
-            <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="reservation" title="예약 내역">
-                <Tab.Content>
-                  <StyledBox1>
-                    <StyledDiv>
-                      <StyledTxt2>예약 내역</StyledTxt2>
-                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
-                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleStartDateChange}
-                        />
-                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleEndDateChange}
-                        />
-                      </StyledFilterDiv1>
-                    </StyledDiv>
-
-                    <section id="list">
-                      <Styleddiv2>
-                        <StyledTable>
-                          <thead>
+      <StyledAll>
+        <StyledSub>
+          <Nav defaultActiveKey="/" className="flex-column">
+            <StyledSubDiv1>마이페이지</StyledSubDiv1>
+            <StyledSubDiv2>
+              <StyledSubDiv2_1p>
+                <Nav.Link href="/MyPage_DBD">
+                  <StyledSubDiv2_2>지정헌혈</StyledSubDiv2_2>
+                </Nav.Link>
+              </StyledSubDiv2_1p>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/MyPage_chat">
+                  <StyledSubDiv2_2g>지정헌혈 채팅</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/MyPage_BD">
+                  <StyledSubDiv2_2g>헌혈</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/MyPage_S">
+                  <StyledSubDiv2_2g>봉사</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/MyPage_D">
+                  <StyledSubDiv2_2g>기부</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/MyPage">
+                  <StyledSubDiv2_2g>개인정보</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+            </StyledSubDiv2>
+          </Nav>
+        </StyledSub>
+        <StyledSubcomment>
+          <StyledTop>
+            <StyledTitle>지정헌혈</StyledTitle>
+          </StyledTop>
+          <Styledcomment>
+            <StyledTxt>지정헌혈 참여</StyledTxt>
+            <FloatingLabel
+                label={inputData.length + '번'}
+                style={{ width: '300px', lineHeight: '15px' }}
+            >
+              <Form.Control
+                  placeholder="name"
+                  disabled
+                  style={{
+                    background: '#ffffff',
+                    height: '50px',
+                  }}
+              />
+            </FloatingLabel>
+            <StyledTab1>
+              <Tabs style={{ marginTop: '20px' }}>
+                <Tab eventKey="history" title="지정헌혈 승인 내역">
+                  <Tab.Content>
+                    <StyledBox1>
+                      <StyledDiv>
+                        <StyledTxt2>지정헌혈 승인 내역</StyledTxt2>
+                        <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                          <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                          <input
+                              type="Date"
+                              value={startDate}
+                              style={{
+                                border: 'none',
+                                marginRight: '20px',
+                                height: '40px',
+                              }}
+                              onChange={handleStartDateChange}
+                          />
+                          <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                          <input
+                              type="Date"
+                              value={endDate}
+                              style={{
+                                border: 'none',
+                                marginRight: '20px',
+                                height: '40px',
+                              }}
+                              onChange={handleEndDateChange}
+                          />
+                        </StyledFilterDiv1>
+                      </StyledDiv>
+                      <section id="list">
+                        <Styleddiv2>
+                          <StyledTable>
+                            <thead>
                             <tr>
                               <th
-                                id="area-header"
-                                style={{ ...thStyle, width: '200px' }}
+                                  id="area-header"
+                                  style={{ ...thStyle, width: '400px' }}
                               >
                                 제목
                               </th>
                               <th
-                                id="centerName-header"
-                                style={{ ...thStyle, width: '100px' }}
+                                  id="bloodHouseAddress-header"
+                                  style={{ ...thStyle, width: '200px' }}
                               >
                                 일 시
                               </th>
-                              <th style={{ ...thStyle, width: '100px' }}>
-                                &nbsp;
-                              </th>
+                              <th>&nbsp;</th>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {inputData.map((review, index) => {
-                              return (
-                                <React.Fragment key={index}>
-                                  <tr onClick={() => handleRowClick(index)}>
-                                    <td
-                                      headers="area-header"
-                                      style={{
-                                        ...tdStyle,
-                                        fontWeight: '500',
-                                      }}
-                                    >
-                                      {review.title}
-                                    </td>
-                                    <td
-                                      headers="centerName-header"
-                                      style={{ ...tdStyle, width: '120px' }}
-                                    >
-                                      {review.createdAt}
-                                    </td>
-                                    <td
-                                      style={{
-                                        ...tdStyle,
-                                        width: '130px',
-                                        fontSize: '15px',
-                                      }}
-                                    >
-                                      <button
-                                        type="button"
+                            </thead>
+                            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+                            {inputData.map((review, index) => (
+                                <tr
+                                    key={index}
+                                    onClick={() => handleRowClick(index)}
+                                >
+                                  <td headers="area-header">{review.title}</td>
+                                  <td headers="bloodHouseAddress-header">
+                                    {review.createdAt}
+                                  </td>
+                                  <td>
+                                    <button
                                         style={{
                                           ...btStyle,
+                                          // border: '1px solid #FF9C9C',
+                                          color: 'white',
+                                          paddingLeft: '15px',
+                                          paddingRight: '15px',
                                           background: '#8FAADC',
+                                        }}
+                                    >
+                                      후기쓰러 가기
+                                    </button>
+                                  </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                          </StyledTable>
+                        </Styleddiv2>
+                      </section>
+                    </StyledBox1>
+                  </Tab.Content>
+                </Tab>{' '}
+                <Tab eventKey="interested" title="관심있는 게시물">
+                  <Tab.Content>
+                    <StyledBox1>
+                      <StyledDiv>
+                        <StyledTxt2>관심있는 게시물</StyledTxt2>
+                      </StyledDiv>
+                      <section id="list">
+                        <Styleddiv2>
+                          <StyledTable>
+                            <thead>
+                            <tr>
+                              <th
+                                  id="area-header"
+                                  style={{ ...thStyle, width: '500px' }}
+                              >
+                                제목 / 내용
+                              </th>
+                              <th
+                                  id="bloodHouseAddress-header"
+                                  style={{ ...thStyle, width: '200px' }}
+                              >
+                                모집인원 및 현황
+                              </th>
+                            </tr>
+                            </thead>
+                            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+                            {inputData4.map((interested, index) => (
+                                <tr
+                                    key={index}
+                                    onClick={() => handleRowClick(index)}
+                                >
+                                  <td style={{display:"block", 	textAlign: 'left', paddingLeft : '20px', lineHeight: '22px',}}>
+                                    <div style={{marginTop:'10px', fontWeight : 600 }}> {interested.boardTitle}</div>
+                                    <br/>
+                                    <div style={{}}>
+                                    {interested.boardContent}
+                                    </div>
+                                    <br/>
+                                    <div style={{color: '#9D9D9D'}}>
+                                      {interested.boardDate}
+                                    </div>
+
+                                  </td>
+                                  <td>
+                                    <button
+                                        style={{
+                                          ...btStyle,
+                                          // border: '1px solid #FF9C9C',
+                                          paddingLeft: '15px',
+                                          paddingRight: '15px',
+                                          background: '#AEAEAE',
+                                          marginTop : '10px',
+                                          marginBottom:'10px',
+                                          color: '#ffffff'
+                                        }}
+                                    >
+                                      상세보기
+                                    </button>
+                                    <br/>
+                                    <button
+                                        style={{
+                                          ...btStyle,
+                                          // border: '1px solid #FF9C9C',
+                                          color: '#ffffff',
+                                          paddingLeft: '15px',
+                                          paddingRight: '15px',
+                                          background: '#FF9F9F',
+                                        }}
+                                    >
+                                      참여하기
+                                    </button>
+                                  </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                          </StyledTable>
+                        </Styleddiv2>
+                      </section>
+                    </StyledBox1>
+                  </Tab.Content>
+                </Tab>{' '}
+                <Tab eventKey="write" title="작성한 게시물">
+                  <Tab.Content>
+                    <StyledBox1>
+                      <StyledDiv>
+                        <StyledTxt2>작성한 게시물</StyledTxt2>
+                        <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                          <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                          <input
+                              type="Date"
+                              value={startDate}
+                              style={{
+                                border: 'none',
+                                marginRight: '20px',
+                                height: '40px',
+                              }}
+                              onChange={handleStartDateChange}
+                          />
+                          <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                          <input
+                              type="Date"
+                              value={endDate}
+                              style={{
+                                border: 'none',
+                                marginRight: '20px',
+                                height: '40px',
+                              }}
+                              onChange={handleEndDateChange}
+                          />
+                        </StyledFilterDiv1>
+                      </StyledDiv>
+                      <section id="list">
+                        <Styleddiv2>
+                          <StyledTable>
+                            <thead>
+                            <tr>
+                              <th
+                                  id="area-header"
+                                  style={{ ...thStyle, width: '350px' }}
+                              >
+                                제목
+                              </th>
+                              <th
+                                  id="bloodHouseAddress-header"
+                                  style={{ ...thStyle, width: '250px' }}
+                              >
+                                일 시
+                              </th>
+                              <th style={{ ...thStyle, width: '100px' }}>&nbsp;</th>
+                              <th style={{ ...thStyle, width: '100px' }}>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+                            {inputData2.map((review, index) => (
+                                <tr
+                                    key={index}
+                                    onClick={() => handleRowClick(index)}
+                                >
+                                  <td headers="area-header">
+                                    {review.boardTitle}
+                                  </td>
+                                  <td headers="bloodHouseAddress-header">
+                                    {review.localDateTime}
+                                  </td>
+                                  <td>
+                                    <button
+                                        style={{
+                                          ...btStyle,
                                           color: 'white',
                                           paddingLeft: '10px',
                                           paddingRight: '10px',
+                                          background: '#FF9F9F',
                                         }}
-                                      >
-                                        환자 정보보기
-                                      </button>
-                                    </td>
-                                    {/* </div> */}
-                                  </tr>
-                                </React.Fragment>
-                              );
-                            })}
-                          </tbody>
-                        </StyledTable>
-                      </Styleddiv2>
-                    </section>
-
-                    {/* //여기만 디자인 해주세요  */}
-                    <div>
-                      {inputData.map((review, index) => (
-                        <div key={index}>
-                          <div>제목: {review.title}</div>
-                          <div>시간: {review.createdAt}</div>
-                          <div>
-                            <br />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </StyledBox1>
-                </Tab.Content>
-              </Tab>
-              <Tab eventKey="history" title="지정헌혈 승인 내역">
-                <Tab.Content>
-                  <StyledBox1>
-                    <StyledDiv>
-                      <StyledTxt2>지정헌혈 승인 내역</StyledTxt2>
-                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
-                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleStartDateChange}
-                        />
-                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleEndDateChange}
-                        />
-                      </StyledFilterDiv1>
-                    </StyledDiv>
-                  </StyledBox1>
-                </Tab.Content>
-              </Tab>
-
-              <Tab eventKey="watchlist" title="관심있는 게시물">
-                <Tab.Content>
-                  <StyledBox1>
-                    <StyledDiv>
-                      <StyledTxt2>관심있는 게시물</StyledTxt2>
-                    </StyledDiv>
-                  </StyledBox1>
-                </Tab.Content>
-              </Tab>
-              <Tab eventKey="write" title="작성한 게시물">
-                <Tab.Content>
-                  <StyledBox1>
-                    <StyledDiv>
-                      <StyledTxt2>작성한 게시물</StyledTxt2>
-                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
-                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleStartDateChange}
-                        />
-                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleEndDateChange}
-                        />
-                      </StyledFilterDiv1>
-                    </StyledDiv>
-                  </StyledBox1>
-                </Tab.Content>
-              </Tab>
-              <Tab eventKey="review" title="내가 작성한 후기">
-                <Tab.Content>
-                  <StyledBox1>
-                    <StyledDiv>
-                      <StyledTxt2>내가 작성한 후기</StyledTxt2>
-                      <StyledFilterDiv1 style={{ marginTop: '20px' }}>
-                        <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
-                        <input
-                          type="Date"
-                          value={startDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleStartDateChange}
-                        />
-                        <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
-                        <input
-                          type="Date"
-                          value={endDate}
-                          style={{
-                            border: 'none',
-                            marginRight: '20px',
-                            height: '40px',
-                          }}
-                          onChange={handleEndDateChange}
-                        />
-                      </StyledFilterDiv1>
-                    </StyledDiv>
-                  </StyledBox1>
-                </Tab.Content>
-              </Tab>
-            </Tabs>
-          </StyledTab1>
-        </Styledcomment>
-      </StyledSubcomment>
-    </StyledAll>
+                                    >
+                                      수정하기
+                                    </button>
+                                  </td>
+                                  <td>
+                                    <button
+                                        style={{
+                                          ...btStyle,
+                                          color: 'white',
+                                          paddingLeft: '10px',
+                                          paddingRight: '10px',
+                                          background: '#F55757',
+                                        }}
+                                    >
+                                      삭제하기
+                                    </button>
+                                  </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                          </StyledTable>
+                        </Styleddiv2>
+                      </section>
+                    </StyledBox1>
+                  </Tab.Content>
+                </Tab>{' '}
+                <Tab eventKey="review" title="내가 작성한 후기">
+                  <Tab.Content>
+                    <StyledBox1>
+                      <StyledDiv>
+                        <StyledTxt2>내가 작성한 후기</StyledTxt2>
+                        <StyledFilterDiv1 style={{ marginTop: '20px' }}>
+                          <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                          <input
+                              type="Date"
+                              value={startDate}
+                              style={{
+                                border: 'none',
+                                marginRight: '20px',
+                                height: '40px',
+                              }}
+                              onChange={handleStartDateChange}
+                          />
+                          <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                          <input
+                              type="Date"
+                              value={endDate}
+                              style={{
+                                border: 'none',
+                                marginRight: '20px',
+                                height: '40px',
+                              }}
+                              onChange={handleEndDateChange}
+                          />
+                        </StyledFilterDiv1>
+                      </StyledDiv>
+                      <section id="list">
+                        <Styleddiv2>
+                          <StyledTable>
+                            <thead>
+                            <tr>
+                              <th
+                                  id="area-header"
+                                  style={{ ...thStyle, width: '350px' }}
+                              >
+                                제목
+                              </th>
+                              <th
+                                  id="bloodHouseAddress-header"
+                                  style={{ ...thStyle, width: '300px' }}
+                              >
+                                일 시
+                              </th>
+                              <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+                            {inputData3.map((review, index) => (
+                                <tr
+                                    key={index}
+                                    onClick={() => handleRowClick(index)}
+                                >
+                                  <td headers="area-header">
+                                    {review.reviewTitle}
+                                  </td>
+                                  <td headers="bloodHouseAddress-header">
+                                    {review.localDateTime}
+                                  </td>
+                                  <td>
+                                    <button
+                                        style={{
+                                          ...btStyle,
+                                          // border: '1px solid #FF9C9C',
+                                          color: 'white',
+                                          paddingLeft: '15px',
+                                          paddingRight: '15px',
+                                          background: '#F55757',
+                                        }}
+                                    >
+                                      삭제하기
+                                    </button>
+                                  </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                          </StyledTable>
+                        </Styleddiv2>
+                      </section>
+                    </StyledBox1>
+                  </Tab.Content>
+                </Tab>{' '}
+              </Tabs>
+            </StyledTab1>
+          </Styledcomment>
+        </StyledSubcomment>
+      </StyledAll>
   );
 }
 

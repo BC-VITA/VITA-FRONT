@@ -26,7 +26,7 @@ const Sp0 = styled.span`
 const Styledfoot = styled.footer`
   font-family: Gmarket Sans TTF;
   position: static;
-  bottom: 0;
+  //bottom: 0;
   width: 100%;
   height: 200px;
   background-color: #f5f5f5;
