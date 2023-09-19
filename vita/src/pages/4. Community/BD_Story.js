@@ -63,7 +63,7 @@ function BD_Story() {
             // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
             const imageUrl = board.img
               ? board.img.replace(
-                  'C:\\Users\\suim7\\mymain\\VITA-FRONT\\vita\\public\\images\\',
+                    'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
                   '\\'
                 )
               : null;
