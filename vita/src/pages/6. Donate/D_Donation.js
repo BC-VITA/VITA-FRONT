@@ -63,7 +63,7 @@ function D_Donation() {
                 const imageUrl = board.imageUrl
                   ? board.imageUrl.replace(
                       // 'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
-                      'C:Userssuim7OneDrive문서GitHubVITA-FRONT\vitapublic',
+                        'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
                       '\\'
                     )
                   : null;
