@@ -65,11 +65,42 @@ function S_ReservationSecond() {
   const handleClose = () => setShow(false);
   return (
     <StyledAll>
+      <StyledSub>
+        <Nav defaultActiveKey="/" className="flex-column">
+          <StyledSubDiv1>봉사하자</StyledSubDiv1>
+          <StyledSubDiv2>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Main">
+                <StyledSubDiv22g>자원봉사란</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Ganeral">
+                <StyledSubDiv22g>개인봉사</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Group">
+                <StyledSubDiv22g>기업 단체 봉사</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_Other">
+                <StyledSubDiv22g>타기관 봉사정보</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+            <StyledSubDiv21>
+              <Nav.Link href="/S_WatchList">
+                <StyledSubDiv22g>관심목록</StyledSubDiv22g>
+              </Nav.Link>
+            </StyledSubDiv21>
+          </StyledSubDiv2>
+        </Nav>
+      </StyledSub>
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>봉사 신청하기</StyledTitle>
         </StyledTop>
-
         <StyledDiv>봉사 예약이 완료되었습니다.</StyledDiv>
 
         <StyledBox>
@@ -124,12 +155,7 @@ function S_ReservationSecond() {
           <Modal.Header closeButton>
             <Modal.Title>안 내</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            ※ 헌혈 시 신분증
-            <br />
-            꼭 지참해주세요
-            <br />
-          </Modal.Body>
+          <Modal.Body>봉사 신청이 완료되었습니다.</Modal.Body>
           <Modal.Footer>
             <Button
               variant="secondary"
@@ -155,14 +181,75 @@ const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
 `;
-
+const StyledSub = styled.div`
+  width: 200px;
+  /* height: 175px; */
+  margin-top: 25px;
+  margin-left: 180px;
+`;
+const StyledSubDiv1 = styled.div`
+  width: 220px;
+  height: 60px;
+  /* left: 370px;
+  top: 123px; */
+  background: #ff9f9f;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 60px;
+  text-align: center;
+  color: #ffffff;
+`;
+const StyledSubDiv2 = styled.div`
+  width: 220px;
+  height: 302px;
+  border: 3px solid #d7d7d7;
+`;
+const StyledSubDiv21 = styled.div`
+  border-bottom: 3px solid #d7d7d7;
+  background-color: white;
+  height: 60px;
+  margin-left: 3px;
+  margin-right: 3px;
+`;
+const StyledSubDiv21p = styled.div`
+  border-bottom: 3px solid #ff9f9f;
+  background-color: white;
+  height: 60px;
+  margin-left: 3px;
+  margin-right: 3px;
+`;
+const StyledSubDiv22 = styled.div`
+  border: solid white 3px;
+  height: 24px;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 38px;
+  /* identical to box height, or 100% */
+  text-align: center;
+  color: #333333;
+`;
+const StyledSubDiv22g = styled.div`
+  border: solid white 3px;
+  height: 24px;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 38px;
+  /* identical to box height, or 100% */
+  text-align: center;
+  color: #969696;
+`;
 const StyledSubcomment = styled.div`
   display: block;
   width: 924px;
   margin-left: 65px;
   margin-top: 25px;
 `;
-
 const StyledTitle = styled.div`
   width: 230px;
   font-family: 'Gmarket Sans TTF';
@@ -170,31 +257,25 @@ const StyledTitle = styled.div`
   font-weight: 700;
   font-size: 35px;
   line-height: 48px;
-
   color: #333333;
 `;
 const StyledTop = styled.div`
   display: flex;
 `;
-
 const StyledCurrent = styled.div`
   display: flex;
   margin-top: 20px;
 `;
-
 const StyledBar = styled.div`
   width: 115px;
   height: 0;
   border: 3.5px solid #ff6565;
   margin-top: 35px;
 `;
-
 const StyledCircle = styled.div`
   box-sizing: border-box;
-
   width: 75px;
   height: 75px;
-
   background: #ffffff;
   border: 5px solid #ff6565;
   border-radius: 50%;
@@ -204,30 +285,24 @@ const StyledCircleTxt = styled.div`
   height: 51px;
   margin-left: 13px;
   margin-top: 9px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 19.5px;
   line-height: 25px;
   /* or 125% */
-
   letter-spacing: 0.1em;
-
   color: #333333;
 `;
-
 const StyledBox = styled.div``;
 const StyledDiv = styled.div`
   margin-top: 25px;
   margin-bottom: 25px;
-
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
   font-size: 33px;
   line-height: 55px;
-
   color: #2d3c89;
 `;
 const StyledDiv1 = styled.div`
@@ -240,9 +315,7 @@ const StyledDiv2 = styled.div`
   font-size: 27px;
   line-height: 70px;
   text-align: center;
-
   color: #333333;
-
   width: 180px;
   height: 70px;
   background: #eff3ff;
@@ -255,35 +328,28 @@ const StyledDiv3 = styled.div`
   font-size: 27px;
   line-height: 70px;
   text-align: center;
-
   color: #101a79;
-
   width: 37ch;
   height: 70px;
   background: #ffffff;
   border: 2px solid #626b8b;
 `;
-
 const Styledbutton = styled.div`
-  margin-top: 50px;
-  margin-left: 51ch;
-  width: 148px;
-  height: 50px;
-
-  background: #ffd7d7;
-  border-radius: 5px;
-
+  margin-top: 10px;
+  width: 140px;
+  height: 40px;
+  margin-left: 57ch;
+  background: #ff9f9f;
+  border-radius: 9px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 50px;
-
+  font-size: 18px;
+  line-height: 40px;
   text-align: center;
   // margin-left: 28px;
   /* identical to box height, or 100% */
-
-  color: #333333;
+  color: #ffffff;
   border: none;
 `;
 export default S_ReservationSecond;

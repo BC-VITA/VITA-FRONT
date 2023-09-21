@@ -51,7 +51,7 @@ function MyPage_Chat() {
             </StyledSubDiv2_1>
             <StyledSubDiv2_1p>
               <Nav.Link href="/MyPage_chat">
-                <StyledSubDiv2_2>채팅</StyledSubDiv2_2>
+                <StyledSubDiv2_2>지정헌혈 채팅</StyledSubDiv2_2>
               </Nav.Link>
             </StyledSubDiv2_1p>
             <StyledSubDiv2_1>
@@ -79,7 +79,7 @@ function MyPage_Chat() {
       </StyledSub>
       <StyledSubcomment>
         <StyledTop>
-          <StyledTitle>채팅</StyledTitle>
+          <StyledTitle>지정헌혈 채팅</StyledTitle>
           {/* <StyledButton>
             <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>수정하기</StyledButtonDiv>
@@ -214,7 +214,7 @@ const StyledSubcomment = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 203px;
+  width: 213px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
