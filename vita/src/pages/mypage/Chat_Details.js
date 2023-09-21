@@ -8,7 +8,7 @@ import information from '../../img/image 67.png';
 function Chat_Details() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { element } = location.state;
+  const { element,roomId1 } = location.state;
   const img = () => { navigate('/information'); };
 
   const [show, setShow] = useState(false);
@@ -87,7 +87,7 @@ function Chat_Details() {
   //채팅 목록 가져오기
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://localhost:8004/chat/${roomId}`)
+      fetch(`http://localhost:8004/chat/${roomId1.roomId}`)
         .then((response) => response.json())
         .then((data) => {
           console.log('Room detail:', data);
@@ -114,10 +114,10 @@ function Chat_Details() {
   //메시지 보내기
   const sendMessage = () => {
     const chatMessage = {
-      'roomId': 1,
-      'boardId': 1,
+      'roomId': roomId1.roomId,
+      'boardId': roomId1.boardId,
       'senderId': userId,
-      'receiverId': element.registerName,
+      'receiverId': roomId1.otherUserId,
       'message': message,
     };
     //로그인할때 number저장하기
@@ -189,7 +189,6 @@ function Chat_Details() {
                 <Button variant="primary" onClick={() => handleAccept(element.designatedBloodWriteNumber)}>
                   수락
                 </Button>
-                <div>{element.designatedBloodWriteNumber}</div>
               </Modal.Footer>
             </Modal>
             <StyledButtonP onClick={() => setCancel(true)}>
@@ -326,7 +325,6 @@ function Chat_Details() {
           </StyledText2>
         </StyledBox2>
         <StyledBox3>
-          <div>{element.designatedBloodWriteNumber}</div>
           {data123.chatMessageList &&
             data123.chatMessageList.map((messageItem) => (
               <div key={messageItem.messageId}>

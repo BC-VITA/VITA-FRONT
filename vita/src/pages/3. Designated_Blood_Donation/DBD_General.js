@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Table, Nav, Tab, Tabs, Accordion, Form } from 'react-bootstrap';
+import { Table, Nav, Tab, Tabs, Accordion, Form, Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import icon from './heart.png';
+import { Stomp } from '@stomp/stompjs';
 
 function DBD_General() {
   const navigate = useNavigate();
+
   const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
   const selectList2 = ['최신순', '마감순'];
   const [firstListValue, setFirstListValue] = useState('전체');
@@ -58,10 +60,6 @@ function DBD_General() {
       });
   }, []);
 
-  const handleJoin = (hospitalName) => {
-    navigate('/Chat_Details', { state: { hospitalName } });
-  };
-
   const handleDetailClick = (element) => {
     navigate('/Chat_Details', { state: { element } });
   };
@@ -82,6 +80,136 @@ function DBD_General() {
       .then((res) => {
         res.json();
       });
+  };
+
+  //채팅방 있는지 비교하기
+  const [acceptModal, setAcceptModal] = useState([]);
+  const [rejectmodal, setRejectModal] = useState([]);
+  const [roomIds, setRoomIds] = useState([]);
+
+  const handleAcceptOpen = (index) => {
+    let newArr = [...acceptModal];
+    newArr[index] = true;
+    setAcceptModal(newArr);
+  };
+  
+  const handleAcceptClose = (index) => {
+    let newArr = [...acceptModal];
+    newArr[index] = false;
+    setAcceptModal(newArr);
+  };
+  
+  const handleRejectOpen = (index) => {
+    let newArr2= [...rejectmodal];
+    newArr2[index]= true;
+    setRejectModal(newArr2);
+  };
+  
+  const handleRejectClose= (index) => {
+    let newArr2= [...rejectmodal];
+    newArr2[index]= false;
+    setRejectModal(newArr2);
+  };
+
+  useEffect(() => {
+    fetch(`http://localhost:8004/chat/roomId?userId=${userId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setRoomIds(data);
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('오류 발생:', error);
+      });
+  }, [userId]);
+
+  //비교후 채팅방 없으면 만들기
+  const [stompClient, setStompClient] = useState(null);
+  const [message, setMessage] = useState('');
+  const [receivedMessage, setReceivedMessage] = useState('');
+  const [chatList, setChatList] = useState([]);
+
+  //STOMP 연결
+  useEffect(() => {
+    // STOMP 클라이언트 설정
+    const client = Stomp.client('ws://localhost:8004/vita');
+    setStompClient(client);
+
+    // 연결이 열린 경우의 이벤트 핸들러
+    const onConnect = (frame) => {
+      console.log('STOMP 연결 성공');
+      client.subscribe('/sub/chat/1', onMessageReceived);
+    };
+
+    // 연결이 닫힌 경우의 이벤트 핸들러
+    const onDisconnect = (frame) => {
+      console.log('STOMP 연결 종료');
+    };
+
+    // STOMP 클라이언트 연결
+    client.connect({}, onConnect, onDisconnect);
+
+    // 컴포넌트가 언마운트될 때 STOMP 클라이언트 연결 종료
+    return () => {
+      client.disconnect();
+    };
+  }, []);
+
+  //채팅 보내기
+  useEffect(() => {
+    fetchChatList();
+  }, []);
+
+  const fetchChatList = async () => {
+    try {
+      // 세션 정보 가져오기
+      const sessionId = sessionStorage.getItem('sessionId');
+
+      // 요청 헤더에 세션 정보 추가
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionId}`,
+      };
+
+      // fetch 요청 보내기
+      const url = `http://localhost:8004/chat/list?userId=${userId}`;
+      const response = await fetch(url, {
+        credentials: 'include',
+        headers: headers,
+      });
+      const data = await response.json();
+      setChatList(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const sendMessage = (element) => {
+    const chatMessage = {
+      'boardId': element.designatedBloodWriteNumber,
+      'senderId': userId,
+      'receiverId': element.registerName,
+      'message': "처음 인사말 아무거나",
+    };
+    if (stompClient) {
+      stompClient.send('/pub/send', {}, JSON.stringify(chatMessage));
+    }
+    setMessage('');
+    navigate('/MyPage_DBD');
+  };
+
+  const onMessageReceived = (message) => {
+    const receivedData = JSON.parse(message.body);
+    setReceivedMessage(receivedData.message);
+  };
+
+  const gotomypage = () => {
+    navigate('/MyPage_DBD');
   };
 
 
@@ -178,9 +306,6 @@ function DBD_General() {
                           .slice(0)
                           .reverse()
                           .map((element, index) => {
-                            const markerPositions = [
-                              [element.latitude, element.longitude],
-                            ];
                             let iconFilterValue = '100%'; // 기본적으로 100%로 설정
 
                             wishList123.forEach((item) => {
@@ -237,10 +362,54 @@ function DBD_General() {
                                     <br />
                                     <button
                                       variant="primary"
-                                      onClick={() => handleDetailClick(element)}
-                                      style={{ width: '100px', height: '35px', borderRadius: '9px', background: '#d9d9d9', color: '#333333', border: 'none' }}>
+                                      style={{ width: '100px', height: '35px', borderRadius: '9px', background: '#d9d9d9', color: '#333333', border: 'none' }}
+                                      onClick={() => {
+                                        const isReceiverNameInRoomIds =
+                                          roomIds.some((room) => room.receiverName === element.registerName);
+
+                                        if (isReceiverNameInRoomIds) {
+                                          handleAcceptOpen(index)
+                                        } else {
+                                          handleRejectOpen(index)
+                                        }
+                                      }}
+                                    >
                                       참여하기
                                     </button>
+
+                                    < Modal size="md" show={acceptModal[index]} onHide={() => handleAcceptClose(index)}>
+                                      <Modal.Header closeButton>
+                                        <Modal.Title>지정헌혈 채팅방</Modal.Title>
+                                      </Modal.Header>
+                                      <Modal.Body>
+                                        현재 관련한 채팅방이 있습니다.<br />
+                                        채팅방으로 이동합니다.<br />
+                                      </Modal.Body>
+                                      <Modal.Footer>
+                                        <Button variant="secondary" onClick={() => handleDetailClick(element)}>
+                                          채팅방으로 이동하기
+                                        </Button>
+                                        <Button variant="secondary" onClick={gotomypage}>
+                                          채팅방 목록으로 이동하기
+                                        </Button>
+                                      </Modal.Footer>
+                                    </Modal>
+
+                                    < Modal size="md" show={rejectmodal[index]} onHide={() => handleRejectClose(index)}>
+                                      <Modal.Header closeButton>
+                                        <Modal.Title>지정헌혈 채팅방</Modal.Title>
+                                      </Modal.Header>
+                                      <Modal.Body>
+                                        현재 관련한 채팅방이 없습니다<br />
+                                        채팅방을 만드시겠습니까?<br />
+                                        주의 *채팅방을 만들고 채팅방목록으로 이동합니다*<br />
+                                      </Modal.Body>
+                                      <Modal.Footer>
+                                        <Button variant="secondary" onClick={() => sendMessage(element)}>
+                                          채팅방 만들기
+                                        </Button>
+                                      </Modal.Footer>
+                                    </ Modal >
                                   </td>
                                 </tr>
                                 {openIndex === index && (
@@ -262,7 +431,6 @@ function DBD_General() {
                               </React.Fragment>
                             );
                           })}
-
                       </tbody>
                     </StyledTable>
                   </Styleddiv2>
