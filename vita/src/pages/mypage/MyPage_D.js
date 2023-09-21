@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Form, Tab, Tabs, Nav, FloatingLabel } from 'react-bootstrap';
+import { Form, Tab, Tabs, Nav, FloatingLabel, Modal } from 'react-bootstrap';
 
 function MyPage_D() {
   const userId = sessionStorage.getItem('userId');

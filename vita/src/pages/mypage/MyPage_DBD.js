@@ -2,10 +2,12 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Form, Tab, Tabs, Nav } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function MyPage_DBD() {
   const [startDate, setstartDate] = useState('');
   const [endDate, setendDate] = useState('');
+  const navigate = useNavigate();
   const handleStartDateChange = ({ target: { value } }) => setstartDate(value);
   const handleEndDateChange = ({ target: { value } }) => setendDate(value);
 
@@ -32,7 +34,7 @@ function MyPage_DBD() {
 
   //지정헌혈 채팅 리스트 
   useEffect(() => {
-    fetch(`http://localhost:8004/chat/roomId?userId=${userId}`)
+    fetch(`http://localhost:8004/chat/list?userId=${userId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
@@ -64,6 +66,9 @@ function MyPage_DBD() {
   if (inputData === null) {
     return <div>Loading...</div>;
   }
+  const handleChatRoomClick = (roomId1) => {
+    navigate(`/Chat_Details`, { state: { roomId1 } });
+  };
 
   return (
     <StyledAll>
@@ -165,7 +170,8 @@ function MyPage_DBD() {
                     </StyledDiv>
                     {roomIds.map(room => (
                       <li key={room.id}>
-                        채팅방 번호: {room.roomId} ,지정헌혈게시글번호: {room.boardId} , 보낸이: {room.senderName} , 받는이: {room.receiverName} <button>채팅방으로 이동</button>
+                        채팅방 번호: {room.roomId} ,지정헌혈게시글번호: {room.boardId} , 보낸이: {room.loginUserId} , 받는이: {room.otherUserId}
+                        <button onClick={() => handleChatRoomClick(room)}>채팅방으로 이동</button> 
                       </li>
 
                     ))}
