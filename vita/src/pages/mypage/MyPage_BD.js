@@ -2,6 +2,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Form, Tab, Tabs, Nav, Table } from 'react-bootstrap';
+import {format, parseISO} from "date-fns";
 
 function MyPage_BD() {
   const [startDate, setstartDate] = useState('');
@@ -220,7 +221,7 @@ function MyPage_BD() {
                                 >
                                   <td headers="area-header">{reservation.centerName}</td>
                                   <td headers="bloodHouseAddress-header">
-                                    {reservation.date}
+                                    {format(parseISO(reservation.date), 'yyyy.MM.dd HH:mm')}
                                   </td>
                                   <td>
                                     <button
@@ -383,7 +384,7 @@ function MyPage_BD() {
                                     {review.reviewTitle}
                                   </td>
                                   <td headers="bloodHouseAddress-header">
-                                    {review.localDateTime}
+                                    {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
                                   </td>
                                   <td>
                                     <button
