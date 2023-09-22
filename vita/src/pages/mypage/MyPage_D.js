@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Form, Tab, Tabs, Nav, FloatingLabel, Table} from 'react-bootstrap';
+import {format, parseISO} from "date-fns";
 
 function MyPage_D() {
     const userId = sessionStorage.getItem('userId');
@@ -11,7 +12,7 @@ function MyPage_D() {
     const [error, setError] = useState(null);
 
     const [inputData, setInputData1] = useState(null);
-    // const [inputData2, setInputData2] = useState(null);
+    const [inputData2, setInputData2] = useState(null);
     const totalUsePoint = inputData
         ? inputData.reduce((sum, review) => sum + review.usePoint, 0)
         : 0;
@@ -35,26 +36,26 @@ function MyPage_D() {
             .catch((err) => {
                 setError(err.message);
             });
-        // const url2 = `http://localhost:8004/donate/user-point?userId=${userId}&reviewType=${type}`;
-        // fetch(url2, {
-        //     method: 'get',
-        // })
-        //     .then((res) => res.json())
-        //     .then((res) => {
-        //         setInputData2(res);
-        //     })
-        //     .catch((err) => {
-        //         setError(err.message);
-        //     });
+        const url2 = `http://localhost:8004/donate/mypage-user-review-point-history?userId=${userId}&reviewType=${type}`;
+        fetch(url2, {
+            method: 'get',
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                setInputData2(res);
+            })
+            .catch((err) => {
+                setError(err.message);
+            });
     }, []);
 
     if (inputData === null) {
         return <div>Loading...</div>;
     }
-    //
-    // if (inputData2 === null) {
-    //     return <div>Loading...</div>;
-    // }
+
+    if (inputData2 === null) {
+        return <div>Loading...</div>;
+    }
 
     const handlePDF = (id) => {
         fetch(`http://localhost:8004/volunteer/pdf?registerId=${id}`, {
@@ -175,7 +176,7 @@ function MyPage_D() {
                     </StyledBox2>
                     <StyledTab1>
                         <Tabs style={{marginTop: '20px'}}>
-                            <Tab eventKey="history" title="기부 내역" style={{minHeight:'430vh'}}>
+                            <Tab eventKey="history" title="기부 내역" style={{minHeight:'130vh'}}>
                                 <Tab.Content>
                                     <StyledBox1>
                                         <StyledDiv>
@@ -261,7 +262,7 @@ function MyPage_D() {
                                                                             fontSize: '17px',
                                                                         }}
                                                                     >
-                                                                        {review.donateTime}
+                                                                        {format(parseISO(review.donateTime), 'yyyy.MM.dd HH:mm')}
                                                                     </td>
                                                                     <td
                                                                         style={{
@@ -270,18 +271,6 @@ function MyPage_D() {
                                                                             fontSize: '15px',
                                                                         }}
                                                                     >
-                                                                        {/* <button
-                                        style={{
-                                          ...btStyle,
-                                          // border: '1px solid #FF9C9C',
-                                          color: 'white',
-                                          paddingLeft: '10px',
-                                          paddingRight: '10px',
-                                          background: '#F55757',
-                                        }}
-                                      >
-                                        취소하기
-                                      </button> */}
                                                                         <button
                                                                             type="button"
                                                                             onClick={() =>
@@ -303,165 +292,113 @@ function MyPage_D() {
                                                             </React.Fragment>
                                                         );
                                                     })}
-                                                    );
                                                     </tbody>
                                                 </StyledTable>
                                             </Styleddiv2>
                                         </section>
-
-                                        <div>
-                                            {inputData.map((review, index) => (
-                                                <div key={index}>
-                                                    <div>제목: {review.donateName}</div>
-                                                    <div>포인트: {review.usePoint}</div>
-                                                    <div>시간: {review.donateTime}</div>
-                                                    <div>
-                                                        <br/>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
                                     </StyledBox1>
                                 </Tab.Content>
                             </Tab>
 
-                            {/*<Tab eventKey="reservation" title="포인트 조회">*/}
-                            {/*    <Tab.Content>*/}
-                            {/*        <StyledBox1>*/}
-                            {/*            <StyledDiv>*/}
-                            {/*                <StyledTxt2>포인트 조회</StyledTxt2>*/}
-                            {/*                <StyledFilterDiv1 style={{marginTop: '20px'}}>*/}
-                            {/*                    <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>*/}
-                            {/*                    <input*/}
-                            {/*                        type="Date"*/}
-                            {/*                        value={startDate}*/}
-                            {/*                        style={{*/}
-                            {/*                            border: 'none',*/}
-                            {/*                            marginRight: '20px',*/}
-                            {/*                            height: '40px',*/}
-                            {/*                        }}*/}
-                            {/*                        onChange={handleStartDateChange}*/}
-                            {/*                    />*/}
-                            {/*                    <StyledFilterDivTitle3>-</StyledFilterDivTitle3>*/}
-                            {/*                    <input*/}
-                            {/*                        type="Date"*/}
-                            {/*                        value={endDate}*/}
-                            {/*                        style={{*/}
-                            {/*                            border: 'none',*/}
-                            {/*                            marginRight: '20px',*/}
-                            {/*                            height: '40px',*/}
-                            {/*                        }}*/}
-                            {/*                        onChange={handleEndDateChange}*/}
-                            {/*                    />*/}
-                            {/*                </StyledFilterDiv1>*/}
-                            {/*            </StyledDiv>*/}
-                            {/*            <section id="list">*/}
-                            {/*                <Styleddiv2>*/}
-                            {/*                    <StyledTable>*/}
-                            {/*                        <thead>*/}
-                            {/*                        <tr>*/}
-                            {/*                            <th*/}
-                            {/*                                id="area-header"*/}
-                            {/*                                style={{...thStyle, width: '300px'}}*/}
-                            {/*                            >*/}
-                            {/*                                제목*/}
-                            {/*                            </th>*/}
-                            {/*                            <th*/}
-                            {/*                                id="centerName-header"*/}
-                            {/*                                style={{...thStyle, width: '300px'}}*/}
-                            {/*                            >*/}
-                            {/*                                포인트 액수*/}
-                            {/*                            </th>*/}
-                            {/*                            <th*/}
-                            {/*                                id="bloodHouseAddress-header"*/}
-                            {/*                                style={{...thStyle, width: '300px'}}*/}
-                            {/*                            >*/}
-                            {/*                                일 시*/}
-                            {/*                            </th>*/}
-                            {/*                            <th>&nbsp;</th>*/}
-                            {/*                        </tr>*/}
-                            {/*                        </thead>*/}
-                            {/*                        <tbody>*/}
-                            {/*                        {inputData2.map((review, index) => {*/}
-                            {/*                            return (*/}
-                            {/*                                <React.Fragment key={index}>*/}
-                            {/*                                    <tr onClick={() => handleRowClick(index)}>*/}
-                            {/*                                        /!* <div key={index}> *!/*/}
-                            {/*                                        <td*/}
-                            {/*                                            headers="area-header"*/}
-                            {/*                                            style={{*/}
-                            {/*                                                ...tdStyle,*/}
-                            {/*                                                fontWeight: '500',*/}
-                            {/*                                            }}*/}
-                            {/*                                        >*/}
-                            {/*                                            {review.donateName}*/}
-                            {/*                                        </td>*/}
-                            {/*                                        <td*/}
-                            {/*                                            headers="centerName-header"*/}
-                            {/*                                            style={{...tdStyle, width: '120px'}}*/}
-                            {/*                                        >*/}
-                            {/*                                            {review.usePoint}*/}
-                            {/*                                        </td>*/}
-                            {/*                                        <td*/}
-                            {/*                                            headers="bloodHouseAddress-header"*/}
-                            {/*                                            style={{*/}
-                            {/*                                                ...tdStyle,*/}
-                            {/*                                                width: '130px',*/}
+                            <Tab eventKey="reservation" title="포인트 조회" style={{minHeight:'130vh'}}>
+                                <Tab.Content>
+                                    <StyledBox1>
+                                        <StyledDiv>
+                                            <StyledTxt2>포인트 조회</StyledTxt2>
+                                            <StyledFilterDiv1 style={{marginTop: '20px'}}>
+                                                <StyledFilterDivTitle2>조회일자</StyledFilterDivTitle2>
+                                                <input
+                                                    type="Date"
+                                                    value={startDate}
+                                                    style={{
+                                                        border: 'none',
+                                                        marginRight: '20px',
+                                                        height: '40px',
+                                                    }}
+                                                    onChange={handleStartDateChange}
+                                                />
+                                                <StyledFilterDivTitle3>-</StyledFilterDivTitle3>
+                                                <input
+                                                    type="Date"
+                                                    value={endDate}
+                                                    style={{
+                                                        border: 'none',
+                                                        marginRight: '20px',
+                                                        height: '40px',
+                                                    }}
+                                                    onChange={handleEndDateChange}
+                                                />
+                                            </StyledFilterDiv1>
+                                        </StyledDiv>
+                                        <section id="list">
+                                            <Styleddiv2>
+                                                <StyledTable>
+                                                    <thead>
+                                                    <tr>
+                                                        <th
+                                                            id="area-header"
+                                                            style={{...thStyle, width: '150px'}}
+                                                        >
+                                                            제목
+                                                        </th>
+                                                        <th
+                                                            id="centerName-header"
+                                                            style={{...thStyle, width: '100px'}}
+                                                        >
+                                                            포인트 액수
+                                                        </th>
+                                                        <th
+                                                            id="bloodHouseAddress-header"
+                                                            style={{...thStyle, width: '150px'}}
+                                                        >
+                                                            일 시
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {inputData2.map((review, index) => {
+                                                        return (
+                                                            <React.Fragment key={index}>
+                                                                <tr onClick={() => handleRowClick(index)}>
+                                                                    {/* <div key={index}> */}
+                                                                    <td
+                                                                        headers="area-header"
+                                                                        style={{
+                                                                            ...tdStyle,
+                                                                            fontWeight: '500',
+                                                                            fontSize: '20px',
+                                                                        }}
+                                                                    >
+                                                                        후기작성
+                                                                    </td>
+                                                                    <td
+                                                                        headers="centerName-header"
+                                                                        style={{...tdStyle, width: '120px', fontSize: '20px',}}
+                                                                    >
+                                                                        500P
+                                                                    </td>
+                                                                    <td
+                                                                        headers="bloodHouseAddress-header"
+                                                                        style={{
+                                                                            ...tdStyle,
+                                                                            width: '130px',
 
-                            {/*                                                fontSize: '15px',*/}
-                            {/*                                            }}*/}
-                            {/*                                        >*/}
-                            {/*                                            {review.donateTime}*/}
-                            {/*                                        </td>*/}
-                            {/*                                        <td*/}
-                            {/*                                            style={{*/}
-                            {/*                                                ...tdStyle,*/}
-                            {/*                                                width: '130px',*/}
-                            {/*                                                fontSize: '15px',*/}
-                            {/*                                            }}*/}
-                            {/*                                        >*/}
-                            {/*                                            <button*/}
-                            {/*                                                type="button"*/}
-                            {/*                                                onClick={() =>*/}
-                            {/*                                                    handlePDF(review.reservationId)*/}
-                            {/*                                                }*/}
-                            {/*                                                style={{*/}
-                            {/*                                                    ...btStyle,*/}
-                            {/*                                                    background: '#8FAADC',*/}
-                            {/*                                                    color: 'white',*/}
-                            {/*                                                    paddingLeft: '10px',*/}
-                            {/*                                                    paddingRight: '10px',*/}
-                            {/*                                                }}*/}
-                            {/*                                            >*/}
-                            {/*                                                기부증서 출력*/}
-                            {/*                                            </button>*/}
-                            {/*                                        </td>*/}
-                            {/*                                        /!* </div> *!/*/}
-                            {/*                                    </tr>*/}
-                            {/*                                </React.Fragment>*/}
-                            {/*                            );*/}
-                            {/*                        })}*/}
-                            {/*                        );*/}
-                            {/*                        </tbody>*/}
-                            {/*                    </StyledTable>*/}
-                            {/*                </Styleddiv2>*/}
-                            {/*            </section>*/}
-
-                            {/*            <div>*/}
-                            {/*                {inputData2.map((review, index) => (*/}
-                            {/*                    <div key={index}>*/}
-                            {/*                        <div>제목: {review.donateName}</div>*/}
-                            {/*                        <div>포인트: {review.usePoint}</div>*/}
-                            {/*                        <div>시간: {review.donateTime}</div>*/}
-                            {/*                        <div>*/}
-                            {/*                            <br/>*/}
-                            {/*                        </div>*/}
-                            {/*                    </div>*/}
-                            {/*                ))}*/}
-                            {/*            </div>*/}
-                            {/*        </StyledBox1>*/}
-                            {/*    </Tab.Content>*/}
-                            {/*</Tab>*/}
+                                                                            fontSize: '20px',
+                                                                        }}
+                                                                    >
+                                                                        {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
+                                                                    </td>
+                                                                </tr>
+                                                            </React.Fragment>
+                                                        );
+                                                    })}
+                                                    </tbody>
+                                                </StyledTable>
+                                            </Styleddiv2>
+                                        </section>
+                                    </StyledBox1>
+                                </Tab.Content>
+                            </Tab>
                         </Tabs>
                     </StyledTab1>
                 </Styledcomment>

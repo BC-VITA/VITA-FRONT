@@ -2,6 +2,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Form, Tab, Tabs, Nav, Table } from 'react-bootstrap';
+import {format, parseISO} from "date-fns";
 
 function MyPage_DBD() {
   const [startDate, setstartDate] = useState('');
@@ -296,15 +297,15 @@ function MyPage_DBD() {
                                     key={index}
                                     onClick={() => handleRowClick(index)}
                                 >
-                                  <td style={{display:"block", 	textAlign: 'left', paddingLeft : '20px', lineHeight: '22px',}}>
+                                  <td style={{display:"block", 	textAlign: 'left', paddingLeft : '20px', lineHeight: '15px',}}>
                                     <div style={{marginTop:'10px', fontWeight : 600 }}> {interested.boardTitle}</div>
                                     <br/>
                                     <div style={{}}>
                                     {interested.boardContent}
                                     </div>
                                     <br/>
-                                    <div style={{color: '#9D9D9D'}}>
-                                      {interested.boardDate}
+                                    <div style={{color: '#9D9D9D', marginTop:'8px', marginBottom : '7px'}}>
+                                      {format(parseISO(interested.boardDate), 'yyyy.MM.dd HH:mm')}
                                     </div>
 
                                   </td>
@@ -407,7 +408,7 @@ function MyPage_DBD() {
                                     {review.boardTitle}
                                   </td>
                                   <td headers="bloodHouseAddress-header">
-                                    {review.localDateTime}
+                                    {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
                                   </td>
                                   <td>
                                     <button
@@ -504,7 +505,7 @@ function MyPage_DBD() {
                                     {review.reviewTitle}
                                   </td>
                                   <td headers="bloodHouseAddress-header">
-                                    {review.localDateTime}
+                                    {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
                                   </td>
                                   <td>
                                     <button
