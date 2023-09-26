@@ -75,6 +75,7 @@ import DSelectReceipt from './pages/6. Donate/D_SelectReceipt';
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
+import MPostNews from './pages/0. Master/M_PostNews';
 
 //실험
 import Asd from './pages/asd'
@@ -202,17 +203,15 @@ function App() {
           <Route path="/D_Receipt" element={<DReceipt />}></Route>
           <Route path="/D_ReceiptDetails" element={<DReceiptDetails />}></Route>
           <Route path="/D_SelectReceipt" element={<DSelectReceipt />}></Route>
-          <Route path="/test" element={<test/>}></Route>
+          <Route path="/test" element={<test />}></Route>
 
           {/*관리자 페이지 모음*/}
           <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
 
           {/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route
-            path="/M_Blood_Reservation"
-            element={<MBloodReservation />}
-          ></Route>
+          <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>
           <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
+          <Route path="/M_PostNews" element={<MPostNews />}></Route>
           <Route path="/asd" element={<Asd />}></Route>
           <Route path="/asd1" element={<Asd1 />}></Route>
           <Route path="/Asd2" element={<Asd2 />}></Route>

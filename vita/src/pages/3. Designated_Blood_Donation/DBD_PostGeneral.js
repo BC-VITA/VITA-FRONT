@@ -84,6 +84,7 @@ function DBD_PostGeneral() {
     setbloodtype(e.target.value);
   };
 
+  const userId = sessionStorage.getItem('userId');
   const handleSubmit = async (event) => {
     setDisabled(true);
     event.preventDefault();
@@ -95,8 +96,7 @@ function DBD_PostGeneral() {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
-        userId: 4,
-        userName:"qwe",
+        userName:userId,
         patientName: id,
         bloodPersonNumber: number,
         bloodNumber: people,
@@ -132,29 +132,6 @@ function DBD_PostGeneral() {
         //에러메세지만 보이도록 설정
       });
     setDisabled(false);
-    console.log(
-      'data: ' +
-        JSON.stringify({
-          patientName: id,
-          bloodPersonNumber: number,
-          bloodNumber: people,
-          patientAge: age,
-          hospitalRoomNumber: roomnumber,
-          hospitalName: hostipalname,
-          hostipalAddress: hostipaladdress,
-          hospitalPhoneNumber: hostipalcall,
-          patientBlood: bloodtype,
-          patientIsRH: rhtype,
-          bloodType: donationtype,
-          needBloodSystem: bloodproduct,
-          bloodMatchType: bloodmatch,
-          isReview: review,
-          startDate: startDate,
-          endDate: endDate,
-          title: title,
-          content: detail,
-        })
-    );
   };
 
   return (
