@@ -642,64 +642,6 @@ function MyPage_S() {
                                     </button>
                                   </td>
                                 </tr>
-                                // return (
-                                //     <React.Fragment key={index}>
-                                //       <tr onClick={() => handleRowClick(index)}>
-                                //         {/* <div key={index}> */}
-                                //         <td
-                                //             headers="area-header"
-                                //             style={{
-                                //               ...tdStyle,
-                                //               fontWeight: '500',
-                                //             }}
-                                //         >
-                                //           {review.title}
-                                //         </td>
-                                //         <td
-                                //             headers="centerName-header"
-                                //             style={{ ...tdStyle, width: '120px' }}
-                                //         >
-                                //           {review.volunteerType === 'time'
-                                //               ? '시간'
-                                //               : review.volunteerType}
-                                //         </td>
-                                //         <td
-                                //             headers="bloodHouseAddress-header"
-                                //             style={{
-                                //               ...tdStyle,
-                                //               width: '130px',
-                                //
-                                //               fontSize: '15px',
-                                //             }}
-                                //         >
-                                //           {review.localDateTime
-                                //               ? review.localDateTime.split('T')[0]
-                                //               : ''}
-                                //         </td>
-                                //         <td
-                                //             style={{
-                                //               ...tdStyle,
-                                //               width: '130px',
-                                //               fontSize: '15px',
-                                //             }}
-                                //         >
-                                //           <button
-                                //               style={{
-                                //                 ...btStyle,
-                                //                 // border: '1px solid #FF9C9C',
-                                //                 color: 'white',
-                                //                 paddingLeft: '10px',
-                                //                 paddingRight: '10px',
-                                //                 background: '#F55757',
-                                //               }}
-                                //           >
-                                //             취소하기
-                                //           </button>
-                                //         </td>
-                                //         {/* </div> */}
-                                //       </tr>
-                                //     </React.Fragment>
-                                // );
                               )
                           )}
                           </tbody>

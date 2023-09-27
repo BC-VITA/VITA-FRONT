@@ -75,6 +75,14 @@ import DSelectReceipt from './pages/6. Donate/D_SelectReceipt';
 import MBloodReservation from './pages/0. Master/M_Blood_Reservation';
 import MHouseInfo from './pages/0. Master/M_HouseInfo';
 import MPostDonation from './pages/0. Master/M_PostDonation';
+import MPostNews from './pages/0. Master/M_PostNews';
+import OBDManage from './pages/0. Master/O_BD_Manage';
+import OStatisticsD from './pages/0. Master/O_StatisticsD';
+import OStatisticsS from './pages/0. Master/O_StatisticsS';
+import OStatisticsBD from './pages/0. Master/O_StatisticsBD';
+import OHospitalAuthorizations from './pages/0. Master/O_Hospital_Authorizations';
+import OReporting from './pages/0. Master/O_Reporting';
+import ONewsList from './pages/0. Master/O_NewsList';
 
 //실험
 import Asd from './pages/asd'
@@ -90,136 +98,143 @@ const onReservation = () => {
 
 function App() {
   return (
-    <FooterContainer>
-      <BrowserRouter>
-        <Nav />
-        <Routes>
-          {/* 메인 */}
-          <Route path="/" element={<Home />}></Route>
+      <FooterContainer>
+        <BrowserRouter>
+          <Nav />
+          <Routes>
+            {/* 메인 */}
+            <Route path="/" element={<Home />}></Route>
 
-          {/* 마이페이지 */}
-          <Route path="/MyPage_DBD" element={<MyPageDBD />}></Route>
-          <Route path="/MyPage_Chat" element={<MyPageChat />}></Route>
-          <Route path="/Chat_Details" element={<ChatDetails />}></Route>
-          <Route path="/MyPage_BD" element={<MyPageBD />}></Route>
-          <Route path="/MyPage_D" element={<MyPageD />}></Route>
-          <Route path="/D_Deed" element={<DDeed />}></Route>
-          <Route path="/MyPage_S" element={<MyPageS />}></Route>
-          <Route path="/S_Deed" element={<SDeed />}></Route>
-          <Route path="/S_Deed1" element={<SDeed1 />}></Route>
-          <Route path="/MyPage" element={<MyPage />}></Route>
+            {/* 마이페이지 */}
+            <Route path="/MyPage_DBD" element={<MyPageDBD />}></Route>
+            <Route path="/MyPage_Chat" element={<MyPageChat />}></Route>
+            <Route path="/Chat_Details" element={<ChatDetails />}></Route>
+            <Route path="/MyPage_BD" element={<MyPageBD />}></Route>
+            <Route path="/MyPage_D" element={<MyPageD />}></Route>
+            <Route path="/D_Deed" element={<DDeed />}></Route>
+            <Route path="/MyPage_S" element={<MyPageS />}></Route>
+            <Route path="/S_Deed" element={<SDeed />}></Route>
+            <Route path="/S_Deed1" element={<SDeed1 />}></Route>
+            <Route path="/MyPage" element={<MyPage />}></Route>
 
-          {/*로그인*/}
-          <Route path="/Login" element={<Login />}></Route>
-          <Route path="/Test" element={<Test />}></Route>
+            {/*로그인*/}
+            <Route path="/Login" element={<Login />}></Route>
+            <Route path="/Test" element={<Test />}></Route>
 
-          {/*회원가입*/}
-          <Route path="/SignUp" element={<SignUp />}></Route>
-          <Route path="/SignUpGroup" element={<Group />}></Route>
-          <Route path="/SignUpHospital" element={<Hospital />}></Route>
-          <Route path="/SignUpIndividual" element={<Individual />}></Route>
+            {/*회원가입*/}
+            <Route path="/SignUp" element={<SignUp />}></Route>
+            <Route path="/SignUpGroup" element={<Group />}></Route>
+            <Route path="/SignUpHospital" element={<Hospital />}></Route>
+            <Route path="/SignUpIndividual" element={<Individual />}></Route>
 
-          {/* 알아보자 */}
-          <Route path="/Learn" element={<Learn />}></Route>
+            {/* 알아보자 */}
+            <Route path="/Learn" element={<Learn />}></Route>
 
-          {/*헌혈하자*/}
-          <Route path="/BD_Main" element={<BDMain />}></Route>
-          <Route path="/BD_House" element={<BDHouse />}></Route>
-          <Route path="/BD_PostHouse" element={<BDPostHouse />}></Route>
-          <Route path="/BD_Bus" element={<BDBus />}></Route>
-          <Route path="/BD_Reservation" element={<BDReservation />}></Route>
-          <Route
-            path="/BD_ReservationFirst"
-            element={<BDReservationFirst />}
-          ></Route>
-          <Route
-            path="/BD_ReservationSecond"
-            element={
-              <BDReservationSecond
-                startDate={startDate}
-                endDate={endDate}
-                onReservation={onReservation}
-              />
-            }
-          ></Route>
-          <Route
-            path="/BD_ReservationThird"
-            element={<BDReservationThird />}
-          ></Route>
+            {/*헌혈하자*/}
+            <Route path="/BD_Main" element={<BDMain />}></Route>
+            <Route path="/BD_House" element={<BDHouse />}></Route>
+            <Route path="/BD_PostHouse" element={<BDPostHouse />}></Route>
+            <Route path="/BD_Bus" element={<BDBus />}></Route>
+            <Route path="/BD_Reservation" element={<BDReservation />}></Route>
+            <Route
+                path="/BD_ReservationFirst"
+                element={<BDReservationFirst />}
+            ></Route>
+            <Route
+                path="/BD_ReservationSecond"
+                element={
+                  <BDReservationSecond
+                      startDate={startDate}
+                      endDate={endDate}
+                      onReservation={onReservation}
+                  />
+                }
+            ></Route>
+            <Route
+                path="/BD_ReservationThird"
+                element={<BDReservationThird />}
+            ></Route>
 
-          {/*지정헌혈하자*/}
-          <Route path="/DBD_Main" element={<DBDMain />}></Route>
-          <Route path="/DBD_General" element={<DBDGeneral />}></Route>
-          <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>
-          <Route path="/DBD_PostHospital" element={<DBDPostHospital />}></Route>
-          <Route path="/DBD_News" element={<DBDNews />}></Route>
-          <Route path="/DBD_WatchList" element={<DBDWatchList />}></Route>
+            {/*지정헌혈하자*/}
+            <Route path="/DBD_Main" element={<DBDMain />}></Route>
+            <Route path="/DBD_General" element={<DBDGeneral />}></Route>
+            <Route path="/DBD_PostGeneral" element={<DBDPostGeneral />}></Route>
+            <Route path="/DBD_PostHospital" element={<DBDPostHospital />}></Route>
+            <Route path="/DBD_News" element={<DBDNews />}></Route>
+            <Route path="/DBD_WatchList" element={<DBDWatchList />}></Route>
 
-          {/*이야기하자*/}
-          <Route path="/BD_Story" element={<BDStory />}></Route>
-          <Route path="/BD_Details" element={<BDDetails />}></Route>
-          <Route path="/BD_Post" element={<BDPost />}></Route>
-          <Route path="/DBD_Story" element={<DBDStory />}></Route>
-          <Route path="/DBD_Details" element={<DBDDetails />}></Route>
-          <Route path="/DBD_Post" element={<DBDPost />}></Route>
+            {/*이야기하자*/}
+            <Route path="/BD_Story" element={<BDStory />}></Route>
+            <Route path="/BD_Details" element={<BDDetails />}></Route>
+            <Route path="/BD_Post" element={<BDPost />}></Route>
+            <Route path="/DBD_Story" element={<DBDStory />}></Route>
+            <Route path="/DBD_Details" element={<DBDDetails />}></Route>
+            <Route path="/DBD_Post" element={<DBDPost />}></Route>
 
-          {/*봉사하자*/}
-          <Route
-            path="/S_Main"
-            element={
-              <SMain
-                startDate={startDate}
-                endDate={endDate}
-                onReservation={onReservation}
-              />
-            }
-          ></Route>
-          <Route path="/S_Ganeral" element={<SGaneral />}></Route>
-          <Route path="/S_PostGT" element={<SPostGT />}></Route>
-          <Route path="/S_PostGA" element={<SPostGA />}></Route>
-          <Route path="/S_Group" element={<SGroup />}></Route>
-          <Route path="/S_PostGroup" element={<SPostGroup />}></Route>
-          <Route path="/S_Other" element={<SOther />}></Route>
-          <Route path="/S_PostOther" element={<SPostOther />}></Route>
-          <Route path="/S_WatchList" element={<SWatchList />}></Route>
-          <Route
-            path="/S_ReservationFirst"
-            element={<SReservationFirst />}
-          ></Route>
-          <Route
-            path="/S_ReservationSecond"
-            element={<SReservationSecond />}
-          ></Route>
+            {/*봉사하자*/}
+            <Route
+                path="/S_Main"
+                element={
+                  <SMain
+                      startDate={startDate}
+                      endDate={endDate}
+                      onReservation={onReservation}
+                  />
+                }
+            ></Route>
+            <Route path="/S_Ganeral" element={<SGaneral />}></Route>
+            <Route path="/S_PostGT" element={<SPostGT />}></Route>
+            <Route path="/S_PostGA" element={<SPostGA />}></Route>
+            <Route path="/S_Group" element={<SGroup />}></Route>
+            <Route path="/S_PostGroup" element={<SPostGroup />}></Route>
+            <Route path="/S_Other" element={<SOther />}></Route>
+            <Route path="/S_PostOther" element={<SPostOther />}></Route>
+            <Route path="/S_WatchList" element={<SWatchList />}></Route>
+            <Route
+                path="/S_ReservationFirst"
+                element={<SReservationFirst />}
+            ></Route>
+            <Route
+                path="/S_ReservationSecond"
+                element={<SReservationSecond />}
+            ></Route>
 
-          {/*기부하자*/}
-          <Route path="/D_Main" element={<DMain />}></Route>
-          <Route path="/D_Donation" element={<DDonation />}></Route>
-          <Route
-            path="/D_DonationDetails"
-            element={<DDonationDetails />}
-          ></Route>
-          <Route path="/D_SelectDonation" element={<DSelectDonation />}></Route>
-          <Route path="/D_Receipt" element={<DReceipt />}></Route>
-          <Route path="/D_ReceiptDetails" element={<DReceiptDetails />}></Route>
-          <Route path="/D_SelectReceipt" element={<DSelectReceipt />}></Route>
-          <Route path="/test" element={<test/>}></Route>
+            {/*기부하자*/}
+            <Route path="/D_Main" element={<DMain />}></Route>
+            <Route path="/D_Donation" element={<DDonation />}></Route>
+            <Route
+                path="/D_DonationDetails"
+                element={<DDonationDetails />}
+            ></Route>
+            <Route path="/D_SelectDonation" element={<DSelectDonation />}></Route>
+            <Route path="/D_Receipt" element={<DReceipt />}></Route>
+            <Route path="/D_ReceiptDetails" element={<DReceiptDetails />}></Route>
+            <Route path="/D_SelectReceipt" element={<DSelectReceipt />}></Route>
+            <Route path="/test" element={<test />}></Route>
 
-          {/*관리자 페이지 모음*/}
-          <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
+            {/*관리자 페이지 모음*/}
+            <Route path="/M_HouseInfo" element={<MHouseInfo />}></Route>
 
-          {/*헌혈의 집 정보 Insert하는 페이지*/}
-          <Route
-            path="/M_Blood_Reservation"
-            element={<MBloodReservation />}
-          ></Route>
-          <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
-          <Route path="/asd" element={<Asd />}></Route>
-          <Route path="/asd1" element={<Asd1 />}></Route>
-          <Route path="/Asd2" element={<Asd2 />}></Route>
-        </Routes>
-        <Foot />
-      </BrowserRouter>
-    </FooterContainer>
+            {/*헌혈의 집 정보 Insert하는 페이지*/}
+            <Route path="/M_Blood_Reservation" element={<MBloodReservation />}></Route>
+            <Route path="/M_PostDonation" element={<MPostDonation />}></Route>
+            <Route path="/M_PostNews" element={<MPostNews />}></Route>
+            <Route path="/asd" element={<Asd />}></Route>
+            <Route path="/asd1" element={<Asd1 />}></Route>
+            <Route path="/Asd2" element={<Asd2 />}></Route>
+
+            <Route path="/O_BD_Manage" element={<OBDManage />}></Route>
+            <Route path="/O_StatisticsD" element={<OStatisticsD />}></Route>
+            <Route path="/O_StatisticsBD" element={<OStatisticsBD />}></Route>
+            <Route path="/O_StatisticsS" element={<OStatisticsS />}></Route>
+            <Route path="/O_Hospital_Authorizations" element={<OHospitalAuthorizations />}></Route>
+            <Route path="/O_Reporting" element={<OReporting />}></Route>
+            <Route path="/O_NewsList" element={<ONewsList />}></Route>
+
+          </Routes>
+          <Foot />
+        </BrowserRouter>
+      </FooterContainer>
   );
 }
 const FooterContainer = styled.div`

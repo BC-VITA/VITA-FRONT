@@ -84,7 +84,7 @@ function MyPage_D() {
         ...thStyle,
         fontWeight: '500',
         fontSize: '18px',
-        lineHeight: '30px',
+        lineHeight: '40px',
     };
     const btStyle = {
         ...thStyle,
@@ -176,7 +176,7 @@ function MyPage_D() {
                     </StyledBox2>
                     <StyledTab1>
                         <Tabs style={{marginTop: '20px'}}>
-                            <Tab eventKey="history" title="기부 내역" style={{minHeight:'130vh'}}>
+                            <Tab eventKey="history" title="기부 내역" style={{minHeight:'100vh'}}>
                                 <Tab.Content>
                                     <StyledBox1>
                                         <StyledDiv>
@@ -214,19 +214,19 @@ function MyPage_D() {
                                                     <tr>
                                                         <th
                                                             id="area-header"
-                                                            style={{...thStyle, width: '210px'}}
+                                                            style={{...thStyle, width: '360px', }}
                                                         >
                                                             제목
                                                         </th>
                                                         <th
                                                             id="centerName-header"
-                                                            style={{...thStyle, width: '90px'}}
+                                                            style={{...thStyle, width: '140px'}}
                                                         >
                                                             포인트 액수
                                                         </th>
                                                         <th
                                                             id="bloodHouseAddress-header"
-                                                            style={{...thStyle, width: '145px'}}
+                                                            style={{...thStyle, width: '200px'}}
                                                         >
                                                             일 시
                                                         </th>
@@ -237,29 +237,25 @@ function MyPage_D() {
                                                     {inputData.map((review, index) => {
                                                         return (
                                                             <React.Fragment key={index}>
-                                                                <tr onClick={() => handleRowClick(index)}>
-                                                                    {/* <div key={index}> */}
+                                                                <tr onClick={() => handleRowClick(index)} >
                                                                     <td
                                                                         headers="area-header"
                                                                         style={{
                                                                             ...tdStyle,
-                                                                            fontWeight: '500',
                                                                         }}
                                                                     >
                                                                         {review.donateName}
                                                                     </td>
                                                                     <td
                                                                         headers="centerName-header"
-                                                                        style={{...tdStyle, width: '120px'}}
+                                                                        style={{...tdStyle}}
                                                                     >
-                                                                        {review.usePoint}
+                                                                        {review.usePoint}P
                                                                     </td>
                                                                     <td
                                                                         headers="bloodHouseAddress-header"
                                                                         style={{
                                                                             ...tdStyle,
-                                                                            width: '130px',
-                                                                            fontSize: '17px',
                                                                         }}
                                                                     >
                                                                         {format(parseISO(review.donateTime), 'yyyy.MM.dd HH:mm')}
@@ -267,7 +263,6 @@ function MyPage_D() {
                                                                     <td
                                                                         style={{
                                                                             ...tdStyle,
-                                                                            width: '130px',
                                                                             fontSize: '15px',
                                                                         }}
                                                                     >
@@ -287,7 +282,6 @@ function MyPage_D() {
                                                                             기부증서 출력
                                                                         </button>
                                                                     </td>
-                                                                    {/* </div> */}
                                                                 </tr>
                                                             </React.Fragment>
                                                         );
@@ -382,7 +376,6 @@ function MyPage_D() {
                                                                         style={{
                                                                             ...tdStyle,
                                                                             width: '130px',
-
                                                                             fontSize: '20px',
                                                                         }}
                                                                     >
