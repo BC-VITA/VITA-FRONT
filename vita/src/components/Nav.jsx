@@ -1,97 +1,103 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import icon from '../img/icon.png';
 
 const Nav = () => {
-  const userId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('userId');
-    navigator('/');
-    window.location.reload();
-  };
+    const handleLogout = () => {
+        sessionStorage.removeItem('userId');
+        navigator('/');
+        window.location.reload();
+    };
 
-  return (
-    <Stylednav>
-      <StyledDiv1>
-        <Styledimg src={icon} class name="main-icon" alt="logo" />
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <StyledDiv11>
-            <div>vita</div>
-          </StyledDiv11>
-        </Link>
-      </StyledDiv1>
+    return (
+        <Stylednav>
+            <StyledDiv1>
+                <Styledimg src={icon} class name="main-icon" alt="logo"/>
+                <Link to="/" style={{textDecoration: 'none'}}>
+                    <StyledDiv11>
+                        <div>vita</div>
+                    </StyledDiv11>
+                </Link>
+            </StyledDiv1>
 
-      <StyledDiv2>
-        <Link to="Learn" style={{ textDecoration: 'none' }}>
-          <StyledDiv21>
-            <div>알아보자</div>
-          </StyledDiv21>
-        </Link>
+            <StyledDiv2>
+                <Link to="Learn" style={{textDecoration: 'none'}}>
+                    <StyledDiv21>
+                        <div>알아보자</div>
+                    </StyledDiv21>
+                </Link>
 
-        <Link to="BD_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv21>
-            <div>헌혈하자</div>
-          </StyledDiv21>
-        </Link>
+                <Link to="BD_Main" style={{textDecoration: 'none'}}>
+                    <StyledDiv21>
+                        <div>헌혈하자</div>
+                    </StyledDiv21>
+                </Link>
 
-        <Link to="DBD_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv21L>
-            <div>지정헌혈하자</div>
-          </StyledDiv21L>
-        </Link>
+                <Link to="DBD_Main" style={{textDecoration: 'none'}}>
+                    <StyledDiv21L>
+                        <div>지정헌혈하자</div>
+                    </StyledDiv21L>
+                </Link>
 
-        <Link to="BD_Story" style={{ textDecoration: 'none' }}>
-          <StyledDiv21M>
-            <div>이야기하자</div>
-          </StyledDiv21M>
-        </Link>
+                <Link to="BD_Story" style={{textDecoration: 'none'}}>
+                    <StyledDiv21M>
+                        <div>이야기하자</div>
+                    </StyledDiv21M>
+                </Link>
 
-        <Link to="S_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv21>
-            <div>봉사하자</div>
-          </StyledDiv21>
-        </Link>
+                <Link to="S_Main" style={{textDecoration: 'none'}}>
+                    <StyledDiv21>
+                        <div>봉사하자</div>
+                    </StyledDiv21>
+                </Link>
 
-        <Link to="D_Main" style={{ textDecoration: 'none' }}>
-          <StyledDiv21>
-            <div>기부하자</div>
-          </StyledDiv21>
-        </Link>
-      </StyledDiv2>
-      <StyledDiv3>
-        <Link
-          to={userId ? `/` : '/login'}
-          style={{ textDecoration: 'none', color: 'white' }}
-        >
-          <StyledDiv31L>
-            <div>{userId ? `${userId}님` : '로그인'}</div>
-          </StyledDiv31L>
-        </Link>
-        <StyledDiv31m>
-          {/* <div>|</div> */}
-          <Link
-            to={userId ? `/MyPage_DBD` : '/'}
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <StyledDiv31m>
-              <div>{userId ? `| 마이페이지 |` : '|'}</div>
-            </StyledDiv31m>
-          </Link>
-        </StyledDiv31m>
-        <Link
-          to={userId ? '/' : '/signup'}
-          style={{ textDecoration: 'none', color: 'white' }}
-          onClick={handleLogout}
-        >
-          <StyledDiv31R>
-            <div>{userId ? '로그아웃' : '회원가입'}</div>
-          </StyledDiv31R>
-        </Link>
-      </StyledDiv3>
-    </Stylednav>
-  );
+                <Link to="D_Main" style={{textDecoration: 'none'}}>
+                    <StyledDiv21>
+                        <div>기부하자</div>
+                    </StyledDiv21>
+                </Link>
+            </StyledDiv2>
+            <StyledDiv3>
+                <Link
+                    to={userId ? `/` : '/login'}
+                    style={{textDecoration: 'none', color: 'white'}}
+                >
+                    <StyledDiv31L>
+                        <div>{userId ? `${userId}님` : '로그인'}</div>
+                    </StyledDiv31L>
+                </Link>
+                <StyledDiv31m>
+                    {/* <div>|</div> */}
+                    <Link
+                        to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}
+                        style={{textDecoration: 'none', color: 'white'}}
+                    >
+                        <StyledDiv31m>
+                            <div>
+                                {/*{userId ? `| 마이페이지 |` : '|'}*/}
+                                {userId ? (userId === "admin" ? "| 관리페이지 |" : "| 마이페이지 |") : '|'}
+                                {/*{userId === true && `| 마이페이지 |`}*/}
+                                {/*{userId === false && `|`}*/}
+                                {/*{userId === "admin" && `| 관리페이지 |`}*/}
+                            </div>
+                        </StyledDiv31m>
+                    </Link>
+                </StyledDiv31m>
+                <Link
+                    to={userId ? '/' : '/signup'}
+                    style={{textDecoration: 'none', color: 'white'}}
+                    onClick={handleLogout}
+                >
+                    <StyledDiv31R>
+                        <div>{userId ? '로그아웃' : '회원가입'}</div>
+                    </StyledDiv31R>
+                </Link>
+            </StyledDiv3>
+        </Stylednav>
+    );
 };
 
 const Stylednav = styled.nav`

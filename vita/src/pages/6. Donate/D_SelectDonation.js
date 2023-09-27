@@ -135,10 +135,10 @@ function D_SelectDonation() {
               <Modal.Body>기부가 되었습니다.</Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleReservation}>
-                  다음에 보기
+                  확인
                 </Button>
                 <Button variant="primary" onClick={handleReservation2}>
-                  예약내역 보기
+                  기부내역 보러가기
                 </Button>
               </Modal.Footer>
             </Modal>
