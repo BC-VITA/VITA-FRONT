@@ -1,43 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-import Nav from 'react-bootstrap/Nav';
-
-import Button from 'react-bootstrap/Button';
-import Table from 'react-bootstrap/Table';
+import { Table, Button, Nav } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { pink } from '@mui/material/colors';
 
 function MyPage_Chat() {
-  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const userId = sessionStorage.getItem('userId');
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const [inputData, setInputData] = useState('');
+
+  //지정헌혈 채팅 리스트
+  const [roomIds, setRoomIds] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
+    fetch(`http://localhost:8004/chat/list?userId=${userId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+        }
+        return response.json();
       })
-      .catch((err) => {
-        setError(err.message);
+      .then(data => {
+        setRoomIds(data);
+      })
+      .catch(error => {
+        console.error('오류 발생:', error);
       });
-    console.log(inputData);
-  }, []);
+  }, [userId]);
+
+  const handleChatRoomClick = (roomId1) => {
+    navigate(`/Chat_Details`, { state: { roomId1 } });
+  };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -80,48 +74,36 @@ function MyPage_Chat() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>지정헌혈 채팅</StyledTitle>
-          {/* <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton> */}
         </StyledTop>
         <Styledcomment>
           <StyledTable>
-            
             <thead style={{ fontWeight: '700', fontSize: '24px' }}>
               <tr>
-                <th
-                  style={{
-                    width: '400px',
-                  }}
-                >
+                <th style={{ width: '400px' }}>
                   제목
                 </th>
                 <th
-                  style={{
-                    width: '200px',
-                  }}
-                >
+                  style={{ width: '200px' }}>
                   일시
                 </th>
-                <th
-                  style={{
-                    width: '100px',
-                  }}
-                ></th>
+                <th style={{ width: '100px' }}>
+                </th>
               </tr>
             </thead>
             <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
-              <tr>
-                <td>A형의 혈액형이 급하게 필요합니다. 도와...</td>
-                <td>2023.06.07</td>
-                <td>
-                  <Button style={{ background: '#8FAADC' }}>
-                    <Nav.Link href="/Chat_Details">채팅방이동</Nav.Link>
-                  </Button>
-                </td>
-              </tr>
+              {roomIds.map(room => (
+                <tr key={room.id}>
+                  <td>{room.title}</td>
+                  <td>{room.boardCreatedAt}</td>
+                  <td>
+                    <Button
+                      style={{ background: '#8FAADC' }}
+                      onClick={() => handleChatRoomClick(room)}>
+                      채팅방으로 이동
+                    </Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </StyledTable>
         </Styledcomment>
