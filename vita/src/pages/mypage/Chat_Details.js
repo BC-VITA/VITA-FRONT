@@ -8,7 +8,7 @@ import information from '../../img/image 67.png';
 function Chat_Details() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { element,roomId1 } = location.state;
+  const { element, roomId1 } = location.state;
   const img = () => { navigate('/information'); };
 
   const [show, setShow] = useState(false);
@@ -101,13 +101,13 @@ function Chat_Details() {
     // 최초 실행
     fetchData();
 
-    // 1초마다 fetchData 함수 호출
-    const intervalId = setInterval(fetchData, 1000);
+    // // 1초마다 fetchData 함수 호출
+    // const intervalId = setInterval(fetchData, 1000);
 
-    // 컴포넌트 언마운트 시 타이머 정리
-    return () => {
-      clearInterval(intervalId);
-    };
+    // // 컴포넌트 언마운트 시 타이머 정리
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
   }, []);
 
 
@@ -136,6 +136,7 @@ function Chat_Details() {
   };
 
   //채팅부분에서 수락하기 버튼
+  const [userInfo, setuserInfo] = useState('');
   const handleAccept = (roomId1) => {
     fetch(`http://localhost:8004/chat/agree`, {
       method: 'POST',
@@ -144,18 +145,29 @@ function Chat_Details() {
       },
       body: JSON.stringify({
         userId: userId,
-        roomId: roomId1,
+        roomId: roomId1.roomId,
         isAgree: true
       }),
     })
       .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      })
       .catch((err) => {
         console.error(err);
       });
   };
+
+  useEffect(() => {
+    const url1 = `http://localhost:8004/user/designate-blood-accept-window?designateBloodWriteUserId=${roomId1.boardId}&userId=${userId}`;
+    fetch(url1, {
+      method: 'get',
+    })
+      .then((data1) => data1.json())
+      .then((data1) => {
+        setuserInfo(data1);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <StyledAll>
@@ -186,7 +198,7 @@ function Chat_Details() {
                 <Button variant="secondary" onClick={() => setAccept(false)}>
                   닫기
                 </Button>
-                <Button variant="primary" onClick={() => handleAccept(element.designatedBloodWriteNumber)}>
+                <Button variant="primary" onClick={() => handleAccept(roomId1)}>
                   수락
                 </Button>
               </Modal.Footer>
@@ -353,6 +365,12 @@ function Chat_Details() {
                 )}
               </div>
             ))}
+          {roomId1.isAgree === true &&
+            <div>
+              {Object.entries(userInfo).map(([key, value]) => (
+                <p key={key}>{`${key}: ${value}`}</p>
+              ))}
+            </div>}
         </StyledBox3>
         <StyledBox4>
           <FloatingLabel
