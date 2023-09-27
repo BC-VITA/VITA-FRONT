@@ -13,18 +13,38 @@ import History from '../img/내역.png';
 import img from '../img/Group 10.png';
 import img2 from '../img/image 3.png';
 import Nav from 'react-bootstrap/Nav';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 function Main() {
   const [userInfo, setUserInfo] = useState(null);
   const asd = sessionStorage.getItem('userId');
 
-  //useEffect(() => {
-  //  fetch('http://localhost:8004/user/check')
-  //    .then(response => response.json())
-  //    .then(data => setUserInfo(data))
-  //    .catch(error => console.error(error));
-  //}, []);
+  const [money, setmoney] = useState('');
+  const formattedMoney = Number(money).toLocaleString();
+  useEffect(() => {
+    fetch('http://localhost:8004/donate/main-donate-sum', {
+      method: 'get'
+    })
+      .then(response => response.json())
+      .then(data => setmoney(data))
+      .catch(error => console.error(error));
+  }, []);
 
+  const [data123, setdata123] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:8004/admin/warm-case-admin-list', {
+      method: 'get',
+    })
+      .then((data1) => data1.json())
+      .then((data1) => {
+        setdata123(data1);
+        console.log(data1);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   return (
     <div>
       <Carousel variant="dark" style={{ height: '400px' }}>
@@ -77,7 +97,7 @@ function Main() {
           </Styledimg> */}
           <Styledimg src={Donation} class name="groupPhoto" alt="groupPhoto" />
           <StyledDiv13>
-            <StyledPrice>누적 포인트 : 32.400.100원</StyledPrice>
+            <StyledPrice>누적 포인트 : {formattedMoney}원</StyledPrice>
             <StyledDiv14>
               <StyledBtn>
                 <Nav.Link href="/D_Main">
@@ -100,6 +120,36 @@ function Main() {
       </StyledDiv1>
       <StyledDiv2>
         <Styledimg2 src={img2} class name="groupPhoto" alt="groupPhoto" />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+          {data123.slice(0, 4).map((board) => {
+            const imageUrl = board.imageUrl
+              ? board.imageUrl.replace(
+                //여기 이미지경로 수정하세요
+                'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
+                '\\'
+              )
+              : null;
+            return (
+              <div key={board.boardId}>
+                <StyledBox>
+                  <StyledBox2>
+                    <Card style={{ width: '17rem' }}>
+                      <Card.Img variant="top" src={imageUrl} />
+                      <Card.Body>
+                        <Card.Title>{board.title}</Card.Title>
+                        <Card.Text>{board.content}</Card.Text>
+                        <Card.Text>{imageUrl}</Card.Text>
+                        <Button>
+                          자세히 보기
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </StyledBox2>
+                </StyledBox>
+              </div>
+            );
+          })}
+        </div>
       </StyledDiv2>
       <StyledDiv4>
         <StyledDiv41>
@@ -369,4 +419,12 @@ const StyledDiv42 = styled.div`
   border-radius: 15px;
 `;
 
+const StyledBox = styled.div`
+  margin-top: 30px;
+  display: flex;
+`;
+const StyledBox2 = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
+`;
 export default Main;
