@@ -191,6 +191,7 @@ function S_Ganeral() {
     })
       .then((res) => {
         res.json();
+        window.location.reload();
       });
   };
 
