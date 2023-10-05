@@ -18,7 +18,7 @@ import Button from 'react-bootstrap/Button';
 
 function Main() {
   const [userInfo, setUserInfo] = useState(null);
-  const asd = sessionStorage.getItem('userId');
+  const userId = sessionStorage.getItem('userId');
 
   const [money, setmoney] = useState('');
   const formattedMoney = Number(money).toLocaleString();
@@ -39,12 +39,30 @@ function Main() {
       .then((data1) => data1.json())
       .then((data1) => {
         setdata123(data1);
-        console.log(data1);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
+
+  //간단알림
+  const [alarm, setalarm] = useState([]);
+  const url1 = `http://localhost:8004/chat/alarm/list?userId=${userId}`;
+    useEffect(() => {
+        if (userId) {
+            fetch(url1, {
+                method: 'get',
+            })
+                .then((data) => data.json())
+                .then((data) => {
+                  setalarm(data);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    }, [userId]);
+
   return (
     <div>
       <Carousel variant="dark" style={{ height: '400px' }}>
@@ -207,6 +225,17 @@ function Main() {
           <Styledimg5 src={img} class name="groupPhoto" alt="groupPhoto" />
         </StyledDiv42>
       </StyledDiv4>
+      <div>
+        {alarm.map((item, index) => (
+          <div key={index}>
+            <p>Send Time: {item.sendTime}</p>
+            <p>Sender Name: {item.senderName}</p>
+            <p>Board Title: {item.boardTitle}</p>
+            <p>Room ID: {item.roomId}</p>
+            <p>=============</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
