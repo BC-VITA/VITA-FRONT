@@ -503,7 +503,8 @@ function MyPage_DBD() {
                                 >
                                   <td headers="area-header">
                                     {review.reviewTitle}
-                                  </td>
+                                </td>
+                                <td>asd</td>
                                   <td headers="bloodHouseAddress-header">
                                     {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
                                   </td>

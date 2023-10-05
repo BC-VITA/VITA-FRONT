@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const BD_Post = () => {
     const reviewType = useState('Blood'); //리뷰타입
+    const navigate = useNavigate();
     const userId = sessionStorage.getItem('userId');//유저아이디    
 
     //제목
@@ -46,9 +48,11 @@ const BD_Post = () => {
             method: 'POST',
             body: formData
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log('후기게시글 성공:', data);
+            .then((res) => {
+                res.json();
+                if (res.ok) {
+                    navigate('/BD_Story');
+                }
             })
             .catch(error => {
                 console.error('후기게시글 오류:', error);

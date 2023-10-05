@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
-
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
@@ -13,11 +11,9 @@ function BD_Story() {
 
   useEffect(() => {
     fetchBoardList();
-    console.log(boardList);
   }, []);
 
   const Blood = 'Blood';
-
   const fetchBoardList = () => {
     const url1 = `http://localhost:8004/review/board/list?reviewType=${Blood}`;
     fetch(url1)

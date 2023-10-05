@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function BD_ReservationThird() {
+  const userId = sessionStorage.getItem('userId');
   const navigate = useNavigate();
   const { state: { selectedOptions, formattedDate, centerName } = {} } =
     useLocation();
@@ -18,14 +19,16 @@ function BD_ReservationThird() {
     navigate('/MyPage_BD', { state: { centerName } });
   };
 
+  const [isBloodType, setIsBloodType] = useState('');
   useEffect(() => {
     const times = Object.keys(selectedOptions);
 
     const bloodTypeString = Object.values(selectedOptions)
       .map((times) => Object.values(times).join(''))
       .join('');
-    // setIsBloodType(bloodTypeString);
+    
     const bloodTypesString = bloodTypeString.toString();
+    setIsBloodType(bloodTypesString);
 
     const timeString = times.join(',');
     setTimes(timeString);
@@ -35,13 +38,14 @@ function BD_ReservationThird() {
     event.preventDefault();
     await new Promise((r) => setTimeout(r, 1000));
 
-    fetch('http://localhost:8004/blood/reservation', {
+    const url1 = `http://localhost:8004/blood/reservation?userId=${userId}`;
+    fetch(url1, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
-        // isBloodType: isBloodType,
+        isBloodType: isBloodType,
         bloodHouseName: centerName,
         date: formattedDate,
         time: times,

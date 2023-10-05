@@ -102,12 +102,12 @@ function Chat_Details() {
     fetchData();
 
     // // 1초마다 fetchData 함수 호출
-    // const intervalId = setInterval(fetchData, 1000);
+    const intervalId = setInterval(fetchData, 1000);
 
-    // // 컴포넌트 언마운트 시 타이머 정리
-    // return () => {
-    //   clearInterval(intervalId);
-    // };
+    // 컴포넌트 언마운트 시 타이머 정리
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
 
