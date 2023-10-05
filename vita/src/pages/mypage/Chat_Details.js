@@ -87,7 +87,7 @@ function Chat_Details() {
   //채팅 목록 가져오기
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://localhost:8004/chat/${roomId1.roomId}`)
+      fetch(`http://localhost:8004/chat/${roomId1.roomId}/${userId}`)
         .then((response) => response.json())
         .then((data) => {
           console.log('Room detail:', data);

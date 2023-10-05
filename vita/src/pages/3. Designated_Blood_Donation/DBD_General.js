@@ -48,7 +48,6 @@ function DBD_General() {
       .then((res) => res.json())
       .then((res) => {
         setInputData(res);
-        console.log(res);
       });
 
     fetch('http://localhost:8004/user/wishListTable', {
@@ -57,6 +56,7 @@ function DBD_General() {
       .then((res) => res.json())
       .then((res) => {
         setWishList123(res);
+        console.log(res);
       });
   }, []);
 
@@ -121,7 +121,6 @@ function DBD_General() {
       })
       .then(data => {
         setRoomIds(data);
-        console.log(data);
       })
       .catch(error => {
         console.error('오류 발생:', error);
@@ -309,7 +308,7 @@ function DBD_General() {
                             let iconFilterValue = '100%'; // 기본적으로 100%로 설정
 
                             wishList123.forEach((item) => {
-                              if (item.designatedBoardId === element.designatedBloodWriteNumber) {
+                              if (item.designatedBoardId === element.designatedBloodWriteNumber && item.userId === userId) {
                                 iconFilterValue = '0%'; // 조건에 따라 필터 값을 변경
                               }
                             });
