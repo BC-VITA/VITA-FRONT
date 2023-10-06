@@ -85,30 +85,16 @@ function Chat_Details() {
   };
 
   //채팅 목록 가져오기
-  useEffect(() => {
-    const fetchData = () => {
-      fetch(`http://localhost:8004/chat/${roomId1.roomId}/${userId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Room detail:', data);
-          setData123(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching room detail:', error);
-        });
-    };
-
-    // 최초 실행
-    fetchData();
-
-    // // 1초마다 fetchData 함수 호출
-    const intervalId = setInterval(fetchData, 1000);
-
-    // 컴포넌트 언마운트 시 타이머 정리
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  const fetchData = () => {
+    fetch(`http://localhost:8004/chat/${roomId1.roomId}/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData123(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching room detail:', error);
+      });
+  };
 
 
   //메시지 보내기
@@ -149,7 +135,14 @@ function Chat_Details() {
         isAgree: true
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          setAsd(true);
+        } else {
+          throw new Error(`HTTP 오류! 상태 코드: ${res.status}`);
+        }
+        return res.json();
+      })
       .catch((err) => {
         console.error(err);
       });
@@ -168,6 +161,44 @@ function Chat_Details() {
         console.error(err);
       });
   }, []);
+
+  //isagree값 비교하기
+  const [roomIds, setRoomIds] = useState([]);
+  const [asd, setAsd] = useState(false);
+  const fetchData1 = () => {
+    fetch(`http://localhost:8004/chat/list?userId=${userId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const filteredRoomIds = data.filter(room => room.roomId === roomId1.roomId);
+        setRoomIds(filteredRoomIds);
+        if (filteredRoomIds.length > 0 && filteredRoomIds[0].isAgree) {
+          setAsd(true);
+        }
+      })
+      .catch(error => {
+        console.error('오류 발생:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData1(); // 초기 데이터 가져오기
+  }, [userId]);
+
+  //반복작업
+  useEffect(() => {
+    const intervalId = setInterval(fetchData, fetchData1, 1000);
+
+    // 컴포넌트 언마운트 시 타이머 정리
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
 
   return (
     <StyledAll>
@@ -365,7 +396,7 @@ function Chat_Details() {
                 )}
               </div>
             ))}
-          {roomId1.isAgree === true &&
+          {asd &&
             <div>
               {Object.entries(userInfo).map(([key, value]) => (
                 <p key={key}>{`${key}: ${value}`}</p>

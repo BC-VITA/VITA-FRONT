@@ -1,40 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import Nav from 'react-bootstrap/Nav';
 
 function S_Ganeral() {
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const userId = sessionStorage.getItem('userId');
+  const [userData3, setUserData3] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
+    const url3 = `http://localhost:8004/user/mypage-wishList-volunteer?userId=${userId}`;
+    fetch(url3, {
       method: 'get',
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
+        setUserData3(res);
       })
       .catch((err) => {
-        setError(err.message);
+        console.log(err.message);
       });
-    console.log(inputData);
   }, []);
+
   return (
     <StyledAll>
       <StyledSub>
@@ -78,6 +63,22 @@ function S_Ganeral() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
+        <div>
+          {userData3.map(wishList => (
+            <div key={wishList.volunteerId}>
+              <div>제목 : {wishList.title}</div>
+              <div>내용 : {wishList.content}</div>
+              <div>작성자 : {wishList.userId}</div>
+              <div>봉사 종류 : {wishList.volunteerType}</div>
+              <div>시작 날짜 : {wishList.volunteerStartDate}</div>
+              <div>끝나는 날짜 : {wishList.volunteerEndDate}</div>
+              <div>몇명 필요한지 : {wishList.needVolunteerNumber}</div>
+              <div>온/오프라인 여부 : {wishList.activitySection}</div>
+              <div>주소 : {wishList.volunteerAddress}</div>
+              <div>봉사하는 장소 : {wishList.volunteerPlace}</div>
+            </div>
+          ))}
+        </div>
       </StyledSubcomment>
     </StyledAll>
   );

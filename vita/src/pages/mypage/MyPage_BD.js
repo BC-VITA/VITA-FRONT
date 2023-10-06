@@ -221,7 +221,7 @@ function MyPage_BD() {
                                 >
                                   <td headers="area-header">{reservation.centerName}</td>
                                   <td headers="bloodHouseAddress-header">
-                                    {format(parseISO(reservation.date), 'yyyy.MM.dd HH:mm')}
+                                  {format(parseISO(reservation.date), 'yyyy.MM.dd')} {reservation.time}
                                   </td>
                                   <td>
                                     <button

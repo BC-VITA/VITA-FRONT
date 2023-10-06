@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
-  Nav,
-  FloatingLabel,
-  Form,
-  Tab,
-  Tabs,
-  Button,
-  Table,
+  Nav, FloatingLabel, Form, Tab, Tabs, Button, Table
 } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -195,7 +189,7 @@ function MyPage_S() {
           <StyledBox3>
             <StyledBox3_1>
               <StyledBox3_1G>VITA</StyledBox3_1G>
-              <StyledBox3_1W>20시간 5분</StyledBox3_1W>
+              <StyledBox3_1W>{userData.timeTypeVolunteerHistoryNumber + ' 시간'}</StyledBox3_1W>
 
               <StyledBox3_1G>1365 자원봉사포털</StyledBox3_1G>
               <StyledBox3_1W></StyledBox3_1W>
@@ -259,7 +253,7 @@ function MyPage_S() {
           </StyledBox3>
           <StyledTab1>
             <Tabs style={{ marginTop: '20px' }}>
-              <Tab eventKey="history" title="봉사 신청 내역" style={{minHeight:'100vh'}}>
+              <Tab eventKey="history" title="봉사 신청 내역" style={{ minHeight: '100vh' }}>
                 <Tab.Content>
                   <StyledBox1>
                     <StyledDiv>
@@ -315,7 +309,7 @@ function MyPage_S() {
                               <th>&nbsp;</th>
                             </tr>
                           </thead>
-                          <tbody style={{ fontWeight: '500', fontSize: '20px'}}>
+                          <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
                             {userData.myPageVolunteerReservationList.map(
                               (review, index) => {
                                 return (
@@ -573,77 +567,77 @@ function MyPage_S() {
                       <Styleddiv2>
                         <StyledTable>
                           <thead>
-                          <tr>
-                            <th
+                            <tr>
+                              <th
                                 id="area-header"
                                 style={{ ...thStyle, width: '250px' }}
-                            >
-                              제목 / 내용
-                            </th>
-                            <th
+                              >
+                                제목 / 내용
+                              </th>
+                              <th
                                 id="centerName-header"
                                 style={{ ...thStyle, width: '100px' }}
-                            >
-                              모집인원 및 현황
-                            </th>
-                          </tr>
+                              >
+                                모집인원 및 현황
+                              </th>
+                            </tr>
                           </thead>
                           <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
-                          {userData3.map((review, index) => (
-                                <tr
-                                    key={index}
-                                    onClick={() => handleRowClick(index)}
-                                >
-                                  <td headers="area-header" style={{display:"block", 	textAlign: 'left', paddingLeft : '20px',}}>
-                                    <div style={{display:"flex",fontWeight: '600',}}>
-                                      <div style={{color:'#0057FF', marginRight:"10px"}}>
-                                        {review.volunteerType}
-                                      </div>
-                                      {review.title}
+                            {userData3.map((review, index) => (
+                              <tr
+                                key={index}
+                                onClick={() => handleRowClick(index)}
+                              >
+                                <td headers="area-header" style={{ display: "block", textAlign: 'left', paddingLeft: '20px', }}>
+                                  <div style={{ display: "flex", fontWeight: '600', }}>
+                                    <div style={{ color: '#0057FF', marginRight: "10px" }}>
+                                      {review.volunteerType}
                                     </div>
-                                    <div style={{display:"flex"}}>
-                                      <div>봉사시간 :&nbsp;</div>
+                                    {review.title}
+                                  </div>
+                                  <div style={{ display: "flex" }}>
+                                    <div>봉사시간 :&nbsp;</div>
                                     {review.volunteerStartDate}-{review.volunteerEndDate}
-                                    </div>
-                                    <div style={{display:"flex"}}>
-                                      <div>주소 :&nbsp;</div>
+                                  </div>
+                                  <div style={{ display: "flex" }}>
+                                    <div>주소 :&nbsp;</div>
                                     {review.volunteerAddress}
-                                    </div>
-                                  </td>
+                                  </div>
+                                </td>
 
 
-                                  <td>
-                                    <button
-                                        style={{
-                                          ...btStyle,
-                                          // border: '1px solid #FF9C9C',
-                                          paddingLeft: '15px',
-                                          paddingRight: '15px',
-                                          background: '#AEAEAE',
-                                          marginTop : '0px',
-                                          marginBottom:'10px',
-                                          color: '#ffffff'
-                                        }}
-                                    >
-                                      상세보기
-                                    </button>
-                                    <br/>
-                                    <button
-                                        style={{
-                                          ...btStyle,
-                                          // border: '1px solid #FF9C9C',
-                                          color: '#ffffff',
-                                          paddingLeft: '15px',
-                                          paddingRight: '15px',
-                                          background: '#FF9F9F',
-                                        }}
-                                    >
-                                      참여하기
-                                    </button>
-                                  </td>
-                                </tr>
-                              )
-                          )}
+                                <td>
+                                  <button
+                                    style={{
+                                      ...btStyle,
+                                      // border: '1px solid #FF9C9C',
+                                      paddingLeft: '15px',
+                                      paddingRight: '15px',
+                                      background: '#AEAEAE',
+                                      marginTop: '0px',
+                                      marginBottom: '10px',
+                                      color: '#ffffff'
+                                    }}
+                                  >
+                                    상세보기
+                                  </button>
+                                  <br />
+                                  <button
+                                    style={{
+                                      ...btStyle,
+                                      // border: '1px solid #FF9C9C',
+                                      color: '#ffffff',
+                                      paddingLeft: '15px',
+                                      paddingRight: '15px',
+                                      background: '#FF9F9F',
+                                    }}
+                                  >
+                                    참여하기
+                                  </button>
+                                </td>
+                              </tr>
+                            )
+                            )}
                           </tbody>
                         </StyledTable>
                       </Styleddiv2>

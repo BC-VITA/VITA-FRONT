@@ -42,8 +42,8 @@ function S_ReservationFirst() {
         const data = await response.json();
 
         // 응답 데이터 처리
-        const { userName, email } = data;
-        setUserName(userName);
+        const { phone, email } = data;
+        setUserName(phone);
         setEmail(email);
       } catch (error) {
         console.error('API 요청 오류:', error);
