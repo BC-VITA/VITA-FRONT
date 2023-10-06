@@ -83,55 +83,59 @@ function Chat_Details() {
             console.error(error);
         }
     };
-    const handleInputChange = (event) => {
-        setMessage(event.target.value);
+
+    // STOMP 클라이언트 연결
+    client.connect({}, onConnect, onDisconnect);
+
+    // 컴포넌트가 언마운트될 때 STOMP 클라이언트 연결 종료
+    return () => {
+      client.disconnect();
     };
+  }, []);
 
-    //채팅 목록 가져오기
-    useEffect(() => {
-        const fetchData = () => {
-            fetch(`http://localhost:8004/chat/${roomId1.roomId}/${userId}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Room detail:', data);
-                    setData123(data);
-                })
-                .catch((error) => {
-                    console.error('Error fetching room detail:', error);
-                });
-        };
+  //채팅 보내기
+  useEffect(() => {
+    fetchChatList();
+  }, []);
 
-        // 최초 실행
-        fetchData();
+  const fetchChatList = async () => {
+    try {
+      // 세션 정보 가져오기
+      const sessionId = sessionStorage.getItem('sessionId');
 
-        // // 1초마다 fetchData 함수 호출
-        // const intervalId = setInterval(fetchData, 1000);
+      // 요청 헤더에 세션 정보 추가
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionId}`,
+      };
 
-        // // 컴포넌트 언마운트 시 타이머 정리
-        // return () => {
-        //   clearInterval(intervalId);
-        // };
-    }, []);
+      // fetch 요청 보내기
+      const url = `http://localhost:8004/chat/list?userId=${userId}`;
+      const response = await fetch(url, {
+        credentials: 'include',
+        headers: headers,
+      });
+      const data = await response.json();
+      setChatList(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleInputChange = (event) => {
+    setMessage(event.target.value);
+  };
 
-
-    //메시지 보내기
-    const sendMessage = () => {
-        const chatMessage = {
-            'roomId': roomId1.roomId,
-            'boardId': roomId1.boardId,
-            'senderId': userId,
-            'receiverId': roomId1.otherUserId,
-            'message': message,
-        };
-        //로그인할때 number저장하기
-
-        // STOMP 클라이언트를 통해 메시지 전송
-        if (stompClient) {
-            stompClient.send('/pub/send', {}, JSON.stringify(chatMessage));
-        }
-
-        setMessage('');
-    };
+  //채팅 목록 가져오기
+  const fetchData = () => {
+    fetch(`http://localhost:8004/chat/${roomId1.roomId}/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData123(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching room detail:', error);
+      });
+  };
 
     const onMessageReceived = (message) => {
         const receivedData = JSON.parse(message.body);
@@ -158,287 +162,319 @@ function Chat_Details() {
             });
         // navigate(`/MyPage_Chat`);
     };
+    //로그인할때 number저장하기
 
-    useEffect(() => {
-        const url1 = `http://localhost:8004/user/designate-blood-accept-window?designateBloodWriteUserId=${roomId1.boardId}&userId=${userId}`;
-        fetch(url1, {
-            method: 'get',
-        })
-            .then((data1) => data1.json())
-            .then((data1) => {
-                setuserInfo(data1);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }, []);
+    // STOMP 클라이언트를 통해 메시지 전송
+    if (stompClient) {
+      stompClient.send('/pub/send', {}, JSON.stringify(chatMessage));
+    }
 
-    return (
-        <StyledAll>
-            <StyledSubcomment>
-                <StyledTop>
-                    <StyledTitle>채팅</StyledTitle>
-                    <StyledTitle2>
-                        <Nav.Link href="/MyPage_DBD">마이페이지로 가기</Nav.Link>{' '}
-                    </StyledTitle2>
-                </StyledTop>
-            </StyledSubcomment>
-            <Styledcomment>
-                <StyledBox>
-                    <StyledText>
-                        {data123.roomTitle}
-                    </StyledText>
-                    <StyledButton>
-                        {setAccept ?
-                            <>
-                                <StyledButtonB onClick={() => setAccept(true)}>
-                                    수락하기
-                                </StyledButtonB>
-                                <Modal size="md" show={accept} onHide={() => setAccept(false)}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>수락하기</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        신청자를 수락하였습니다. <br/>
-                                        신청자에게 환자 정보가 보여지게 됩니다. <br/>
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="secondary" onClick={() => setAccept(false)}>
-                                            닫기
-                                        </Button>
-                                        <Button variant="primary" onClick={() => handleAccept(roomId1)}>
-                                            수락
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
-                            </>
-                            :
-                            <>
-                                <StyledButtonB>
-                                    정보보기
-                                </StyledButtonB>
-                                <Modal size="md" show={accept} onHide={() => setAccept(false)}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>환자정보</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        {roomId1.isAgree === true &&
-                                            <div>
-                                                {Object.entries(userInfo).map(([key, value]) => (
-                                                    <p key={key}>{`${key}: ${value}`}</p>
-                                                ))}
-                                            </div>
-                                        }
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleClose}>
-                                            닫기
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
-                            </>
-                        }
-                        {/*<StyledButtonB onClick={() => setAccept(true)}>*/}
-                        {/*    수락하기*/}
-                        {/*</StyledButtonB>*/}
-                        {/*<Modal size="md" show={accept} onHide={() => setAccept(false)}>*/}
-                        {/*    <Modal.Header closeButton>*/}
-                        {/*        <Modal.Title>수락하기</Modal.Title>*/}
-                        {/*    </Modal.Header>*/}
-                        {/*    <Modal.Body>*/}
-                        {/*        신청자를 수락하였습니다. <br/>*/}
-                        {/*        신청자에게 환자 정보가 보여지게 됩니다. <br/>*/}
-                        {/*    </Modal.Body>*/}
-                        {/*    <Modal.Footer>*/}
-                        {/*        <Button variant="secondary" onClick={() => setAccept(false)}>*/}
-                        {/*            닫기*/}
-                        {/*        </Button>*/}
-                        {/*        <Button variant="primary" onClick={() => handleAccept(roomId1)}>*/}
-                        {/*            수락*/}
-                        {/*        </Button>*/}
-                        {/*    </Modal.Footer>*/}
-                        {/*</Modal>*/}
-                        <StyledButtonP onClick={() => setCancel(true)}>
-                            취소하기
-                        </StyledButtonP>
-                        <Modal size="md" show={cancel} onHide={() => setCancel(false)}
-                            // aria-labelledby="example-modal-sizes-title-sm"
-                        >
-                            <Modal.Header closeButton>
-                                <Modal.Title>취소하기</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                취소되었습니다. <br/>
-                            </Modal.Body>
-                        </Modal>
-                    </StyledButton>
-                </StyledBox>
-                <StyledBox2>
-                    <StyledText2>
-                        {/* <Nav.Link href="/DBDPostGeneral">
+    setMessage('');
+  };
+
+  const onMessageReceived = (message) => {
+    const receivedData = JSON.parse(message.body);
+    setReceivedMessage(receivedData.message);
+  };
+
+  //채팅부분에서 수락하기 버튼
+  const [userInfo, setuserInfo] = useState('');
+  const handleAccept = (roomId1) => {
+    fetch(`http://localhost:8004/chat/agree`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        userId: userId,
+        roomId: roomId1.roomId,
+        isAgree: true
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          setAsd(true);
+        } else {
+          throw new Error(`HTTP 오류! 상태 코드: ${res.status}`);
+        }
+        return res.json();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    const url1 = `http://localhost:8004/user/designate-blood-accept-window?designateBloodWriteUserId=${roomId1.boardId}&userId=${userId}`;
+    fetch(url1, {
+      method: 'get',
+    })
+      .then((data1) => data1.json())
+      .then((data1) => {
+        setuserInfo(data1);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  //isagree값 비교하기
+  const [roomIds, setRoomIds] = useState([]);
+  const [asd, setAsd] = useState(false);
+  const fetchData1 = () => {
+    fetch(`http://localhost:8004/chat/list?userId=${userId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const filteredRoomIds = data.filter(room => room.roomId === roomId1.roomId);
+        setRoomIds(filteredRoomIds);
+        if (filteredRoomIds.length > 0 && filteredRoomIds[0].isAgree) {
+          setAsd(true);
+        }
+      })
+      .catch(error => {
+        console.error('오류 발생:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData1(); // 초기 데이터 가져오기
+  }, [userId]);
+
+  //반복작업
+  useEffect(() => {
+    const intervalId = setInterval(fetchData, fetchData1, 1000);
+
+    // 컴포넌트 언마운트 시 타이머 정리
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+
+  return (
+    <StyledAll>
+      <StyledSubcomment>
+        <StyledTop>
+          <StyledTitle>채팅</StyledTitle>
+          <StyledTitle2>
+            <Nav.Link href="/MyPage_DBD">마이페이지로 가기</Nav.Link>{' '}
+          </StyledTitle2>
+        </StyledTop>
+      </StyledSubcomment>
+      <Styledcomment>
+        <StyledBox>
+          <StyledText>{data123.roomTitle}</StyledText>
+          <StyledButton>
+            <StyledButtonB onClick={() => setAccept(true)}>
+              수락하기
+            </StyledButtonB>
+            <Modal size="md" show={accept} onHide={() => setAccept(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>수락하기</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                신청자를 수락하였습니다. <br />
+                신청자에게 환자 정보가 보여지게 됩니다. <br />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setAccept(false)}>
+                  닫기
+                </Button>
+                <Button variant="primary" onClick={() => handleAccept(roomId1)}>
+                  수락
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            <StyledButtonP onClick={() => setCancel(true)}>
+              취소하기
+            </StyledButtonP>
+            <Modal size="md" show={cancel} onHide={() => setCancel(false)}
+            // aria-labelledby="example-modal-sizes-title-sm"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>취소하기</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                취소되었습니다. <br />
+              </Modal.Body>
+            </Modal>
+          </StyledButton>
+        </StyledBox>
+        <StyledBox2>
+          <StyledText2>
+            {/* <Nav.Link href="/DBDPostGeneral">
               <StyledButtonDiv>지정헌혈자 안내문</StyledButtonDiv>
             </Nav.Link> */}
 
-                        <StyledText2 onClick={handleShow}>지정헌혈자 안내문</StyledText2>
+            <StyledText2 onClick={handleShow}>지정헌혈자 안내문</StyledText2>
 
-                        <Modal size="lg" show={show} onHide={handleClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>지정헌혈자 안내문</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <ul>
-                                    <li>
-                                        <b>지정헌혈자 유의사항</b>
-                                    </li>
-                                    <ol>
-                                        <li>
-                                            헌혈장소 방문시 의료기관에서 등록된{' '}
-                                            <b>
-                                                <u>수혈자 등록번호</u>
-                                            </b>
-                                            를 간호사에게 보여주시기 바랍니다.
-                                        </li>
-                                        <li>
-                                            <b>
-                                                <u>수혈자 등록번호</u>
-                                            </b>
-                                            가 없는 경우 <b>지정헌혈이 불가합니다.</b>
-                                        </li>
-                                        <li>
-                                            지정혈액은 환자의 상태 또는 혈액의 잔여 유효기간 등의
-                                            사유로 지정된 환자에게 수혈이 불가능 한 경우 다른 의료기관
-                                            환자에게 수혈될 수 있습니다.
-                                        </li>
-                                        <li>
-                                            임신력이 있는 여성의 경우 혈소판 지정헌혈이 불가능합니다.
-                                        </li>
-                                    </ol>
-                                    <br/>
-                                    <li>
-                                        <b>지정헌혈자 선별시 유의사항</b>
-                                        <ol>
-                                            <li>
-                                                환자와 혈액관계(4촌이내)가 있는 분의 혈액은 수혈로 인한
-                                                <b>이식편대숙주병</b> 등의 수혈부작용을 유발할 수
-                                                있으므로 가급적 직계가 아닌 헌혈자가 헌혈하는 것이
-                                                좋으며, 혈연관계에 있으신 분이 헌혈할 경우에는 수혈시
-                                                혈액방사선조사가 필요합니다.
-                                            </li>
-                                            <li>
-                                                <b>신생아용혈성질환</b> 방지를 위해 임신가능 연령의
-                                                부인에게 남편 또는 남편 친족관계에 있는 분은 지정헌혈을
-                                                자제해주시고, 신생아 용혈성 질환이 생긴 아기에게
-                                                아버지는 지정헌혈을 자제해 주시기 바랍니다.
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <br/>
-                                    <li>
-                                        <b>헌혈자 유의사항</b>
-                                        <ol>
-                                            <li>
-                                                헌혈장소 방문시 헌혈자 본인 <b>신분증</b>을 반드시
-                                                지참해 주시기 바랍니다.
-                                            </li>
-                                            <li>헌혈가능 연령, 체중 및 간격</li>
-                                            <Styledimg
-                                                src={information}
-                                                classname="information"
-                                                alt="information"
-                                            />
-                                        </ol>
-                                        <ul>
-                                            <li>
-                                                전국 헌혈장소 및 헌혈에 대한 자세한 정보는 아래 홈페이지
-                                                또는 앱에서 확인하실 수 있습니다.
-                                            </li>
-                                            <li>
-                                                <b>
-                                                    <u>대한적십자사 혈액관리본부 홈페이지</u>
-                                                </b>{' '}
-                                                : <a href="www.bloodinfo.net">www.bloodinfo.net</a>{' '}
-                                            </li>
-                                            <li>
-                                                <b>
-                                                    <u>대한적십자사 레드커넥트 앱</u>
-                                                </b>{' '}
-                                                : 네이버에서 레드커넥트 검색 후 다운로드{' '}
-                                            </li>
-                                            <li>
-                                                한마음혈액원 홈페이지 :{' '}
-                                                <a href="www.bloodnet.or.kr">www.bloodnet.or.kr</a>{' '}
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <br/>
-                                    <li>
-                                        <b>헌혈장소 및 기타 문의사항 연락처</b>
-                                        <ul>
-                                            <li>대한적십자사 CRM 센터 1600-3705</li>
-                                            <li>한마음 혈액원 02-586-2415</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={handleClose}>
-                                    Close
-                                </Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </StyledText2>
-                </StyledBox2>
-                <StyledBox3>
-                    {data123.chatMessageList &&
-                        data123.chatMessageList.map((messageItem) => (
-                            <div key={messageItem.messageId}>
-                                {messageItem.senderId === userId ? (
-                                    <>
-                                        <StyledBox3RName>{messageItem.senderName}</StyledBox3RName>
-                                        <StyledBox3R>
-                                            <StyledBox3RTextBox>
-                                                <StyledBox3RTime>{messageItem.sendTime}</StyledBox3RTime>
-                                                <StyledBox3RText>{messageItem.message}</StyledBox3RText>
-                                                <div></div>
-                                            </StyledBox3RTextBox>
-                                        </StyledBox3R>
-                                    </>
-                                ) : (
-                                    <>
-                                        <StyledBox3LName>{messageItem.senderName}</StyledBox3LName>
-                                        <StyledBox3L>
-                                            <div></div>
-                                            <StyledBox3LTextBox>
-                                                <StyledBox3LText>{messageItem.message}</StyledBox3LText>
-                                                <StyledBox3LTime>{messageItem.sendTime}</StyledBox3LTime>
-                                            </StyledBox3LTextBox>
-                                        </StyledBox3L>
-                                    </>
-                                )}
-                            </div>
-                        ))}
-                    {/*{roomId1.isAgree === true &&*/}
-                    {/*    <div>*/}
-                    {/*        {Object.entries(userInfo).map(([key, value]) => (*/}
-                    {/*            <p key={key}>{`${key}: ${value}`}</p>*/}
-                    {/*        ))}*/}
-                    {/*    </div>}*/}
-                </StyledBox3>
-                <StyledBox4>
-                    <FloatingLabel
-                        label="메세지 작성"
-                        name="message"
-                        style={{width: '60em'}}
-                    >
-                        <Form.Control type="text" placeholder="label" value={message} onChange={handleInputChange}/>
-                    </FloatingLabel>
-                    <StyledButton4 onClick={sendMessage}>
-                        전송
-                    </StyledButton4>
-                </StyledBox4>
-            </Styledcomment>
-        </StyledAll>
-    );
+            <Modal size="lg" show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>지정헌혈자 안내문</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <ul>
+                  <li>
+                    <b>지정헌혈자 유의사항</b>
+                  </li>
+                  <ol>
+                    <li>
+                      헌혈장소 방문시 의료기관에서 등록된{' '}
+                      <b>
+                        <u>수혈자 등록번호</u>
+                      </b>
+                      를 간호사에게 보여주시기 바랍니다.
+                    </li>
+                    <li>
+                      <b>
+                        <u>수혈자 등록번호</u>
+                      </b>
+                      가 없는 경우 <b>지정헌혈이 불가합니다.</b>
+                    </li>
+                    <li>
+                      지정혈액은 환자의 상태 또는 혈액의 잔여 유효기간 등의
+                      사유로 지정된 환자에게 수혈이 불가능 한 경우 다른 의료기관
+                      환자에게 수혈될 수 있습니다.
+                    </li>
+                    <li>
+                      임신력이 있는 여성의 경우 혈소판 지정헌혈이 불가능합니다.
+                    </li>
+                  </ol>
+                  <br />
+                  <li>
+                    <b>지정헌혈자 선별시 유의사항</b>
+                    <ol>
+                      <li>
+                        환자와 혈액관계(4촌이내)가 있는 분의 혈액은 수혈로 인한
+                        <b>이식편대숙주병</b> 등의 수혈부작용을 유발할 수
+                        있으므로 가급적 직계가 아닌 헌혈자가 헌혈하는 것이
+                        좋으며, 혈연관계에 있으신 분이 헌혈할 경우에는 수혈시
+                        혈액방사선조사가 필요합니다.
+                      </li>
+                      <li>
+                        <b>신생아용혈성질환</b> 방지를 위해 임신가능 연령의
+                        부인에게 남편 또는 남편 친족관계에 있는 분은 지정헌혈을
+                        자제해주시고, 신생아 용혈성 질환이 생긴 아기에게
+                        아버지는 지정헌혈을 자제해 주시기 바랍니다.
+                      </li>
+                    </ol>
+                  </li>
+                  <br />
+                  <li>
+                    <b>헌혈자 유의사항</b>
+                    <ol>
+                      <li>
+                        헌혈장소 방문시 헌혈자 본인 <b>신분증</b>을 반드시
+                        지참해 주시기 바랍니다.
+                      </li>
+                      <li>헌혈가능 연령, 체중 및 간격</li>
+                      <Styledimg
+                        src={information}
+                        classname="information"
+                        alt="information"
+                      />
+                    </ol>
+                    <ul>
+                      <li>
+                        전국 헌혈장소 및 헌혈에 대한 자세한 정보는 아래 홈페이지
+                        또는 앱에서 확인하실 수 있습니다.
+                      </li>
+                      <li>
+                        <b>
+                          <u>대한적십자사 혈액관리본부 홈페이지</u>
+                        </b>{' '}
+                        : <a href="www.bloodinfo.net">www.bloodinfo.net</a>{' '}
+                      </li>
+                      <li>
+                        <b>
+                          <u>대한적십자사 레드커넥트 앱</u>
+                        </b>{' '}
+                        : 네이버에서 레드커넥트 검색 후 다운로드{' '}
+                      </li>
+                      <li>
+                        한마음혈액원 홈페이지 :{' '}
+                        <a href="www.bloodnet.or.kr">www.bloodnet.or.kr</a>{' '}
+                      </li>
+                    </ul>
+                  </li>
+                  <br />
+                  <li>
+                    <b>헌혈장소 및 기타 문의사항 연락처</b>
+                    <ul>
+                      <li>대한적십자사 CRM 센터 1600-3705</li>
+                      <li>한마음 혈액원 02-586-2415</li>
+                    </ul>
+                  </li>
+                </ul>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                {/* <Button variant="primary" onClick={handleClose}>
+                  Save Changes
+                </Button> */}
+              </Modal.Footer>
+            </Modal>
+          </StyledText2>
+        </StyledBox2>
+        <StyledBox3>
+          {data123.chatMessageList &&
+            data123.chatMessageList.map((messageItem) => (
+              <div key={messageItem.messageId}>
+                {messageItem.senderId === userId ? (
+                  <>
+                    <StyledBox3RName>{messageItem.senderName}</StyledBox3RName>
+                    <StyledBox3R>
+                      <StyledBox3RTextBox>
+                        <StyledBox3RTime>{messageItem.sendTime}</StyledBox3RTime>
+                        <StyledBox3RText>{messageItem.message}</StyledBox3RText>
+                        <div></div>
+                      </StyledBox3RTextBox>
+                    </StyledBox3R>
+                  </>
+                ) : (
+                  <>
+                    <StyledBox3LName>{messageItem.senderName}</StyledBox3LName>
+                    <StyledBox3L>
+                      <div></div>
+                      <StyledBox3LTextBox>
+                        <StyledBox3LText>{messageItem.message}</StyledBox3LText>
+                        <StyledBox3LTime>{messageItem.sendTime}</StyledBox3LTime>
+                      </StyledBox3LTextBox>
+                    </StyledBox3L>
+                  </>
+                )}
+              </div>
+            ))}
+          {asd &&
+            <div>
+              {Object.entries(userInfo).map(([key, value]) => (
+                <p key={key}>{`${key}: ${value}`}</p>
+              ))}
+            </div>}
+        </StyledBox3>
+        <StyledBox4>
+          <FloatingLabel
+            label="메세지 작성"
+            name="message"
+            style={{ width: '60em' }}
+          >
+            <Form.Control type="text" placeholder="label" value={message} onChange={handleInputChange} />
+          </FloatingLabel>
+          <StyledButton4 onClick={sendMessage}>
+            전송
+          </StyledButton4>
+        </StyledBox4>
+      </Styledcomment>
+    </StyledAll>
+  );
+
 }
 
 const StyledAll = styled.div`

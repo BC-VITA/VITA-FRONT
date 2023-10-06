@@ -1,13 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {
-    Nav,
-    FloatingLabel,
-    Form,
-    Tab,
-    Tabs,
-    Button,
-    Table, Modal,
+  Nav, FloatingLabel, Form, Tab, Tabs, Button, Table
 } from 'react-bootstrap';
 import {useLocation, useNavigate} from 'react-router-dom';
 
@@ -144,7 +138,6 @@ function MyPage_S() {
         textAlign: 'center',
         color: '#333333',
     };
-
     return (
         <StyledAll>
             <StyledSub>
