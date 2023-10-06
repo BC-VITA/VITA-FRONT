@@ -41,11 +41,6 @@ function O_NewsList() {
                     <StyledSubDiv1>회원 관리</StyledSubDiv1>
                     <StyledSubDiv2>
                         <StyledSubDiv2_1>
-                            <Nav.Link href="/O_BD_Manage">
-                                <StyledSubDiv2_2g>헌혈 통계 게시물</StyledSubDiv2_2g>
-                            </Nav.Link>
-                        </StyledSubDiv2_1>
-                        <StyledSubDiv2_1>
                             <Nav.Link href="/O_StatisticsD">
                                 <StyledSubDiv2_2g>기부금 통계 게시물</StyledSubDiv2_2g>
                             </Nav.Link>
@@ -53,6 +48,11 @@ function O_NewsList() {
                         <StyledSubDiv2_1>
                             <Nav.Link href="/O_StatisticsS">
                                 <StyledSubDiv2_2g>봉사 통계</StyledSubDiv2_2g>
+                            </Nav.Link>
+                        </StyledSubDiv2_1>
+                        <StyledSubDiv2_1>
+                            <Nav.Link href="/O_BD_Manage">
+                                <StyledSubDiv2_2g>헌혈 통계 게시물</StyledSubDiv2_2g>
                             </Nav.Link>
                         </StyledSubDiv2_1>
                         <StyledSubDiv2_1>

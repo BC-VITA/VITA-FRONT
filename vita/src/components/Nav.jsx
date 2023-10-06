@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import icon from '../img/icon.png';
+import {Icon} from '@iconify/react';
+import {Button, Modal} from "react-bootstrap";
 
 const Nav = () => {
     const userId = sessionStorage.getItem('userId');
@@ -10,6 +12,54 @@ const Nav = () => {
         sessionStorage.removeItem('userId');
         navigator('/');
         window.location.reload();
+    };
+
+    //간단알림
+    const [alarm, setalarm] = useState([]);
+    const url1 = `http://localhost:8004/chat/alarm/list?userId=${userId}`;
+    useEffect(() => {
+        if (userId) {
+            fetch(url1, {
+                method: 'get',
+            })
+                .then((data) => data.json())
+                .then((data) => {
+                    setalarm(data);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    }, [userId]);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    //지정헌혈 채팅 리스트
+    const navigate = useNavigate();
+    const [roomIds, setRoomIds] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost:8004/chat/list?userId=${userId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setRoomIds(data);
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('오류 발생:', error);
+            });
+    }, [userId]);
+
+    const handleChatRoomClick = (roomId1) => {
+        navigate(`/Chat_Details`, {state: {roomId1}});
+        setShow(false);
+        setcount(prevCount => prevCount - 1)
+        // setcount(count - 1); // count 값을 감소
     };
 
     //알람
@@ -33,8 +83,8 @@ const Nav = () => {
     return (
         <Stylednav>
             <StyledDiv1>
-                <Styledimg src={icon} class name="main-icon" alt="logo" />
-                <Link to="/" style={{ textDecoration: 'none' }}>
+                <Styledimg src={icon} class name="main-icon" alt="logo"/>
+                <Link to="/" style={{textDecoration: 'none'}}>
                     <StyledDiv11>
                         <div>vita</div>
                     </StyledDiv11>
@@ -42,37 +92,37 @@ const Nav = () => {
             </StyledDiv1>
 
             <StyledDiv2>
-                <Link to="Learn" style={{ textDecoration: 'none' }}>
+                <Link to="Learn" style={{textDecoration: 'none'}}>
                     <StyledDiv21>
                         <div>알아보자</div>
                     </StyledDiv21>
                 </Link>
 
-                <Link to="BD_Main" style={{ textDecoration: 'none' }}>
+                <Link to="BD_Main" style={{textDecoration: 'none'}}>
                     <StyledDiv21>
                         <div>헌혈하자</div>
                     </StyledDiv21>
                 </Link>
 
-                <Link to="DBD_Main" style={{ textDecoration: 'none' }}>
+                <Link to="DBD_Main" style={{textDecoration: 'none'}}>
                     <StyledDiv21L>
                         <div>지정헌혈하자</div>
                     </StyledDiv21L>
                 </Link>
 
-                <Link to="BD_Story" style={{ textDecoration: 'none' }}>
+                <Link to="BD_Story" style={{textDecoration: 'none'}}>
                     <StyledDiv21M>
                         <div>이야기하자</div>
                     </StyledDiv21M>
                 </Link>
 
-                <Link to="S_Main" style={{ textDecoration: 'none' }}>
+                <Link to="S_Main" style={{textDecoration: 'none'}}>
                     <StyledDiv21>
                         <div>봉사하자</div>
                     </StyledDiv21>
                 </Link>
 
-                <Link to="D_Main" style={{ textDecoration: 'none' }}>
+                <Link to="D_Main" style={{textDecoration: 'none'}}>
                     <StyledDiv21>
                         <div>기부하자</div>
                     </StyledDiv21>
@@ -81,32 +131,93 @@ const Nav = () => {
             <StyledDiv3>
                 <Link
                     to={userId ? `/` : '/login'}
-                    style={{ textDecoration: 'none', color: 'white' }}
+                    style={{textDecoration: 'none', color: 'white'}}
                 >
                     <StyledDiv31L>
-                        <div>{userId ? `${userId}님` : '로그인'}</div>
+                        {userId ? `${userId}님` : '로그인'}
                     </StyledDiv31L>
                 </Link>
                 <StyledDiv31m>
                     {/* <div>|</div> */}
-                    <Link
-                        to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}
-                        style={{ textDecoration: 'none', color: 'white' }}
-                    >
-                        <StyledDiv31m>
-                            <div>
-                                {/*{userId ? `| 마이페이지 |` : '|'}*/}
-                                {userId ? (userId === "admin" ? "| 관리페이지 |" : "| 마이페이지 |") : '|'}
-                                {/*{userId === true && `| 마이페이지 |`}*/}
-                                {/*{userId === false && `|`}*/}
-                                {/*{userId === "admin" && `| 관리페이지 |`}*/}
-                            </div>
-                        </StyledDiv31m>
-                    </Link>
+                    {/*<Link*/}
+                    {/*    to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}*/}
+                    {/*    style={{textDecoration: 'none', color: 'white'}}*/}
+                    {/*>*/}
+                    <div>
+                        {userId ? (userId === "admin" ?
+                                <Link to="/O_StatisticsD" style={{textDecoration: 'none', color: 'white'}}>
+                                    |&nbsp;&nbsp;관리페이지&nbsp;&nbsp;|
+                                </Link>
+                                :
+                                <div style={{display: "flex"}}>
+                                    <Link to="/MyPage_DBD" style={{textDecoration: 'none', color: 'white'}}>
+                                        |&nbsp;&nbsp;마이페이지
+                                    </Link>
+                                    {/*<Link to="/O_BD_Manage" style={{textDecoration: 'none', color: 'white', display:"flex"}}>*/}
+
+                                    <div style={{display: "flex"}}>
+                                        &nbsp;&nbsp;
+                                        <Icon icon="material-symbols:notifications-active-outline"
+                                              style={{marginTop: "3px"}} onClick={handleShow}/>
+                                        <div>
+                                            {(() => {
+                                                if (count.length > 0) {
+                                                    return count;
+                                                } else {
+                                                    return " ";
+                                                }
+                                            })()}
+                                            {/*{count}*/}
+                                            {/*{count.length > 0 ? count :" "}*/}
+                                            &nbsp;&nbsp;|
+                                        </div>
+                                    </div>
+                                    <Modal size="lg" show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>채팅방 알림</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <div>
+                                                {alarm.map((item, index) => (
+                                                    <div key={index} style={{
+                                                        background: "#FFE9E9",
+                                                        padding: "10px",
+                                                        borderRadius: "5px",
+                                                        display: "flex"
+                                                    }}>
+                                                        <div>
+                                                        <div>시간: {item.sendTime}</div>
+                                                        <div>지정헌혈 제목: {item.boardTitle}</div>
+                                                        </div>
+                                                        {roomIds.map(room => (
+                                                            <Button
+                                                                style={{background: '#8FAADC'}}
+                                                                onClick={() => handleChatRoomClick(room)}>
+                                                                채팅방으로 이동
+                                                            </Button>
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                Close
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
+                                    {/*</Link>*/}
+                                </div>)
+                            :
+                            <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+                                |
+                            </Link>}
+                    </div>
+                    {/*</Link>*/}
                 </StyledDiv31m>
                 <Link
                     to={userId ? '/' : '/signup'}
-                    style={{ textDecoration: 'none', color: 'white' }}
+                    style={{textDecoration: 'none', color: 'white'}}
                     onClick={handleLogout}
                 >
                     <StyledDiv31R>
@@ -115,9 +226,10 @@ const Nav = () => {
                 </Link>
 
             </StyledDiv3>
-            <div style={{color: '#ffffff'}}>
-                이거 알람{count}
-            </div>
+            {/*<div style={{color: '#ffffff'}}>*/}
+            {/*    <Icon icon="material-symbols:notifications-active-outline" />*/}
+            {/*    이거 알람{count}*/}
+            {/*</div>*/}
         </Stylednav>
     );
 };
@@ -204,7 +316,7 @@ const StyledDiv21M = styled.div`
 
 const StyledDiv3 = styled.div`
   /* flex-direction: row; */
-  width: 200px;
+  //width: 210px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -225,7 +337,7 @@ const StyledDiv31L = styled.div`
   color: #ffffff;
 `;
 const StyledDiv31m = styled.div`
-  /* width: 50px; */
+  //width: 100px;
   /* flex-direction: row; */
   text-decoration-line: none;
 
@@ -240,6 +352,7 @@ const StyledDiv31m = styled.div`
   margin-right: 5px;
 
   color: #ffffff;
+  text-decoration: none;
 `;
 const StyledDiv31R = styled.div`
   /* width: 70px; */

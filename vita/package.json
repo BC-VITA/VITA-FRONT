@@ -13,6 +13,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.4",
     "@nivo/bar": "^0.83.0",
+    "@nivo/pie": "^0.83.0",
     "@react-pdf/renderer": "^3.1.12",
     "@stomp/stompjs": "^7.0.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -83,5 +84,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@iconify/react": "^4.1.1"
   }
 }

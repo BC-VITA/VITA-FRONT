@@ -83,6 +83,7 @@ import OStatisticsBD from './pages/0. Master/O_StatisticsBD';
 import OHospitalAuthorizations from './pages/0. Master/O_Hospital_Authorizations';
 import OReporting from './pages/0. Master/O_Reporting';
 import ONewsList from './pages/0. Master/O_NewsList';
+import S_Details from "./pages/mypage/S_Details";
 
 //실험
 import Asd from './pages/asd'
@@ -116,6 +117,7 @@ function App() {
             <Route path="/S_Deed" element={<SDeed />}></Route>
             <Route path="/S_Deed1" element={<SDeed1 />}></Route>
             <Route path="/MyPage" element={<MyPage />}></Route>
+            <Route path="/S_Details" element={<S_Details />}></Route>
 
             {/*로그인*/}
             <Route path="/Login" element={<Login />}></Route>

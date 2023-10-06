@@ -22,6 +22,7 @@ function MyPage_Chat() {
       })
       .then(data => {
         setRoomIds(data);
+        console.log(data);
       })
       .catch(error => {
         console.error('오류 발생:', error);
@@ -93,7 +94,7 @@ function MyPage_Chat() {
             <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
               {roomIds.map(room => (
                 <tr key={room.id}>
-                  <td>{room.title}</td>
+                  <div>{room.title.length > 20 ? room.title.substring(0, 20) + "..." : room.title}</div>
                   <td>{room.boardCreatedAt}</td>
                   <td>
                     <Button
