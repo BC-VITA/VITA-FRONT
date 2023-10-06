@@ -1,66 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {
-  Form,
-  FloatingLabel,
-  Accordion,
-  Table,
-  Nav,
-  Tab,
-  Tabs,
-} from 'react-bootstrap';
+import { Form, FloatingLabel, Accordion, Table, Nav, Tab, Tabs } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import KakaoMap from '../KakaoMap';
 import icon from './heart.png';
+
 function S_Ganeral() {
   const navigate = useNavigate();
+  const userId = sessionStorage.getItem('userId');
 
   const mapSize = [450, 300];
   //지역선택
-  const selectArea1 = [
-    '전체',
-    '서울',
-    '부산',
-    '대구',
-    '인천',
-    '광주',
-    '대전',
-    '울산',
-    '세종',
-    '경기',
-    '강원',
-    '충북',
-    '충남',
-    '전북',
-    '전남',
-    '경북',
-    '경남',
-    '제주',
-  ];
+  const selectArea1 = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'];
   const [volunteerArea1, setvolunteerArea] = useState('전체'); //지역선택에서 사용하는 값
   function handleAreaChange(event) {
     const selectedValue = event.target.value;
     setvolunteerArea(selectedValue);
   }
   //봉사분야
-  const selectType = [
-    '전체',
-    '생활편의시설',
-    '주거환경',
-    '교육',
-    '보건의료',
-    '환경보호',
-  ];
+  const selectType = ['전체', '생활편의시설', '주거환경', '교육', '보건의료', '환경보호'];
   const [volunteerBigType1, setvolunteerBigType] = useState('생활편의시설'); // 실제로 사용하는 분야의 첫번째 값
-  const [volunteerSmallType, setvolunteerSmallType] = useState([
-    '전체',
-    '활동보조',
-    '아동보조',
-    '청결지도',
-    '급식지원',
-    '식사반찬지원',
-    '기타',
-  ]);
+  const [volunteerSmallType, setvolunteerSmallType] = useState(['전체', '활동보조', '아동보조', '청결지도', '급식지원', '식사반찬지원', '기타',]);
   const [volunteerSmallType11, setvolunteerSmallType1] = useState('전체'); //실제로 사용하는 분야의 두번째 값
   function handleTypeChange(event) {
     const selectedValue1 = event.target.value;
@@ -69,56 +29,22 @@ function S_Ganeral() {
       setvolunteerSmallType(['검색할 봉사분야를 골라주세요']);
       setvolunteerSmallType1(['검색할 봉사분야를 골라주세요']);
     } else if (selectedValue1 === '생활편의시설') {
-      setvolunteerSmallType([
-        '전체',
-        '활동보조',
-        '아동보조',
-        '청결지도',
-        '급식지원',
-        '식사반찬지원',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '활동보조', '아동보조', '청결지도', '급식지원', '식사반찬지원', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '주거환경') {
       setvolunteerSmallType(['전체', '주거개선', '마을공동체활동', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '안전예방') {
-      setvolunteerSmallType([
-        '전체',
-        '지역안전',
-        '교통안전',
-        '어린이 안전',
-        '청소년 안전',
-        '취약계층 안전',
-        '안신고활동',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '지역안전', '교통안전', '어린이 안전', '청소년 안전', '취약계층 안전', '안신고활동', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '교육') {
-      setvolunteerSmallType([
-        '전체',
-        '방과후 교육',
-        '학습지도 교육',
-        '특수교육',
-        '평생교육',
-        '전문교육',
-        '진로체험교육',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '방과후 교육', '학습지도 교육', '특수교육', '평생교육', '전문교육', '진로체험교육', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '보건의료') {
       setvolunteerSmallType(['전체', '간호간병', '의료지원', '헌혈', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '문화행사') {
-      setvolunteerSmallType([
-        '전체',
-        '행사보조',
-        '공연활동',
-        '켐페인',
-        '관광안내',
-        '사진촬영',
-        '기타',
-      ]);
+      setvolunteerSmallType(['전체', '행사보조', '공연활동', '켐페인', '관광안내', '사진촬영', '기타']);
       setvolunteerSmallType1('전체');
     } else if (selectedValue1 === '환경보호') {
       setvolunteerSmallType(['전체', '환경정화', '환경감시', '기타']);
@@ -136,19 +62,7 @@ function S_Ganeral() {
     setactivitySection(e.target.value);
   };
   //봉사대상
-  const selectVolunteerTarget = [
-    '전체',
-    '아동.청소년',
-    '장애인',
-    '노인',
-    '쪽방촌',
-    '다문화가정',
-    '여성',
-    '환경',
-    '사회적기업',
-    '고향봉사',
-    '기타',
-  ];
+  const selectVolunteerTarget = ['전체', '아동.청소년', '장애인', '노인', '쪽방촌', '다문화가정', '여성', '환경', '사회적기업', '고향봉사', '기타'];
   const [volunteerTarget1, setvolunteerTarget] = useState('전체'); //봉사대상에서 실제 사용하는 값
   const handleSelectVolunteerTarget = (e) => {
     setvolunteerTarget(e.target.value);
@@ -184,9 +98,10 @@ function S_Ganeral() {
   const [demand, setDemand] = useState('');
   const handleChangeDemand = ({ target: { value } }) => setDemand(value);
   const [inputData, setInputData] = useState([{}, {}]);
-  const userId = 'time';
+  const type = 'time';
+  const [wishList123, setWishList123] = useState([]);
   useEffect(() => {
-    const url = `http://localhost:8004/volunteer/board/list?volunteerType=${userId}`;
+    const url = `http://localhost:8004/volunteer/board/list?volunteerType=${type}`;
     fetch(url, {
       method: 'get',
     })
@@ -195,8 +110,16 @@ function S_Ganeral() {
         setInputData(res);
         console.log(res);
       });
-    console.log(inputData);
+
+    fetch('http://localhost:8004/user/wishListTable', {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setWishList123(res);
+      });
   }, []);
+
   const handleReservation = (
     volunteerArea1,
     volunteerBigType1,
@@ -253,22 +176,25 @@ function S_Ganeral() {
   const handleRowClick = (index) => {
     setOpenIndex(index === openIndex ? -1 : index);
   };
-  // const thStyle = {
-  //   // width: '80px',
-  //   fontFamily: 'Gmarket Sans TTF',
-  //   fontStyle: 'normal',
-  //   fontWeight: '700',
-  //   fontSize: '22px',
-  //   // lineHeight: '35px',
-  //   // textAlign: 'center',
-  //   color: '#333333',
-  // };
-  // const tdStyle = {
-  //   ...thStyle,
-  //   fontWeight: '500',
-  //   fontSize: '18px',
-  //   // lineHeight: '30px',
-  // };
+
+  const handleClick = async (volunteerId) => {
+    fetch('http://localhost:8004/user/wishList/wishListUpdate', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        userId: userId,
+        boardId: volunteerId,
+        boardType: "volunteer"
+      }),
+    })
+      .then((res) => {
+        res.json();
+        window.location.reload();
+      });
+  };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -712,29 +638,16 @@ function S_Ganeral() {
                         <tr>
                           <th
                             id="area-header"
-                            style={{
-                              width: '350px',
-                              fontWeight: '700',
-                              fontSize: '22px',
-                            }}
-                          >
+                            style={{ width: '350px', fontWeight: '700', fontSize: '22px' }}>
                             제목 / 내용
                           </th>
                           <th
-                            style={{
-                              width: '100px',
-                            }}
-                          >
+                            style={{ width: '100px' }}>
                             &nbsp;
                           </th>
                           <th
                             id="centerName-header"
-                            style={{
-                              width: '200px',
-                              fontWeight: '700',
-                              fontSize: '22px',
-                            }}
-                          >
+                            style={{ width: '200px', fontWeight: '700', fontSize: '22px' }}>
                             모집인원 및 현황
                           </th>
                         </tr>
@@ -745,10 +658,17 @@ function S_Ganeral() {
                           const markerPositions = [
                             [element.latitude, element.longitude],
                           ];
+                          let iconFilterValue = '100%';
+                          wishList123.forEach((item) => {
+                            if (item.volunteerBoardId === element.volunteerId && item.userId === userId) {
+                              iconFilterValue = '0%';
+                            }
+                          });
                           return (
                             <React.Fragment key={element.id}>
-                              <tr onClick={() => handleRowClick(index)}>
+                              <tr>
                                 <td
+                                  onClick={() => handleRowClick(index)}
                                   headers="area-header"
                                   style={{
                                     width: '350px',
@@ -790,6 +710,11 @@ function S_Ganeral() {
                                     src={icon}
                                     className="main-icon"
                                     alt="logo"
+                                    onClick={() => handleClick(element.volunteerId)}
+                                    style={{
+                                      cursor: 'pointer',
+                                      filter: `grayscale(${iconFilterValue})`,
+                                    }}
                                   />
                                   <br />
                                   <button
@@ -809,7 +734,6 @@ function S_Ganeral() {
                                   </button>
                                 </td>
                               </tr>
-
                               {openIndex === index && (
                                 <tr>
                                   <td colSpan={2}>

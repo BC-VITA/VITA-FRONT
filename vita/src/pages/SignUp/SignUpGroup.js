@@ -340,8 +340,6 @@ function SignUpGroup() {
           </StyledDiv>
         </form>
       </section>
-      <div>{blood}</div>
-      <div>{rh}</div>
     </StyledAll>
   );
 }

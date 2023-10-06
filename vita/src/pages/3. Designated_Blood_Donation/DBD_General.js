@@ -56,7 +56,6 @@ function DBD_General() {
       .then((res) => res.json())
       .then((res) => {
         setWishList123(res);
-        console.log(res);
       });
   }, []);
 
@@ -79,6 +78,7 @@ function DBD_General() {
     })
       .then((res) => {
         res.json();
+        window.location.reload();
       });
   };
 
@@ -200,7 +200,7 @@ function DBD_General() {
       stompClient.send('/pub/send', {}, JSON.stringify(chatMessage));
     }
     setMessage('');
-    navigate('/MyPage_DBD');
+    navigate('/MyPage_chat');
   };
 
   const onMessageReceived = (message) => {
@@ -209,7 +209,7 @@ function DBD_General() {
   };
 
   const gotomypage = () => {
-    navigate('/MyPage_DBD');
+    navigate('/MyPage_chat');
   };
 
 
@@ -387,9 +387,6 @@ function DBD_General() {
                                         채팅방으로 이동합니다.<br />
                                       </Modal.Body>
                                       <Modal.Footer>
-                                        <Button variant="secondary" onClick={() => handleDetailClick(element)}>
-                                          채팅방으로 이동하기
-                                        </Button>
                                         <Button variant="secondary" onClick={gotomypage}>
                                           채팅방 목록으로 이동하기
                                         </Button>

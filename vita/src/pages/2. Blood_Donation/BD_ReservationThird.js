@@ -26,7 +26,6 @@ function BD_ReservationThird() {
     const bloodTypeString = Object.values(selectedOptions)
         .map((times) => Object.values(times).join(''))
         .join('');
-
     const bloodTypesString = bloodTypeString.toString();
     setIsBloodType(bloodTypesString);
 
