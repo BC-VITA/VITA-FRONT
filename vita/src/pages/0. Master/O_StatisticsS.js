@@ -1,28 +1,44 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {Form, Tab, Tabs, Nav, FloatingLabel, Table} from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
-import {format, parseISO} from "date-fns";
+import {Tab, Tabs, Nav} from 'react-bootstrap';
 import {ResponsiveBar} from '@nivo/bar';
 
 function O_StatisticsS() {
-    const [boardList, setBoardList] = useState([]);
-    const [graphData, setGraphData] = useState([]); // 추가된 상태 변수
-    const navigate = useNavigate();
+    const [data, setData] = useState([]);
 
-    const fetchBoardList = () => {
-        fetch('http://localhost:8004/donate/donate-board-statistics')
-            .then((response) => response.json())
-            .then((data) => {
-                // const sortedBoardList = data.content.sort((a, b) => a.id - b.id); // 특정 id 값을 기준으로 정렬
-                setBoardList(data);
-            })
-            .catch((error) => console.error('Error fetching board list:', error));
-    };
+    const yearToFetch = new Date().getFullYear(); // 현재 연도 또는 원하는 연도
 
     useEffect(() => {
-        fetchBoardList();
-    }, []);
+        fetch(`http://localhost:8004/admin/volunteer-statistics?year=${yearToFetch}`)
+            .then(response => response.json())
+            .then(data => {
+                const formattedData = data.map(item => ({
+                    year: item.year,
+                    month: item.month,
+                    count: item.count
+                }));
+
+                console.log(formattedData); // 데이터 형태 확인
+
+                setData(formattedData);
+            });
+    }, [yearToFetch]);
+
+    const [data2, setData2] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://localhost:8004/admin/volunteer-field-statistics?year=${yearToFetch}`)
+            .then(response => response.json())
+            .then(data2 => {
+                const formattedData = data2.map(item => ({
+                    year: item.year,
+                    count: item.count,
+                    volunteerField: item.volunteerField
+                }));
+
+                setData2(formattedData);
+            });
+    }, [yearToFetch]);
 
 
     const btStyle = {
@@ -45,11 +61,6 @@ function O_StatisticsS() {
                     <StyledSubDiv1>회원 관리</StyledSubDiv1>
                     <StyledSubDiv2>
                         <StyledSubDiv2_1>
-                            <Nav.Link href="/O_BD_Manage">
-                                <StyledSubDiv2_2g>헌혈 통계 게시물</StyledSubDiv2_2g>
-                            </Nav.Link>
-                        </StyledSubDiv2_1>
-                        <StyledSubDiv2_1>
                             <Nav.Link href="/O_StatisticsD">
                                 <StyledSubDiv2_2g>기부금 통계 게시물</StyledSubDiv2_2g>
                             </Nav.Link>
@@ -59,6 +70,11 @@ function O_StatisticsS() {
                                 <StyledSubDiv2_2>봉사 통계</StyledSubDiv2_2>
                             </Nav.Link>
                         </StyledSubDiv2_1p>
+                        <StyledSubDiv2_1>
+                            <Nav.Link href="/O_BD_Manage">
+                                <StyledSubDiv2_2g>헌혈 통계 게시물</StyledSubDiv2_2g>
+                            </Nav.Link>
+                        </StyledSubDiv2_1>
                         <StyledSubDiv2_1>
                             <Nav.Link href="/O_Hospital_Authorizations">
                                 <StyledSubDiv2_2g>병원 회원가입 승인</StyledSubDiv2_2g>
@@ -82,15 +98,43 @@ function O_StatisticsS() {
                     <StyledTitle>봉사 통계</StyledTitle>
                 </StyledTop>
                 <Styledcomment>
+                    <StyledTable>
+                        <Tabs style={{marginTop: "10px"}}>
+                            <Tab eventKey="history" title="월별 봉사자 수" style={{width: "120vh", marginTop: '30px'}}>
+                                <Tab.Content>
+                                    <StyledGraphContainer> {/* StyledGraphContainer 사용 */}
+                                        <ResponsiveBar
+                                            data={data}
+                                            keys={['count']}
+                                            indexBy="month"
+                                            margin={{top: 50, right: 60, bottom: 50, left: 60}} // margin 추가
+                                            padding={0.3}
+                                        />
+                                    </StyledGraphContainer>
+                                    <div style={{textAlign: 'center'}}>{data.year}</div>
+                                </Tab.Content>
+                            </Tab>
+                            <Tab eventKey="graph" title="분야별 봉사자 수" style={{width: "120vh", marginTop: '30px'}}>
+                                <Tab.Content>
+                                        <StyledGraphContainer> {/* StyledGraphContainer 사용 */}
+                                            <ResponsiveBar
+                                                data={data2}
+                                                keys={['count']}
+                                                indexBy="volunteerField"
+                                                margin={{top: 50, right: 60, bottom: 50, left: 60}}
+                                                padding={0.3}
+                                            />
+                                        </StyledGraphContainer>
+                                    <div style={{textAlign: 'center'}}>{data2.volunteerField}</div>
+                                </Tab.Content>
+                            </Tab>
+                        </Tabs>
+                    </StyledTable>
                 </Styledcomment>
             </StyledSubcomment>
         </StyledAll>
     );
 }
-
-const Styleddiv2 = styled.div`
-  text-align: center;
-`;
 
 const StyledAll = styled.div`
   display: flex;
@@ -199,7 +243,7 @@ const StyledSubcomment = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 203px;
+  width: 300px;
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
@@ -212,4 +256,8 @@ const StyledTop = styled.div`
   display: flex;
 `;
 
+const StyledGraphContainer = styled.div`
+  font-size: 30px;
+  height: 600px;
+`;
 export default O_StatisticsS;

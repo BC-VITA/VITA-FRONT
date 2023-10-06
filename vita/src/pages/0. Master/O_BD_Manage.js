@@ -13,11 +13,6 @@ function O_BD_Manage() {
                 <Nav defaultActiveKey="/" className="flex-column">
                     <StyledSubDiv1>회원 관리</StyledSubDiv1>
                     <StyledSubDiv2>
-                        <StyledSubDiv2_1p>
-                            <Nav.Link href="/O_BD_Manage">
-                                <StyledSubDiv2_2>헌혈 통계 게시물</StyledSubDiv2_2>
-                            </Nav.Link>
-                        </StyledSubDiv2_1p>
                         <StyledSubDiv2_1>
                             <Nav.Link href="/O_StatisticsD">
                                 <StyledSubDiv2_2g>기부금 통계 게시물</StyledSubDiv2_2g>
@@ -28,6 +23,11 @@ function O_BD_Manage() {
                                 <StyledSubDiv2_2g>봉사 통계</StyledSubDiv2_2g>
                             </Nav.Link>
                         </StyledSubDiv2_1>
+                        <StyledSubDiv2_1p>
+                            <Nav.Link href="/O_BD_Manage">
+                                <StyledSubDiv2_2>헌혈 통계 게시물</StyledSubDiv2_2>
+                            </Nav.Link>
+                        </StyledSubDiv2_1p>
                         <StyledSubDiv2_1>
                             <Nav.Link href="/O_Hospital_Authorizations">
                                 <StyledSubDiv2_2g>병원 회원가입 승인</StyledSubDiv2_2g>

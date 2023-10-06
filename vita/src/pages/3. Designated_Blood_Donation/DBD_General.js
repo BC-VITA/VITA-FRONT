@@ -83,6 +83,7 @@ function DBD_General() {
   };
 
   //채팅방 있는지 비교하기
+
   const [acceptModal, setAcceptModal] = useState([]);
   const [rejectmodal, setRejectModal] = useState([]);
   const [roomIds, setRoomIds] = useState([]);
@@ -92,19 +93,19 @@ function DBD_General() {
     newArr[index] = true;
     setAcceptModal(newArr);
   };
-  
+
   const handleAcceptClose = (index) => {
     let newArr = [...acceptModal];
     newArr[index] = false;
     setAcceptModal(newArr);
   };
-  
+
   const handleRejectOpen = (index) => {
     let newArr2= [...rejectmodal];
     newArr2[index]= true;
     setRejectModal(newArr2);
   };
-  
+
   const handleRejectClose= (index) => {
     let newArr2= [...rejectmodal];
     newArr2[index]= false;
@@ -193,7 +194,7 @@ function DBD_General() {
       'boardId': element.designatedBloodWriteNumber,
       'senderId': userId,
       'receiverId': element.registerName,
-      'message': "처음 인사말 아무거나",
+      // 'message': "처음 인사말 아무거나",
     };
     if (stompClient) {
       stompClient.send('/pub/send', {}, JSON.stringify(chatMessage));
@@ -308,7 +309,8 @@ function DBD_General() {
                             let iconFilterValue = '100%'; // 기본적으로 100%로 설정
 
                             wishList123.forEach((item) => {
-                              if (item.designatedBoardId === element.designatedBloodWriteNumber && item.userId === userId) {
+                              // if (item.designatedBoardId === element.designatedBloodWriteNumber && item.userId === userId) {
+                              if (item.designatedBoardId === element.designatedBloodWriteNumber) {
                                 iconFilterValue = '0%'; // 조건에 따라 필터 값을 변경
                               }
                             });
