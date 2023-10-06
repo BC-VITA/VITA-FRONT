@@ -3,26 +3,32 @@ import styled from 'styled-components';
 import {Form, Tab, Tabs, Nav, FloatingLabel, Table} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 import {format, parseISO} from "date-fns";
-import {ResponsiveBar} from '@nivo/bar';
+import {ResponsivePie} from '@nivo/pie'; // ResponsivePie import
 
 function O_StatisticsD() {
     const [boardList, setBoardList] = useState([]);
-    const [graphData, setGraphData] = useState([]); // 추가된 상태 변수
+    const [graphData, setGraphData] = useState([]);
     const navigate = useNavigate();
 
-    const fetchBoardList = () => {
+    useEffect(() => {
         fetch('http://localhost:8004/donate/donate-board-statistics')
             .then((response) => response.json())
             .then((data) => {
-                // const sortedBoardList = data.content.sort((a, b) => a.id - b.id); // 특정 id 값을 기준으로 정렬
                 setBoardList(data);
             })
             .catch((error) => console.error('Error fetching board list:', error));
-    };
+    }, []);
 
     useEffect(() => {
-        fetchBoardList();
-    }, []);
+        if (boardList.length > 0) {
+            let dataForGraph = boardList.map(item => ({
+                id: `게시물 ${item.title}`, // Pie chart에서 label로 사용됩니다.
+                value: item.boardTotalPoint
+            }));
+
+            setGraphData(dataForGraph);
+        }
+    }, [boardList]);
 
 
     const btStyle = {
@@ -44,11 +50,6 @@ function O_StatisticsD() {
                 <Nav defaultActiveKey="/" className="flex-column">
                     <StyledSubDiv1>회원 관리</StyledSubDiv1>
                     <StyledSubDiv2>
-                        <StyledSubDiv2_1>
-                            <Nav.Link href="/O_BD_Manage">
-                                <StyledSubDiv2_2g>헌혈 통계 게시물</StyledSubDiv2_2g>
-                            </Nav.Link>
-                        </StyledSubDiv2_1>
                         <StyledSubDiv2_1p>
                             <Nav.Link href="/O_StatisticsD">
                                 <StyledSubDiv2_2>기부금 통계 게시물</StyledSubDiv2_2>
@@ -57,6 +58,11 @@ function O_StatisticsD() {
                         <StyledSubDiv2_1>
                             <Nav.Link href="/O_StatisticsS">
                                 <StyledSubDiv2_2g>봉사 통계</StyledSubDiv2_2g>
+                            </Nav.Link>
+                        </StyledSubDiv2_1>
+                        <StyledSubDiv2_1>
+                            <Nav.Link href="/O_BD_Manage">
+                                <StyledSubDiv2_2g>헌혈 통계 게시물</StyledSubDiv2_2g>
                             </Nav.Link>
                         </StyledSubDiv2_1>
                         <StyledSubDiv2_1>
@@ -90,7 +96,7 @@ function O_StatisticsD() {
                             }
                             </td>
                         </tr>
-                        
+
                         <tr>
                             {boardList.map((reservation, index) => (
                                 <>
@@ -160,15 +166,12 @@ function O_StatisticsD() {
                                                         <div style={{display: "block", width: "680px",}}>
                                                             <div style={{display: "flex", fontWeight: '600',}}>
                                                                 {review.title}
-
                                                             </div>
                                                             <div>{review.content.length > 35 ? review.content.substring(0, 35) + "..." : review.content}</div>
                                                             <div style={{display: "flex", fontSize: "17px"}}>
-                                                                <div
-                                                                    style={{width: "350px"}}>[일시]&nbsp;{format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}</div>
+                                                                {/*<div>style={{width: "350px"}}>[일시]&nbsp;{format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}</div>*/}
                                                                 <div>[모인 기부금]&nbsp;{review.boardTotalPoint}</div>
                                                             </div>
-
                                                         </div>
                                                         <div style={{paddingRight: '20px',}}>
                                                             <button
@@ -207,20 +210,20 @@ function O_StatisticsD() {
                                     </StyledTable>
                                 </Tab.Content>
                             </Tab>
-
                             <Tab eventKey="graph" title="통계 그래프" style={{minHeight: '100vh'}}>
                                 <Tab.Content>
-
-                                    <StyledTable style={{marginTop: "10px"}}>
-                                        <ResponsiveBar
-                                            data={graphData}
-                                            keys={['totalPoint']}
-                                            indexBy="date"
-                                            margin={{ top: 50, right: 130, bottom: 50, left:60 }}
-                                            padding={0.3}
-                                        />
-
-                                    </StyledTable>
+                                    <div style={{width: "900px", height: "650px"}}>
+                                        <StyledGraphContainer> {/* StyledGraphContainer 사용 */}
+                                            <ResponsivePie
+                                                data={graphData}
+                                                margin={{ top: 40, right: 80, bottom: 80, left: 100 }}
+                                                innerRadius={0.3}
+                                                padAngle={0.7}
+                                                cornerRadius={3}
+                                                // enableArcLinkLabels={false}
+                                            />
+                                        </StyledGraphContainer>
+                                    </div>
                                 </Tab.Content>
                             </Tab>
                         </Tabs>
@@ -355,4 +358,8 @@ const StyledTop = styled.div`
   display: flex;
 `;
 
+const StyledGraphContainer = styled.div`
+  font-size: 30px;
+  height: 600px;
+`;
 export default O_StatisticsD;

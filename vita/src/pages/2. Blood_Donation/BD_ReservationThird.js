@@ -9,7 +9,7 @@ function BD_ReservationThird() {
   const userId = sessionStorage.getItem('userId');
   const navigate = useNavigate();
   const { state: { selectedOptions, formattedDate, centerName } = {} } =
-    useLocation();
+      useLocation();
   const [times, setTimes] = useState('');
 
   const handleReservation = (centerName) => {
@@ -24,9 +24,8 @@ function BD_ReservationThird() {
     const times = Object.keys(selectedOptions);
 
     const bloodTypeString = Object.values(selectedOptions)
-      .map((times) => Object.values(times).join(''))
-      .join('');
-    
+        .map((times) => Object.values(times).join(''))
+        .join('');
     const bloodTypesString = bloodTypeString.toString();
     setIsBloodType(bloodTypesString);
 
@@ -63,125 +62,125 @@ function BD_ReservationThird() {
   const handleClose = () => setShow(false);
 
   return (
-    <StyledAll>
-      <StyledSub>
-        <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>헌혈하자</StyledSubDiv1>
-          <StyledSubDiv2>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Main">
-                <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_House">
-                <StyledSubDiv2_2g>헌혈의 집 찾기</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/BD_Bus">
-                <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-            <StyledSubDiv2_1p>
-              <Nav.Link href="/BD_Reservation">
-                <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
-              </Nav.Link>
-            </StyledSubDiv2_1p>
-          </StyledSubDiv2>
-        </Nav>
-      </StyledSub>
-      <StyledSubcomment>
-        <StyledTop>
-          <StyledTitle>예약하기</StyledTitle>
-        </StyledTop>
-        <StyledCurrent>
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>유의사항</StyledCircleTxt>
-          </StyledCircle>
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>센터선택</StyledCircleTxt>
-          </StyledCircle>
+      <StyledAll>
+        <StyledSub>
+          <Nav defaultActiveKey="/" className="flex-column">
+            <StyledSubDiv1>헌혈하자</StyledSubDiv1>
+            <StyledSubDiv2>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/BD_Main">
+                  <StyledSubDiv2_2g>헌혈이란</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/BD_House">
+                  <StyledSubDiv2_2g>헌혈의 집 찾기</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1>
+                <Nav.Link href="/BD_Bus">
+                  <StyledSubDiv2_2g>헌혈 버스 찾기</StyledSubDiv2_2g>
+                </Nav.Link>
+              </StyledSubDiv2_1>
+              <StyledSubDiv2_1p>
+                <Nav.Link href="/BD_Reservation">
+                  <StyledSubDiv2_2>헌혈 예약</StyledSubDiv2_2>
+                </Nav.Link>
+              </StyledSubDiv2_1p>
+            </StyledSubDiv2>
+          </Nav>
+        </StyledSub>
+        <StyledSubcomment>
+          <StyledTop>
+            <StyledTitle>예약하기</StyledTitle>
+          </StyledTop>
+          <StyledCurrent>
+            <StyledBar />
+            <StyledCircle>
+              <StyledCircleTxt>유의사항</StyledCircleTxt>
+            </StyledCircle>
+            <StyledBar />
+            <StyledCircle>
+              <StyledCircleTxt>센터선택</StyledCircleTxt>
+            </StyledCircle>
 
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>예약하기</StyledCircleTxt>
-          </StyledCircle>
+            <StyledBar />
+            <StyledCircle>
+              <StyledCircleTxt>예약하기</StyledCircleTxt>
+            </StyledCircle>
 
-          <StyledBar />
-          <StyledCircle>
-            <StyledCircleTxt>예약완료</StyledCircleTxt>
-          </StyledCircle>
-          <StyledBar />
-        </StyledCurrent>
+            <StyledBar />
+            <StyledCircle>
+              <StyledCircleTxt>예약완료</StyledCircleTxt>
+            </StyledCircle>
+            <StyledBar />
+          </StyledCurrent>
 
-        <StyledDiv>헌혈 예약이 완료되었습니다.</StyledDiv>
-        <StyledBox>
-          {Object.keys(selectedOptions).map((time) => (
-            <div key={time}>
-              <StyledDiv1>
-                <StyledDiv2>일시</StyledDiv2>
-                <StyledDiv3>{formattedDate}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>시간</StyledDiv2>
-                <StyledDiv3>{time}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>헌혈의 집</StyledDiv2>
-                <StyledDiv3>{centerName}</StyledDiv3>
-              </StyledDiv1>
-              <StyledDiv1>
-                <StyledDiv2>헌혈 종류</StyledDiv2>
-                <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
-              </StyledDiv1>
-            </div>
-          ))}
-        </StyledBox>
-        <Styledbutton type="button" onClick={handleSubmit}>
-          예약완료하기
-        </Styledbutton>
+          <StyledDiv>헌혈 예약이 완료되었습니다.</StyledDiv>
+          <StyledBox>
+            {Object.keys(selectedOptions).map((time) => (
+                <div key={time}>
+                  <StyledDiv1>
+                    <StyledDiv2>일시</StyledDiv2>
+                    <StyledDiv3>{formattedDate}</StyledDiv3>
+                  </StyledDiv1>
+                  <StyledDiv1>
+                    <StyledDiv2>시간</StyledDiv2>
+                    <StyledDiv3>{time}</StyledDiv3>
+                  </StyledDiv1>
+                  <StyledDiv1>
+                    <StyledDiv2>헌혈의 집</StyledDiv2>
+                    <StyledDiv3>{centerName}</StyledDiv3>
+                  </StyledDiv1>
+                  <StyledDiv1>
+                    <StyledDiv2>헌혈 종류</StyledDiv2>
+                    <StyledDiv3>{selectedOptions[time]}</StyledDiv3>
+                  </StyledDiv1>
+                </div>
+            ))}
+          </StyledBox>
+          <Styledbutton type="button" onClick={handleSubmit}>
+            예약완료하기
+          </Styledbutton>
 
-        {/* <Styledbutton type="button" onClick={() => setMain(true)}>
+          {/* <Styledbutton type="button" onClick={() => setMain(true)}>
           확&nbsp;&nbsp;&nbsp;&nbsp;인
         </Styledbutton> */}
 
-        <Modal
-          size="md"
-          show={main}
-          onHide={() => setMain(false)}
-          onClick={handleClose}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>안 내</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            ※ 헌혈 시 신분증
-            <br />
-            꼭 지참해주세요
-            <br />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              // onClick={handleClose}
-              onClick={handleReservation}
-            >
-              다음에 보기
-            </Button>
-            <Button
-              variant="primary"
-              // onClick={handleClose}
-              onClick={handleReservation2}
-            >
-              예약내역 보기
-            </Button>
-          </Modal.Footer>
-        </Modal>
+          <Modal
+              size="md"
+              show={main}
+              onHide={() => setMain(false)}
+              onClick={handleClose}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>안 내</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              ※ 헌혈 시 신분증
+              <br />
+              꼭 지참해주세요
+              <br />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                  variant="secondary"
+                  // onClick={handleClose}
+                  onClick={handleReservation}
+              >
+                다음에 보기
+              </Button>
+              <Button
+                  variant="primary"
+                  // onClick={handleClose}
+                  onClick={handleReservation2}
+              >
+                예약내역 보기
+              </Button>
+            </Modal.Footer>
+          </Modal>
 
-        {/* <Modal
+          {/* <Modal
           size="md"
           show={main}
           onHide={() => setAccept(false)}
@@ -200,8 +199,8 @@ function BD_ReservationThird() {
             </Button>
           </Modal.Footer>
         </Modal> */}
-      </StyledSubcomment>
-    </StyledAll>
+        </StyledSubcomment>
+      </StyledAll>
   );
 }
 const StyledAll = styled.div`

@@ -1,46 +1,87 @@
-import React, { useEffect, useId, useState } from 'react';
-import { Stomp } from '@stomp/stompjs';
+import React, {useEffect, useId, useState} from 'react';
+import {Stomp} from '@stomp/stompjs';
 import styled from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Form, Button, Modal, Nav, FloatingLabel } from 'react-bootstrap';
+import {useNavigate, useLocation} from 'react-router-dom';
+import {Form, Button, Modal, Nav, FloatingLabel} from 'react-bootstrap';
 import information from '../../img/image 67.png';
+import MyPage_Chat from "./MyPage_Chat";
 
 function Chat_Details() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { element, roomId1 } = location.state;
-  const img = () => { navigate('/information'); };
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [accept, setAccept] = useState(false);
-  const [cancel, setCancel] = useState(false);
-
-  //채팅
-  const [stompClient, setStompClient] = useState(null);
-  const [roomId, setRoomId] = useState(1);
-  const [message, setMessage] = useState('');
-  const [receivedMessage, setReceivedMessage] = useState('');
-  const [chatList, setChatList] = useState([]);
-  const [data123, setData123] = useState([]);
-  const userId = sessionStorage.getItem('userId');
-
-  //STOMP 연결
-  useEffect(() => {
-    // STOMP 클라이언트 설정
-    const client = Stomp.client('ws://localhost:8004/vita');
-    setStompClient(client);
-
-    // 연결이 열린 경우의 이벤트 핸들러
-    const onConnect = (frame) => {
-      console.log('STOMP 연결 성공');
-      client.subscribe('/sub/chat/1', onMessageReceived);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const {element, roomId1} = location.state;
+    const img = () => {
+        navigate('/information');
     };
 
-    // 연결이 닫힌 경우의 이벤트 핸들러
-    const onDisconnect = (frame) => {
-      console.log('STOMP 연결 종료');
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [accept, setAccept] = useState(false);
+    const [cancel, setCancel] = useState(false);
+
+    //채팅
+    const [stompClient, setStompClient] = useState(null);
+    const [roomId, setRoomId] = useState(1);
+    const [message, setMessage] = useState('');
+    const [receivedMessage, setReceivedMessage] = useState('');
+    const [chatList, setChatList] = useState([]);
+    const [data123, setData123] = useState([]);
+    const userId = sessionStorage.getItem('userId');
+
+    //STOMP 연결
+    useEffect(() => {
+        // STOMP 클라이언트 설정
+        const client = Stomp.client('ws://localhost:8004/vita');
+        setStompClient(client);
+
+        // 연결이 열린 경우의 이벤트 핸들러
+        const onConnect = (frame) => {
+            console.log('STOMP 연결 성공');
+            client.subscribe('/sub/chat/1', onMessageReceived);
+        };
+
+        // 연결이 닫힌 경우의 이벤트 핸들러
+        const onDisconnect = (frame) => {
+            console.log('STOMP 연결 종료');
+        };
+
+        // STOMP 클라이언트 연결
+        client.connect({}, onConnect, onDisconnect);
+
+        // 컴포넌트가 언마운트될 때 STOMP 클라이언트 연결 종료
+        return () => {
+            client.disconnect();
+        };
+    }, []);
+
+    //채팅 보내기
+    useEffect(() => {
+        fetchChatList();
+    }, []);
+
+    const fetchChatList = async () => {
+        try {
+            // 세션 정보 가져오기
+            const sessionId = sessionStorage.getItem('sessionId');
+
+            // 요청 헤더에 세션 정보 추가
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionId}`,
+            };
+
+            // fetch 요청 보내기
+            const url = `http://localhost:8004/chat/list?userId=${userId}`;
+            const response = await fetch(url, {
+                credentials: 'include',
+                headers: headers,
+            });
+            const data = await response.json();
+            setChatList(data);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     // STOMP 클라이언트 연결
@@ -96,15 +137,30 @@ function Chat_Details() {
       });
   };
 
+    const onMessageReceived = (message) => {
+        const receivedData = JSON.parse(message.body);
+        setReceivedMessage(receivedData.message);
+    };
 
-  //메시지 보내기
-  const sendMessage = () => {
-    const chatMessage = {
-      'roomId': roomId1.roomId,
-      'boardId': roomId1.boardId,
-      'senderId': userId,
-      'receiverId': roomId1.otherUserId,
-      'message': message,
+    //채팅부분에서 수락하기 버튼
+    const [userInfo, setuserInfo] = useState('');
+    const handleAccept = (roomId1) => {
+        fetch(`http://localhost:8004/chat/agree`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            },
+            body: JSON.stringify({
+                userId: userId,
+                roomId: roomId1.roomId,
+                isAgree: true
+            }),
+        })
+            .then((res) => res.json())
+            .catch((err) => {
+                console.error(err);
+            });
+        // navigate(`/MyPage_Chat`);
     };
     //로그인할때 number저장하기
 
@@ -418,6 +474,7 @@ function Chat_Details() {
       </Styledcomment>
     </StyledAll>
   );
+
 }
 
 const StyledAll = styled.div`
@@ -480,7 +537,7 @@ const StyledText = styled.div`
   font-family: 'Gmarket Sans TTF';
   font-style: normal;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 50px;
 
   color: #333333;
