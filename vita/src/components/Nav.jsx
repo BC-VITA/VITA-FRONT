@@ -160,14 +160,14 @@ const Nav = () => {
                                         <Icon icon="material-symbols:notifications-active-outline"
                                               style={{marginTop: "3px"}} onClick={handleShow}/>
                                         <div>
-                                            {(() => {
-                                                if (count.length > 0) {
-                                                    return count;
-                                                } else {
-                                                    return " ";
-                                                }
-                                            })()}
-                                            {/*{count}*/}
+                                            {/*{(() => {*/}
+                                            {/*    if (count.length > 0) {*/}
+                                            {/*        return count;*/}
+                                            {/*    } else {*/}
+                                            {/*        return " ";*/}
+                                            {/*    }*/}
+                                            {/*})()}*/}
+                                            {count}
                                             {/*{count.length > 0 ? count :" "}*/}
                                             &nbsp;&nbsp;|
                                         </div>
@@ -178,24 +178,24 @@ const Nav = () => {
                                         </Modal.Header>
                                         <Modal.Body>
                                             <div>
-                                                {alarm.map((item, index) => (
-                                                    <div key={index} style={{
+                                                {roomIds.map(room => (
+                                                    <div key={room} style={{
                                                         background: "#FFE9E9",
                                                         padding: "10px",
                                                         borderRadius: "5px",
-                                                        display: "flex"
+                                                        display: "flex",
+                                                        justifyContent: "space-between",
+                                                        marginBottom:"10px"
                                                     }}>
                                                         <div>
-                                                        <div>시간: {item.sendTime}</div>
-                                                        <div>지정헌혈 제목: {item.boardTitle}</div>
+                                                        {/*<div>시간: {room.boardCreatedAt}</div>*/}
+                                                        <div>지정헌혈 제목: {room.title}</div>
                                                         </div>
-                                                        {roomIds.map(room => (
                                                             <Button
                                                                 style={{background: '#8FAADC'}}
                                                                 onClick={() => handleChatRoomClick(room)}>
                                                                 채팅방으로 이동
                                                             </Button>
-                                                        ))}
                                                     </div>
                                                 ))}
                                             </div>

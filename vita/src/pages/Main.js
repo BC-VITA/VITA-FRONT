@@ -153,7 +153,6 @@ function Main() {
                 </StyledDiv12>
             </StyledDiv1>
             <StyledDiv2>
-                {/*<Styledimg2 src={img2} class name="groupPhoto" alt="groupPhoto" />*/}
                 <div style={{display: 'flex',}}>
                     {data123.slice(0, 4).map((board) => {
                         const imageUrl = board.imageUrl
@@ -168,7 +167,7 @@ function Main() {
                         //     ? `/images/${encodeURIComponent(board.imageUrl)}`
                         //     : null;
                         return (
-                            <div key={board.boardId}>
+                            <div>
                                 <StyledBox>
                                     <StyledBox2>
                                         <Card style={{width: '15.5rem'}}>

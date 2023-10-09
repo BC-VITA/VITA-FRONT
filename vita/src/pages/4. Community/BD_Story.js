@@ -1,106 +1,103 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function BD_Story() {
-  const [boardList, setBoardList] = useState([]);
-  const navigate = useNavigate();
+    const [boardList, setBoardList] = useState([]);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchBoardList();
-  }, []);
+    useEffect(() => {
+        fetchBoardList();
+    }, []);
 
-  const Blood = 'Blood';
-  const fetchBoardList = () => {
-    const url1 = `http://localhost:8004/review/board/list?reviewType=${Blood}`;
-    fetch(url1)
-      .then((response) => response.json())
-      .then((data) => setBoardList(data))
-      .catch((error) => console.error('Error fetching board list:', error));
-  };
+    const Blood = 'Blood';
+    const fetchBoardList = () => {
+        const url1 = `http://localhost:8004/review/board/list?reviewType=${Blood}`;
+        fetch(url1)
+            .then((response) => response.json())
+            .then((data) => setBoardList(data))
+            .catch((error) => console.error('Error fetching board list:', error));
+    };
 
-  const handleDetailClick = (board, imageUrl) => {
-    navigate('/BD_Details', { state: { board, imageUrl } });
-  };
+    const handleDetailClick = (board, imageUrl) => {
+        navigate('/BD_Details', {state: {board, imageUrl}});
+    };
 
-  return (
-    <StyledAll>
-      <StyledSub>
-        <Nav defaultActiveKey="/" className="flex-column">
-          <StyledSubDiv1>이야기하자</StyledSubDiv1>
-          <StyledSubDiv2>
-            <StyledSubDiv2_1p>
-              <Nav.Link href="/BD_Story">
-                <StyledSubDiv2_2>헌혈후기</StyledSubDiv2_2>
-              </Nav.Link>
-            </StyledSubDiv2_1p>
-            <StyledSubDiv2_1>
-              <Nav.Link href="/DBD_Story">
-                <StyledSubDiv2_2g>지정헌혈후기</StyledSubDiv2_2g>
-              </Nav.Link>
-            </StyledSubDiv2_1>
-          </StyledSubDiv2>
-        </Nav>
-      </StyledSub>
-      <StyledSubcomment>
-        <StyledTop>
-          <StyledTitle>헌혈후기</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/BD_Post">
-              <StyledButtonDiv>작성하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
-        </StyledTop>
-        <div>
-          {boardList.map((board) => {
-            // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
-            const imageUrl = board.img
-              ? board.img.replace(
-                    'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
-                  '\\'
-                )
-              : null;
-            // {boardList.map((board) => {
-            //   const imageUrl = board.img
-            //     ? `http://localhost:8004/images${board.img.replace(
-            //         'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\images',
-            //         ''
-            //       )}`
-            //     : null;
-            return (
-              <div key={board.boardId}>
-                <StyledBox>
-                  <StyledBox2>
-                    <Card style={{ width: '17rem' }}>
-                      <Card.Img variant="top" src={imageUrl} />
-                      {/* {imageUrl ? (
-                        <Card.Img variant="top" src={imageUrl} />
-                      ) : null} */}
-                      <Card.Body>
-                        <Card.Title>{board.title}</Card.Title>
-                        <Card.Text>{board.content}</Card.Text>
-                        <Card.Text>{imageUrl}</Card.Text>
-                        <Button
-                          variant="primary"
-                          onClick={() => handleDetailClick(board, imageUrl)}
-                        >
-                          자세히 보기
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  </StyledBox2>
-                </StyledBox>
-              </div>
-            );
-          })}
-        </div>
-      </StyledSubcomment>
-    </StyledAll>
-  );
+    return (
+        <StyledAll>
+            <StyledSub>
+                <Nav defaultActiveKey="/" className="flex-column">
+                    <StyledSubDiv1>이야기하자</StyledSubDiv1>
+                    <StyledSubDiv2>
+                        <StyledSubDiv2_1p>
+                            <Nav.Link href="/BD_Story">
+                                <StyledSubDiv2_2>헌혈후기</StyledSubDiv2_2>
+                            </Nav.Link>
+                        </StyledSubDiv2_1p>
+                        <StyledSubDiv2_1>
+                            <Nav.Link href="/DBD_Story">
+                                <StyledSubDiv2_2g>지정헌혈후기</StyledSubDiv2_2g>
+                            </Nav.Link>
+                        </StyledSubDiv2_1>
+                    </StyledSubDiv2>
+                </Nav>
+            </StyledSub>
+            <StyledSubcomment>
+                <StyledTop>
+                    <StyledTitle>헌혈후기</StyledTitle>
+                    <StyledButton>
+                        <Nav.Link href="/BD_Post">
+                            <StyledButtonDiv>작성하기</StyledButtonDiv>
+                        </Nav.Link>
+                    </StyledButton>
+                </StyledTop>
+                <div style={{display: 'flex',}}>
+                    {boardList.map((board) => {
+                        const imageUrl = board.img
+                            ? board.img.replace(
+                                'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA\\VITA-FRONT\\vita\\public\\',
+                                '\\'
+                            )
+                            : null;
+                        // {boardList.map((board) => {
+                        //   const imageUrl = board.img
+                        //     ? `http://localhost:8004/images${board.img.replace(
+                        //         'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\images',
+                        //         ''
+                        //       )}`
+                        //     : null;
+                        return (
+                            <div>
+                                <StyledBox>
+                                    <StyledBox2>
+                                        <Card style={{width: '15.5rem'}}>
+                                            <Card.Img variant="top" src={imageUrl} style={{margin:"3px",width:'15rem', height:'15rem'}}/>
+                                            <Card.Body>
+                                                <Card.Title>{board.title.length > 10 ? board.title.substring(0, 10) + "..." : board.title}</Card.Title>
+                                                <Card.Text>{board.content.length > 30 ? board.content.substring(0, 30) + "..." : board.content}</Card.Text>
+                                                {/*<Card.Text>{imageUrl}</Card.Text>*/}
+                                                <Button
+                                                    variant="primary"
+                                                    onClick={() => handleDetailClick(board, imageUrl)}
+                                                >
+                                                    자세히 보기
+                                                </Button>
+                                            </Card.Body>
+                                        </Card>
+                                    </StyledBox2>
+                                </StyledBox>
+                            </div>
+                        );
+                    })}
+                </div>
+            </StyledSubcomment>
+        </StyledAll>
+    );
 }
+
 const StyledAll = styled.div`
   display: flex;
   padding-bottom: 300px;
