@@ -122,7 +122,7 @@ function Chat_Details() {
       'senderId': userId,
       'receiverId': roomId1.otherUserId === userId ? roomId1.loginUserId : roomId1.otherUserId,
       'message': message,
-    };    
+    };
     //로그인할때 number저장하기
 
     // STOMP 클라이언트를 통해 메시지 전송
@@ -249,7 +249,6 @@ function Chat_Details() {
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={() => setAccept(false)}> 닫기</Button>
-                    /!* "닫기" 버튼 클릭 시 accept 상태 변경하여 모달창 닫히게 함 *!/
                   </ Modal.Footer >
                 </ Modal >
               </>
@@ -413,12 +412,7 @@ function Chat_Details() {
                 )}
               </div>
             ))}
-          {/*{roomId1.isAgree === true &&*/}
-          {/*    <div>*/}
-          {/*        {Object.entries(userInfo).map(([key, value]) => (*/}
-          {/*            <p key={key}>{`${key}: ${value}`}</p>*/}
-          {/*        ))}*/}
-          {/*    </div>}*/}
+
         </StyledBox3>
         <StyledBox4>
           <FloatingLabel
@@ -433,7 +427,7 @@ function Chat_Details() {
           </StyledButton4>
         </StyledBox4>
       </Styledcomment>
-      <div>asa{roomId1.otherUserId}</div>
+      {/*<div>asa{roomId1.otherUserId}</div>*/}
     </StyledAll>
   );
 }

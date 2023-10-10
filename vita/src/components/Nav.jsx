@@ -58,8 +58,8 @@ const Nav = () => {
     const handleChatRoomClick = (roomId1) => {
         navigate(`/Chat_Details`, {state: {roomId1}});
         setShow(false);
-        setcount(prevCount => prevCount - 1)
-        // setcount(count - 1); // count 값을 감소
+        setcount(prevCount => prevCount > 0 ? prevCount - 1 : prevCount)
+        setHasNavigatedToChatRoom(true); // 채팅방으로 이동했음을 표시
     };
 
     //알람
@@ -79,6 +79,9 @@ const Nav = () => {
                 });
         }
     }, [userId]);
+
+    const [hasNavigatedToChatRoom, setHasNavigatedToChatRoom] = useState(false);
+
 
     return (
         <Stylednav>
@@ -138,21 +141,6 @@ const Nav = () => {
                     </StyledDiv31L>
                 </Link>
                 <StyledDiv31m>
-                    {/*<Link*/}
-                    {/*    to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}*/}
-                    {/*    style={{ textDecoration: 'none', color: 'white' }}*/}
-                    {/*>*/}
-                    {/*    <StyledDiv31m>*/}
-                    {/*        <div>*/}
-                    {/*            /!*{userId ? `| 마이페이지 |` : '|'}*!/*/}
-                    {/*            {userId ? (userId === "admin" ? "| 관리페이지 |" : "| 마이페이지 |") : '|'}*/}
-                    {/*            /!*{userId === true && `| 마이페이지 |`}*!/*/}
-                    {/*            /!*{userId === false && `|`}*!/*/}
-                    {/*            /!*{userId === "admin" && `| 관리페이지 |`}*!/*/}
-                    {/*        </div>*/}
-                    {/*    </StyledDiv31m>*/}
-                    {/*</Link>*/}
-                    {/* <div>|</div>*/}
                     <Link
                         to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}
                         style={{textDecoration: 'none', color: 'white'}}
@@ -169,50 +157,47 @@ const Nav = () => {
                                     </Link>
                                     {/*<Link to="/O_BD_Manage" style={{textDecoration: 'none', color: 'white', display:"flex"}}>*/}
 
-                                    <div style={{display: "flex"}}>
+                                    <div style={{display: "flex", color: "red"}}>
                                         &nbsp;&nbsp;
                                         <Icon icon="material-symbols:notifications-active-outline"
                                               style={{marginTop: "3px"}} onClick={handleShow}/>
                                         <div>
-                                            {/*{(() => {*/}
-                                            {/*    if (count.length > 0) {*/}
-                                            {/*        return count;*/}
-                                            {/*    } else {*/}
-                                            {/*        return " ";*/}
-                                            {/*    }*/}
-                                            {/*})()}*/}
                                             {count}
-                                            {/*{count.length > 0 ? count :" "}*/}
-                                            &nbsp;&nbsp;|
+                                        </div>
+                                        <div style={{color:"white"}}>
+                                        &nbsp;&nbsp;|
                                         </div>
                                     </div>
+
                                     <Modal size="lg" show={show} onHide={handleClose}>
                                         <Modal.Header closeButton>
                                             <Modal.Title>채팅방 알림</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>
-                                            <div>
-                                                {roomIds.map(room => (
-                                                    <div key={room} style={{
-                                                        background: "#FFE9E9",
-                                                        padding: "10px",
-                                                        borderRadius: "5px",
-                                                        display: "flex",
-                                                        justifyContent: "space-between",
-                                                        marginBottom:"10px"
-                                                    }}>
-                                                        <div>
-                                                        {/*<div>시간: {room.boardCreatedAt}</div>*/}
-                                                        <div>지정헌혈 제목: {room.title}</div>
-                                                        </div>
+                                            {!hasNavigatedToChatRoom && (
+                                                <div>
+                                                    {roomIds.map(room => (
+                                                        <div key={room} style={{
+                                                            background: "#FFE9E9",
+                                                            padding: "10px",
+                                                            borderRadius: "5px",
+                                                            display: "flex",
+                                                            justifyContent: "space-between",
+                                                            marginBottom:"10px"
+                                                        }}>
+                                                            <div>
+                                                                {/*<div>시간: {room.boardCreatedAt}</div>*/}
+                                                                <div>지정헌혈 제목: {room.title}</div>
+                                                            </div>
                                                             <Button
                                                                 style={{background: '#8FAADC'}}
                                                                 onClick={() => handleChatRoomClick(room)}>
                                                                 채팅방으로 이동
                                                             </Button>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </Modal.Body>
                                         <Modal.Footer>
                                             <Button variant="secondary" onClick={handleClose}>
@@ -240,10 +225,6 @@ const Nav = () => {
                 </Link>
 
             </StyledDiv3>
-            {/*<div style={{color: '#ffffff'}}>*/}
-            {/*    <Icon icon="material-symbols:notifications-active-outline" />*/}
-            {/*    이거 알람{count}*/}
-            {/*</div>*/}
         </Stylednav>
     );
 };
