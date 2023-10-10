@@ -194,7 +194,7 @@ function DBD_General() {
       'boardId': element.designatedBloodWriteNumber,
       'senderId': userId,
       'receiverId': element.registerName,
-      // 'message': "처음 인사말 아무거나",
+      'message': "안녕하세요",
     };
     if (stompClient) {
       stompClient.send('/pub/send', {}, JSON.stringify(chatMessage));

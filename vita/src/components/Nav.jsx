@@ -138,11 +138,25 @@ const Nav = () => {
                     </StyledDiv31L>
                 </Link>
                 <StyledDiv31m>
-                    {/* <div>|</div> */}
                     {/*<Link*/}
                     {/*    to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}*/}
-                    {/*    style={{textDecoration: 'none', color: 'white'}}*/}
+                    {/*    style={{ textDecoration: 'none', color: 'white' }}*/}
                     {/*>*/}
+                    {/*    <StyledDiv31m>*/}
+                    {/*        <div>*/}
+                    {/*            /!*{userId ? `| 마이페이지 |` : '|'}*!/*/}
+                    {/*            {userId ? (userId === "admin" ? "| 관리페이지 |" : "| 마이페이지 |") : '|'}*/}
+                    {/*            /!*{userId === true && `| 마이페이지 |`}*!/*/}
+                    {/*            /!*{userId === false && `|`}*!/*/}
+                    {/*            /!*{userId === "admin" && `| 관리페이지 |`}*!/*/}
+                    {/*        </div>*/}
+                    {/*    </StyledDiv31m>*/}
+                    {/*</Link>*/}
+                    {/* <div>|</div>*/}
+                    <Link
+                        to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}
+                        style={{textDecoration: 'none', color: 'white'}}
+                    >
                     <div>
                         {userId ? (userId === "admin" ?
                                 <Link to="/O_StatisticsD" style={{textDecoration: 'none', color: 'white'}}>
@@ -213,7 +227,7 @@ const Nav = () => {
                                 |
                             </Link>}
                     </div>
-                    {/*</Link>*/}
+                    </Link>
                 </StyledDiv31m>
                 <Link
                     to={userId ? '/' : '/signup'}
