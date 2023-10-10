@@ -17,7 +17,7 @@ function Chat_Details() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [accept, setAccept] = useState(false);
+    const [accept, setAccept] = useState(true);
     const [cancel, setCancel] = useState(false);
 
     //채팅
@@ -139,7 +139,9 @@ function Chat_Details() {
     };
 
     //채팅부분에서 수락하기 버튼
-    const [userInfo, setuserInfo] = useState('');
+    const [acceptModal, setAcceptModal] = useState(false);
+    const [acceptModal2, setAcceptModal2] = useState(false);
+    const [userInfo, setUserInfo] = useState('');
     const handleAccept = (roomId1) => {
         fetch(`http://localhost:8004/chat/agree`, {
             method: 'POST',
@@ -152,11 +154,23 @@ function Chat_Details() {
                 isAgree: true
             }),
         })
-            .then((res) => res.json())
+            .then((res) => {
+                console.log("Server response:", res);
+                return res.json();
+            })
+            .then((data) => {
+                console.log("Server data:", data);  // JSON 데이터 출력
+                setUserInfo(data); // 서버에서 받은 데이터를 userInfo에 설정
+                setAccept(false);
+                setAcceptModal(false);
+            })
             .catch((err) => {
                 console.error(err);
+                setUserInfo(''); // 에러 발생 시 userInfo 초기화
+                setAccept(false);
+                setAcceptModal(false);
             });
-        // navigate(`/MyPage_Chat`);
+
     };
 
     useEffect(() => {
@@ -166,7 +180,7 @@ function Chat_Details() {
         })
             .then((data1) => data1.json())
             .then((data1) => {
-                setuserInfo(data1);
+                setUserInfo(data1);
             })
             .catch((err) => {
                 console.error(err);
@@ -189,12 +203,14 @@ function Chat_Details() {
                         {data123.roomTitle}
                     </StyledText>
                     <StyledButton>
-                        {setAccept ?
+                        {setAccept ? (
                             <>
-                                <StyledButtonB onClick={() => setAccept(true)}>
-                                    수락하기
-                                </StyledButtonB>
-                                <Modal size="md" show={accept} onHide={() => setAccept(false)}>
+                                <div>
+                                    <StyledButtonB onClick={() => setAcceptModal(true)}>
+                                        수락하기
+                                    </StyledButtonB>
+                                </div>
+                                <Modal size="md" show={acceptModal} onHide={() => setAcceptModal(false)}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>수락하기</Modal.Title>
                                     </Modal.Header>
@@ -203,61 +219,41 @@ function Chat_Details() {
                                         신청자에게 환자 정보가 보여지게 됩니다. <br/>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button variant="secondary" onClick={() => setAccept(false)}>
-                                            닫기
-                                        </Button>
-                                        <Button variant="primary" onClick={() => handleAccept(roomId1)}>
+                                        <Button variant="secondary" onClick={() => setAcceptModal(false)}> 닫기</Button>
+                                        {/* "닫기" 버튼 클릭 시 accept 상태 변경하여 모달창 닫히게 함 */}
+                                        <Button variant="primary" onClick={() => handleAccept(roomId1)}
+                                                href="/MyPage_DBD">
                                             수락
                                         </Button>
-                                    </Modal.Footer>
-                                </Modal>
+                                    </ Modal.Footer>
+                                </ Modal>
                             </>
-                            :
+                        ) : (
                             <>
-                                <StyledButtonB>
-                                    정보보기
-                                </StyledButtonB>
-                                <Modal size="md" show={accept} onHide={() => setAccept(false)}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>환자정보</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        {roomId1.isAgree === true &&
-                                            <div>
-                                                {Object.entries(userInfo).map(([key, value]) => (
-                                                    <p key={key}>{`${key}: ${value}`}</p>
-                                                ))}
-                                            </div>
-                                        }
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleClose}>
-                                            닫기
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
+                                <div>
+                                    <StyledButtonB onClick={() => setAcceptModal2(true)}>
+                                        정보보기
+                                    </StyledButtonB>
+                                </div>
+                                {/*<Modal size="md" show={acceptModal2} onHide={() => setAcceptModal2(false)}>*/}
+                                {/*    <Modal.Header closeButton>*/}
+                                {/*        <Modal.Title>환자정보</Modal.Title>*/}
+                                {/*    </Modal.Header>*/}
+                                {/*    <Modal.Body>*/}
+                                {/*        {roomId1.isAgree === true &&*/}
+                                {/*            <div>*/}
+                                {/*                {Object.entries(userInfo).map(([key, value]) =>*/}
+                                {/*                    (<p key={key}>{`${key}: ${value}`}</p>)*/}
+                                {/*                )}*/}
+                                {/*            </div>}*/}
+                                {/*    </Modal.Body>*/}
+                                {/*    <Modal.Footer>*/}
+                                {/*        <Button variant="secondary" onClick={() => setAccept(false)}> 닫기</Button>*/}
+                                {/*        /!* "닫기" 버튼 클릭 시 accept 상태 변경하여 모달창 닫히게 함 *!/*/}
+                                {/*    </ Modal.Footer >*/}
+                                {/*</ Modal >*/}
                             </>
-                        }
-                        {/*<StyledButtonB onClick={() => setAccept(true)}>*/}
-                        {/*    수락하기*/}
-                        {/*</StyledButtonB>*/}
-                        {/*<Modal size="md" show={accept} onHide={() => setAccept(false)}>*/}
-                        {/*    <Modal.Header closeButton>*/}
-                        {/*        <Modal.Title>수락하기</Modal.Title>*/}
-                        {/*    </Modal.Header>*/}
-                        {/*    <Modal.Body>*/}
-                        {/*        신청자를 수락하였습니다. <br/>*/}
-                        {/*        신청자에게 환자 정보가 보여지게 됩니다. <br/>*/}
-                        {/*    </Modal.Body>*/}
-                        {/*    <Modal.Footer>*/}
-                        {/*        <Button variant="secondary" onClick={() => setAccept(false)}>*/}
-                        {/*            닫기*/}
-                        {/*        </Button>*/}
-                        {/*        <Button variant="primary" onClick={() => handleAccept(roomId1)}>*/}
-                        {/*            수락*/}
-                        {/*        </Button>*/}
-                        {/*    </Modal.Footer>*/}
-                        {/*</Modal>*/}
+                        )}
                         <StyledButtonP onClick={() => setCancel(true)}>
                             취소하기
                         </StyledButtonP>
