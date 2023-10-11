@@ -171,6 +171,24 @@ function Chat_Details() {
       });
   }, []);
 
+  ///////////////////////////////////////////////////////////////////////////
+  const [inputData123, setInputData123] = useState([{}, {}]);
+  useEffect(() => {
+    fetch(`http://localhost:8004/user/board/filter`, {
+      method: 'get',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        // 데이터를 불러온 후 필터링
+        const filteredData = res.filter(item => item.registerId === roomId1.boardId);
+
+        // 필터링된 데이터를 상태 변수에 저장
+        setInputData123(filteredData);
+      });
+  }, []);
+
+
+
   return (
     <StyledAll>
       <StyledSubcomment>
@@ -188,17 +206,33 @@ function Chat_Details() {
           </StyledText>
           <StyledButton>
             <div>
-              {roomId1.isAgree ? (
+              {inputData123[0].registerName === userId ? (
                 <div>
-                  <StyledButtonB onClick={() => setAcceptModal2(true)}>
-                    정보보기
-                  </StyledButtonB>
+                  {roomId1.isAgree ? (
+                    <div>
+                      <StyledButtonB onClick={() => setAcceptModal2(true)}>
+                        정보보기
+                      </StyledButtonB>
+                    </div>
+                  ) : (
+                    <div>
+                      <StyledButtonB onClick={() => setAcceptModal(true)}>
+                        수락하기
+                      </StyledButtonB>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div>
-                  <StyledButtonB onClick={() => setAcceptModal(true)}>
-                    수락하기
-                  </StyledButtonB>
+                  {roomId1.isAgree ? (
+                    <div>
+                      <StyledButtonB onClick={() => setAcceptModal2(true)}>
+                        정보보기
+                      </StyledButtonB>
+                    </div>
+                  ) : (
+                    null
+                  )}
                 </div>
               )}
 
@@ -407,19 +441,12 @@ function Chat_Details() {
                 )}
               </div>
             ))}
-          {roomId1.isAgree === true &&
-            <div>
-              {Object.entries(userInfo).map(([key, value]) => (
-                <p key={key}>{`${key}: ${value}`}</p>
-              ))}
-            </div>}
         </StyledBox3>
         <StyledBox4>
           <FloatingLabel
             label="메세지 작성"
             name="message"
-            style={{ width: '60em' }}
-          >
+            style={{ width: '60em' }}>
             <Form.Control type="text" placeholder="label" value={message} onChange={handleInputChange} />
           </FloatingLabel>
           <StyledButton4 onClick={sendMessage}>
