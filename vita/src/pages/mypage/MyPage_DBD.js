@@ -361,7 +361,7 @@ function MyPage_DBD() {
                                   </div>
                                   <br />
                                   <div style={{ color: '#9D9D9D', marginTop: '8px', marginBottom: '7px' }}>
-                                    {format(parseISO(interested.boardDate), 'yyyy.MM.dd HH:mm')}
+                                    {/* {format(parseISO(interested.boardDate), 'yyyy.MM.dd HH:mm')} */}
                                   </div>
 
                                 </td>
@@ -464,7 +464,7 @@ function MyPage_DBD() {
                                   {review.boardTitle}
                                 </td>
                                 <td headers="bloodHouseAddress-header">
-                                  {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
+                                  {/* {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')} */}
                                 </td>
                                 <td>
                                   <button
