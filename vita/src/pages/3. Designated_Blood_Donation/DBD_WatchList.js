@@ -1,84 +1,29 @@
 import React, { useEffect, useState } from 'react';
-// import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 
 function DBD_WatchList() {
-  const [hostipalcall, sethostipalcall] = useState('');
-  const [bloodtype, setbloodtype] = useState('');
-  const [rhtype, setbrhtype] = useState('');
-  const [donationtype, setdonationtype] = useState('');
-  const [bloodproduct, setbloodproduct] = useState('');
-
-  const [disabled, setDisabled] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleSelect1 = (e) => {
-    setdonationtype(e.target.value);
-  };
-  const handleSelect2 = (e) => {
-    setbloodproduct(e.target.value);
-  };
-  // const handleSelect1 = (e) => {
-  //   setdonationtype(e.target.value);
-  // };
-  // const handleSelect2 = (e) => {
-  //   setbloodtype(e.target.value);
-  // };
-
-  const handleRHMChange = () => {
-    setbrhtype('RH-');
-  };
-  const handleRHPChange = () => {
-    setbrhtype('RH+');
-  };
-  const selectList1 = ['전체', '인천', '서울', '경기도', '강원도'];
-  const selectList2 = ['최신순', '마감순'];
-  const handleChangehostipalcall = ({ target: { value } }) =>
-    sethostipalcall(value);
-  const RadioButton = ({ label, value, onChange }) => {
-    return (
-      <label>
-        <input type="radio" checked={value} onChange={onChange} />
-        {label}
-      </label>
-    );
-  };
-
-  const [error, setError] = useState(null);
-
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+  const userId = sessionStorage.getItem('userId');
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8004/user/board/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
+    const url = `http://localhost:8004/user/mypage-wishList?userId=${userId}`;
+    fetch(url)
       .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
+        if (!res.ok) {
+          throw new Error('네트워크 응답이 정상이 아닙니다.');
+        }
+        return res.json();
       })
-      .catch((err) => {
-        setError(err.message);
+      .then((res) => {
+        setUserData(res);;
+      })
+      .catch((error) => {
+        console.error('데이터를 가져오는 중 오류 발생:', error);
       });
-    console.log(inputData);
   }, []);
+
   return (
     <StyledAll>
       <StyledSub>
@@ -117,8 +62,24 @@ function DBD_WatchList() {
             </Nav.Link>
           </StyledButton>
         </StyledTop>
+        <div>
+          {userData.map(data => (
+            <div>
+              <div>회원번호 : {data.userId}</div>
+              <div>게시물 번호 : {data.boardId}</div>
+              <div>게시물 타입 : {data.boardType}</div>
+              <div>게시물 제목 : {data.boardTitle}</div>
+              <div>게시물 내용 : {data.boardContent}</div>
+              <div>게시물 작성 날짜 : {data.boardDate}</div>
+              <div>필요한 혈액형 : {data.needBlood}</div>
+              <div>혈액 종류 : {data.bloodType}</div>
+              <div>장소 : {data.place}</div>
+              <div>좋아요 여부 : {data.wishList.toString()}</div>
+              <br />
+            </div>
+          ))}
+        </div>
       </StyledSubcomment>
-      z<div className="home">{error && <div>{error}</div>}</div>
     </StyledAll>
   );
 }
