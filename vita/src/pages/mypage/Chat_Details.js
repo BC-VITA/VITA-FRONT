@@ -243,18 +243,18 @@ function Chat_Details() {
                   </Modal.Header>
                   <Modal.Body>
                     {roomId1.isAgree === true && (
-                      <div>
-                        병원이름 : {userInfo.hospitalName}<br />
-                        병원번호 : {userInfo.hospitalPhoneNumber}<br />
-                        병원주소 : {userInfo.hospitalAddress}<br />
+                      <div style={{fontWeight : "bolder"}}>
+                        <div style={{color:"red"}}>수혈자 등록번호 : {userInfo.bloodPersonNumber}<br /></div>
+                        환자명 : {userInfo.patientName} ({userInfo.patientAge})<br />
+                        {/*환자 나이 : {userInfo.patientAge}<br />*/}
                         혈액형 : {userInfo.patientBlood}<br />
                         RH여부 : {userInfo.isRH}<br />
-                        무슨 헌혈이 필요한지 : {userInfo.bloodType}<br />
-                        헐액 재제 : {userInfo.needBloodSystem}<br />
-                        환자 이름 : {userInfo.patientName}<br />
-                        필요한 헌혈자 명수 : {userInfo.bloodPersonNumber}<br />
-                        환자 나이 : {userInfo.patientAge}<br />
-                        글 올린 사람 : {userInfo.userName}<br />
+                        혈액종류 : {userInfo.bloodType}<br />
+                        필요헐액재제 : {userInfo.needBloodSystem}<br />
+                        의료기관명 : {userInfo.hospitalName}<br />
+                        의료기관 번호 : {userInfo.hospitalPhoneNumber}<br />
+                        의료기관 주소 : {userInfo.hospitalAddress}<br />
+                        보호자명 : {userInfo.userName}<br />
                       </div>
                     )}
                   </Modal.Body>

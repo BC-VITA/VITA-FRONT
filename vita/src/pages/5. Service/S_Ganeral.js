@@ -678,14 +678,14 @@ function S_Ganeral() {
                                   }}
                                 >
                                   {element.title}
-                                  <br />
-                                  글을 올린 날짜: {element.startDate}
+                                  {/*<br />*/}
+                                  {/*글을 올린 날짜: {element.startDate}*/}
                                   <br />
                                   모집기간: {element.volunteerSeekStartDate}-
                                   {element.volunteerSeekEndDate}
                                   <br />
-                                  활동날짜: {element.volunteerStartTime}-
-                                  {element.volunteerEndTime}
+                                  활동날짜: {element.volunteerStartDate}-
+                                  {element.volunteerEndDate}
                                   <br />
                                   활동요일: {element.volunteerActivityWeek}
                                   <br />
@@ -1094,8 +1094,8 @@ function S_Ganeral() {
                                   }}
                                 >
                                   {element.title}
-                                  <br />
-                                  글을 올린 날짜: {element.startDate}
+                                  {/*<br />*/}
+                                  {/*글을 올린 날짜: {element.startDate}*/}
                                   <br />
                                   모집기간: {element.volunteerSeekStartDate}-
                                   {element.volunteerSeekEndDate}
