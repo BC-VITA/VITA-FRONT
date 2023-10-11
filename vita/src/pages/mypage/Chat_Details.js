@@ -165,6 +165,7 @@ function Chat_Details() {
       .then((data1) => data1.json())
       .then((data1) => {
         setUserInfo(data1);
+        console.log(data1);
       })
       .catch((err) => {
         console.error(err);
