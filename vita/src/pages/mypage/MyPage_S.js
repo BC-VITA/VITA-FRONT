@@ -217,7 +217,7 @@ function MyPage_S() {
                     <StyledBox3>
                         <StyledBox3_1>
                             <StyledBox3_1G>VITA</StyledBox3_1G>
-                            <StyledBox3_1W>20시간 5분</StyledBox3_1W>
+                            <StyledBox3_1W>{userData.timeTypeVolunteerHistoryNumber + ' 시간'}</StyledBox3_1W>
 
                             <StyledBox3_1G>1365 자원봉사포털</StyledBox3_1G>
                             <StyledBox3_1W></StyledBox3_1W>
