@@ -11,8 +11,8 @@ function MyPage_D() {
     const handleEndDateChange = ({target: {value}}) => setendDate(value);
     const [error, setError] = useState(null);
 
-    const [inputData, setInputData1] = useState(null);
-    const [inputData2, setInputData2] = useState(null);
+    const [inputData, setInputData1] = useState([]);
+    const [inputData2, setInputData2] = useState([]);
     const totalUsePoint = inputData
         ? inputData.reduce((sum, review) => sum + review.usePoint, 0)
         : 0;
@@ -379,7 +379,7 @@ function MyPage_D() {
                                                                             fontSize: '20px',
                                                                         }}
                                                                     >
-                                                                        {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
+                                                                        {/* {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')} */}
                                                                     </td>
                                                                 </tr>
                                                             </React.Fragment>

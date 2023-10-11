@@ -384,7 +384,8 @@ function MyPage_BD() {
                                     {review.reviewTitle}
                                   </td>
                                   <td headers="bloodHouseAddress-header">
-                                    {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
+                                  {/* {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')} */}
+                                  asd
                                   </td>
                                   <td>
                                     <button

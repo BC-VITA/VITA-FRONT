@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 
 function S_Ganeral() {
   const userId = sessionStorage.getItem('userId');
-  const [userData3, setUserData3] = useState(null);
+  const [userData3, setUserData3] = useState([]);
 
   useEffect(() => {
     const url3 = `http://localhost:8004/user/mypage-wishList-volunteer?userId=${userId}`;
