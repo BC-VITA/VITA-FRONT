@@ -346,7 +346,7 @@ function MyPage_DBD() {
                                 모집인원 및 현황
                               </th>
                             </tr>
-                          </thead>
+                            </thead>
                           <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
                             {inputData4.map((interested, index) => (
                               <tr
