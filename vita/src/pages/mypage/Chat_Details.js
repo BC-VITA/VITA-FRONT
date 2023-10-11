@@ -165,7 +165,6 @@ function Chat_Details() {
       .then((data1) => data1.json())
       .then((data1) => {
         setUserInfo(data1);
-        console.log(data1);
       })
       .catch((err) => {
         console.error(err);
@@ -245,9 +244,17 @@ function Chat_Details() {
                   <Modal.Body>
                     {roomId1.isAgree === true && (
                       <div>
-                        {Object.entries(userInfo).map(([key, value]) => (
-                          <p key={key}>{`${key}: ${value}`}</p>
-                        ))}
+                        병원이름 : {userInfo.hospitalName}<br />
+                        병원번호 : {userInfo.hospitalPhoneNumber}<br />
+                        병원주소 : {userInfo.hospitalAddress}<br />
+                        혈액형 : {userInfo.patientBlood}<br />
+                        RH여부 : {userInfo.isRH}<br />
+                        무슨 헌혈이 필요한지 : {userInfo.bloodType}<br />
+                        헐액 재제 : {userInfo.needBloodSystem}<br />
+                        환자 이름 : {userInfo.patientName}<br />
+                        필요한 헌혈자 명수 : {userInfo.bloodPersonNumber}<br />
+                        환자 나이 : {userInfo.patientAge}<br />
+                        글 올린 사람 : {userInfo.userName}<br />
                       </div>
                     )}
                   </Modal.Body>
