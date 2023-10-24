@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import icon from '../img/icon.png';
-import {Icon} from '@iconify/react';
-import {Button, Modal} from "react-bootstrap";
+import { Icon } from '@iconify/react';
+import { Button, Modal } from "react-bootstrap";
 
 const Nav = () => {
     const userId = sessionStorage.getItem('userId');
@@ -55,11 +55,9 @@ const Nav = () => {
             });
     }, [userId]);
 
-    const handleChatRoomClick = (roomId1) => {
-        navigate(`/Chat_Details`, {state: {roomId1}});
+    const handleChatRoomClick = () => {
+        navigate('/D_main');
         setShow(false);
-        setcount(prevCount => prevCount - 1)
-        // setcount(count - 1); // count 값을 감소
     };
 
     //알람
@@ -83,8 +81,8 @@ const Nav = () => {
     return (
         <Stylednav>
             <StyledDiv1>
-                <Styledimg src={icon} class name="main-icon" alt="logo"/>
-                <Link to="/" style={{textDecoration: 'none'}}>
+                <Styledimg src={icon} class name="main-icon" alt="logo" />
+                <Link to="/" style={{ textDecoration: 'none' }}>
                     <StyledDiv11>
                         <div>vita</div>
                     </StyledDiv11>
@@ -92,37 +90,37 @@ const Nav = () => {
             </StyledDiv1>
 
             <StyledDiv2>
-                <Link to="Learn" style={{textDecoration: 'none'}}>
+                <Link to="Learn" style={{ textDecoration: 'none' }}>
                     <StyledDiv21>
                         <div>알아보자</div>
                     </StyledDiv21>
                 </Link>
 
-                <Link to="BD_Main" style={{textDecoration: 'none'}}>
+                <Link to="BD_Main" style={{ textDecoration: 'none' }}>
                     <StyledDiv21>
                         <div>헌혈하자</div>
                     </StyledDiv21>
                 </Link>
 
-                <Link to="DBD_Main" style={{textDecoration: 'none'}}>
+                <Link to="DBD_Main" style={{ textDecoration: 'none' }}>
                     <StyledDiv21L>
                         <div>지정헌혈하자</div>
                     </StyledDiv21L>
                 </Link>
 
-                <Link to="BD_Story" style={{textDecoration: 'none'}}>
+                <Link to="BD_Story" style={{ textDecoration: 'none' }}>
                     <StyledDiv21M>
                         <div>이야기하자</div>
                     </StyledDiv21M>
                 </Link>
 
-                <Link to="S_Main" style={{textDecoration: 'none'}}>
+                <Link to="S_Main" style={{ textDecoration: 'none' }}>
                     <StyledDiv21>
                         <div>봉사하자</div>
                     </StyledDiv21>
                 </Link>
 
-                <Link to="D_Main" style={{textDecoration: 'none'}}>
+                <Link to="D_Main" style={{ textDecoration: 'none' }}>
                     <StyledDiv21>
                         <div>기부하자</div>
                     </StyledDiv21>
@@ -131,7 +129,7 @@ const Nav = () => {
             <StyledDiv3>
                 <Link
                     to={userId ? `/` : '/login'}
-                    style={{textDecoration: 'none', color: 'white'}}
+                    style={{ textDecoration: 'none', color: 'white' }}
                 >
                     <StyledDiv31L>
                         {userId ? `${userId}님` : '로그인'}
@@ -155,24 +153,24 @@ const Nav = () => {
                     {/* <div>|</div>*/}
                     <Link
                         to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}
-                        style={{textDecoration: 'none', color: 'white'}}
+                        style={{ textDecoration: 'none', color: 'white' }}
                     >
-                    <div>
-                        {userId ? (userId === "admin" ?
-                                <Link to="/O_StatisticsD" style={{textDecoration: 'none', color: 'white'}}>
+                        <div>
+                            {userId ? (userId === "admin" ?
+                                <Link to="/O_StatisticsD" style={{ textDecoration: 'none', color: 'white' }}>
                                     |&nbsp;&nbsp;관리페이지&nbsp;&nbsp;|
                                 </Link>
                                 :
-                                <div style={{display: "flex"}}>
-                                    <Link to="/MyPage_DBD" style={{textDecoration: 'none', color: 'white'}}>
+                                <div style={{ display: "flex" }}>
+                                    <Link to="/MyPage_DBD" style={{ textDecoration: 'none', color: 'white' }}>
                                         |&nbsp;&nbsp;마이페이지
                                     </Link>
                                     {/*<Link to="/O_BD_Manage" style={{textDecoration: 'none', color: 'white', display:"flex"}}>*/}
 
-                                    <div style={{display: "flex"}}>
+                                    <div style={{ display: "flex" }}>
                                         &nbsp;&nbsp;
                                         <Icon icon="material-symbols:notifications-active-outline"
-                                              style={{marginTop: "3px"}} onClick={handleShow}/>
+                                            style={{ marginTop: "3px" }} onClick={handleShow} />
                                         <div>
                                             {/*{(() => {*/}
                                             {/*    if (count.length > 0) {*/}
@@ -192,24 +190,27 @@ const Nav = () => {
                                         </Modal.Header>
                                         <Modal.Body>
                                             <div>
-                                                {roomIds.map(room => (
+                                                {alarm.map(room => (
                                                     <div key={room} style={{
                                                         background: "#FFE9E9",
                                                         padding: "10px",
                                                         borderRadius: "5px",
                                                         display: "flex",
                                                         justifyContent: "space-between",
-                                                        marginBottom:"10px"
+                                                        marginBottom: "10px"
                                                     }}>
                                                         <div>
-                                                        {/*<div>시간: {room.boardCreatedAt}</div>*/}
-                                                        <div>지정헌혈 제목: {room.title}</div>
+                                                            {/*<div>시간: {room.boardCreatedAt}</div>*/}
+                                                            <div>지정헌혈 제목: {room.boardTitle}</div>
                                                         </div>
-                                                            <Button
-                                                                style={{background: '#8FAADC'}}
-                                                                onClick={() => handleChatRoomClick(room)}>
+                                                        <Link
+                                                            to="MyPage_chat"
+                                                            style={{ background: '#8FAADC' }}
+                                                            onClick={() => setShow(false)}>
+                                                            <div>
                                                                 채팅방으로 이동
-                                                            </Button>
+                                                            </div>
+                                                        </Link>
                                                     </div>
                                                 ))}
                                             </div>
@@ -222,16 +223,16 @@ const Nav = () => {
                                     </Modal>
                                     {/*</Link>*/}
                                 </div>)
-                            :
-                            <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
-                                |
-                            </Link>}
-                    </div>
+                                :
+                                <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                                    |
+                                </Link>}
+                        </div>
                     </Link>
                 </StyledDiv31m>
                 <Link
                     to={userId ? '/' : '/signup'}
-                    style={{textDecoration: 'none', color: 'white'}}
+                    style={{ textDecoration: 'none', color: 'white' }}
                     onClick={handleLogout}
                 >
                     <StyledDiv31R>
