@@ -94,7 +94,7 @@ function MyPage_Chat() {
             <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
               {roomIds.map(room => (
                 <tr key={room.id}>
-                  <div>{room.title.length > 20 ? room.title.substring(0, 20) + "..." : room.title}</div>
+                  <td>{room.title.length > 20 ? room.title.substring(0, 20) + "..." : room.title}</td>
                   <td>{room.boardCreatedAt}</td>
                   <td>
                     <Button
