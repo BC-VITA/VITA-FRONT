@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
+import {Table} from "react-bootstrap";
 
 function DBD_WatchList() {
   const userId = sessionStorage.getItem('userId');
@@ -56,29 +57,74 @@ function DBD_WatchList() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>관심목록</StyledTitle>
-          <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton>
         </StyledTop>
-        <div>
-          {userData.map(data => (
-            <div>
-              <div>회원번호 : {data.userId}</div>
-              <div>게시물 번호 : {data.boardId}</div>
-              <div>게시물 타입 : {data.boardType}</div>
-              <div>게시물 제목 : {data.boardTitle}</div>
-              <div>게시물 내용 : {data.boardContent}</div>
-              <div>게시물 작성 날짜 : {data.boardDate}</div>
-              <div>필요한 혈액형 : {data.needBlood}</div>
-              <div>혈액 종류 : {data.bloodType}</div>
-              <div>장소 : {data.place}</div>
-              <div>좋아요 여부 : {data.wishList.toString()}</div>
-              <br />
-            </div>
-          ))}
-        </div>
+        <section id="list">
+          <Styleddiv2>
+            <StyledTable>
+              <thead>
+              <tr>
+                <th
+                    id="area-header"
+                    style={{ width: '350px', fontWeight: '700', fontSize: '22px' }}>
+                  {/*제목 / 내용*/}
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              {userData.map(data => (
+                  <React.Fragment >
+                    <tr>
+                      <td
+                          headers="area-header"
+                          style={{
+                            width: '350px',
+                            fontWeight: '500',
+                            fontSize: '18px',
+                            textAlign: 'left',
+
+                          }}>
+                        <div style={{lineHeight: '35px',}}><b>제목</b> : {data.boardTitle}</div>
+                        <div><b>내용</b> : {data.boardContent}</div>
+                        {/*<div>회원번호 : {data.userId}</div>*/}
+                        {/*<div>게시물 번호 : {data.boardId}</div>*/}
+                        {/*<div>게시물 타입 : {data.boardType}</div>*/}
+                        {/*<div>게시물 제목 : {data.boardTitle}</div>*/}
+                        {/*<div>게시물 내용 : {data.boardContent}</div>*/}
+                        {/*<div>게시물 작성 날짜 : {data.boardDate}</div>*/}
+                        {/*<div>필요한 혈액형 : {data.needBlood}</div>*/}
+                        {/*<div>혈액 종류 : {data.bloodType}</div>*/}
+                        {/*<div>장소 : {data.place}</div>*/}
+                        {/*<div>좋아요 여부 : {data.wishList.toString()}</div>*/}
+                        <StyledButton>
+                          <Nav.Link href="/S_Ganeral">
+                            <StyledButtonDiv>자세히 보기</StyledButtonDiv>
+                          </Nav.Link>
+                        </StyledButton>
+                      </td>
+                    </tr>
+                  </React.Fragment>
+              ))}
+              </tbody>
+            </StyledTable>
+          </Styleddiv2>
+        </section>
+        {/*<div>*/}
+        {/*  {userData.map(data => (*/}
+        {/*    <div>*/}
+        {/*      <div>회원번호 : {data.userId}</div>*/}
+        {/*      <div>게시물 번호 : {data.boardId}</div>*/}
+        {/*      <div>게시물 타입 : {data.boardType}</div>*/}
+        {/*      <div>게시물 제목 : {data.boardTitle}</div>*/}
+        {/*      <div>게시물 내용 : {data.boardContent}</div>*/}
+        {/*      <div>게시물 작성 날짜 : {data.boardDate}</div>*/}
+        {/*      <div>필요한 혈액형 : {data.needBlood}</div>*/}
+        {/*      <div>혈액 종류 : {data.bloodType}</div>*/}
+        {/*      <div>장소 : {data.place}</div>*/}
+        {/*      <div>좋아요 여부 : {data.wishList.toString()}</div>*/}
+        {/*      <br />*/}
+        {/*    </div>*/}
+        {/*  ))}*/}
+        {/*</div>*/}
       </StyledSubcomment>
     </StyledAll>
   );
@@ -185,7 +231,7 @@ const StyledButton = styled.div`
   margin-top: 10px;
   width: 125px;
   height: 35px;
-  margin-left: 535px;
+  margin-left: 700px;
 
   background: #ff9f9f;
   border-radius: 9px;
@@ -197,11 +243,30 @@ const StyledButtonDiv = styled.div`
   font-weight: 700;
   font-size: 18px;
   line-height: 38px;
-  margin: auto;
-  margin-left: 28px;
+  //margin: auto;
+  //margin-left: 28px;
+  text-align: center;
   /* identical to box height, or 100% */
 
   color: #ffffff;
+`;
+const Styleddiv2 = styled.div`
+  text-align: center;
+  margin-top: 20px;
+`;
+const StyledTable = styled(Table)`
+  /* margin-top: 30px; */
+  border-collapse: collapse;
+  font-family: Gmarket Sans TTF;
+  font-style: normal;
+  text-align: center;
+  color: #333333;
+  border: 1px;
+  th,
+  tbody,
+  td td {
+    padding: 0;
+  }
 `;
 
 export default DBD_WatchList;

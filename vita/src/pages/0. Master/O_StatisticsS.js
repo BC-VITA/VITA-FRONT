@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {Tab, Tabs, Nav} from 'react-bootstrap';
+import {Tab, Tabs, Nav, FloatingLabel, Form, Table} from 'react-bootstrap';
 import {ResponsiveBar} from '@nivo/bar';
 
 function O_StatisticsS() {
@@ -97,6 +97,33 @@ function O_StatisticsS() {
                 <StyledTop>
                     <StyledTitle>봉사 통계</StyledTitle>
                 </StyledTop>
+                <StyledFilter>
+                    <StyledFilterDiv1 style={{ marginTop: '15px' }}>
+                        <StyledFilterDivTitle2>봉사기간</StyledFilterDivTitle2>
+                        <input
+                            type="Date"
+                            // value={startDate}
+                            style={{
+                                border: 'none',
+                            }}
+                            // onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle2>
+                            &nbsp;&nbsp;&nbsp;-&nbsp;
+                        </StyledFilterDivTitle2>
+                        <input
+                            type="Date"
+                            // values={endDate}
+                            style={{
+                                border: 'none',
+                            }}
+                            // onChange={handleEndDateChange}
+                        />
+                        <StyledButton2>검색</StyledButton2>
+                        <StyledButton3>초기화</StyledButton3>
+                    </StyledFilterDiv1>
+                </StyledFilter>
+
                 <Styledcomment>
                     <StyledTable>
                         <Tabs style={{marginTop: "10px"}}>
@@ -259,5 +286,80 @@ const StyledTop = styled.div`
 const StyledGraphContainer = styled.div`
   font-size: 30px;
   height: 600px;
+  color: pink;
+`;
+
+//
+const StyledFilter = styled.div`
+  /* width: 865px; */
+  /* height: 250px; */
+  background: #ffe9e9;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 5px;
+  padding-bottom: 25px;
+`;
+const StyledFilterDiv1 = styled.div`
+  display: flex;
+  margin-left: 20px;
+`;
+const StyledFilterDivTitle = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  /* margin-right: 10px;
+  margin-left: 20px; */
+  background-color: #fefefe;
+  border: 1px;
+  border-color: #d7d7d7;
+  border-style: solid;
+  text-align: center;
+  padding-top: 5px;
+  height: 35px;
+`;
+const StyledFilterDivTitle2 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 10px;
+  line-height: 40px;
+`;
+const StyledFilterDiv2 = styled.div`
+  width: 850px;
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+`;
+const StyledButton2 = styled.button`
+  width: 100px;
+  height: 35px;
+  margin-left: 220px;
+  margin-top: 5px;
+  border-radius: 9px;
+  background: #d9d9d9;
+  color: #333333;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 38px;
+  border: none;
+`;
+const StyledButton3 = styled.button`
+  width: 100px;
+  height: 35px;
+  margin-left: 20px;
+  margin-top: 5px;
+  border-radius: 9px;
+  background: #d9d9d9;
+  color: #333333;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 38px;
+  border: none;
 `;
 export default O_StatisticsS;

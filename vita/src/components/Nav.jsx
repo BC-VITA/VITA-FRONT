@@ -55,13 +55,6 @@ const Nav = () => {
             });
     }, [userId]);
 
-    const handleChatRoomClick = (roomId1) => {
-        navigate(`/Chat_Details`, {state: {roomId1}});
-        setShow(false);
-        setcount(prevCount => prevCount > 0 ? prevCount - 1 : prevCount)
-        setHasNavigatedToChatRoom(true); // 채팅방으로 이동했음을 표시
-    };
-
     //알람
     const [count, setcount] = useState('');
     const url = `http://localhost:8004/chat/count?userId=${userId}`;
@@ -141,7 +134,7 @@ const Nav = () => {
                     </StyledDiv31L>
                 </Link>
                 <StyledDiv31m>
-                    <Link
+                    <div
                         to={userId ? (userId === "admin" ? `/O_BD_Manage` : `/MyPage_DBD`) : '/'}
                         style={{textDecoration: 'none', color: 'white'}}
                     >
@@ -176,7 +169,7 @@ const Nav = () => {
                                         <Modal.Body>
                                             {!hasNavigatedToChatRoom && (
                                                 <div>
-                                                    {roomIds.map(room => (
+                                                    {alarm.map(room => (
                                                         <div key={room} style={{
                                                             background: "#FFE9E9",
                                                             padding: "10px",
@@ -186,14 +179,17 @@ const Nav = () => {
                                                             marginBottom:"10px"
                                                         }}>
                                                             <div>
-                                                                {/*<div>시간: {room.boardCreatedAt}</div>*/}
-                                                                <div>지정헌혈 제목: {room.title}</div>
+                                                                <div>지정헌혈 제목: {room.boardTitle}</div>
                                                             </div>
-                                                            <Button
+                                                            <Link
+                                                                to="MyPage_chat"
                                                                 style={{background: '#8FAADC'}}
-                                                                onClick={() => handleChatRoomClick(room)}>
-                                                                채팅방으로 이동
-                                                            </Button>
+                                                                onClick={()=> setShow(false)}
+                                                            >
+                                                                    <div>
+                                                                        채팅방으로 이동
+                                                                    </div>
+                                                            </Link>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -212,7 +208,7 @@ const Nav = () => {
                                 |
                             </Link>}
                     </div>
-                    </Link>
+                    </div>
                 </StyledDiv31m>
                 <Link
                     to={userId ? '/' : '/signup'}

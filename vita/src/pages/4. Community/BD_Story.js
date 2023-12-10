@@ -54,7 +54,7 @@ function BD_Story() {
                         </Nav.Link>
                     </StyledButton>
                 </StyledTop>
-                <div style={{display: 'flex',}}>
+                <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
                     {boardList.map((board) => {
                         const imageUrl = board.img
                             ? board.img.replace(
@@ -70,11 +70,11 @@ function BD_Story() {
                         //       )}`
                         //     : null;
                         return (
-                            <div>
+                            <div key={board.registerId}>
                                 <StyledBox>
                                     <StyledBox2>
-                                        <Card style={{width: '15.5rem'}}>
-                                            <Card.Img variant="top" src={imageUrl} style={{margin:"3px",width:'15rem', height:'15rem'}}/>
+                                        <Card style={{width: '17rem'}}>
+                                            <Card.Img variant="top" src={imageUrl} style={{margin:"3px",width:'16.5rem', height:'16.5rem'}}/>
                                             <Card.Body>
                                                 <Card.Title>{board.title.length > 10 ? board.title.substring(0, 10) + "..." : board.title}</Card.Title>
                                                 <Card.Text>{board.content.length > 30 ? board.content.substring(0, 30) + "..." : board.content}</Card.Text>
@@ -223,8 +223,8 @@ const StyledBox = styled.div`
   display: flex;
 `;
 const StyledBox2 = styled.div`
-  margin-left: 5px;
-  margin-right: 5px;
+  //margin-left: 3px;
+  //margin-right: 3px;
 `;
 const StyledBox3 = styled.div`
   display: flex;

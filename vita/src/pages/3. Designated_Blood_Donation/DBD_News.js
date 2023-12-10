@@ -66,9 +66,9 @@ function DBD_News() {
                 <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
                     {boardList.map((board) => {
                         // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
-                        const imageUrl = board.img
-                            ? board.img.replace(
-                                'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
+                        const imageUrl = board.imageUrl
+                            ? board.imageUrl.replace(
+                                'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA\\VITA-FRONT\\vita\\public\\',
                                 '\\'
                             )
                             : null;
@@ -84,14 +84,17 @@ function DBD_News() {
                                 <StyledBox>
                                     <StyledBox2>
                                         <Card style={{width: '17rem'}}>
-                                            <Card.Img variant="top" src={imageUrl}/>
-                                            {/* {imageUrl ? (
-                        <Card.Img variant="top" src={imageUrl} />
-                      ) : null} */}
+                                            <Card.Img variant="top" src={imageUrl}  style={{margin:"3px",width:'16.5rem', height:'16.5rem'}}/>
                                             <Card.Body>
-                                                <Card.Title>{board.title}</Card.Title>
-                                                <Card.Text>{board.content}</Card.Text>
-                                                <Card.Text>{imageUrl}</Card.Text>
+                                                <Card.Title>
+                                                    {board.title.length > 10 ? board.title.substring(0, 10) + "..." : board.title}
+                                                    {/*{board.title}*/}
+                                                </Card.Title>
+                                                <Card.Text>
+                                                    {board.content.length > 30 ? board.content.substring(0, 30) + "..." : board.content}
+                                                    {/*{board.content}*/}
+                                                </Card.Text>
+                                                {/*<Card.Text>{imageUrl}</Card.Text>*/}
                                                 <Button
                                                     variant="primary"
                                                     onClick={() => handleDetailClick(board, imageUrl)}
@@ -236,8 +239,8 @@ const StyledBox = styled.div`
   display: flex;
 `;
 const StyledBox2 = styled.div`
-  margin-left: 5px;
-  margin-right: 5px;
+  //margin-left: 5px;
+  //margin-right: 5px;
 `;
 const StyledBox3 = styled.div`
   display: flex;
