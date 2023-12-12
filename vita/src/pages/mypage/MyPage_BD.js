@@ -375,34 +375,58 @@ function MyPage_BD() {
                             </tr>
                             </thead>
                             <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
-                            {inputData3.map((review, index) => (
-                                <tr
-                                    key={index}
-                                    onClick={() => handleRowClick(index)}
+                            {/*{inputData3.map((review, index) => (*/}
+                            <tr
+                                // key={index}
+                                // onClick={() => handleRowClick(index)}
+                            >
+                              <td headers="area-header">
+                                {/*{review.reviewTitle}*/}
+                                첫 헌혈!!
+                              </td>
+                              <td>2023-10-20</td>
+
+                              <td>
+                                <button
+                                    style={{
+                                      ...btStyle,
+                                      // border: '1px solid #FF9C9C',
+                                      color: 'white',
+                                      paddingLeft: '15px',
+                                      paddingRight: '15px',
+                                      background: '#F55757',
+                                    }}
                                 >
-                                  <td headers="area-header">
-                                    {review.reviewTitle}
-                                  </td>
-                                  <td headers="bloodHouseAddress-header">
-                                  {/* {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')} */}
-                                  asd
-                                  </td>
-                                  <td>
-                                    <button
-                                        style={{
-                                          ...btStyle,
-                                          // border: '1px solid #FF9C9C',
-                                          color: 'white',
-                                          paddingLeft: '15px',
-                                          paddingRight: '15px',
-                                          background: '#F55757',
-                                        }}
-                                    >
-                                      삭제하기
-                                    </button>
-                                  </td>
-                                </tr>
-                            ))}
+                                  삭제하기
+                                </button>
+                              </td>
+                            </tr>
+                            <tr
+                                // key={index}
+                                // onClick={() => handleRowClick(index)}
+                            >
+                              <td headers="area-header">
+                                {/*{review.reviewTitle}*/}
+                                친구랑 같이 헌현 했어요.
+                              </td>
+                              <td>2023-10-23</td>
+
+                              <td>
+                                <button
+                                    style={{
+                                      ...btStyle,
+                                      // border: '1px solid #FF9C9C',
+                                      color: 'white',
+                                      paddingLeft: '15px',
+                                      paddingRight: '15px',
+                                      background: '#F55757',
+                                    }}
+                                >
+                                  삭제하기
+                                </button>
+                              </td>
+                            </tr>
+                            {/*))}*/}
                             </tbody>
                           </StyledTable>
                         </Styleddiv2>

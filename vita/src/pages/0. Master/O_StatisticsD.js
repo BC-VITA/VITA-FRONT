@@ -87,12 +87,38 @@ function O_StatisticsD() {
                 <StyledTop>
                     <StyledTitle>기부금 통계 게시물</StyledTitle>
                 </StyledTop>
+                <StyledFilter>
+                    <StyledFilterDiv1 style={{ marginTop: '15px' }}>
+                        <StyledFilterDivTitle2>조회기간</StyledFilterDivTitle2>
+                        <input
+                            type="Date"
+                            // value={startDate}
+                            style={{
+                                border: 'none',
+                            }}
+                            // onChange={handleStartDateChange}
+                        />
+                        <StyledFilterDivTitle2>
+                            &nbsp;&nbsp;&nbsp;-&nbsp;
+                        </StyledFilterDivTitle2>
+                        <input
+                            type="Date"
+                            // values={endDate}
+                            style={{
+                                border: 'none',
+                            }}
+                            // onChange={handleEndDateChange}
+                        />
+                        <StyledButton2>검색</StyledButton2>
+                        <StyledButton3>초기화</StyledButton3>
+                    </StyledFilterDiv1>
+                </StyledFilter>
                 <Styledcomment>
                     <StyledTable>
                         <tr>
-                            <td colSpan={boardList.length} style={{textAlign : "left", fontWeight: "500", fontSize: "30px" }}>
+                            <td colSpan={boardList.length} style={{textAlign: "left", fontWeight: "500", fontSize: "30px"}}>
                                 합 계 : {
-                                boardList.reduce((total, reservation) => total + reservation.boardTotalPoint, 0)
+                                new Intl.NumberFormat().format(boardList.reduce((total, reservation) => total + reservation.boardTotalPoint, 0))
                             }
                             </td>
                         </tr>
@@ -136,7 +162,8 @@ function O_StatisticsD() {
                                         background: '#ffffff',
                                     }}
                                 >
-                                    {reservation.boardTotalPoint}
+                                    {reservation.boardTotalPoint.toLocaleString()}
+
                                 </td>
                             ))}
                         </tr>
@@ -163,14 +190,14 @@ function O_StatisticsD() {
                                                             paddingBottom: "10px"
 
                                                         }}>
-                                                        <div style={{display: "block", width: "680px",}}>
+                                                        <div style={{display: "block", width: "680px", marginRight:"20px"}}>
                                                             <div style={{display: "flex", fontWeight: '600',}}>
                                                                 {review.title}
                                                             </div>
                                                             <div>{review.content.length > 35 ? review.content.substring(0, 35) + "..." : review.content}</div>
                                                             <div style={{display: "flex", fontSize: "17px"}}>
                                                                 {/*<div>style={{width: "350px"}}>[일시]&nbsp;{format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}</div>*/}
-                                                                <div>[모인 기부금]&nbsp;{review.boardTotalPoint}</div>
+                                                                <div>[모인 기부금]&nbsp;{review.boardTotalPoint.toLocaleString()}</div>
                                                             </div>
                                                         </div>
                                                         <div style={{paddingRight: '20px',}}>
@@ -184,7 +211,8 @@ function O_StatisticsD() {
                                                                     marginTop : '3px',
                                                                     marginBottom:'10px',
                                                                     color: '#ffffff',
-                                                                    textAlign : "center"
+                                                                    textAlign : "center",
+                                                                    marginRight:"30px"
                                                                 }}
                                                             >
                                                                 수정하기
@@ -361,5 +389,55 @@ const StyledTop = styled.div`
 const StyledGraphContainer = styled.div`
   font-size: 30px;
   height: 600px;
+`;
+
+const StyledFilter = styled.div`
+  background: #ffe9e9;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 5px;
+  padding-bottom: 25px;
+`;
+const StyledFilterDiv1 = styled.div`
+  display: flex;
+  margin-left: 20px;
+`;
+const StyledFilterDivTitle2 = styled.div`
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 10px;
+  line-height: 40px;
+`;
+const StyledButton2 = styled.button`
+  width: 100px;
+  height: 35px;
+  margin-left: 220px;
+  margin-top: 5px;
+  border-radius: 9px;
+  background: #d9d9d9;
+  color: #333333;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 38px;
+  border: none;
+`;
+const StyledButton3 = styled.button`
+  width: 100px;
+  height: 35px;
+  margin-left: 20px;
+  margin-top: 5px;
+  border-radius: 9px;
+  background: #d9d9d9;
+  color: #333333;
+  font-family: 'Gmarket Sans TTF';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 38px;
+  border: none;
 `;
 export default O_StatisticsD;

@@ -55,42 +55,49 @@ function D_Receipt() {
         <StyledTop>
           <StyledTitle>기부 영수증</StyledTitle>
         </StyledTop>
+
         <StyledButton>
           <Nav.Link href="/D_SelectReceipt">
             <StyledButtonDiv>통계로 보기</StyledButtonDiv>
           </Nav.Link>
         </StyledButton>
 
-        <div>
+        <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
           {boardList.map((board) => {
-            // 이미지 URL에서 'C:\Users\이민렬\Desktop\test\vita\public\' 부분 제거
             const imageUrl = board.imageUrl
-              ? board.imageUrl.replace(
-                  'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
-                  '\\'
+                ? board.imageUrl.replace(
+                    'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA\\VITA-FRONT\\vita\\public\\',
+                    '\\'
                 )
-              : null;
-
+                : null;
+            // {boardList.map((board) => {
+            //   const imageUrl = board.img
+            //     ? `http://localhost:8004/images${board.img.replace(
+            //         'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\images',
+            //         ''
+            //       )}`
+            //     : null;
             return (
-              <div key={board.boardId}>
-                <StyledBox>
-                  <StyledBox2>
-                    <Card style={{ width: '17rem' }}>
-                      <Card.Img variant="top" src={imageUrl} />
-                      <Card.Body>
-                        <Card.Title>{board.title}</Card.Title>
-                        <Card.Text>{board.content}</Card.Text>
-                        <Button
-                          variant="primary"
-                          onClick={() => handleDetailClick(board, imageUrl)}
-                        >
-                          자세히 보기
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  </StyledBox2>
-                </StyledBox>
-              </div>
+                <div key={board.registerId}>
+                  <StyledBox>
+                    <StyledBox2>
+                      <Card style={{width: '17rem'}}>
+                        <Card.Img variant="top" src={imageUrl} style={{margin:"3px",width:'16.5rem', height:'16.5rem'}}/>
+                        <Card.Body>
+                          <Card.Title>{board.title.length > 10 ? board.title.substring(0, 10) + "..." : board.title}</Card.Title>
+                          <Card.Text>{board.content.length > 30 ? board.content.substring(0, 30) + "..." : board.content}</Card.Text>
+                          {/*<Card.Text>{imageUrl}</Card.Text>*/}
+                          <Button
+                              variant="primary"
+                              onClick={() => handleDetailClick(board, imageUrl)}
+                          >
+                            자세히 보기
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    </StyledBox2>
+                  </StyledBox>
+                </div>
             );
           })}
         </div>

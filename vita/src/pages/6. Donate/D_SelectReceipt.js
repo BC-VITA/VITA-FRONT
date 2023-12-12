@@ -4,39 +4,49 @@ import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 
 import serviceimg from '../../img/serviceimg.png';
+import {useNavigate} from "react-router-dom";
+import {Tab, Tabs} from "react-bootstrap";
+import {ResponsivePie} from "@nivo/pie";
 
 function D_SelectReceipt() {
-  const [error, setError] = useState(null);
+    const [boardList, setBoardList] = useState([]);
+    const [graphData, setGraphData] = useState([]);
+    const navigate = useNavigate();
 
-  const [inputData, setInputData] = useState([
-    {
-      hospitalName: '',
-      title: '',
-      content: '',
-      patientBlood: '',
-      bloodType: '',
-      startDate: '',
-      DesignatedBloodWriteNumber: '',
-      bloodNumber: '',
-    },
-    {},
-  ]);
+    useEffect(() => {
+        fetch('http://localhost:8004/donate/donate-board-statistics')
+            .then((response) => response.json())
+            .then((data) => {
+                setBoardList(data);
+            })
+            .catch((error) => console.error('Error fetching board list:', error));
+    }, []);
 
-  useEffect(() => {
-    fetch('http://localhost:8004/blood/house/filter', {
-      method: 'get',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setInputData(res);
-        console.log(inputData);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    console.log(inputData);
-  }, []);
+    useEffect(() => {
+        if (boardList.length > 0) {
+            let dataForGraph = boardList.map(item => ({
+                id: `게시물 ${item.title}`, // Pie chart에서 label로 사용됩니다.
+                value: item.boardTotalPoint
+            }));
+
+            setGraphData(dataForGraph);
+        }
+    }, [boardList]);
+
+
+    const btStyle = {
+        background: '#D9D9D9',
+        borderRadius: '10px',
+        border: 'none',
+        fontFamily: 'Gmarket Sans TTF',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        fontSize: '18px',
+        lineHeight: '37px',
+        textAlign: 'center',
+        color: '#333333',
+    };
+
   return (
     <StyledAll>
       <StyledSub>
@@ -64,109 +74,76 @@ function D_SelectReceipt() {
       <StyledSubcomment>
         <StyledTop>
           <StyledTitle>기부 영수증</StyledTitle>
-          {/* <StyledButton>
-            <Nav.Link href="/DBDPostGeneral">
-              <StyledButtonDiv>수정하기</StyledButtonDiv>
-            </Nav.Link>
-          </StyledButton> */}
         </StyledTop>
-        <Styledcomment>
-          <StyledTable>
-            <thead style={{ background: '#FF9F9F' }}>
-              <tr>
-                <th
-                  style={{
-                    width: '200px',
-                    padding: '10px',
-                    color: '#ffffff',
-                    fontWeight: '500',
-                  }}
-                >
-                  신생아
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ width: '200px', padding: '10px' }}>1000</td>
-              </tr>
-            </tbody>
-          </StyledTable>
-        </Styledcomment>
-        <Styledcomment2>
-          <StyledDiv>
-            <StyledTitle2>신생아</StyledTitle2>
-            <StyledTable2>
-              <thead style={{ background: '#FF9F9F' }}>
-                <tr>
-                  <th
-                    style={{
-                      width: '100px',
-                      padding: '10px',
-                      color: '#ffffff',
-                      fontWeight: '500',
-                    }}
-                  >
-                    번호
-                  </th>
-                  <th
-                    style={{
-                      width: '200px',
-                      padding: '10px',
-                      color: '#ffffff',
-                      fontWeight: '500',
-                    }}
-                  >
-                    기부한 아이디
-                  </th>
-                  <th
-                    style={{
-                      width: '200px',
-                      padding: '10px',
-                      color: '#ffffff',
-                      fontWeight: '500',
-                    }}
-                  >
-                    일시
-                  </th>
-                  <th
-                    style={{
-                      width: '200px',
-                      padding: '10px',
-                      color: '#ffffff',
-                      fontWeight: '500',
-                    }}
-                  >
-                    포인트 액수
-                  </th>
-                </tr>
-              </thead>
-              <tbody style={{ background: '#ffffff' }}>
-                <tr>
-                  <td style={{ width: '200px', padding: '10px' }}>1</td>
-                  <td style={{ width: '200px', padding: '10px' }}>suim1234</td>
-                  <td style={{ width: '200px', padding: '10px' }}>
-                    2023.06.13
-                  </td>
-                  <td style={{ width: '200px', padding: '10px' }}>1000</td>
-                </tr>
-                <tr>
-                  <td colspan="2"></td>
-                  <td
-                    colspan="2"
-                    style={{
-                      textAlign: 'right',
-                      paddingRight: '30px',
-                      fontWeight: '700',
-                    }}
-                  >
-                    기부 총 합계 : 1000
-                  </td>
-                </tr>
-              </tbody>
-            </StyledTable2>
-          </StyledDiv>
-        </Styledcomment2>
+          <Styledcomment>
+              <StyledTable>
+                  <tr>
+                      <td colSpan={boardList.length} style={{textAlign : "left", fontWeight: "500", fontSize: "30px" }}>
+                          합 계 : {
+                          boardList.reduce((total, reservation) => total + reservation.boardTotalPoint, 0)
+                      }
+                      </td>
+                  </tr>
+
+                  <tr>
+                      {boardList.map((reservation, index) => (
+                          <>
+                              <td
+                                  key={index}
+                                  style={{
+                                      width: '175px',
+                                      padding: '8px',
+                                      color: '#ffffff',
+                                      fontWeight: '500',
+                                      border: "2px",
+                                      borderStyle: "solid",
+                                      borderColor: "black",
+                                      background: '#FF9F9F',
+                                  }}
+                              >
+                                  {reservation.title.length > 5 ? reservation.title.substring(0, 5) + "..." : reservation.title}
+                              </td>
+                          </>
+                      ))}
+
+                  </tr>
+
+
+                  <tr>
+                      {boardList.map((reservation, index) => (
+                          <td
+                              key={index}
+                              style={{
+                                  width: '175px',
+                                  padding: '8px',
+                                  color: '#333333',
+                                  fontWeight: '500',
+                                  border: "2px",
+                                  borderStyle: "solid",
+                                  borderColor: "black",
+                                  background: '#ffffff',
+                              }}
+                          >
+                              {reservation.boardTotalPoint}
+                          </td>
+                      ))}
+                  </tr>
+
+
+                              {/*<div style={{width: "900px", height: "650px" ,marginTop:"50px"}}>*/}
+                              {/*    <StyledGraphContainer> /!* StyledGraphContainer 사용 *!/*/}
+                              {/*        <ResponsivePie*/}
+                              {/*            data={graphData}*/}
+                              {/*            margin={{ top: 40, right: 80, bottom: 80, left: 100 }}*/}
+                              {/*            innerRadius={0.3}*/}
+                              {/*            padAngle={0.7}*/}
+                              {/*            cornerRadius={3}*/}
+                              {/*            // enableArcLinkLabels={false}*/}
+                              {/*        />*/}
+                              {/*    </StyledGraphContainer>*/}
+                              {/*</div>*/}
+              </StyledTable>
+          </Styledcomment>
       </StyledSubcomment>
     </StyledAll>
   );
@@ -322,6 +299,11 @@ const StyledTable2 = styled.div`
   border-style: solid;
   border-color: black;
   border: 1px;
+`;
+
+const StyledGraphContainer = styled.div`
+  font-size: 30px;
+  height: 600px;
 `;
 
 export default D_SelectReceipt;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import styled from 'styled-components';
 import Post from '../img/포스터.png';
+import BDIMG from '../img/BDIMG.png';
 import Post1 from '../img/포스터-1.png';
 import Post2 from '../img/포스터-2.png';
 import Post3 from '../img/포스터-3.png';
@@ -247,40 +248,41 @@ function Main() {
                     </StyledDiv41B>
                 </StyledDiv41>
                 <StyledDiv42>
-                    <StyledBtnTxt4>오늘의 혈액보유량</StyledBtnTxt4>
-                    <div className="blood_list">
-                        <ul style={{display: 'flex'}}>
-                            {data.map(item => (
-                                <div key={item.bloodType}>
+                    {/*<StyledBtnTxt4>오늘의 혈액보유량</StyledBtnTxt4>*/}
+                    <Styledimg100 src={BDIMG} />
+                    {/*<div className="blood_list">*/}
+                    {/*    <ul style={{display: 'flex'}}>*/}
+                    {/*        {data.map(item => (*/}
+                    {/*            <div key={item.bloodType}>*/}
 
-                                    <div className="bloodBar" style={{
-                                        display: 'flex',
-                                        flexDirection: 'column-reverse',
-                                        height: '300px',
-                                        width: '125px'
-                                    }}>
-                                        {/*<div className="bloodBar" style={{ height: `${(item.percentage / maxPercentage) * 87}%`, width: '50px' }}>*/}
-                                        <div style={{height: `${(item.percentage / maxPercentage) * 230}px`}}>
-                                            {/* ResponsiveBar 컴포넌트 추가 */}
-                                            <ResponsiveBar
-                                                data={[{bloodType: item.bloodType, value: item.percentage}]}
-                                                keys={['value']}
-                                                indexBy="bloodType"
-                                                // margin={{right: 30, left: 30}}
-                                                // padding={0.3}
-                                            />
+                    {/*                <div className="bloodBar" style={{*/}
+                    {/*                    display: 'flex',*/}
+                    {/*                    flexDirection: 'column-reverse',*/}
+                    {/*                    height: '300px',*/}
+                    {/*                    width: '125px'*/}
+                    {/*                }}>*/}
+                    {/*                    /!*<div className="bloodBar" style={{ height: `${(item.percentage / maxPercentage) * 87}%`, width: '50px' }}>*!/*/}
+                    {/*                    <div style={{height: `${(item.percentage / maxPercentage) * 230}px`}}>*/}
+                    {/*                        /!* ResponsiveBar 컴포넌트 추가 *!/*/}
+                    {/*                        <ResponsiveBar*/}
+                    {/*                            data={[{bloodType: item.bloodType, value: item.percentage}]}*/}
+                    {/*                            keys={['value']}*/}
+                    {/*                            indexBy="bloodType"*/}
+                    {/*                            // margin={{right: 30, left: 30}}*/}
+                    {/*                            // padding={0.3}*/}
+                    {/*                        />*/}
 
-                                            {/* span 요소는 width 값으로 백분율을 표시 */}
-                                            {/*<span className="progressTag" data-progress={item.percentage}*/}
-                                            {/*      style={{width: `${item.percentage}%`}}>{`${item.percentage}%`}</span>*/}
-                                        </div>
-                                    </div>
-                                  <div className="bloodType" style={{textAlign:'center'}}>{item.bloodType}</div>
-                                    {/*<div className="num">{item.percentage / 10}</div>*/}
-                                </div>
-                            ))}
-                        </ul>
-                    </div>
+                    {/*                        /!* span 요소는 width 값으로 백분율을 표시 *!/*/}
+                    {/*                        /!*<span className="progressTag" data-progress={item.percentage}*!/*/}
+                    {/*                        /!*      style={{width: `${item.percentage}%`}}>{`${item.percentage}%`}</span>*!/*/}
+                    {/*                    </div>*/}
+                    {/*                </div>*/}
+                    {/*              <div className="bloodType" style={{textAlign:'center'}}>{item.bloodType}</div>*/}
+                    {/*                /!*<div className="num">{item.percentage / 10}</div>*!/*/}
+                    {/*            </div>*/}
+                    {/*        ))}*/}
+                    {/*    </ul>*/}
+                    {/*</div>*/}
                 </StyledDiv42>
             </StyledDiv4>
             {/*<div>*/}
@@ -355,6 +357,11 @@ const Styledimg = styled.img`
   /* margin-left: 10px; */
   width: 125px;
   height: 125px;
+`;
+const Styledimg100 = styled.img`
+  /* margin-left: 10px; */
+  width: 600px;
+  height: 350px;
 `;
 const StyledDiv13 = styled.div`
   margin-left: 20px;

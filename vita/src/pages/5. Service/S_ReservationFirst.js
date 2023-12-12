@@ -238,7 +238,7 @@ const StyledDiv4Content = styled.div`
 `;
 
 const StyledBox = styled.div`
-  display: flex;
+  //display: flex;
   width: 870px;
   background: #ffffff;
 
@@ -252,12 +252,12 @@ const StyledBox2 = styled.div`
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
-  line-height: 80px;
+  line-height: 60px;
   /* identical to box height */
 
   /* Gray */
-  margin-left: 90px;
-  margin-right: 90px;
+  margin-left: 40px;
+  margin-right: 40px;
   letter-spacing: 2px;
   color: #757575;
 `;

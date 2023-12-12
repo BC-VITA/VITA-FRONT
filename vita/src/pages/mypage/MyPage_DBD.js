@@ -293,7 +293,7 @@ function MyPage_DBD() {
                                     }}
                                     onClick={() => setAcceptModal2(true)}
                                   >
-                                    환자정보 보기
+                                    후기쓰러 가기
                                   </button>
 
                                   <Modal size="md" show={acceptModal2} onHide={() => setAcceptModal2(false)}>
@@ -354,7 +354,7 @@ function MyPage_DBD() {
                                 onClick={() => handleRowClick(index)}
                               >
                                 <td style={{ display: "block", textAlign: 'left', paddingLeft: '20px', lineHeight: '15px', }}>
-                                  <div style={{ marginTop: '10px', fontWeight: 600 }}> {interested.boardTitle}</div>
+                                  <div style={{ marginTop: '10px',marginBottom: '10px', fontWeight: 600 }}> {interested.boardTitle}</div>
                                   <br />
                                   <div style={{}}>
                                     {interested.boardContent}
@@ -373,7 +373,7 @@ function MyPage_DBD() {
                                       paddingLeft: '15px',
                                       paddingRight: '15px',
                                       background: '#AEAEAE',
-                                      marginTop: '10px',
+                                      // marginTop: '10px',
                                       marginBottom: '10px',
                                       color: '#ffffff'
                                     }}
@@ -552,18 +552,17 @@ function MyPage_DBD() {
                             </tr>
                           </thead>
                           <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
-                            {inputData3.map((review, index) => (
+                            {/*{inputData3.map((review, index) => (*/}
                               <tr
-                                key={index}
-                                onClick={() => handleRowClick(index)}
+                                // key={index}
+                                // onClick={() => handleRowClick(index)}
                               >
                                 <td headers="area-header">
-                                  {review.reviewTitle}
+                                  {/*{review.reviewTitle}*/}
+                                  첫 지정헌혈!!
                                 </td>
-                                <td>asd</td>
-                                <td headers="bloodHouseAddress-header">
-                                  {format(parseISO(review.localDateTime), 'yyyy.MM.dd HH:mm')}
-                                </td>
+                                <td>2023-10-20</td>
+
                                 <td>
                                   <button
                                     style={{
@@ -579,7 +578,32 @@ function MyPage_DBD() {
                                   </button>
                                 </td>
                               </tr>
-                            ))}
+                            <tr
+                                // key={index}
+                                // onClick={() => handleRowClick(index)}
+                            >
+                              <td headers="area-header">
+                                {/*{review.reviewTitle}*/}
+                                정말 오랜만에 지정헌현 했어요.
+                              </td>
+                              <td>2023-10-23</td>
+
+                              <td>
+                                <button
+                                    style={{
+                                      ...btStyle,
+                                      // border: '1px solid #FF9C9C',
+                                      color: 'white',
+                                      paddingLeft: '15px',
+                                      paddingRight: '15px',
+                                      background: '#F55757',
+                                    }}
+                                >
+                                  삭제하기
+                                </button>
+                              </td>
+                            </tr>
+                            {/*))}*/}
                           </tbody>
                         </StyledTable>
                       </Styleddiv2>

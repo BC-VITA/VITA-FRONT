@@ -220,10 +220,10 @@ function MyPage_S() {
                             <StyledBox3_1W>{userData.timeTypeVolunteerHistoryNumber + ' 시간'}</StyledBox3_1W>
 
                             <StyledBox3_1G>1365 자원봉사포털</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>120시간</StyledBox3_1W>
 
                             <StyledBox3_1G>e청소년</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>39시간</StyledBox3_1W>
                         </StyledBox3_1>
                         <StyledBox3_1>
                             <StyledBox3_1G1>
@@ -233,10 +233,10 @@ function MyPage_S() {
                             <StyledBox3_1W>20시간 5분</StyledBox3_1W>
 
                             <StyledBox3_1G>걸스카우트</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>0시간</StyledBox3_1W>
 
                             <StyledBox3_1G>청소년 적십자</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>2시간</StyledBox3_1W>
                         </StyledBox3_1>
 
                         <StyledBox3_1>
@@ -245,24 +245,24 @@ function MyPage_S() {
                                 <br/>
                                 종합관리시스템
                             </StyledBox3_1G1>
-                            <StyledBox3_1W>20시간 5분</StyledBox3_1W>
+                            <StyledBox3_1W>0시간</StyledBox3_1W>
 
                             <StyledBox3_1G>국립공원공단</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>0시간</StyledBox3_1W>
 
                             <StyledBox3_1G>문화품앗e</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>0시간</StyledBox3_1W>
                         </StyledBox3_1>
 
                         <StyledBox3_1>
                             <StyledBox3_1G>농촌재능나눔</StyledBox3_1G>
-                            <StyledBox3_1W>20시간 5분</StyledBox3_1W>
+                            <StyledBox3_1W>0시간</StyledBox3_1W>
 
                             <StyledBox3_1G>대한적십자사</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>0시간</StyledBox3_1W>
 
                             <StyledBox3_1G>서울교통공사</StyledBox3_1G>
-                            <StyledBox3_1W></StyledBox3_1W>
+                            <StyledBox3_1W>0시간</StyledBox3_1W>
                         </StyledBox3_1>
                         <StyledBox3_Txt>
                             <ul>
@@ -843,6 +843,8 @@ const StyledTab1 = styled.div`
   width: 865px;
   margin-top: 5px;
   padding-bottom: 500px;
+  
+  height: 1000px;
 `;
 
 const StyledBox1 = styled.div`

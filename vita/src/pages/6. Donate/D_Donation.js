@@ -55,120 +55,160 @@ function D_Donation() {
         <StyledTop>
           <StyledTitle>기부하기</StyledTitle>
         </StyledTop>
-        <StyledBox3>
-          <div>
-            {boardList
-              .filter((board) => board.boardId % 3 === 0) // id가 1인 항목만 필터링
-              .map((board, index) => {
-                const imageUrl = board.imageUrl
-                  ? board.imageUrl.replace(
-                      // 'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
-                        'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',
-                      '\\'
-                    )
-                  : null;
-
-                // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치
-                const isOdd = index % 2 === 0; // 홀수 번째인지 확인
-
-                return (
-                  <div key={board.boardId}>
-                    <StyledBox>
-                      <StyledBox2 isOdd={isOdd}>
-                        <Card style={{ width: '17rem' }}>
-                          <Card.Img variant="top" src={imageUrl} />
-                          <Card.Body>
-                            <Card.Title>{board.title}</Card.Title>
-                            <Card.Text>{board.content}</Card.Text>
-                            <Button
+        <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
+          {boardList.map((board) => {
+            const imageUrl = board.imageUrl
+                ? board.imageUrl.replace(
+                    'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA\\VITA-FRONT\\vita\\public\\',
+                    '\\'
+                )
+                : null;
+            // {boardList.map((board) => {
+            //   const imageUrl = board.img
+            //     ? `http://localhost:8004/images${board.img.replace(
+            //         'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\images',
+            //         ''
+            //       )}`
+            //     : null;
+            return (
+                <div key={board.registerId}>
+                  <StyledBox>
+                    <StyledBox2>
+                      <Card style={{width: '17rem'}}>
+                        <Card.Img variant="top" src={imageUrl} style={{margin:"3px",width:'16.5rem', height:'16.5rem'}}/>
+                        <Card.Body>
+                          <Card.Title>{board.title.length > 10 ? board.title.substring(0, 10) + "..." : board.title}</Card.Title>
+                          <Card.Text>{board.content.length > 30 ? board.content.substring(0, 30) + "..." : board.content}</Card.Text>
+                          {/*<Card.Text>{imageUrl}</Card.Text>*/}
+                          <Button
                               variant="primary"
                               onClick={() => handleDetailClick(board, imageUrl)}
-                            >
-                              자세히 보기
-                            </Button>
-                          </Card.Body>
-                        </Card>
-                      </StyledBox2>
-                    </StyledBox>
-                  </div>
-                );
-              })}
-          </div>
-          <div>
-            {boardList
-              .filter((board) => board.boardId % 3 === 1) // id가 1인 항목만 필터링
-              .map((board, index) => {
-                const imageUrl = board.imageUrl
-                  ? board.imageUrl.replace(
-                      'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
-                      '\\'
-                    )
-                  : null;
+                          >
+                            자세히 보기
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    </StyledBox2>
+                  </StyledBox>
+                </div>
+            );
+          })}
+        </div>
 
-                // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치
-                const isOdd = index % 2 === 0; // 홀수 번째인지 확인
+        {/*<StyledBox3>*/}
+        {/*  <div>*/}
+        {/*    {boardList*/}
+        {/*      .filter((board) => board.boardId % 3 === 0) // id가 1인 항목만 필터링*/}
+        {/*      .map((board, index) => {*/}
+        {/*        const imageUrl = board.imageUrl*/}
+        {/*          ? board.imageUrl.replace(*/}
+        {/*              // 'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',*/}
+        {/*                'C:\\Users\\suim7\\OneDrive\\문서\\GitHub\\VITA-FRONT\\vita\\public\\',*/}
+        {/*              '\\'*/}
+        {/*            )*/}
+        {/*          : null;*/}
 
-                return (
-                  <div key={board.boardId}>
-                    <StyledBox>
-                      <StyledBox2 isOdd={isOdd}>
-                        <Card style={{ width: '17rem' }}>
-                          <Card.Img variant="top" src={imageUrl} />
-                          <Card.Body>
-                            <Card.Title>{board.title}</Card.Title>
-                            <Card.Text>{board.content}</Card.Text>
-                            <Button
-                              variant="primary"
-                              onClick={() => handleDetailClick(board, imageUrl)}
-                            >
-                              자세히 보기
-                            </Button>
-                          </Card.Body>
-                        </Card>
-                      </StyledBox2>
-                    </StyledBox>
-                  </div>
-                );
-              })}
-          </div>
-          <div>
-            {boardList
-              .filter((board) => board.boardId % 3 === 2) // id가 1인 항목만 필터링
-              .map((board, index) => {
-                const imageUrl = board.imageUrl
-                  ? board.imageUrl.replace(
-                      'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',
-                      '\\'
-                    )
-                  : null;
+        {/*        // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치*/}
+        {/*        const isOdd = index % 2 === 0; // 홀수 번째인지 확인*/}
 
-                // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치
-                const isOdd = index % 2 === 0; // 홀수 번째인지 확인
+        {/*        return (*/}
+        {/*          <div key={board.boardId}>*/}
+        {/*            <StyledBox>*/}
+        {/*              <StyledBox2 isOdd={isOdd}>*/}
+        {/*                <Card style={{ width: '17rem' }}>*/}
+        {/*                  <Card.Img variant="top" src={imageUrl} />*/}
+        {/*                  <Card.Body>*/}
+        {/*                    <Card.Title>{board.title}</Card.Title>*/}
+        {/*                    <Card.Text>{board.content}</Card.Text>*/}
+        {/*                    <Button*/}
+        {/*                      variant="primary"*/}
+        {/*                      onClick={() => handleDetailClick(board, imageUrl)}*/}
+        {/*                    >*/}
+        {/*                      자세히 보기*/}
+        {/*                    </Button>*/}
+        {/*                  </Card.Body>*/}
+        {/*                </Card>*/}
+        {/*              </StyledBox2>*/}
+        {/*            </StyledBox>*/}
+        {/*          </div>*/}
+        {/*        );*/}
+        {/*      })}*/}
+        {/*  </div>*/}
+        {/*  <div>*/}
+        {/*    {boardList*/}
+        {/*      .filter((board) => board.boardId % 3 === 1) // id가 1인 항목만 필터링*/}
+        {/*      .map((board, index) => {*/}
+        {/*        const imageUrl = board.imageUrl*/}
+        {/*          ? board.imageUrl.replace(*/}
+        {/*              'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',*/}
+        {/*              '\\'*/}
+        {/*            )*/}
+        {/*          : null;*/}
 
-                return (
-                  <div key={board.boardId}>
-                    <StyledBox>
-                      <StyledBox2 isOdd={isOdd}>
-                        <Card style={{ width: '17rem' }}>
-                          <Card.Img variant="top" src={imageUrl} />
-                          <Card.Body>
-                            <Card.Title>{board.title}</Card.Title>
-                            <Card.Text>{board.content}</Card.Text>
-                            <Button
-                              variant="primary"
-                              onClick={() => handleDetailClick(board, imageUrl)}
-                            >
-                              자세히 보기
-                            </Button>
-                          </Card.Body>
-                        </Card>
-                      </StyledBox2>
-                    </StyledBox>
-                  </div>
-                );
-              })}
-          </div>
-        </StyledBox3>
+        {/*        // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치*/}
+        {/*        const isOdd = index % 2 === 0; // 홀수 번째인지 확인*/}
+
+        {/*        return (*/}
+        {/*          <div key={board.boardId}>*/}
+        {/*            <StyledBox>*/}
+        {/*              <StyledBox2 isOdd={isOdd}>*/}
+        {/*                <Card style={{ width: '17rem' }}>*/}
+        {/*                  <Card.Img variant="top" src={imageUrl} />*/}
+        {/*                  <Card.Body>*/}
+        {/*                    <Card.Title>{board.title}</Card.Title>*/}
+        {/*                    <Card.Text>{board.content}</Card.Text>*/}
+        {/*                    <Button*/}
+        {/*                      variant="primary"*/}
+        {/*                      onClick={() => handleDetailClick(board, imageUrl)}*/}
+        {/*                    >*/}
+        {/*                      자세히 보기*/}
+        {/*                    </Button>*/}
+        {/*                  </Card.Body>*/}
+        {/*                </Card>*/}
+        {/*              </StyledBox2>*/}
+        {/*            </StyledBox>*/}
+        {/*          </div>*/}
+        {/*        );*/}
+        {/*      })}*/}
+        {/*  </div>*/}
+        {/*  <div>*/}
+        {/*    {boardList*/}
+        {/*      .filter((board) => board.boardId % 3 === 2) // id가 1인 항목만 필터링*/}
+        {/*      .map((board, index) => {*/}
+        {/*        const imageUrl = board.imageUrl*/}
+        {/*          ? board.imageUrl.replace(*/}
+        {/*              'C:\\Users\\이민렬\\Desktop\\test\\vita\\public\\',*/}
+        {/*              '\\'*/}
+        {/*            )*/}
+        {/*          : null;*/}
+
+        {/*        // 홀수 번째와 짝수 번째를 판별하여 카드를 왼쪽 또는 오른쪽에 배치*/}
+        {/*        const isOdd = index % 2 === 0; // 홀수 번째인지 확인*/}
+
+        {/*        return (*/}
+        {/*          <div key={board.boardId}>*/}
+        {/*            <StyledBox>*/}
+        {/*              <StyledBox2 isOdd={isOdd}>*/}
+        {/*                <Card style={{ width: '17rem' }}>*/}
+        {/*                  <Card.Img variant="top" src={imageUrl} />*/}
+        {/*                  <Card.Body>*/}
+        {/*                    <Card.Title>{board.title}</Card.Title>*/}
+        {/*                    <Card.Text>{board.content}</Card.Text>*/}
+        {/*                    <Button*/}
+        {/*                      variant="primary"*/}
+        {/*                      onClick={() => handleDetailClick(board, imageUrl)}*/}
+        {/*                    >*/}
+        {/*                      자세히 보기*/}
+        {/*                    </Button>*/}
+        {/*                  </Card.Body>*/}
+        {/*                </Card>*/}
+        {/*              </StyledBox2>*/}
+        {/*            </StyledBox>*/}
+        {/*          </div>*/}
+        {/*        );*/}
+        {/*      })}*/}
+        {/*  </div>*/}
+        {/*</StyledBox3>*/}
       </StyledSubcomment>
     </StyledAll>
   );

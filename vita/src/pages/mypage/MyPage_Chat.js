@@ -79,7 +79,7 @@ function MyPage_Chat() {
         <Styledcomment>
           <StyledTable>
             <thead style={{ fontWeight: '700', fontSize: '24px' }}>
-              <tr>
+              <tr style={{border:"1px"}}>
                 <th style={{ width: '400px' }}>
                   제목
                 </th>
@@ -91,7 +91,7 @@ function MyPage_Chat() {
                 </th>
               </tr>
             </thead>
-            <tbody style={{ fontWeight: '500', fontSize: '20px' }}>
+            <tbody style={{ fontWeight: '500', fontSize: '20px', border:"1px" }}>
               {roomIds.map(room => (
                 <tr key={room.id}>
                   <td>{room.title.length > 20 ? room.title.substring(0, 20) + "..." : room.title}</td>
@@ -220,7 +220,7 @@ const StyledTable = styled(Table)`
   /* margin: 10px; */
   border-collapse: collapse;
   border: 1px;
-  th,
+  tr th,
   tbody,
   td td {
     padding: 0;

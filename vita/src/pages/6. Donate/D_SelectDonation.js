@@ -88,6 +88,8 @@ function D_SelectDonation() {
     navigate('/MyPage_D', { state: { centerName } });
   };
 
+  const formatter = new Intl.NumberFormat();
+
   return (
     <StyledAll>
       <StyledSub>
@@ -120,7 +122,8 @@ function D_SelectDonation() {
         <StyledDiv>
           <StyledDiv2>
             <StyledBoxTitle>나의 포인트</StyledBoxTitle>
-            <FloatingLabel label={point} name="id">
+            {/*<FloatingLabel label={point} name="id">*/}
+            <FloatingLabel label={formatter.format(point)} name="id">
               <Form.Control type="id" placeholder="label" disabled />
             </FloatingLabel>
 
@@ -147,21 +150,22 @@ function D_SelectDonation() {
             <StyledBoxTitle>기부할 포인트 </StyledBoxTitle>
             <FloatingLabel label="포인트를 입력해주세요" name="id">
               <Form.Control
-                type="number"
-                placeholder="label"
-                value={donationPoint}
-                onChange={handleDonationPointChange}
+                  type="text"
+                  placeholder="label"
+                  value={donationPoint.toLocaleString()}
+                  onChange={handleDonationPointChange}
               />
+
             </FloatingLabel>
           </StyledDiv3>
           <StyledDiv3>
             <StyledBoxTitle>기부하고 남을 포인트</StyledBoxTitle>
             <FloatingLabel label="남은 포인트" name="id">
               <Form.Control
-                type="id"
-                placeholder="label"
-                value={remainingPoint}
-                disabled
+                  type="text"
+                  placeholder="label"
+                  value={remainingPoint.toLocaleString()}
+                  disabled
               />
             </FloatingLabel>
           </StyledDiv3>
